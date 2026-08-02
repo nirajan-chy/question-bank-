@@ -1,0 +1,50 @@
+[
+  {
+    "id": "f1",
+    "question": "Is Sandarbh really free?",
+    "answer": "Yes. Core resources — notes, question banks, past papers and community Q&A — are 100% free for all Nepali students. A small set of premium features (advanced mock tests, AI assistant, downloadable e-books) supports the platform and keeps everything else free.",
+    "category": "General"
+  },
+  {
+    "id": "f2",
+    "question": "Which classes and boards do you cover?",
+    "answer": "We cover Class 8, 9, 10 (SEE), Class 11 and 12 (NEB), CTEVT diploma programs, and Bachelor & Master degrees under TU, KU, PU, Purbanchal, Gandaki and other Nepali universities.",
+    "category": "General"
+  },
+  {
+    "id": "f3",
+    "question": "Are the notes and question banks updated to the new CDC curriculum?",
+    "answer": "Yes. We continuously update resources to match the latest CDC and NEB curriculum. New-curriculum materials are tagged so you always know which syllabus a resource follows.",
+    "category": "Content"
+  },
+  {
+    "id": "f4",
+    "question": "How do the mock tests work?",
+    "answer": "Mock tests are timed and scored instantly. After each attempt you get a detailed breakdown by unit, a projected GPA, and step-by-step solutions so you can learn from every mistake.",
+    "category": "Content"
+  },
+  {
+    "id": "f5",
+    "question": "Can I contribute my own notes?",
+    "answer": "Absolutely! We welcome notes, question banks and study tips from toppers and teachers. Upload through your dashboard — verified contributions are rewarded with points, streaks and badges.",
+    "category": "Community"
+  },
+  {
+    "id": "f6",
+    "question": "Do you offer resources for entrance exams?",
+    "answer": "Yes. We provide past papers and mock tests for major entrance exams including TU CSIT, engineering (IOE), medical (IOM), agriculture, CTEVT and MBA admissions.",
+    "category": "Exams"
+  },
+  {
+    "id": "f7",
+    "question": "Is there a mobile app?",
+    "answer": "Sandarbh is a fully responsive web app that works great on phones, tablets and desktops. A native app is on our roadmap.",
+    "category": "Platform"
+  },
+  {
+    "id": "f8",
+    "question": "How can I track my progress?",
+    "answer": "Your dashboard shows your study streak, minutes focused, tests attempted, leaderboard rank and subject-wise progress. Sync happens automatically when you're signed in.",
+    "category": "Platform"
+  }
+]

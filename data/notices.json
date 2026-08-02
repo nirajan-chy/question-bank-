@@ -1,0 +1,82 @@
+[
+  {
+    "id": "nt1",
+    "slug": "see-2082-routine-released",
+    "title": "SEE 2082 Exam Routine Released — Check Dates Now",
+    "category": "Exam",
+    "date": "2026-07-20",
+    "body": "The National Examination Board has officially released the SEE 2082 examination routine. Exams begin from Baishakh 15 and run for two weeks. Visit the NEB portal to download your admit card. Stay tuned to Sandarbh for subject-wise preparation guides and last-minute tips.",
+    "pinned": true,
+    "tags": ["SEE", "Routine", "NEB"]
+  },
+  {
+    "id": "nt2",
+    "slug": "neb-grade-12-result-published",
+    "title": "NEB Grade 12 Results 2082 Published",
+    "category": "Result",
+    "date": "2026-07-18",
+    "body": "The NEB has published the Grade 12 examination results for 2082. Over 4,80,000 students appeared, with an overall pass rate of 72.4%. Students can check results on the NEB website using their symbol number. Sandarbh's Result section tracks all major board results in real time.",
+    "pinned": true,
+    "tags": ["NEB", "Result", "Grade 12"]
+  },
+  {
+    "id": "nt3",
+    "slug": "ctevt-entrance-notice-2083",
+    "title": "CTEVT Entrance Examination Notice 2083",
+    "category": "Admission",
+    "date": "2026-07-12",
+    "body": "CTEVT has opened online applications for the 2083 entrance exam covering diploma programs in engineering, health sciences and IT. Application window closes on Shrawan 20. Ensure your SEE certificate and required documents are ready before applying.",
+    "pinned": false,
+    "tags": ["CTEVT", "Entrance", "Admission"]
+  },
+  {
+    "id": "nt4",
+    "slug": "tu-csit-admission-open",
+    "title": "TU BSc CSIT Entrance — Application Open",
+    "category": "Admission",
+    "date": "2026-07-08",
+    "body": "Tribhuvan University Institute of Science and Technology has opened applications for BSc CSIT 2083 intake. The entrance exam is scheduled for Bhadra. Mock tests and previous-year question papers are available on Sandarbh to help you prepare.",
+    "pinned": false,
+    "tags": ["TU", "CSIT", "Admission"]
+  },
+  {
+    "id": "nt5",
+    "slug": "pu-semester-exam-schedule",
+    "title": "Pokhara University — Semester Exam Schedule 2083",
+    "category": "Exam",
+    "date": "2026-06-28",
+    "body": "Pokhara University has published the semester-end examination schedule for the 2083 session. The exams cover all faculties including engineering, management, science and health. Students are advised to check their college notice boards and the PU website for the full timetable.",
+    "pinned": false,
+    "tags": ["PU", "Semester", "Schedule"]
+  },
+  {
+    "id": "nt6",
+    "slug": "scholarship-application-window",
+    "title": "National Scholarships — Application Window Open",
+    "category": "Scholarship",
+    "date": "2026-06-15",
+    "body": "Applications are now open for a range of government and private scholarships covering SEE to Master level. Deadlines range from Shrawan to Kartik. Use Sandarbh's Scholarship section to filter by level, amount and deadline, and never miss an opportunity again.",
+    "pinned": false,
+    "tags": ["Scholarship", "Application", "Deadline"]
+  },
+  {
+    "id": "nt7",
+    "slug": "ku-academic-calendar",
+    "title": "Kathmandu University — Academic Calendar Released",
+    "category": "Notice",
+    "date": "2026-06-02",
+    "body": "KU has released its academic calendar for the coming session, including registration deadlines, midterm weeks, and semester-end examinations. New students can also access orientation schedules and course registration guides.",
+    "pinned": false,
+    "tags": ["KU", "Calendar", "Academic"]
+  },
+  {
+    "id": "nt8",
+    "slug": "new-cdc-curriculum-implementation",
+    "title": "New CDC Curriculum — Implementation Update",
+    "category": "Curriculum",
+    "date": "2026-05-22",
+    "body": "The Curriculum Development Centre has announced phased implementation of updated curricula for Grades 8-12. Sandarbh is updating all notes, question banks and mock tests to match the revised syllabus — new resources will be tagged 'New Curriculum'.",
+    "pinned": false,
+    "tags": ["CDC", "Curriculum", "Update"]
+  }
+]

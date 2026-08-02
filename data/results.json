@@ -1,0 +1,67 @@
+[
+  {
+    "id": "r1",
+    "exam": "SEE Result 2082",
+    "level": "Class 10 · SEE",
+    "board": "NEB",
+    "year": 2082,
+    "publishedAt": "2026-07-25",
+    "totalCandidates": 492000,
+    "passed": 423000,
+    "passRate": 86.1,
+    "url": "https://see.gov.np",
+    "notable": ["Highest pass rate in 5 years", "Top districts: Manang, Mustang, Lamjung", "1,24,000 students secured A+"]
+  },
+  {
+    "id": "r2",
+    "exam": "Grade 12 Result 2082",
+    "level": "Class 12 · NEB",
+    "board": "NEB",
+    "year": 2082,
+    "publishedAt": "2026-07-18",
+    "totalCandidates": 481000,
+    "passed": 348000,
+    "passRate": 72.4,
+    "url": "https://neb.gov.np",
+    "notable": ["Science stream: 76.2% pass", "Management: 69.8% pass", "Girls outperformed boys by 3.1%"]
+  },
+  {
+    "id": "r3",
+    "exam": "TU BSc CSIT Entrance 2082",
+    "level": "Bachelor",
+    "board": "Tribhuvan University",
+    "year": 2082,
+    "publishedAt": "2026-07-02",
+    "totalCandidates": 28500,
+    "passed": 8100,
+    "passRate": 28.4,
+    "url": "https://tu.edu.np",
+    "notable": ["Cut-off GPA rose to 3.82", "Maths section scored lowest average", "Full list published on TU portal"]
+  },
+  {
+    "id": "r4",
+    "exam": "CTEVT Entrance 2082",
+    "level": "CTEVT",
+    "board": "CTEVT",
+    "year": 2082,
+    "publishedAt": "2026-06-20",
+    "totalCandidates": 64200,
+    "passed": 23100,
+    "passRate": 36.0,
+    "url": "https://ctevt.org.np",
+    "notable": ["Nursing most competitive with 11:1 ratio", "Engineering diploma cut-off highest in 3 years"]
+  },
+  {
+    "id": "r5",
+    "exam": "SEE Result 2081",
+    "level": "Class 10 · SEE",
+    "board": "NEB",
+    "year": 2081,
+    "publishedAt": "2025-07-28",
+    "totalCandidates": 508000,
+    "passed": 424000,
+    "passRate": 83.4,
+    "url": "https://see.gov.np",
+    "notable": ["96,000 students scored A+", "Bagmati province topped the charts"]
+  }
+]
