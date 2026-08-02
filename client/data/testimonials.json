@@ -1,0 +1,62 @@
+[
+  {
+    "id": "t1",
+    "name": "Aarav Shrestha",
+    "role": "SEE 2082 Topper",
+    "level": "SEE · Class 10",
+    "avatar": "AS",
+    "quote": "Sandarbh's SEE question banks and mock tests were the only resources I needed. The timed mocks trained me to finish 30 minutes early — I secured GPA 4.0.",
+    "rating": 5,
+    "achievement": "GPA 4.0 · National Topper"
+  },
+  {
+    "id": "t2",
+    "name": "Prerana Maharjan",
+    "role": "Grade 12 Science",
+    "level": "NEB · Class 12",
+    "avatar": "PM",
+    "quote": "The physics numerical banks with step-by-step solutions turned my weakest subject into my strongest. Scored 89 in Physics in the NEB boards.",
+    "rating": 5,
+    "achievement": "3.96 GPA · Science Stream"
+  },
+  {
+    "id": "t3",
+    "name": "Bibek Pandey",
+    "role": "TU CSIT Student",
+    "level": "Bachelor · TU",
+    "avatar": "BP",
+    "quote": "Old question papers from the last eight semesters, neatly organized per subject — I passed every subject in the first attempt.",
+    "rating": 5,
+    "achievement": "4th Sem · All Pass"
+  },
+  {
+    "id": "t4",
+    "name": "Sabina Thapa",
+    "role": "PCL Nursing Graduate",
+    "level": "CTEVT",
+    "avatar": "ST",
+    "quote": "The anatomy mock tests felt exactly like the real CTEVT exam. The explanation for every MCQ helped me retain concepts for the clinicals.",
+    "rating": 5,
+    "achievement": "Distinction · CTEVT Nursing"
+  },
+  {
+    "id": "t5",
+    "name": "Rajan Karki",
+    "role": "MBA Student",
+    "level": "Master · PU",
+    "avatar": "RK",
+    "quote": "As a working professional, the community Q&A and AI study assistant saved my semester. Quick answers from fellow students when I needed them most.",
+    "rating": 4,
+    "achievement": "MBA · First Division"
+  },
+  {
+    "id": "t6",
+    "name": "Anisha Basnet",
+    "role": "BBA Student",
+    "level": "Bachelor · PU",
+    "avatar": "AB",
+    "quote": "The study streak and pomodoro timer genuinely built my consistency. 90-day streak before my final semester exams — and the results showed.",
+    "rating": 5,
+    "achievement": "3.9 CGPA · BBA"
+  }
+]
