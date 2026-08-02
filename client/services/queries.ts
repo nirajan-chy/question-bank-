@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { api } from "./api";
+import { api, admin } from "./api";
 
 export const queryKeys = {
   levels: ["levels"] as const,
@@ -62,3 +62,24 @@ export const useCommunity = () => useQuery({ queryKey: queryKeys.community, quer
 export const useLeaderboard = () => useQuery({ queryKey: queryKeys.leaderboard, queryFn: api.leaderboard });
 export const useSearch = (query: string) =>
   useQuery({ queryKey: queryKeys.search(query), queryFn: () => api.search(query), enabled: query.trim().length > 0 });
+
+export const useAdminStats = () =>
+  useQuery({
+    queryKey: ["admin", "stats"] as const,
+    queryFn: admin.stats,
+    retry: false,
+  });
+
+export const useAdminResource = (resource: string) =>
+  useQuery({
+    queryKey: ["admin", resource] as const,
+    queryFn: () => admin.list(resource),
+    retry: false,
+  });
+
+export const useAdminUsers = () =>
+  useQuery({
+    queryKey: ["admin", "users"] as const,
+    queryFn: admin.users,
+    retry: false,
+  });

@@ -18,6 +18,7 @@ const Post = require("./post.model")(sequelize);
 const CommunityQuestion = require("./communityQuestion.model")(sequelize);
 const LeaderboardEntry = require("./leaderboard.model")(sequelize);
 const Contact = require("./contact.model")(sequelize);
+const User = require("./user.model")(sequelize);
 
 const models = {
   Level,
@@ -38,6 +39,7 @@ const models = {
   CommunityQuestion,
   LeaderboardEntry,
   Contact,
+  User,
 };
 
 module.exports = models;

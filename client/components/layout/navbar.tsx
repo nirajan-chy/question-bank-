@@ -11,6 +11,9 @@ import {
   Bookmark,
   Settings,
   User,
+  LogIn,
+  UserPlus,
+  ShieldCheck,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { mainNav, resourcesNav } from "@/lib/nav";
@@ -28,6 +31,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useUiStore } from "@/store/use-ui-store";
 import { useUserStore } from "@/store/use-user-store";
+import { useAuthStore } from "@/store/use-auth-store";
 import { MobileNav } from "./mobile-nav";
 
 export function Navbar() {
@@ -35,11 +39,15 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const setCommandOpen = useUiStore((s) => s.setCommandOpen);
   const user = useUserStore((s) => s.user);
+  const isAuthenticated = useAuthStore((s) => Boolean(s.token));
+  const isAdmin = useAuthStore((s) => s.isAdmin);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
+    setMounted(true);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -122,6 +130,21 @@ export function Navbar() {
                 <p className="text-xs font-normal text-muted-foreground">{user.level}</p>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
+              {mounted && !isAuthenticated && (
+                <>
+                  <DropdownMenuItem asChild>
+                    <Link href="/login" className="gap-2">
+                      <LogIn className="h-4 w-4" /> Sign in
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/register" className="gap-2">
+                      <UserPlus className="h-4 w-4" /> Create account
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                </>
+              )}
               <DropdownMenuItem asChild>
                 <Link href="/dashboard" className="gap-2">
                   <LayoutDashboard className="h-4 w-4" /> Dashboard
@@ -137,6 +160,13 @@ export function Navbar() {
                   <Bookmark className="h-4 w-4" /> Bookmarks
                 </Link>
               </DropdownMenuItem>
+              {mounted && isAdmin && (
+                <DropdownMenuItem asChild>
+                  <Link href="/admin" className="gap-2">
+                    <ShieldCheck className="h-4 w-4" /> Admin panel
+                  </Link>
+                </DropdownMenuItem>
+              )}
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
                 <Link href="/settings" className="gap-2">

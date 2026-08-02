@@ -71,7 +71,8 @@ const createBaseController = (Model, config = {}) => {
   const update = asyncHandler(async (req, res) => {
     const item = await Model.findByPk(req.params.id);
     if (!item) throw new ApiError(404, `${Model.name} not found`);
-    const updated = await item.update(req.body);
+    const { id, createdAt, updatedAt, ...patch } = req.body;
+    const updated = await item.update(patch);
     sendSuccess(res, updated, 200, `${Model.name} updated`);
   });
 

@@ -7,7 +7,5 @@ router.post("/:id/view", ctrl.incrementViews);
 router.post("/:id/answers", ctrl.addAnswer);
 router.get("/:slug", ctrl.getBySlug);
 router.get("/id/:id", ctrl.getById);
-router.put("/:id", ctrl.update);
-router.delete("/:id", ctrl.remove);
 
 module.exports = router;

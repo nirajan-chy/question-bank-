@@ -19,5 +19,7 @@ router.use("/community", require("./community.routes"));
 router.use("/leaderboard", require("./leaderboard.routes"));
 router.use("/search", require("./search.routes"));
 router.use("/contact", require("./contact.routes"));
+router.use("/auth", require("./auth.routes"));
+router.use("/admin", require("./admin.routes"));
 
 module.exports = router;

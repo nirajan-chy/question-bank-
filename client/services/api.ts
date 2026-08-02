@@ -16,6 +16,10 @@ import type {
   Post,
   CommunityQuestion,
   LeaderboardEntry,
+  User,
+  AuthResponse,
+  AdminStats,
+  ContactSubmission,
 } from "@/types";
 
 import { http } from "./http";
@@ -74,6 +78,47 @@ export const stats = {
   colleges: 560,
   questionsSolved: 2400000,
 };
+
+export const auth = {
+  login: (email: string, password: string) =>
+    http<AuthResponse>("/auth/login", {
+      method: "POST",
+      body: JSON.stringify({ email, password }),
+    }),
+  register: (name: string, email: string, password: string) =>
+    http<AuthResponse>("/auth/register", {
+      method: "POST",
+      body: JSON.stringify({ name, email, password }),
+    }),
+  me: () => http<User>("/auth/me"),
+};
+
+type AdminResourceRecord = Record<string, unknown>;
+
+export const admin = {
+  stats: () => http<AdminStats>("/admin/stats"),
+  users: () => http<User[]>("/admin/users"),
+  updateUser: (id: string, patch: Partial<Pick<User, "name" | "role" | "avatar" | "bio">> & { password?: string }) =>
+    http<User>(`/admin/users/${id}`, { method: "PUT", body: JSON.stringify(patch) }),
+  deleteUser: (id: string) =>
+    http<null>(`/admin/users/${id}`, { method: "DELETE" }),
+
+  list: (resource: string) => http<AdminResourceRecord[]>(`/admin/${resource}`),
+  create: (resource: string, data: AdminResourceRecord) =>
+    http<AdminResourceRecord>(`/admin/${resource}`, {
+      method: "POST",
+      body: JSON.stringify(data),
+    }),
+  update: (resource: string, id: string, data: AdminResourceRecord) =>
+    http<AdminResourceRecord>(`/admin/${resource}/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(data),
+    }),
+  remove: (resource: string, id: string) =>
+    http<null>(`/admin/${resource}/${id}`, { method: "DELETE" }),
+};
+
+export const adminContacts = () => http<ContactSubmission[]>("/admin/contacts");
 
 function withQuery(
   path: string,

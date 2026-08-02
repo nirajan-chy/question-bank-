@@ -1,5 +1,36 @@
 // ─── Domain types for Sandarbh ───────────────────────────────────────────────
 
+export type User = {
+  id: string;
+  name: string;
+  email: string;
+  role: "user" | "admin";
+  avatar: string;
+  bio: string;
+  createdAt?: string;
+  updatedAt?: string;
+};
+
+export type AuthResponse = {
+  token: string;
+  user: User;
+};
+
+export type AdminStats = {
+  counts: Record<string, number>;
+  recentContacts: ContactSubmission[];
+  recentQuestions: CommunityQuestion[];
+};
+
+export type ContactSubmission = {
+  id: string;
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  createdAt?: string;
+};
+
 export type Level = {
   id: string;
   slug: string;
