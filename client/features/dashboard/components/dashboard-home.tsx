@@ -17,9 +17,9 @@ import {
   Timer,
   TrendingUp,
 } from "lucide-react";
-import { db } from "@/services/db";
 import { useUserStore } from "@/store/use-user-store";
 import { useStudyStore } from "@/store/use-study-store";
+import { useLeaderboard, useSubjects } from "@/services/queries";
 import { cn, formatNumber } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -105,7 +105,8 @@ export function DashboardHome() {
     { icon: Target, label: "Pomodoros", value: completedPomodoros, accent: "from-emerald-500 to-teal-500" },
   ];
 
-  const leaderboard = [...db.leaderboard].sort((a, b) => a.rank - b.rank);
+  const { data: leaderboard = [] } = useLeaderboard();
+  const { data: subjects = [] } = useSubjects();
 
   return (
     <div className="space-y-8">
@@ -319,7 +320,7 @@ export function DashboardHome() {
             <BookOpen className="h-4 w-4 text-muted-foreground" />
           </div>
           <div className="mt-4 space-y-3">
-            {db.subjects.slice(0, 3).map((s, i) => (
+            {subjects.slice(0, 3).map((s, i) => (
               <Link key={s.id} href={`/subjects/${s.slug}`} className="flex items-center gap-3 rounded-xl border p-3 transition-colors hover:border-primary/40 hover:bg-accent/40">
                 <span className={cn("flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br text-lg", s.gradient)}>{s.emoji}</span>
                 <div className="min-w-0 flex-1">

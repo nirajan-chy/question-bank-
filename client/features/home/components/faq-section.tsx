@@ -1,6 +1,6 @@
 "use client";
 
-import { getFaqs } from "@/services/db";
+import { useFaqs } from "@/services/queries";
 import { SectionHeader } from "@/components/shared/section-header";
 import {
   Accordion,
@@ -10,7 +10,19 @@ import {
 } from "@/components/ui/accordion";
 
 export function FaqSection() {
-  const faqs = getFaqs();
+  const { data: faqs = [], isPending } = useFaqs();
+
+  if (isPending) {
+    return (
+      <section className="py-16 md:py-24">
+        <div className="container">
+          <div className="mx-auto h-6 w-64 animate-pulse rounded bg-primary/10" />
+        </div>
+      </section>
+    );
+  }
+
+  if (!faqs.length) return null;
 
   return (
     <section className="py-16 md:py-24">

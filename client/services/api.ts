@@ -11,72 +11,80 @@ import type {
   Scholarship,
   Notice,
   ResultEntry,
+  Testimonial,
+  Faq,
   Post,
   CommunityQuestion,
   LeaderboardEntry,
 } from "@/types";
 
-import {
-  db,
-  getLevels,
-  getUniversities,
-  getFaculties,
-  getSubjects,
-  getSubjectBySlug,
-  getSubjectsByLevel,
-  getTrendingSubjects,
-  getNotes,
-  getBooks,
-  getQuestionBanks,
-  getPastPapers,
-  getMockTests,
-  getScholarships,
-  getNotices,
-  getResults,
-  getPosts,
-  getPostBySlug,
-  getCommunityQuestions,
-  getLeaderboard,
-  searchAll,
-} from "./db";
+import { http } from "./http";
 
-const latency = 250;
-const jitter = () => latency + Math.random() * 200;
-
-async function resolve<T>(data: T): Promise<T> {
-  await new Promise((r) => setTimeout(r, jitter()));
-  return data;
-}
+type SearchResults = {
+  subjects: Subject[];
+  notes: Note[];
+  books: Book[];
+  questionBanks: QuestionBank[];
+  mockTests: MockTest[];
+  scholarships: Scholarship[];
+  posts: Post[];
+  community: CommunityQuestion[];
+};
 
 export const api = {
-  levels: () => resolve<Level[]>(getLevels()),
-  universities: () => resolve<University[]>(getUniversities()),
-  faculties: () => resolve<Faculty[]>(getFaculties()),
-  subjects: () => resolve<Subject[]>(getSubjects()),
-  subject: (slug: string) => resolve<Subject | undefined>(getSubjectBySlug(slug)),
-  subjectsByLevel: (levelSlug: string) => resolve<Subject[]>(getSubjectsByLevel(levelSlug)),
-  trendingSubjects: (limit = 8) => resolve<Subject[]>(getTrendingSubjects(limit)),
-  notes: (opts?: { limit?: number; subjectSlug?: string }) => resolve<Note[]>(getNotes(opts)),
-  books: (opts?: { limit?: number; bestseller?: boolean }) => resolve<Book[]>(getBooks(opts)),
+  levels: () => http<Level[]>("/levels"),
+  universities: () => http<University[]>("/universities"),
+  faculties: () => http<Faculty[]>("/faculties"),
+  subjects: () => http<Subject[]>("/subjects"),
+  subject: (slug: string) => http<Subject>(`/subjects/${slug}`),
+  subjectsByLevel: (levelSlug: string) => http<Subject[]>(`/subjects/level/${levelSlug}`),
+  trendingSubjects: (limit = 8) => http<Subject[]>(`/subjects/trending?limit=${limit}`),
+
+  notes: (opts?: { limit?: number; subjectSlug?: string }) =>
+    http<Note[]>(withQuery("/notes", opts)),
+  books: (opts?: { limit?: number; bestseller?: boolean }) =>
+    http<Book[]>(withQuery("/books", opts)),
   questionBanks: (opts?: { limit?: number; subjectSlug?: string }) =>
-    resolve<QuestionBank[]>(getQuestionBanks(opts)),
+    http<QuestionBank[]>(withQuery("/question-banks", opts)),
   pastPapers: (opts?: { limit?: number; subjectSlug?: string }) =>
-    resolve<PastPaper[]>(getPastPapers(opts)),
-  mockTests: (opts?: { limit?: number; subjectSlug?: string }) => resolve<MockTest[]>(getMockTests(opts)),
+    http<PastPaper[]>(withQuery("/past-papers", opts)),
+  mockTests: (opts?: { limit?: number; subjectSlug?: string }) =>
+    http<MockTest[]>(withQuery("/mock-tests", opts)),
   scholarships: (opts?: { limit?: number; featured?: boolean }) =>
-    resolve<Scholarship[]>(getScholarships(opts)),
-  notices: (opts?: { limit?: number }) => resolve<Notice[]>(getNotices(opts)),
-  results: () => resolve<ResultEntry[]>(getResults()),
-  posts: (opts?: { limit?: number }) => resolve<Post[]>(getPosts(opts)),
-  post: (slug: string) => resolve<Post | undefined>(getPostBySlug(slug)),
-  community: () => resolve<CommunityQuestion[]>(getCommunityQuestions()),
-  leaderboard: () => resolve<LeaderboardEntry[]>(getLeaderboard()),
-  search: (query: string) => resolve(searchAll(query)),
+    http<Scholarship[]>(withQuery("/scholarships", opts)),
+  notices: (opts?: { limit?: number }) => http<Notice[]>(withQuery("/notices", opts)),
+  results: () => http<ResultEntry[]>("/results"),
+  testimonials: () => http<Testimonial[]>("/testimonials"),
+  faqs: () => http<Faq[]>("/faqs"),
+
+  posts: (opts?: { limit?: number }) => http<Post[]>(withQuery("/posts", opts)),
+  post: (slug: string) => http<Post>(`/posts/${slug}`),
+
+  community: () => http<CommunityQuestion[]>("/community"),
+  askQuestion: (payload: { title: string; body: string; tags: string[]; author?: string }) =>
+    http<CommunityQuestion>("/community", { method: "POST", body: JSON.stringify(payload) }),
+
+  leaderboard: () => http<LeaderboardEntry[]>("/leaderboard"),
+  search: (query: string) => http<SearchResults>(`/search?q=${encodeURIComponent(query)}`),
 };
 
 export const stats = {
-  resources: db.notes.length + db.books.length + db.questionBanks.length,
+  resources: 30,
   students: 128000,
   colleges: 560,
   questionsSolved: 2400000,
 };
+
+function withQuery(
+  path: string,
+  opts?: Record<string, string | number | boolean | undefined>
+): string {
+  if (!opts) return path;
+  const params = new URLSearchParams();
+  for (const [key, value] of Object.entries(opts)) {
+    if (value === undefined || value === false) continue;
+    params.set(key, String(value));
+  }
+  const qs = params.toString();
+  return qs ? `${path}?${qs}` : path;
+}

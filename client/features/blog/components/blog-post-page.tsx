@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, CalendarDays, Clock, Eye, Heart, Share2 } from "lucide-react";
 import { toast } from "sonner";
 import { Post } from "@/types";
 import { cn, formatNumber, initials } from "@/lib/utils";
-import { db } from "@/services/db";
+import { usePosts } from "@/services/queries";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -19,9 +19,14 @@ export function BlogPostPage({ post }: { post: Post }) {
   const [liked, setLiked] = useState(false);
   const { copied, copy } = useCopy();
   const cover = coverMap[post.cover] ?? coverMap.guide;
+  const { data: allPosts = [] } = usePosts();
 
-  const related = db.posts.filter((p) => p.slug !== post.slug && p.tags.some((t) => post.tags.includes(t))).slice(0, 3);
-  const fallback = related.length ? related : db.posts.filter((p) => p.slug !== post.slug).slice(0, 3);
+  const related = useMemo(() => {
+    const matches = allPosts
+      .filter((p) => p.slug !== post.slug && p.tags.some((t) => post.tags.includes(t)))
+      .slice(0, 3);
+    return matches.length ? matches : allPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
+  }, [allPosts, post.slug, post.tags]);
 
   const share = async () => {
     await copy(window.location.href);
@@ -137,7 +142,7 @@ export function BlogPostPage({ post }: { post: Post }) {
         <div className="container">
           <h2 className="mb-6 font-display text-xl font-bold md:text-2xl">Related articles</h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {fallback.map((p) => (
+            {related.map((p) => (
               <BlogCard key={p.id} post={p} compact />
             ))}
           </div>

@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { CheckCircle2, ChevronDown, Eye, HelpCircle, MessageSquare, MessageSquarePlus, Search, ThumbsUp } from "lucide-react";
-import { db } from "@/services/db";
+import { useCommunity } from "@/services/queries";
 import { cn, timeAgo, initials } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,18 +12,20 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { PageHeader } from "@/components/shared/page-header";
 
-const allTags = Array.from(new Set(db.community.flatMap((q) => q.tags))).slice(0, 10);
 const sortOptions = ["Newest", "Most voted", "Active"] as const;
 
 export function CommunityList() {
+  const { data: questions = [], isPending } = useCommunity();
   const [q, setQ] = useState("");
   const [tag, setTag] = useState("all");
   const [sort, setSort] = useState<(typeof sortOptions)[number]>("Newest");
-  const [open, setOpen] = useState<string | null>(db.community[0]?.id ?? null);
+  const [open, setOpen] = useState<string | null>(null);
   const [commentText, setCommentText] = useState<Record<string, string>>({});
 
+  const allTags = useMemo(() => Array.from(new Set(questions.flatMap((item) => item.tags))).slice(0, 10), [questions]);
+
   const filtered = useMemo(() => {
-    let list = [...db.community];
+    let list = [...questions];
     if (tag !== "all") list = list.filter((item) => item.tags.includes(tag));
     if (q.trim()) {
       const needle = q.trim().toLowerCase();
@@ -40,7 +42,7 @@ export function CommunityList() {
         list.sort((a, b) => +new Date(b.createdAt) - +new Date(a.createdAt));
     }
     return list;
-  }, [q, tag, sort]);
+  }, [q, tag, sort, questions]);
 
   return (
     <>
@@ -106,7 +108,15 @@ export function CommunityList() {
           </div>
 
           <div className="space-y-4">
-            {filtered.length === 0 && (
+            {isPending && (
+              <div className="space-y-4">
+                {Array.from({ length: 4 }).map((_, i) => (
+                  <Card key={i} className="h-32 animate-pulse" />
+                ))}
+              </div>
+            )}
+
+            {!isPending && filtered.length === 0 && (
               <Card className="flex flex-col items-center gap-3 p-12 text-center">
                 <HelpCircle className="h-10 w-10 text-muted-foreground" />
                 <p className="font-medium">No questions match your filters</p>
@@ -117,9 +127,9 @@ export function CommunityList() {
               </Card>
             )}
 
-            {filtered.map((item, i) => (
-              <motion.div key={item.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: i * 0.03 }}>
-                <Card className="overflow-hidden">
+            {!isPending &&
+              filtered.map((item, i) => (
+                <motion.div key={item.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: i * 0.03 }}>                <Card className="overflow-hidden">
                   <div className="flex gap-4 p-4 md:p-5">
                     <div className="hidden shrink-0 flex-col items-center gap-2 sm:flex">
                       <span className={cn("flex h-16 w-16 flex-col items-center justify-center rounded-xl border text-sm font-bold", item.votes >= 0 ? "border-primary/30 bg-primary/5 text-primary" : "border-destructive/30 bg-destructive/5 text-destructive")}>
@@ -225,9 +235,9 @@ export function CommunityList() {
                       </div>
                     </div>
                   )}
-                </Card>
-              </motion.div>
-            ))}
+                  </Card>
+                </motion.div>
+              ))}
           </div>
         </div>
       </section>
