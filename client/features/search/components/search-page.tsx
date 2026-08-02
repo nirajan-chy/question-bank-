@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowRight, Search, SearchX } from "lucide-react";
-import { searchAll } from "@/services/db";
+import { ArrowRight, Loader2, Search, SearchX } from "lucide-react";
+import { useSearch } from "@/services/queries";
 import { useDebounce } from "@/hooks/use-debounce";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -12,6 +12,17 @@ import { Badge } from "@/components/ui/badge";
 import { SubjectCard, NoteCard, BookCard, QuestionBankCard, MockTestCard, ScholarshipCard } from "@/features/education/components/cards";
 import { PageHeader } from "@/components/shared/page-header";
 import { EmptyState } from "@/components/shared/empty-state";
+
+const emptyResults = {
+  subjects: [],
+  notes: [],
+  books: [],
+  questionBanks: [],
+  mockTests: [],
+  scholarships: [],
+  posts: [],
+  community: [],
+};
 
 export function SearchPage({ initialQuery = "" }: { initialQuery?: string }) {
   const router = useRouter();
@@ -22,7 +33,8 @@ export function SearchPage({ initialQuery = "" }: { initialQuery?: string }) {
     if (debounced.trim()) router.replace(`/search?q=${encodeURIComponent(debounced.trim())}`, { scroll: false });
   }, [debounced, router]);
 
-  const results = useMemo(() => searchAll(debounced), [debounced]);
+  const { data: searchData, isFetching } = useSearch(debounced);
+  const results = searchData ?? emptyResults;
 
   const active = debounced.trim();
   const hasResults = Object.values(results).some((arr) => arr.length > 0);
@@ -80,7 +92,11 @@ export function SearchPage({ initialQuery = "" }: { initialQuery?: string }) {
             <>
               <div className="mt-10 flex flex-wrap items-center justify-between gap-3">
                 <p className="text-sm text-muted-foreground">
-                  {hasResults ? (
+                  {isFetching ? (
+                    <span className="inline-flex items-center gap-1.5">
+                      <Loader2 className="h-3.5 w-3.5 animate-spin" /> Searching...
+                    </span>
+                  ) : hasResults ? (
                     <>
                       <span className="font-semibold text-foreground">
                         {Object.values(results).reduce((a, b) => a + b.length, 0)}

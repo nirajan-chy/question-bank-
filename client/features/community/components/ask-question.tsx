@@ -1,13 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { ArrowLeft, Eye, MessageSquarePlus, Send } from "lucide-react";
 import { toast } from "sonner";
-import { db } from "@/services/db";
+import { api } from "@/services/api";
+import { useCommunity } from "@/services/queries";
 import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -24,13 +25,17 @@ const schema = z.object({
 
 type Form = z.infer<typeof schema>;
 
-const suggestedTags = Array.from(new Set(db.community.flatMap((q) => q.tags)));
-
 export function AskQuestion() {
+  const { data: questions = [] } = useCommunity();
+  const suggestedTags = useMemo(
+    () => Array.from(new Set(questions.flatMap((q) => q.tags))),
+    [questions]
+  );
   const [tags, setTags] = useState<string[]>(["see"]);
   const [tagInput, setTagInput] = useState("");
   const [preview, setPreview] = useState(false);
   const [posted, setPosted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const { register, handleSubmit, watch, formState: { errors } } = useForm<Form>({ resolver: zodResolver(schema) });
 
@@ -46,9 +51,19 @@ export function AskQuestion() {
     setTagInput("");
   };
 
-  const onSubmit = () => {
-    setPosted(true);
-    toast.success("Question posted!", { description: "The community will answer shortly." });
+  const onSubmit = async () => {
+    setSubmitting(true);
+    try {
+      await api.askQuestion({ title, body, tags });
+      setPosted(true);
+      toast.success("Question posted!", { description: "The community will answer shortly." });
+    } catch (error) {
+      toast.error("Could not post your question", {
+        description: error instanceof Error ? error.message : "Please try again.",
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (posted) {
@@ -146,8 +161,8 @@ export function AskQuestion() {
                 <Button type="button" variant="outline" onClick={() => setPreview((p) => !p)}>
                   <Eye className="h-4 w-4" /> {preview ? "Hide preview" : "Preview"}
                 </Button>
-                <Button type="submit" variant="gradient">
-                  <Send className="h-4 w-4" /> Post question
+                <Button type="submit" variant="gradient" disabled={submitting}>
+                  <Send className="h-4 w-4" /> {submitting ? "Posting..." : "Post question"}
                 </Button>
               </div>
             </form>

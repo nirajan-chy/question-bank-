@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Award, BookOpen, Clock, Flame, Medal, Sparkles, Target, Trophy } from "lucide-react";
-import { db } from "@/services/db";
+import { useLeaderboard } from "@/services/queries";
 import { useUserStore } from "@/store/use-user-store";
 import { useStudyStore } from "@/store/use-study-store";
 import { cn, formatNumber, initials } from "@/lib/utils";
@@ -27,7 +27,7 @@ export function ProfilePage() {
   const { sessions, completedPomodoros } = useStudyStore();
 
   const totalMinutes = sessions.reduce((a, s) => a + s.minutes, 0);
-  const leaderboard = [...db.leaderboard].sort((a, b) => a.rank - b.rank);
+  const { data: leaderboard = [] } = useLeaderboard();
   const myRank = leaderboard.findIndex((e) => e.name.toLowerCase().includes("sujan")) + 1;
   const displayRank = myRank || 6;
 

@@ -18,6 +18,8 @@ export const queryKeys = {
   scholarships: (opts?: { limit?: number; featured?: boolean }) => ["scholarships", opts] as const,
   notices: (opts?: { limit?: number }) => ["notices", opts] as const,
   results: ["results"] as const,
+  testimonials: ["testimonials"] as const,
+  faqs: ["faqs"] as const,
   posts: (opts?: { limit?: number }) => ["posts", opts] as const,
   post: (slug: string) => ["posts", slug] as const,
   community: ["community"] as const,
@@ -50,6 +52,8 @@ export const useScholarships = (opts?: { limit?: number; featured?: boolean }) =
 export const useNotices = (opts?: { limit?: number }) =>
   useQuery({ queryKey: queryKeys.notices(opts), queryFn: () => api.notices(opts) });
 export const useResults = () => useQuery({ queryKey: queryKeys.results, queryFn: api.results });
+export const useTestimonials = () => useQuery({ queryKey: queryKeys.testimonials, queryFn: api.testimonials });
+export const useFaqs = () => useQuery({ queryKey: queryKeys.faqs, queryFn: api.faqs });
 export const usePosts = (opts?: { limit?: number }) =>
   useQuery({ queryKey: queryKeys.posts(opts), queryFn: () => api.posts(opts) });
 export const usePost = (slug: string) =>

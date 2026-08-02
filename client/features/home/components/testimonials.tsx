@@ -1,14 +1,36 @@
 "use client";
 
 import { Star, Quote } from "lucide-react";
-import { getTestimonials } from "@/services/db";
+import { useTestimonials } from "@/services/queries";
 import { SectionHeader } from "@/components/shared/section-header";
 import { Stagger, StaggerItem } from "@/components/shared/motion";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 
 export function Testimonials() {
-  const testimonials = getTestimonials();
+  const { data: testimonials, isPending } = useTestimonials();
+
+  if (isPending) {
+    return (
+      <section className="border-y bg-muted/30 py-16 md:py-24">
+        <div className="container">
+          <SectionHeader
+            eyebrow="Testimonials"
+            title="Students who made it"
+            description="Real results from real students across Nepal."
+            align="center"
+          />
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="h-56 animate-pulse rounded-2xl border bg-card" />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (!testimonials?.length) return null;
 
   return (
     <section className="border-y bg-muted/30 py-16 md:py-24">

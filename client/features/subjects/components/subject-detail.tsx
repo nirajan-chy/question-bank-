@@ -17,8 +17,7 @@ import {
 } from "lucide-react";
 import { notFound } from "next/navigation";
 import { toast } from "sonner";
-import { useSubject } from "@/services/queries";
-import { db } from "@/services/db";
+import { useSubject, useSubjects, useNotes, useBooks, useQuestionBanks, usePastPapers } from "@/services/queries";
 import { cn, formatNumber } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -46,6 +45,11 @@ export type SubjectTabId = (typeof subjectTabs)[number]["id"];
 
 export function SubjectDetail({ slug, initialTab = "overview" }: { slug: string; initialTab?: string }) {
   const { data: subject, isLoading } = useSubject(slug);
+  const { data: allSubjects = [] } = useSubjects();
+  const { data: subjectNotes = [] } = useNotes({ subjectSlug: subject?.slug });
+  const { data: subjectBooks = [] } = useBooks();
+  const { data: subjectQb = [] } = useQuestionBanks({ subjectSlug: subject?.slug });
+  const { data: subjectPapers = [] } = usePastPapers({ subjectSlug: subject?.slug });
   const [tab, setTab] = useState<SubjectTabId>(
     subjectTabs.some((t) => t.id === initialTab) ? (initialTab as SubjectTabId) : "overview"
   );
@@ -54,9 +58,9 @@ export function SubjectDetail({ slug, initialTab = "overview" }: { slug: string;
   const related = useMemo(() => {
     if (!subject) return [];
     return subject.relatedSlugs
-      .map((s) => db.subjects.find((x) => x.slug === s))
+      .map((s) => allSubjects.find((x) => x.slug === s))
       .filter(Boolean) as NonNullable<typeof subject>[];
-  }, [subject]);
+  }, [subject, allSubjects]);
 
   if (!isLoading && !subject) notFound();
   if (!subject || isLoading) {
@@ -192,7 +196,7 @@ export function SubjectDetail({ slug, initialTab = "overview" }: { slug: string;
           {tab === "syllabus" && <SyllabusTab subject={subject} />}
           {tab === "notes" && (
             <ResourceGrid empty={<EmptyState title="No notes yet" description="Notes for this subject are coming soon." />}>
-              {db.notes
+              {subjectNotes
                 .filter((n) => n.subjectSlug === subject.slug)
                 .map((note) => (
                   <NoteCard key={note.id} note={note} />
@@ -201,7 +205,7 @@ export function SubjectDetail({ slug, initialTab = "overview" }: { slug: string;
           )}
           {tab === "books" && (
             <ResourceGrid empty={<EmptyState title="No books yet" description="Books for this subject are coming soon." />}>
-              {db.books
+              {subjectBooks
                 .filter((b) => b.subjects.some((s) => s.toLowerCase().includes(subject.name.toLowerCase().split(" ")[0])))
                 .map((book) => (
                   <BookCard key={book.id} book={book} />
@@ -210,7 +214,7 @@ export function SubjectDetail({ slug, initialTab = "overview" }: { slug: string;
           )}
           {tab === "question-banks" && (
             <ResourceGrid empty={<EmptyState title="No question banks yet" description="Question banks are coming soon." />}>
-              {db.questionBanks
+              {subjectQb
                 .filter((qb) => qb.subjectSlug === subject.slug)
                 .map((qb) => (
                   <QuestionBankCard key={qb.id} qb={qb} />
@@ -219,7 +223,7 @@ export function SubjectDetail({ slug, initialTab = "overview" }: { slug: string;
           )}
           {tab === "past-papers" && (
             <ResourceGrid empty={<EmptyState title="No past papers yet" description="Past papers are coming soon." />}>
-              {db.pastPapers
+              {subjectPapers
                 .filter((p) => p.subjectSlug === subject.slug)
                 .map((paper) => (
                   <PastPaperCard key={paper.id} paper={paper} />

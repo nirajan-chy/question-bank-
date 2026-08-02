@@ -1,0 +1,43 @@
+const { sequelize } = require("../config/postgres");
+
+const Level = require("./level.model")(sequelize);
+const University = require("./university.model")(sequelize);
+const Faculty = require("./faculty.model")(sequelize);
+const Subject = require("./subject.model")(sequelize);
+const Note = require("./note.model")(sequelize);
+const Book = require("./book.model")(sequelize);
+const QuestionBank = require("./questionBank.model")(sequelize);
+const PastPaper = require("./pastPaper.model")(sequelize);
+const MockTest = require("./mockTest.model")(sequelize);
+const Scholarship = require("./scholarship.model")(sequelize);
+const Notice = require("./notice.model")(sequelize);
+const ResultEntry = require("./result.model")(sequelize);
+const Testimonial = require("./testimonial.model")(sequelize);
+const Faq = require("./faq.model")(sequelize);
+const Post = require("./post.model")(sequelize);
+const CommunityQuestion = require("./communityQuestion.model")(sequelize);
+const LeaderboardEntry = require("./leaderboard.model")(sequelize);
+const Contact = require("./contact.model")(sequelize);
+
+const models = {
+  Level,
+  University,
+  Faculty,
+  Subject,
+  Note,
+  Book,
+  QuestionBank,
+  PastPaper,
+  MockTest,
+  Scholarship,
+  Notice,
+  ResultEntry,
+  Testimonial,
+  Faq,
+  Post,
+  CommunityQuestion,
+  LeaderboardEntry,
+  Contact,
+};
+
+module.exports = models;
