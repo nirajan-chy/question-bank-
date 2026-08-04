@@ -12,6 +12,9 @@ const getToken = (req) => {
 const auth = asyncHandler(async (req, res, next) => {
   const token = getToken(req);
   if (!token) throw new ApiError(401, "Authentication required");
+  if (!process.env.JWT_SECRET) {
+    throw new ApiError(500, "Server misconfigured: JWT_SECRET is not set in the environment");
+  }
 
   let payload;
   try {

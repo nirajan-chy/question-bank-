@@ -1,44 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { 
-  Download, 
-  FileText, 
-  MoreHorizontal, 
-  Reply, 
-  SmilePlus,
-  ThumbsUp
-} from "lucide-react";
+import { Download, FileText, MoreHorizontal, Reply, SmilePlus, ThumbsUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-
-type MessageAttachment = {
-  name: string;
-  size: string;
-  type: string;
-};
-
-type MessageReaction = {
-  emoji: string;
-  count: number;
-};
-
-type Message = {
-  id: string;
-  author: string;
-  role: string;
-  avatar: string;
-  content: string;
-  time: string;
-  reactions: MessageReaction[];
-  attachment?: MessageAttachment;
-};
+import { formatTime } from "@/lib/utils";
+import type { CommunityMessage as ChatMessage } from "@/types";
 
 interface CommunityMessageProps {
-  message: Message;
+  message: ChatMessage;
+  onReact?: (emoji: string) => void;
 }
 
-export function CommunityMessage({ message }: CommunityMessageProps) {
+export function CommunityMessage({ message, onReact }: CommunityMessageProps) {
   const [showActions, setShowActions] = useState(false);
 
   return (
@@ -61,7 +35,7 @@ export function CommunityMessage({ message }: CommunityMessageProps) {
               Moderator
             </span>
           )}
-          <span className="text-xs text-muted-foreground">{message.time}</span>
+          <span className="text-xs text-muted-foreground">{formatTime(message.createdAt)}</span>
         </div>
 
         <p className="text-sm mt-1 whitespace-pre-wrap">{message.content}</p>
@@ -88,6 +62,7 @@ export function CommunityMessage({ message }: CommunityMessageProps) {
             {message.reactions.map((reaction, index) => (
               <button
                 key={index}
+                onClick={() => onReact?.(reaction.emoji)}
                 className="flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs hover:bg-muted"
               >
                 <span>{reaction.emoji}</span>
@@ -104,7 +79,12 @@ export function CommunityMessage({ message }: CommunityMessageProps) {
       {/* Action Buttons */}
       {showActions && (
         <div className="absolute right-2 top-0 -translate-y-1/2 flex items-center gap-1 bg-background border rounded-lg shadow-sm p-1">
-          <Button variant="ghost" size="icon" className="h-7 w-7">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-7 w-7"
+            onClick={() => onReact?.("👍")}
+          >
             <ThumbsUp className="h-3.5 w-3.5" />
           </Button>
           <Button variant="ghost" size="icon" className="h-7 w-7">

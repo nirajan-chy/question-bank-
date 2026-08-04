@@ -43,6 +43,7 @@ export const adminResources: AdminResource[] = [
   { path: "faqs", label: "FAQs", icon: MessageSquare, color: "from-orange-500 to-red-600" },
   { path: "posts", label: "Blog Posts", icon: BookOpenCheck, color: "from-teal-500 to-emerald-600" },
   { path: "community", label: "Community", icon: MessageSquare, color: "from-fuchsia-500 to-pink-600" },
+  { path: "communities", label: "Communities", icon: MessageSquare, color: "from-pink-500 to-rose-600" },
   { path: "leaderboard", label: "Leaderboard", icon: Trophy, color: "from-amber-500 to-orange-600" },
   { path: "contacts", label: "Contacts", icon: Contact, color: "from-blue-500 to-cyan-600" },
 ];

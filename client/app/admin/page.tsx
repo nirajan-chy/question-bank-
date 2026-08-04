@@ -2,22 +2,38 @@
 
 import Link from "next/link";
 import { ArrowUpRight, Contact, MessageSquare, PlusCircle } from "lucide-react";
-import { adminResources } from "@/features/admin/resource-config";
+import { adminResources, adminUsersResource } from "@/features/admin/resource-config";
 import { useAdminStats } from "@/services/queries";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 
-const humanLabel = (key: string) => {
-  const found = adminResources.find(
-    (r) => r.path === key.toLowerCase().replace(/ /g, "-")
-  );
-  if (found) return found.label;
-  return key
-    .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-    .replace(/Entry$/, "")
-    .trim();
+const MODEL_TO_RESOURCE: Record<string, string> = {
+  Level: "levels",
+  University: "universities",
+  Faculty: "faculties",
+  Subject: "subjects",
+  Note: "notes",
+  Book: "books",
+  QuestionBank: "question-banks",
+  PastPaper: "past-papers",
+  MockTest: "mock-tests",
+  Scholarship: "scholarships",
+  Notice: "notices",
+  ResultEntry: "results",
+  Testimonial: "testimonials",
+  Faq: "faqs",
+  Post: "posts",
+  CommunityQuestion: "community",
+  Community: "communities",
+  LeaderboardEntry: "leaderboard",
+  Contact: "contacts",
+  User: "users",
 };
+
+const resourceByPath = new Map(
+  [...adminResources, adminUsersResource].map((r) => [r.path, r])
+);
 
 export default function AdminDashboardPage() {
   const { data, isLoading } = useAdminStats();
@@ -50,18 +66,17 @@ export default function AdminDashboardPage() {
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {Object.entries(counts).map(([key, count]) => {
-            const label = humanLabel(key);
-            const resource = adminResources.find(
-              (r) => r.path === label.toLowerCase().replace(/ /g, "-").replace(/s$/, "") + "s"
-            );
+            const path = MODEL_TO_RESOURCE[key];
+            if (!path) return null;
+            const resource = resourceByPath.get(path);
             const Icon = resource?.icon ?? MessageSquare;
             return (
-              <Link key={key} href={`/admin/${resource?.path ?? "subjects"}`}>
+              <Link key={key} href={`/admin/${path}`}>
                 <Card className="transition-shadow hover:shadow-md">
                   <CardContent className="flex items-center justify-between p-5">
                     <div>
                       <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                        {label}
+                        {resource?.label ?? key}
                       </p>
                       <p className="mt-1 font-display text-3xl font-bold">{count}</p>
                     </div>

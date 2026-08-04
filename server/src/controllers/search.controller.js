@@ -15,7 +15,7 @@ const sendSuccess = require("../utils/sendSuccess");
 const searchModel = async (Model, query, fields) => {
   const conditions = fields.map((field) => {
     if (field === "tags") {
-      return where(cast(col(`${Model.name}.${field}`), "text"), {
+      return where(cast(col(field), "text"), {
         [Op.iLike]: `%${query}%`,
       });
     }
