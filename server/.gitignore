@@ -1,4 +1,5 @@
 .env
+src/seed/createAdmin.js
 .env.*
 !.env.example
 
