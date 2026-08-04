@@ -77,6 +77,13 @@ export const useAdminResource = (resource: string) =>
     retry: false,
   });
 
+export const useAdminResourceMeta = (resource: string) =>
+  useQuery({
+    queryKey: ["admin", resource, "meta"] as const,
+    queryFn: () => admin.meta(resource),
+    retry: false,
+  });
+
 export const useAdminUsers = () =>
   useQuery({
     queryKey: ["admin", "users"] as const,

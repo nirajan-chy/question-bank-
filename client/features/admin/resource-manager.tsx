@@ -15,7 +15,8 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { admin } from "@/services/api";
-import { useAdminResource } from "@/services/queries";
+import { useAdminResource, useAdminResourceMeta } from "@/services/queries";
+import type { ResourceField } from "@/types";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -25,10 +26,16 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-type FieldType = "string" | "number" | "boolean" | "date" | "string-array" | "json";
-
-type FieldDef = { key: string; type: FieldType };
+const SKIP_FIELDS = new Set(["createdAt", "updatedAt"]);
+const NONE_VALUE = "__none__";
 
 const humanize = (key: string) =>
   key
@@ -36,65 +43,60 @@ const humanize = (key: string) =>
     .replace(/([A-Z])([A-Z][a-z])/g, "$1 $2")
     .replace(/^./, (c) => c.toUpperCase());
 
-const DATE_RE = /^\d{4}-\d{2}-\d{2}/;
-const isDateString = (v: unknown) => typeof v === "string" && DATE_RE.test(v);
+const isNumberType = (t: string) => t === "INTEGER" || t === "FLOAT";
+const isDateType = (t: string) => t === "DATE" || t === "DATEONLY";
 
-function inferType(value: unknown): FieldType {
-  if (typeof value === "boolean") return "boolean";
-  if (typeof value === "number") return "number";
-  if (Array.isArray(value)) {
-    if (value.every((v) => typeof v === "string")) return "string-array";
-    return "json";
-  }
-  if (value && typeof value === "object") return "json";
-  if (isDateString(value)) return "date";
-  return "string";
+function jsonbIsLines(value: unknown): boolean {
+  return Array.isArray(value) && value.every((v) => typeof v === "string");
 }
 
-function inferFields(sample: Record<string, unknown>): FieldDef[] {
-  return Object.entries(sample)
-    .filter(([k]) => k !== "createdAt" && k !== "updatedAt" && k !== "id")
-    .map(([key, value]) => ({ key, type: inferType(value) }));
+function fieldToInputValue(field: ResourceField, current: unknown, isEdit: boolean): string {
+  const value = current ?? field.defaultValue;
+  if (field.type === "BOOLEAN") return value === true ? "true" : "false";
+  if (field.type === "JSONB") {
+    if (jsonbIsLines(value)) return (value as string[]).join("\n");
+    if (jsonbIsLines(field.defaultValue) && !isEdit) return (field.defaultValue as string[]).join("\n");
+    return value == null ? "" : JSON.stringify(value, null, 2);
+  }
+  return value == null ? "" : String(value);
 }
 
-function parseFieldValue(raw: string, type: FieldType): { value: unknown; error?: string } {
-  if (type === "string-array") {
-    return { value: raw.split("\n").map((s) => s.trim()).filter(Boolean) };
-  }
-  if (type === "json") {
+function parseFieldValue(raw: string, field: ResourceField): { value: unknown; error?: string } {
+  if (field.type === "JSONB") {
+    if (jsonbIsLines(field.defaultValue)) {
+      return { value: raw.split("\n").map((s) => s.trim()).filter(Boolean) };
+    }
     const trimmed = raw.trim();
-    if (!trimmed) return { value: null };
+    if (!trimmed) return { value: field.defaultValue ?? null };
     try {
       return { value: JSON.parse(trimmed) };
     } catch {
       return { value: null, error: "Invalid JSON" };
     }
   }
-  if (type === "number") {
+  if (field.type === "BOOLEAN") return { value: raw === "true" };
+  if (isNumberType(field.type)) {
     if (raw.trim() === "") return { value: undefined };
     const n = Number(raw);
     return Number.isFinite(n) ? { value: n } : { value: undefined, error: "Must be a number" };
   }
-  if (type === "boolean") return { value: raw === "true" };
+  if (field.type === "ENUM" && raw === NONE_VALUE) return { value: undefined };
   return { value: raw };
-}
-
-function fieldToInputValue(value: unknown, type: FieldType): string {
-  if (type === "string-array") return (value as string[]).join("\n");
-  if (type === "json") return value == null ? "" : JSON.stringify(value, null, 2);
-  if (type === "boolean") return value === true ? "true" : "false";
-  return value == null ? "" : String(value);
 }
 
 export function ResourceManager({ resource, label }: { resource: string; label: string }) {
   const queryClient = useQueryClient();
   const { data = [], isLoading } = useAdminResource(resource);
+  const { data: meta, isLoading: metaLoading } = useAdminResourceMeta(resource);
 
   const [mode, setMode] = useState<{ type: "edit"; record: Record<string, unknown> } | { type: "create" } | null>(null);
   const [confirmingId, setConfirmingId] = useState<string | null>(null);
   const [query, setQuery] = useState("");
 
-  const fields = useMemo(() => (data.length > 0 ? inferFields(data[0]) : []), [data]);
+  const fields = useMemo(
+    () => (meta?.attributes ?? []).filter((f) => !SKIP_FIELDS.has(f.key)),
+    [meta]
+  );
 
   const invalidate = () => {
     queryClient.invalidateQueries({ queryKey: ["admin", resource] });
@@ -138,7 +140,7 @@ export function ResourceManager({ resource, label }: { resource: string; label: 
         <Button
           variant="gradient"
           onClick={() => setMode({ type: "create" })}
-          disabled={fields.length === 0}
+          disabled={metaLoading || fields.length === 0}
         >
           <Plus className="h-4 w-4" /> Add {label.replace(/s$/, "")}
         </Button>
@@ -246,7 +248,7 @@ function ResourceForm({
 }: {
   resource: string;
   label: string;
-  fields: FieldDef[];
+  fields: ResourceField[];
   initial?: Record<string, unknown>;
   sampleId?: string;
   onDone: () => void;
@@ -256,25 +258,21 @@ function ResourceForm({
   const [values, setValues] = useState<Record<string, string>>(() => {
     const init: Record<string, string> = {};
     for (const f of fields) {
-      init[f.key] = fieldToInputValue(initial?.[f.key], f.type);
+      init[f.key] = fieldToInputValue(f, initial?.[f.key], isEdit);
     }
     return init;
   });
-  const [jsonErrors, setJsonErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
 
-  const set = (key: string, value: string) => {
-    setValues((v) => ({ ...v, [key]: value }));
-    setJsonErrors((e) => ({ ...e, [key]: "" }));
-  };
+  const set = (key: string, value: string) => setValues((v) => ({ ...v, [key]: value }));
 
   const buildPayload = (): { payload: Record<string, unknown>; error?: string } => {
     const payload: Record<string, unknown> = {};
     for (const f of fields) {
-      if (isEdit && f.key === "id") continue;
-      const { value, error } = parseFieldValue(values[f.key], f.type);
+      if (isEdit && f.primaryKey) continue;
+      const { value, error } = parseFieldValue(values[f.key], f);
       if (error) return { payload, error };
-      if (f.type === "number" && value === undefined) continue;
+      if (value === undefined) continue;
       payload[f.key] = value;
     }
     return { payload };
@@ -282,11 +280,15 @@ function ResourceForm({
 
   const validateCreate = () => {
     for (const f of fields) {
-      if (f.type !== "string" && f.type !== "date") continue;
-      if (f.key === "id") continue;
-      if (!values[f.key]?.trim()) {
-        return `${humanize(f.key)} is required`;
+      if (f.type === "BOOLEAN" || f.type === "JSONB") continue;
+      if (f.primaryKey && f.type === "UUID") continue;
+      if (f.allowNull || f.defaultValue != null) continue;
+      const raw = values[f.key];
+      if (isNumberType(f.type)) {
+        if (!raw?.trim()) return `${humanize(f.key)} is required`;
+        continue;
       }
+      if (!raw?.trim()) return `${humanize(f.key)} is required`;
     }
     return null;
   };
@@ -312,7 +314,7 @@ function ResourceForm({
         await admin.update(resource, initial!.id as string, payload);
         toast.success(`${label} item updated`);
       } else {
-        await admin.create(resource, { id: values.id?.trim(), ...payload });
+        await admin.create(resource, payload);
         toast.success(`${label} item created`);
       }
       onDone();
@@ -338,18 +340,9 @@ function ResourceForm({
         </div>
 
         <form onSubmit={onSubmit} className="grid gap-4 sm:grid-cols-2">
-          {!isEdit && (
-            <Field
-              label="ID"
-              required
-              value={values.id ?? ""}
-              onChange={(v) => set("id", v)}
-              placeholder={sampleId ? `e.g. ${sampleId}` : "unique id (slug-like)"}
-            />
-          )}
-
           {fields.map((f) => {
-            if (f.type === "boolean") {
+            const isPk = f.primaryKey;
+            if (f.type === "BOOLEAN") {
               return (
                 <div key={f.key} className="flex items-center justify-between rounded-lg border p-3 sm:col-span-2">
                   <Label htmlFor={`f-${f.key}`}>{humanize(f.key)}</Label>
@@ -361,16 +354,30 @@ function ResourceForm({
                 </div>
               );
             }
+            if (f.type === "ENUM") {
+              return (
+                <FieldSelect
+                  key={f.key}
+                  field={f}
+                  value={values[f.key]}
+                  required={!isEdit && !f.allowNull && f.defaultValue == null}
+                  disabled={isEdit && isPk}
+                  onChange={(v) => set(f.key, v)}
+                />
+              );
+            }
+            const fullWidth =
+              f.type === "JSONB" || f.type === "TEXT" || f.type === "DATEONLY" || f.type === "DATE";
             return (
               <Field
                 key={f.key}
-                label={humanize(f.key)}
-                type={f.type}
-                required={!isEdit && (f.type === "string" || f.type === "date")}
+                field={f}
+                required={!isEdit && !f.allowNull && f.defaultValue == null}
+                disabled={isEdit && isPk}
                 value={values[f.key]}
-                error={jsonErrors[f.key]}
                 onChange={(v) => set(f.key, v)}
-                className={f.type === "json" || f.type === "string-array" ? "sm:col-span-2" : ""}
+                placeholder={isPk && !isEdit ? (sampleId ? `e.g. ${sampleId}` : "unique id (slug-like)") : undefined}
+                className={fullWidth ? "sm:col-span-2" : ""}
               />
             );
           })}
@@ -390,50 +397,93 @@ function ResourceForm({
 }
 
 function Field({
-  label: labelText,
-  type = "string",
+  field,
   required,
+  disabled,
   value,
   onChange,
   placeholder,
-  error,
   className,
 }: {
-  label: string;
-  type?: FieldType;
+  field: ResourceField;
   required?: boolean;
+  disabled?: boolean;
   value: string;
   onChange: (v: string) => void;
   placeholder?: string;
-  error?: string;
   className?: string;
 }) {
-  const isTextarea = type === "string-array" || type === "json";
+  const isTextarea = field.type === "TEXT" || field.type === "JSONB";
+  const badge = field.type === "JSONB"
+    ? jsonbIsLines(field.defaultValue)
+      ? "one per line"
+      : "JSON"
+    : undefined;
   return (
     <div className={cn("space-y-1.5", className)}>
-      <Label>
-        {labelText}
+      <Label htmlFor={`f-${field.key}`}>
+        {humanize(field.key)}
         {required && <span className="ml-0.5 text-destructive">*</span>}
-        {type === "json" && <Badge variant="outline" className="ml-2 text-[9px]">JSON</Badge>}
-        {type === "string-array" && <Badge variant="outline" className="ml-2 text-[9px]">one per line</Badge>}
+        {badge && <Badge variant="outline" className="ml-2 text-[9px]">{badge}</Badge>}
       </Label>
       {isTextarea ? (
         <Textarea
+          id={`f-${field.key}`}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          rows={type === "json" ? 5 : 3}
-          placeholder={type === "json" ? 'e.g. [{"key": "value"}]' : "one item per line"}
-          className="font-mono text-xs"
+          rows={field.type === "TEXT" ? 3 : 5}
+          placeholder={field.type === "JSONB" ? 'e.g. [{"key": "value"}]' : placeholder}
+          className={cn(field.type === "JSONB" && "font-mono text-xs")}
+          disabled={disabled}
         />
       ) : (
         <Input
-          type={type === "date" ? "date" : type === "number" ? "number" : "text"}
+          id={`f-${field.key}`}
+          type={isDateType(field.type) ? "date" : isNumberType(field.type) ? "number" : "text"}
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
+          disabled={disabled}
         />
       )}
-      {error && <p className="text-xs text-destructive">{error}</p>}
+    </div>
+  );
+}
+
+function FieldSelect({
+  field,
+  value,
+  required,
+  disabled,
+  onChange,
+}: {
+  field: ResourceField;
+  value: string;
+  required?: boolean;
+  disabled?: boolean;
+  onChange: (v: string) => void;
+}) {
+  const options = field.values ?? [];
+  const showNone = !required;
+  return (
+    <div className="space-y-1.5">
+      <Label htmlFor={`f-${field.key}`}>
+        {humanize(field.key)}
+        {required && <span className="ml-0.5 text-destructive">*</span>}
+      </Label>
+      <Select value={value} onValueChange={onChange} disabled={disabled}>
+        <SelectTrigger id={`f-${field.key}`}>
+          <SelectValue placeholder="Select…" />
+        </SelectTrigger>
+        <SelectContent>
+          {showNone && <SelectItem value={NONE_VALUE}>—</SelectItem>}
+          {options.map((opt) => (
+            <SelectItem key={opt} value={opt}>
+              {opt}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
     </div>
   );
 }

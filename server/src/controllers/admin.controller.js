@@ -55,4 +55,17 @@ const deleteUser = asyncHandler(async (req, res) => {
   sendSuccess(res, null, 200, "User deleted");
 });
 
-module.exports = { getStats, updateUser, deleteUser };
+const buildModelMeta = (Model) => ({
+  name: Model.name,
+  attributes: Object.entries(Model.rawAttributes).map(([key, attr]) => ({
+    key,
+    type: attr.type?.key ?? "STRING",
+    allowNull: attr.allowNull === undefined ? !attr.primaryKey : attr.allowNull,
+    primaryKey: Boolean(attr.primaryKey),
+    defaultValue: attr.defaultValue === undefined ? null : attr.defaultValue,
+    unique: Boolean(attr.unique),
+    values: attr.type?.values || undefined,
+  })),
+});
+
+module.exports = { getStats, updateUser, deleteUser, buildModelMeta };

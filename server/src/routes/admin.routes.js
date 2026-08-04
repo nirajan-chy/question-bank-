@@ -1,34 +1,43 @@
 const router = require("express").Router();
 const { auth, adminOnly } = require("../middleware/auth");
 const adminCtrl = require("../controllers/admin.controller");
-const userCtrl = require("../controllers/base.controller").createBaseController(
-  require("../models").User
-);
+const sendSuccess = require("../utils/sendSuccess");
+const ApiError = require("../utils/ApiError");
+const models = require("../models");
+const { createBaseController } = require("../controllers/base.controller");
 
 router.use(auth, adminOnly);
 
 router.get("/stats", adminCtrl.getStats);
 
 const resources = [
-  { path: "levels", ctrl: require("../controllers/level.controller") },
-  { path: "universities", ctrl: require("../controllers/university.controller") },
-  { path: "faculties", ctrl: require("../controllers/faculty.controller") },
-  { path: "subjects", ctrl: require("../controllers/subject.controller") },
-  { path: "notes", ctrl: require("../controllers/note.controller") },
-  { path: "books", ctrl: require("../controllers/book.controller") },
-  { path: "question-banks", ctrl: require("../controllers/questionBank.controller") },
-  { path: "past-papers", ctrl: require("../controllers/pastPaper.controller") },
-  { path: "mock-tests", ctrl: require("../controllers/mockTest.controller") },
-  { path: "scholarships", ctrl: require("../controllers/scholarship.controller") },
-  { path: "notices", ctrl: require("../controllers/notice.controller") },
-  { path: "results", ctrl: require("../controllers/result.controller") },
-  { path: "testimonials", ctrl: require("../controllers/testimonial.controller") },
-  { path: "faqs", ctrl: require("../controllers/faq.controller") },
-  { path: "posts", ctrl: require("../controllers/post.controller") },
-  { path: "community", ctrl: require("../controllers/community.controller") },
-  { path: "leaderboard", ctrl: require("../controllers/leaderboard.controller") },
-  { path: "contacts", ctrl: require("../controllers/contact.controller") },
+  { path: "levels", model: models.Level, ctrl: require("../controllers/level.controller") },
+  { path: "universities", model: models.University, ctrl: require("../controllers/university.controller") },
+  { path: "faculties", model: models.Faculty, ctrl: require("../controllers/faculty.controller") },
+  { path: "subjects", model: models.Subject, ctrl: require("../controllers/subject.controller") },
+  { path: "notes", model: models.Note, ctrl: require("../controllers/note.controller") },
+  { path: "books", model: models.Book, ctrl: require("../controllers/book.controller") },
+  { path: "question-banks", model: models.QuestionBank, ctrl: require("../controllers/questionBank.controller") },
+  { path: "past-papers", model: models.PastPaper, ctrl: require("../controllers/pastPaper.controller") },
+  { path: "mock-tests", model: models.MockTest, ctrl: require("../controllers/mockTest.controller") },
+  { path: "scholarships", model: models.Scholarship, ctrl: require("../controllers/scholarship.controller") },
+  { path: "notices", model: models.Notice, ctrl: require("../controllers/notice.controller") },
+  { path: "results", model: models.ResultEntry, ctrl: require("../controllers/result.controller") },
+  { path: "testimonials", model: models.Testimonial, ctrl: require("../controllers/testimonial.controller") },
+  { path: "faqs", model: models.Faq, ctrl: require("../controllers/faq.controller") },
+  { path: "posts", model: models.Post, ctrl: require("../controllers/post.controller") },
+  { path: "community", model: models.CommunityQuestion, ctrl: require("../controllers/community.controller") },
+  { path: "leaderboard", model: models.LeaderboardEntry, ctrl: require("../controllers/leaderboard.controller") },
+  { path: "contacts", model: models.Contact, ctrl: require("../controllers/contact.controller") },
 ];
+
+const modelByPath = Object.fromEntries(resources.map((r) => [r.path, r.model]));
+
+router.get("/meta/:resource", (req, res, next) => {
+  const Model = modelByPath[req.params.resource];
+  if (!Model) return next(new ApiError(404, `Unknown resource: ${req.params.resource}`));
+  sendSuccess(res, adminCtrl.buildModelMeta(Model));
+});
 
 for (const { path, ctrl } of resources) {
   router.get(`/${path}`, ctrl.list);
@@ -38,6 +47,7 @@ for (const { path, ctrl } of resources) {
   router.delete(`/${path}/:id`, ctrl.remove);
 }
 
+const userCtrl = createBaseController(models.User);
 router.get("/users", userCtrl.list);
 router.get("/users/:id", userCtrl.getById);
 router.put("/users/:id", adminCtrl.updateUser);

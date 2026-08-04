@@ -20,6 +20,7 @@ import type {
   AuthResponse,
   AdminStats,
   ContactSubmission,
+  ResourceMeta,
 } from "@/types";
 
 import { http } from "./http";
@@ -97,6 +98,7 @@ type AdminResourceRecord = Record<string, unknown>;
 
 export const admin = {
   stats: () => http<AdminStats>("/admin/stats"),
+  meta: (resource: string) => http<ResourceMeta>(`/admin/meta/${resource}`),
   users: () => http<User[]>("/admin/users"),
   updateUser: (id: string, patch: Partial<Pick<User, "name" | "role" | "avatar" | "bio">> & { password?: string }) =>
     http<User>(`/admin/users/${id}`, { method: "PUT", body: JSON.stringify(patch) }),

@@ -31,6 +31,21 @@ export type ContactSubmission = {
   createdAt?: string;
 };
 
+export type ResourceField = {
+  key: string;
+  type: "STRING" | "TEXT" | "INTEGER" | "FLOAT" | "BOOLEAN" | "JSONB" | "DATE" | "DATEONLY" | "ENUM" | "UUID" | string;
+  allowNull: boolean;
+  primaryKey: boolean;
+  defaultValue: unknown;
+  unique: boolean;
+  values?: string[];
+};
+
+export type ResourceMeta = {
+  name: string;
+  attributes: ResourceField[];
+};
+
 export type Level = {
   id: string;
   slug: string;
