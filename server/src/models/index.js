@@ -16,6 +16,8 @@ const Testimonial = require("./testimonial.model")(sequelize);
 const Faq = require("./faq.model")(sequelize);
 const Post = require("./post.model")(sequelize);
 const CommunityQuestion = require("./communityQuestion.model")(sequelize);
+const Community = require("./community.model")(sequelize);
+const CommunityMessage = require("./communityMessage.model")(sequelize);
 const LeaderboardEntry = require("./leaderboard.model")(sequelize);
 const Contact = require("./contact.model")(sequelize);
 const User = require("./user.model")(sequelize);
@@ -37,6 +39,8 @@ const models = {
   Faq,
   Post,
   CommunityQuestion,
+  Community,
+  CommunityMessage,
   LeaderboardEntry,
   Contact,
   User,

@@ -15,6 +15,9 @@ import type {
   Faq,
   Post,
   CommunityQuestion,
+  Community,
+  CommunityMessage,
+  MessageAttachment,
   LeaderboardEntry,
   User,
   AuthResponse,
@@ -68,6 +71,24 @@ export const api = {
   community: () => http<CommunityQuestion[]>("/community"),
   askQuestion: (payload: { title: string; body: string; tags: string[]; author?: string }) =>
     http<CommunityQuestion>("/community", { method: "POST", body: JSON.stringify(payload) }),
+
+  communities: () => http<Community[]>("/communities"),
+  communityMessages: (communityId: string, channelId: string) =>
+    http<CommunityMessage[]>(`/communities/${communityId}/messages?channel=${encodeURIComponent(channelId)}`),
+  sendCommunityMessage: (
+    communityId: string,
+    channelId: string,
+    payload: { author: string; role?: string; content: string; attachment?: MessageAttachment | null }
+  ) =>
+    http<CommunityMessage>(`/communities/${communityId}/messages`, {
+      method: "POST",
+      body: JSON.stringify({ ...payload, channelId }),
+    }),
+  reactToMessage: (messageId: string, emoji: string) =>
+    http<CommunityMessage>(`/communities/messages/${messageId}/reactions`, {
+      method: "POST",
+      body: JSON.stringify({ emoji }),
+    }),
 
   leaderboard: () => http<LeaderboardEntry[]>("/leaderboard"),
   search: (query: string) => http<SearchResults>(`/search?q=${encodeURIComponent(query)}`),

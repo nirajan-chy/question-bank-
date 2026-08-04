@@ -116,6 +116,8 @@ All endpoints return the envelope: `{ success, message, data, errors }`.
 | `/api/testimonials` · `/api/faqs` | Site content |
 | `/api/posts` · `/api/posts/:slug` | Blog |
 | `/api/community` | Community Q&A |
+| `/api/communities` | Study communities (chat groups + channels) |
+| `/api/communities/:id/messages?channel=` | Messages in a community channel |
 | `/api/leaderboard` | Leaderboard |
 | `/api/search?q=` | Unified search |
 | `/api/contact` | Contact submissions |
@@ -127,6 +129,8 @@ All endpoints return the envelope: `{ success, message, data, errors }`.
 | `POST /api/community` | Ask a community question |
 | `POST /api/community/:id/answers` | Add an answer |
 | `POST /api/community/:id/view` | Increment views |
+| `POST /api/communities/:id/messages` | Send a chat message to a channel |
+| `POST /api/communities/messages/:messageId/reactions` | React to a chat message |
 | `POST /api/contact` | Submit the contact form |
 
 ### Auth
@@ -149,7 +153,7 @@ All endpoints return the envelope: `{ success, message, data, errors }`.
 | `DELETE /api/admin/:resource/:id` | Delete a record |
 | `GET /api/admin/users` · `PUT /api/admin/users/:id` · `DELETE /api/admin/users/:id` | Manage users |
 
-`resource` is one of: `levels`, `universities`, `faculties`, `subjects`, `notes`, `books`, `question-banks`, `past-papers`, `mock-tests`, `scholarships`, `notices`, `results`, `testimonials`, `faqs`, `posts`, `community`, `leaderboard`, `contacts`.
+`resource` is one of: `levels`, `universities`, `faculties`, `subjects`, `notes`, `books`, `question-banks`, `past-papers`, `mock-tests`, `scholarships`, `notices`, `results`, `testimonials`, `faqs`, `posts`, `community`, `communities`, `leaderboard`, `contacts`.
 
 > Public content endpoints are **read-only** — all writes go through the protected `/api/admin/*` routes.
 

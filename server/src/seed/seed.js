@@ -31,6 +31,8 @@ const seedMap = [
   { model: models.Faq, file: "faq.json" },
   { model: models.Post, file: "posts.json" },
   { model: models.CommunityQuestion, file: "community.json" },
+  { model: models.Community, file: "community-channels.json", transform: (row, index) => ({ ...row, order: index }) },
+  { model: models.CommunityMessage, file: "community-messages.json" },
   { model: models.LeaderboardEntry, file: "leaderboard.json" },
 ];
 
@@ -46,8 +48,8 @@ async function seed() {
     await sequelize.sync();
     console.log("✅ Tables synced");
 
-    for (const { model, file } of seedMap) {
-      const rows = readJson(file);
+    for (const { model, file, transform } of seedMap) {
+      const rows = transform ? readJson(file).map(transform) : readJson(file);
       if (rows.length === 0) continue;
 
       await model.bulkCreate(rows, {

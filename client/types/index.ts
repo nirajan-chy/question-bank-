@@ -322,6 +322,48 @@ export type CommunityAnswer = {
   comments: { author: string; body: string; createdAt: string }[];
 };
 
+export type CommunityChannel = {
+  id: string;
+  name: string;
+  description: string;
+};
+
+export type Community = {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  gradient: string;
+  memberCount: number;
+  badge?: string;
+  channels: CommunityChannel[];
+  createdAt?: string;
+};
+
+export type MessageReaction = {
+  emoji: string;
+  count: number;
+};
+
+export type MessageAttachment = {
+  name: string;
+  size: string;
+  type: string;
+};
+
+export type CommunityMessage = {
+  id: string;
+  communityId: string;
+  channelId: string;
+  author: string;
+  role: string;
+  avatar: string;
+  content: string;
+  reactions: MessageReaction[];
+  attachment: MessageAttachment | null;
+  createdAt: string;
+};
+
 export type StudySession = {
   id: string;
   subject: string;

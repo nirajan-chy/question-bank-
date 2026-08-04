@@ -27,6 +27,7 @@ const resources = [
   { path: "faqs", model: models.Faq, ctrl: require("../controllers/faq.controller") },
   { path: "posts", model: models.Post, ctrl: require("../controllers/post.controller") },
   { path: "community", model: models.CommunityQuestion, ctrl: require("../controllers/community.controller") },
+  { path: "communities", model: models.Community, ctrl: require("../controllers/communities.controller") },
   { path: "leaderboard", model: models.LeaderboardEntry, ctrl: require("../controllers/leaderboard.controller") },
   { path: "contacts", model: models.Contact, ctrl: require("../controllers/contact.controller") },
 ];

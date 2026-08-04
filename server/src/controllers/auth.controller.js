@@ -8,8 +8,12 @@ const { User } = models;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const signToken = (user) =>
-  jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "7d" });
+const signToken = (user) => {
+  if (!process.env.JWT_SECRET) {
+    throw new ApiError(500, "Server misconfigured: JWT_SECRET is not set in the environment");
+  }
+  return jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "7d" });
+};
 
 const sanitize = (user) => user.get({ plain: true });
 
