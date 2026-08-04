@@ -31,6 +31,8 @@ const seedMap = [
   { model: models.Faq, file: "faq.json" },
   { model: models.Post, file: "posts.json" },
   { model: models.CommunityQuestion, file: "community.json" },
+  { model: models.Community, file: "community-channels.json", transform: (row, index) => ({ ...row, order: index }) },
+  { model: models.CommunityMessage, file: "community-messages.json" },
   { model: models.LeaderboardEntry, file: "leaderboard.json" },
 ];
 
@@ -46,8 +48,8 @@ async function seed() {
     await sequelize.sync();
     console.log("✅ Tables synced");
 
-    for (const { model, file } of seedMap) {
-      const rows = readJson(file);
+    for (const { model, file, transform } of seedMap) {
+      const rows = transform ? readJson(file).map(transform) : readJson(file);
       if (rows.length === 0) continue;
 
       await model.bulkCreate(rows, {
@@ -55,6 +57,22 @@ async function seed() {
         upsertKeys: ["id"],
       });
       console.log(`✅ ${model.name}: ${rows.length} rows upserted`);
+    }
+
+    const adminEmail = (process.env.ADMIN_EMAIL || "admin@sandarbh.com").toLowerCase();
+    const adminPassword = process.env.ADMIN_PASSWORD || "admin123";
+    const admin = await models.User.findOne({ where: { email: adminEmail } });
+    if (admin) {
+      await admin.update({ role: "admin", password: adminPassword });
+      console.log(`✅ Admin user updated: ${adminEmail}`);
+    } else {
+      await models.User.create({
+        name: "Sandarbh Admin",
+        email: adminEmail,
+        password: adminPassword,
+        role: "admin",
+      });
+      console.log(`✅ Admin user created: ${adminEmail}`);
     }
 
     console.log("🎉 Seeding complete");

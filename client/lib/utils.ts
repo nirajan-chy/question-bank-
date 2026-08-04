@@ -22,6 +22,11 @@ export function formatDate(date: string | Date, opts?: Intl.DateTimeFormatOption
   }).format(d);
 }
 
+export function formatTime(date: string | Date): string {
+  const d = typeof date === "string" ? new Date(date) : date;
+  return new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit" }).format(d);
+}
+
 export function timeAgo(date: string | Date): string {
   const d = typeof date === "string" ? new Date(date) : date;
   const seconds = Math.floor((Date.now() - d.getTime()) / 1000);

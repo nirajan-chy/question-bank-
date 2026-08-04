@@ -20,6 +20,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import type { Community } from "@/types";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   School,
@@ -30,23 +31,6 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Wrench,
   Landmark,
   Award,
-};
-
-type CommunityChannel = {
-  id: string;
-  name: string;
-  description: string;
-};
-
-type Community = {
-  id: string;
-  name: string;
-  description: string;
-  icon: string;
-  gradient: string;
-  memberCount: number;
-  badge?: string;
-  channels: CommunityChannel[];
 };
 
 interface CommunitySidebarProps {

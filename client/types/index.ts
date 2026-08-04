@@ -1,5 +1,51 @@
 // ─── Domain types for Sandarbh ───────────────────────────────────────────────
 
+export type User = {
+  id: string;
+  name: string;
+  email: string;
+  role: "user" | "admin";
+  avatar: string;
+  bio: string;
+  createdAt?: string;
+  updatedAt?: string;
+};
+
+export type AuthResponse = {
+  token: string;
+  user: User;
+};
+
+export type AdminStats = {
+  counts: Record<string, number>;
+  recentContacts: ContactSubmission[];
+  recentQuestions: CommunityQuestion[];
+};
+
+export type ContactSubmission = {
+  id: string;
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  createdAt?: string;
+};
+
+export type ResourceField = {
+  key: string;
+  type: "STRING" | "TEXT" | "INTEGER" | "FLOAT" | "BOOLEAN" | "JSONB" | "DATE" | "DATEONLY" | "ENUM" | "UUID" | string;
+  allowNull: boolean;
+  primaryKey: boolean;
+  defaultValue: unknown;
+  unique: boolean;
+  values?: string[];
+};
+
+export type ResourceMeta = {
+  name: string;
+  attributes: ResourceField[];
+};
+
 export type Level = {
   id: string;
   slug: string;
@@ -274,6 +320,48 @@ export type CommunityAnswer = {
   accepted: boolean;
   createdAt: string;
   comments: { author: string; body: string; createdAt: string }[];
+};
+
+export type CommunityChannel = {
+  id: string;
+  name: string;
+  description: string;
+};
+
+export type Community = {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  gradient: string;
+  memberCount: number;
+  badge?: string;
+  channels: CommunityChannel[];
+  createdAt?: string;
+};
+
+export type MessageReaction = {
+  emoji: string;
+  count: number;
+};
+
+export type MessageAttachment = {
+  name: string;
+  size: string;
+  type: string;
+};
+
+export type CommunityMessage = {
+  id: string;
+  communityId: string;
+  channelId: string;
+  author: string;
+  role: string;
+  avatar: string;
+  content: string;
+  reactions: MessageReaction[];
+  attachment: MessageAttachment | null;
+  createdAt: string;
 };
 
 export type StudySession = {

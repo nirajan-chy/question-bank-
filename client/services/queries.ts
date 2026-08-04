@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
-import { api } from "./api";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { api, admin } from "./api";
 
 export const queryKeys = {
   levels: ["levels"] as const,
@@ -23,6 +23,9 @@ export const queryKeys = {
   posts: (opts?: { limit?: number }) => ["posts", opts] as const,
   post: (slug: string) => ["posts", slug] as const,
   community: ["community"] as const,
+  communities: ["communities"] as const,
+  communityMessages: (communityId: string, channelId: string) =>
+    ["communities", communityId, "messages", channelId] as const,
   leaderboard: ["leaderboard"] as const,
   search: (q: string) => ["search", q] as const,
 };
@@ -59,6 +62,60 @@ export const usePosts = (opts?: { limit?: number }) =>
 export const usePost = (slug: string) =>
   useQuery({ queryKey: queryKeys.post(slug), queryFn: () => api.post(slug) });
 export const useCommunity = () => useQuery({ queryKey: queryKeys.community, queryFn: api.community });
+export const useCommunities = () =>
+  useQuery({ queryKey: queryKeys.communities, queryFn: api.communities });
+export const useCommunityMessages = (communityId: string, channelId: string) =>
+  useQuery({
+    queryKey: queryKeys.communityMessages(communityId, channelId),
+    queryFn: () => api.communityMessages(communityId, channelId),
+    enabled: Boolean(communityId && channelId),
+  });
+export const useSendCommunityMessage = (communityId: string, channelId: string) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (payload: { author: string; role?: string; content: string }) =>
+      api.sendCommunityMessage(communityId, channelId, payload),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: queryKeys.communityMessages(communityId, channelId) }),
+  });
+};
+export const useReactToMessage = (communityId: string, channelId: string) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ messageId, emoji }: { messageId: string; emoji: string }) =>
+      api.reactToMessage(messageId, emoji),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: queryKeys.communityMessages(communityId, channelId) }),
+  });
+};
 export const useLeaderboard = () => useQuery({ queryKey: queryKeys.leaderboard, queryFn: api.leaderboard });
 export const useSearch = (query: string) =>
   useQuery({ queryKey: queryKeys.search(query), queryFn: () => api.search(query), enabled: query.trim().length > 0 });
+
+export const useAdminStats = () =>
+  useQuery({
+    queryKey: ["admin", "stats"] as const,
+    queryFn: admin.stats,
+    retry: false,
+  });
+
+export const useAdminResource = (resource: string) =>
+  useQuery({
+    queryKey: ["admin", resource] as const,
+    queryFn: () => admin.list(resource),
+    retry: false,
+  });
+
+export const useAdminResourceMeta = (resource: string) =>
+  useQuery({
+    queryKey: ["admin", resource, "meta"] as const,
+    queryFn: () => admin.meta(resource),
+    retry: false,
+  });
+
+export const useAdminUsers = () =>
+  useQuery({
+    queryKey: ["admin", "users"] as const,
+    queryFn: admin.users,
+    retry: false,
+  });

@@ -1,114 +1,40 @@
 "use client";
 
 import { useState } from "react";
-import { 
-  Hash, 
-  Users, 
-  Search, 
-  Settings, 
-  Smile, 
-  Paperclip, 
-  Send,
-  X,
-  MessageSquarePlus
-} from "lucide-react";
+import { Hash, Users, Search, Settings, Smile, Paperclip, Send, X, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CommunityMessage } from "./community-message";
-
-type CommunityChannel = {
-  id: string;
-  name: string;
-  description: string;
-};
-
-type Community = {
-  id: string;
-  name: string;
-  description: string;
-  icon: string;
-  gradient: string;
-  memberCount: number;
-  badge?: string;
-  channels: CommunityChannel[];
-};
+import { useCommunityMessages, useReactToMessage, useSendCommunityMessage } from "@/services/queries";
+import { useAuthStore } from "@/store/use-auth-store";
+import type { Community, CommunityChannel } from "@/types";
 
 interface CommunityChatProps {
   community: Community;
   channel: CommunityChannel;
 }
 
-const sampleMessages = [
-  {
-    id: "1",
-    author: "Ananya Sharma",
-    role: "Moderator",
-    avatar: "AS",
-    content: "Hello everyone! How's your preparation for the upcoming exams?",
-    time: "10:30 AM",
-    reactions: [
-      { emoji: "👍", count: 12 },
-      { emoji: "🎉", count: 4 },
-    ],
-  },
-  {
-    id: "2",
-    author: "Rahul Verma",
-    role: "Student",
-    avatar: "RV",
-    content: "Pretty good so far! Focusing on Physics these days.",
-    time: "10:32 AM",
-    reactions: [{ emoji: "🔥", count: 6 }],
-  },
-  {
-    id: "3",
-    author: "Priya Singh",
-    role: "Student",
-    avatar: "PS",
-    content: "Anyone has good notes for Chemical Bonding? I'm stuck on that topic.",
-    time: "10:34 AM",
-    reactions: [],
-  },
-  {
-    id: "4",
-    author: "Rahul Verma",
-    role: "Student",
-    avatar: "RV",
-    content: "I have some notes, @Priya Singh. Check this out!",
-    time: "10:35 AM",
-    reactions: [],
-    attachment: {
-      name: "Chemical_Bonding_Notes.pdf",
-      size: "2.4 MB",
-      type: "pdf",
-    },
-  },
-  {
-    id: "5",
-    author: "Sakshyam",
-    role: "Student",
-    avatar: "SK",
-    content: "Same here! Let's all revise together sometime.",
-    time: "10:36 AM",
-    reactions: [
-      { emoji: "👍", count: 8 },
-      { emoji: "🎉", count: 2 },
-    ],
-  },
-  {
-    id: "6",
-    author: "Arjun Joshi",
-    role: "Student",
-    avatar: "AJ",
-    content: "I can share my notes on Cell Structure, check the file I just uploaded.",
-    time: "10:38 AM",
-    reactions: [],
-  },
-];
-
 export function CommunityChat({ community, channel }: CommunityChatProps) {
+  const { data: messages = [], isPending } = useCommunityMessages(community.id, channel.id);
+  const sendMessage = useSendCommunityMessage(community.id, channel.id);
+  const reactToMessage = useReactToMessage(community.id, channel.id);
+  const user = useAuthStore((s) => s.user);
+
   const [message, setMessage] = useState("");
   const [showWelcome, setShowWelcome] = useState(true);
+
+  const submit = () => {
+    const content = message.trim();
+    if (!content || sendMessage.isPending) return;
+    sendMessage.mutate(
+      {
+        author: user?.name ?? "Anonymous",
+        role: user?.role === "admin" ? "Moderator" : "Student",
+        content,
+      },
+      { onSuccess: () => setMessage("") }
+    );
+  };
 
   return (
     <div className="flex flex-col h-full bg-background">
@@ -121,13 +47,9 @@ export function CommunityChat({ community, channel }: CommunityChatProps) {
           <p className="text-sm text-muted-foreground">{channel.description}</p>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="gradient" size="sm" className="gap-1.5">
-            <MessageSquarePlus className="h-4 w-4" />
-            Ask Question
-          </Button>
           <div className="flex items-center gap-1 text-sm text-muted-foreground">
             <div className="h-2 w-2 rounded-full bg-green-500" />
-            <span>128 online</span>
+            <span>{community.memberCount.toLocaleString()} members</span>
           </div>
           <Button variant="ghost" size="icon" className="h-8 w-8">
             <Users className="h-4 w-4" />
@@ -164,14 +86,24 @@ export function CommunityChat({ community, channel }: CommunityChatProps) {
         {/* Date Separator */}
         <div className="flex items-center gap-4 my-4">
           <div className="flex-1 border-t" />
-          <span className="text-xs font-medium text-muted-foreground">Today</span>
+          <span className="text-xs font-medium text-muted-foreground">#{channel.name}</span>
           <div className="flex-1 border-t" />
         </div>
 
         {/* Messages */}
-        {sampleMessages.map((msg) => (
-          <CommunityMessage key={msg.id} message={msg} />
-        ))}
+        {isPending ? (
+          <div className="flex items-center justify-center py-12 text-muted-foreground">
+            <Loader2 className="h-5 w-5 animate-spin" />
+          </div>
+        ) : (
+          messages.map((msg) => (
+            <CommunityMessage
+              key={msg.id}
+              message={msg}
+              onReact={(emoji) => reactToMessage.mutate({ messageId: msg.id, emoji })}
+            />
+          ))
+        )}
       </div>
 
       {/* Message Input */}
@@ -186,6 +118,9 @@ export function CommunityChat({ community, channel }: CommunityChatProps) {
             <Input
               value={message}
               onChange={(e) => setMessage(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") submit();
+              }}
               placeholder={`Message #${channel.name}`}
               className="pr-24 h-10"
             />
@@ -196,7 +131,13 @@ export function CommunityChat({ community, channel }: CommunityChatProps) {
               <Button variant="ghost" size="icon" className="h-8 w-8">
                 <Paperclip className="h-4 w-4" />
               </Button>
-              <Button variant="ghost" size="icon" className="h-8 w-8">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8"
+                onClick={submit}
+                disabled={sendMessage.isPending || !message.trim()}
+              >
                 <Send className="h-4 w-4" />
               </Button>
             </div>

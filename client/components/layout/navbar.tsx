@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import {
   ChevronDown,
@@ -11,6 +11,8 @@ import {
   Bookmark,
   Settings,
   User,
+  ShieldCheck,
+  LogOut,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { mainNav, resourcesNav } from "@/lib/nav";
@@ -27,19 +29,24 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useUiStore } from "@/store/use-ui-store";
-import { useUserStore } from "@/store/use-user-store";
+import { useAuthStore } from "@/store/use-auth-store";
 import { MobileNav } from "./mobile-nav";
 
 export function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const setCommandOpen = useUiStore((s) => s.setCommandOpen);
-  const user = useUserStore((s) => s.user);
+  const authUser = useAuthStore((s) => s.user);
+  const isAdmin = useAuthStore((s) => s.isAdmin);
+  const logout = useAuthStore((s) => s.logout);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
+    setMounted(true);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -106,45 +113,77 @@ export function Navbar() {
             </kbd>
           </button>
           <ModeToggle />
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="relative" aria-label="Account">
-                <Avatar className="h-8 w-8">
-                  <AvatarFallback className="bg-brand-gradient text-white">
-                    {user.name.split(" ").map((p) => p[0]).join("")}
-                  </AvatarFallback>
-                </Avatar>
+
+          {!mounted ? (
+            <div className="h-8 w-8" aria-hidden />
+          ) : authUser ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="relative" aria-label="Account">
+                  <Avatar className="h-8 w-8">
+                    <AvatarFallback className="bg-brand-gradient text-white">
+                      {authUser.name.charAt(0).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuLabel>
+                  <p className="text-sm font-medium">{authUser.name}</p>
+                  <p className="text-xs font-normal text-muted-foreground">{authUser.email}</p>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href="/dashboard" className="gap-2">
+                    <LayoutDashboard className="h-4 w-4" /> Dashboard
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/profile" className="gap-2">
+                    <User className="h-4 w-4" /> Profile
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/bookmarks" className="gap-2">
+                    <Bookmark className="h-4 w-4" /> Bookmarks
+                  </Link>
+                </DropdownMenuItem>
+                {isAdmin && (
+                  <DropdownMenuItem asChild>
+                    <Link href="/admin" className="gap-2">
+                      <ShieldCheck className="h-4 w-4" /> Admin panel
+                    </Link>
+                  </DropdownMenuItem>
+                )}
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href="/settings" className="gap-2">
+                    <Settings className="h-4 w-4" /> Settings
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onSelect={() => {
+                    logout();
+                    router.push("/");
+                    router.refresh();
+                  }}
+                  className="gap-2 text-destructive focus:text-destructive"
+                >
+                  <LogOut className="h-4 w-4" /> Sign out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <div className="hidden items-center gap-2 sm:flex">
+              <Button variant="ghost" size="sm" asChild>
+                <Link href="/login">Sign in</Link>
               </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuLabel>
-                <p className="text-sm font-medium">{user.name}</p>
-                <p className="text-xs font-normal text-muted-foreground">{user.level}</p>
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem asChild>
-                <Link href="/dashboard" className="gap-2">
-                  <LayoutDashboard className="h-4 w-4" /> Dashboard
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/profile" className="gap-2">
-                  <User className="h-4 w-4" /> Profile
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/bookmarks" className="gap-2">
-                  <Bookmark className="h-4 w-4" /> Bookmarks
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem asChild>
-                <Link href="/settings" className="gap-2">
-                  <Settings className="h-4 w-4" /> Settings
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+              <Button variant="gradient" size="sm" asChild>
+                <Link href="/register">Sign up</Link>
+              </Button>
+            </div>
+          )}
+
           <MobileNav />
         </div>
       </nav>
