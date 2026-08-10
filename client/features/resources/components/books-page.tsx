@@ -35,7 +35,7 @@ export function BooksPage() {
       <PageHeader
         icon={Library}
         title="Books & Textbooks"
-        description="The books every Nepali student needs — textbooks, guides and references for SEE, NEB, CTEVT and every university program."
+        description="The books every Nepali student needs — textbooks, guides and references for NEB, CTEVT and every university program."
         crumbs={[{ label: "Books" }]}
       />
       <section className="py-12 md:py-16">

@@ -18,6 +18,8 @@ const seedMap = [
   { model: models.Level, file: "levels.json" },
   { model: models.University, file: "universities.json" },
   { model: models.Faculty, file: "faculties.json" },
+  { model: models.Course, file: "courses.json" },
+  { model: models.Semester, file: "semesters.json" },
   { model: models.Subject, file: "subjects.json" },
   { model: models.Note, file: "notes.json" },
   { model: models.Book, file: "books.json" },
@@ -45,13 +47,17 @@ async function seed() {
     await sequelize.authenticate();
     console.log("✅ Database connected");
 
-    await sequelize.sync();
-    console.log("✅ Tables synced");
+    await sequelize.sync({ alter: true });
+    console.log("✅ Tables synced (altered)");
 
     for (const { model, file, transform } of seedMap) {
       const rows = transform ? readJson(file).map(transform) : readJson(file);
       if (rows.length === 0) continue;
 
+      const seedIds = rows.map((r) => r.id).filter(Boolean);
+      if (seedIds.length > 0) {
+        await model.destroy({ where: { id: { [require("sequelize").Op.notIn]: seedIds } } });
+      }
       await model.bulkCreate(rows, {
         updateOnDuplicate: getUpdateFields(model),
         upsertKeys: ["id"],

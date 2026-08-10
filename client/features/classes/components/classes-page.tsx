@@ -25,7 +25,7 @@ export function ClassesPage() {
         icon={BookOpen}
         gradient="from-indigo-600 via-violet-600 to-fuchsia-600"
         title="Classes & Levels"
-        description="From Class 8 to Master's — pick your level and access every subject, note, question bank and mock test tailored to your exam."
+        description="NEB Class 12, CTEVT, Bachelor & Master — pick your level and access every subject, note, question bank and mock test tailored to your exam."
         crumbs={[{ label: "Classes" }]}
         actions={
           <Input

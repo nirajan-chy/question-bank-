@@ -14,6 +14,22 @@ const listByLevel = asyncHandler(async (req, res) => {
   sendSuccess(res, items);
 });
 
+const listByCourse = asyncHandler(async (req, res) => {
+  const items = await Subject.findAll({
+    where: { courseSlug: req.params.courseSlug },
+  });
+  sendSuccess(res, items);
+});
+
+const listByCourseSemester = asyncHandler(async (req, res) => {
+  const where = { courseSlug: req.params.courseSlug };
+  if (req.params.semesterNumber) {
+    where.semester = Number(req.params.semesterNumber);
+  }
+  const items = await Subject.findAll({ where });
+  sendSuccess(res, items);
+});
+
 const listTrending = asyncHandler(async (req, res) => {
   const limit = controller.toNumber(req.query.limit);
   const items = await Subject.findAll({
@@ -27,5 +43,7 @@ const listTrending = asyncHandler(async (req, res) => {
 module.exports = {
   ...controller,
   listByLevel,
+  listByCourse,
+  listByCourseSemester,
   listTrending,
 };

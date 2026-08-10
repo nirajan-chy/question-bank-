@@ -2,6 +2,8 @@ import type {
   Level,
   University,
   Faculty,
+  Course,
+  Semester,
   Subject,
   Note,
   Book,
@@ -43,9 +45,17 @@ export const api = {
   levels: () => http<Level[]>("/levels"),
   universities: () => http<University[]>("/universities"),
   faculties: () => http<Faculty[]>("/faculties"),
+  courses: () => http<Course[]>("/courses"),
+  course: (slug: string) => http<Course>(`/courses/${slug}`),
+  coursesByLevel: (levelSlug: string) => http<Course[]>(`/courses/level/${levelSlug}`),
+  semesters: () => http<Semester[]>("/semesters"),
+  semestersByCourse: (courseSlug: string) => http<Semester[]>(`/semesters/course/${courseSlug}`),
   subjects: () => http<Subject[]>("/subjects"),
   subject: (slug: string) => http<Subject>(`/subjects/${slug}`),
   subjectsByLevel: (levelSlug: string) => http<Subject[]>(`/subjects/level/${levelSlug}`),
+  subjectsByCourse: (courseSlug: string) => http<Subject[]>(`/subjects/course/${courseSlug}`),
+  subjectsByCourseSemester: (courseSlug: string, semester: number) =>
+    http<Subject[]>(`/subjects/course/${courseSlug}/semester/${semester}`),
   trendingSubjects: (limit = 8) => http<Subject[]>(`/subjects/trending?limit=${limit}`),
 
   notes: (opts?: { limit?: number; subjectSlug?: string }) =>

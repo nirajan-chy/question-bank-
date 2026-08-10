@@ -3,6 +3,8 @@ const router = require("express").Router();
 router.use("/levels", require("./level.routes"));
 router.use("/universities", require("./university.routes"));
 router.use("/faculties", require("./faculty.routes"));
+router.use("/courses", require("./course.routes"));
+router.use("/semesters", require("./semester.routes"));
 router.use("/subjects", require("./subject.routes"));
 router.use("/notes", require("./note.routes"));
 router.use("/books", require("./book.routes"));

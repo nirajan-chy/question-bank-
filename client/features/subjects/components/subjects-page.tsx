@@ -12,8 +12,7 @@ import { cn } from "@/lib/utils";
 
 const levels = [
   "All",
-  "SEE · Class 10",
-  "NEB · Class 11/12",
+  "NEB · Class 12",
   "CTEVT",
   "Bachelor · TU",
   "Bachelor · KU/PU",
@@ -39,7 +38,7 @@ export function SubjectsPage() {
       <PageHeader
         icon={BookOpen}
         title="All Subjects"
-        description="Every subject from SEE to Master — with notes, question banks, past papers, mock tests and videos in one place."
+        description="Every subject from NEB to Master — with notes, question banks, past papers, mock tests and videos in one place."
         crumbs={[{ label: "Subjects" }]}
       />
       <section className="py-12 md:py-16">

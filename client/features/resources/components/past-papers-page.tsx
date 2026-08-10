@@ -35,7 +35,7 @@ export function PastPapersPage() {
       <PageHeader
         icon={FileText}
         title="Past Papers"
-        description="Official board and university exam papers from SEE, NEB, CTEVT, TU, KU and PU — practice under real exam conditions."
+        description="Official board and university exam papers from NEB, CTEVT, TU, KU and PU — practice under real exam conditions."
         crumbs={[{ label: "Past Papers" }]}
       />
       <section className="py-12 md:py-16">

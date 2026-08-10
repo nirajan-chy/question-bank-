@@ -4,13 +4,11 @@ export const siteConfig = {
   name: "Sandarbh",
   fullName: "Sandarbh Nepal",
   description:
-    "Nepal's premium education platform — Notes, books, question banks, past papers, mock tests and resources for Class 8–12 (SEE), CTEVT, Bachelor & Master across TU, KU, PU, Pokhara University and more.",
+    "Nepal's premium education platform — Notes, books, question banks, past papers, mock tests and resources for NEB Class 12, CTEVT, Bachelor & Master across TU, KU, PU, Pokhara University and more.",
   url: "https://sandarbh.edu.np",
   keywords: [
     "Nepal education",
-    "SEE question bank",
-    "Class 10 notes",
-    "Class 11 notes",
+    "NEB Class 12",
     "Class 12 notes",
     "CTEVT",
     "Tribhuvan University",
@@ -24,7 +22,7 @@ export const siteConfig = {
   og: {
     title: "Sandarbh — Nepal's Education Platform",
     description:
-      "Everything you need to ace SEE, +2, CTEVT, Bachelor & Master. Notes, books, question banks, past papers & mock tests.",
+      "Everything you need to ace NEB, CTEVT, Bachelor & Master. Notes, books, question banks, past papers & mock tests.",
   },
 };
 

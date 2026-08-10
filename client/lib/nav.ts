@@ -6,7 +6,6 @@ import {
   FileQuestion,
   FileText,
   Timer,
-  GraduationCap,
   Award,
   Newspaper,
   User,
@@ -26,7 +25,6 @@ export type NavLink = {
 export const mainNav: NavLink[] = [
   { label: "Home", href: "/" },
   { label: "Classes", href: "/classes" },
-  { label: "Bachelor", href: "/bachelor" },
   { label: "Universities", href: "/universities" },
   { label: "Subjects", href: "/subjects" },
   { label: "Notes", href: "/notes" },
@@ -62,7 +60,6 @@ export const dashboardNav: NavLink[] = [
 
 export const quickLinks: NavLink[] = [
   { label: "Classes", href: "/classes", icon: BookOpen },
-  { label: "Bachelor", href: "/bachelor", icon: GraduationCap },
   { label: "Universities", href: "/universities", icon: Award },
   { label: "Scholarships", href: "/scholarships", icon: Award },
   { label: "Results", href: "/results", icon: FileText },

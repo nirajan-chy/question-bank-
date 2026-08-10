@@ -5,9 +5,17 @@ export const queryKeys = {
   levels: ["levels"] as const,
   universities: ["universities"] as const,
   faculties: ["faculties"] as const,
+  courses: ["courses"] as const,
+  course: (slug: string) => ["courses", slug] as const,
+  coursesByLevel: (level: string) => ["courses", "level", level] as const,
+  semesters: ["semesters"] as const,
+  semestersByCourse: (course: string) => ["semesters", "course", course] as const,
   subjects: ["subjects"] as const,
   subject: (slug: string) => ["subjects", slug] as const,
   subjectsByLevel: (level: string) => ["subjects", "level", level] as const,
+  subjectsByCourse: (course: string) => ["subjects", "course", course] as const,
+  subjectsByCourseSemester: (course: string, semester: number) =>
+    ["subjects", "course", course, "semester", semester] as const,
   trendingSubjects: ["subjects", "trending"] as const,
   notes: (opts?: { limit?: number; subjectSlug?: string }) => ["notes", opts] as const,
   books: (opts?: { limit?: number }) => ["books", opts] as const,
@@ -33,11 +41,22 @@ export const queryKeys = {
 export const useLevels = () => useQuery({ queryKey: queryKeys.levels, queryFn: api.levels });
 export const useUniversities = () => useQuery({ queryKey: queryKeys.universities, queryFn: api.universities });
 export const useFaculties = () => useQuery({ queryKey: queryKeys.faculties, queryFn: api.faculties });
+export const useCourses = () => useQuery({ queryKey: queryKeys.courses, queryFn: api.courses });
+export const useCourse = (slug: string) =>
+  useQuery({ queryKey: queryKeys.course(slug), queryFn: () => api.course(slug) });
+export const useCoursesByLevel = (level: string) =>
+  useQuery({ queryKey: queryKeys.coursesByLevel(level), queryFn: () => api.coursesByLevel(level) });
+export const useSemestersByCourse = (courseSlug: string) =>
+  useQuery({ queryKey: queryKeys.semestersByCourse(courseSlug), queryFn: () => api.semestersByCourse(courseSlug) });
 export const useSubjects = () => useQuery({ queryKey: queryKeys.subjects, queryFn: api.subjects });
 export const useSubject = (slug: string) =>
   useQuery({ queryKey: queryKeys.subject(slug), queryFn: () => api.subject(slug) });
 export const useSubjectsByLevel = (level: string) =>
   useQuery({ queryKey: queryKeys.subjectsByLevel(level), queryFn: () => api.subjectsByLevel(level) });
+export const useSubjectsByCourse = (course: string) =>
+  useQuery({ queryKey: queryKeys.subjectsByCourse(course), queryFn: () => api.subjectsByCourse(course) });
+export const useSubjectsByCourseSemester = (course: string, semester: number) =>
+  useQuery({ queryKey: queryKeys.subjectsByCourseSemester(course, semester), queryFn: () => api.subjectsByCourseSemester(course, semester) });
 export const useTrendingSubjects = (limit = 8) =>
   useQuery({ queryKey: queryKeys.trendingSubjects, queryFn: () => api.trendingSubjects(limit) });
 export const useNotes = (opts?: { limit?: number; subjectSlug?: string }) =>
