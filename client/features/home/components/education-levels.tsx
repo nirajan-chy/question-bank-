@@ -14,8 +14,8 @@ export function EducationLevels() {
       <div className="container">
         <SectionHeader
           eyebrow="Education Levels"
-          title="One platform for every class"
-          description="From Class 8 to Master's — SEE, NEB, CTEVT and every major Nepali university, all in one place."
+          title="One platform for every level"
+          description="NEB Class 12, CTEVT, Bachelor & Master — TU, KU, PU and every major Nepali university, all in one place."
           href="/classes"
           linkLabel="All classes"
         />

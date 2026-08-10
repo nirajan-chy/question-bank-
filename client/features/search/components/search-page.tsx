@@ -62,7 +62,7 @@ export function SearchPage({ initialQuery = "" }: { initialQuery?: string }) {
             <Input
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Try 'SEE Maths', 'Physics 12', 'TU scholarship'..."
+              placeholder="Try 'Physics 12', 'BSc CSIT', 'NEB Papers', 'TU scholarship'..."
               className="h-11 flex-1 border-0 bg-transparent shadow-none focus-visible:ring-0"
             />
             <Button type="submit" className="h-11">
@@ -74,7 +74,7 @@ export function SearchPage({ initialQuery = "" }: { initialQuery?: string }) {
             <div className="mx-auto mt-10 max-w-2xl">
               <p className="text-sm font-medium text-muted-foreground">Popular searches</p>
               <div className="mt-3 flex flex-wrap gap-2">
-                {["SEE Maths", "Grade 12 Physics", "BSc CSIT", "NEB Papers", "TU scholarship", "Accountancy"].map((t) => (
+                {["Physics 12", "Grade 12 Physics", "BSc CSIT", "NEB Papers", "TU scholarship", "Accountancy"].map((t) => (
                   <Link
                     key={t}
                     href={`/search?q=${encodeURIComponent(t)}`}

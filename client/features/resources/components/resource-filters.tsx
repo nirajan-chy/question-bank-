@@ -6,8 +6,6 @@ import { cn } from "@/lib/utils";
 
 export const levelOptions = [
   "All levels",
-  "SEE · Class 10",
-  "NEB · Class 11",
   "NEB · Class 12",
   "CTEVT",
   "Bachelor · TU",

@@ -1,6 +1,8 @@
 import levels from "@/data/levels.json";
 import universities from "@/data/universities.json";
 import faculties from "@/data/faculties.json";
+import courses from "@/data/courses.json";
+import semesters from "@/data/semesters.json";
 import subjects from "@/data/subjects.json";
 import notes from "@/data/notes.json";
 import books from "@/data/books.json";
@@ -20,6 +22,8 @@ import type {
   Level,
   University,
   Faculty,
+  Course,
+  Semester,
   Subject,
   Note,
   Book,
@@ -40,6 +44,8 @@ export const db = {
   levels: levels as Level[],
   universities: universities as University[],
   faculties: faculties as Faculty[],
+  courses: courses as Course[],
+  semesters: semesters as Semester[],
   subjects: subjects as Subject[],
   notes: notes as Note[],
   books: books as Book[],
@@ -68,6 +74,26 @@ export function getFaculties() {
   return db.faculties;
 }
 
+export function getCourses() {
+  return db.courses;
+}
+
+export function getCourseBySlug(slug: string) {
+  return db.courses.find((c) => c.slug === slug);
+}
+
+export function getCoursesByLevel(levelSlug: string) {
+  return db.courses.filter((c) => c.levelSlug === levelSlug);
+}
+
+export function getSemesters() {
+  return db.semesters;
+}
+
+export function getSemestersByCourse(courseSlug: string) {
+  return db.semesters.filter((s) => s.courseSlug === courseSlug).sort((a, b) => a.number - b.number);
+}
+
 export function getSubjects() {
   return db.subjects;
 }
@@ -78,6 +104,14 @@ export function getSubjectBySlug(slug: string) {
 
 export function getSubjectsByLevel(levelSlug: string) {
   return db.subjects.filter((s) => s.levelSlug === levelSlug);
+}
+
+export function getSubjectsByCourse(courseSlug: string) {
+  return db.subjects.filter((s) => s.courseSlug === courseSlug);
+}
+
+export function getSubjectsByCourseSemester(courseSlug: string, semester: number) {
+  return db.subjects.filter((s) => s.courseSlug === courseSlug && s.semester === semester);
 }
 
 export function getTrendingSubjects(limit = 8) {

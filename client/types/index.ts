@@ -57,6 +57,33 @@ export type Level = {
   subjects: string[];
   color: string;
   badge?: string;
+  streams?: string[];
+};
+
+export type Course = {
+  id: string;
+  slug: string;
+  name: string;
+  short: string;
+  description: string;
+  levelSlug: string;
+  category: string;
+  icon: string;
+  gradient: string;
+  semesterCount: number;
+  university: string;
+  tags: string[];
+};
+
+export type Semester = {
+  id: string;
+  slug: string;
+  name: string;
+  short: string;
+  number: number;
+  courseSlug: string;
+  description: string;
+  tags: string[];
 };
 
 export type University = {
@@ -92,6 +119,9 @@ export type Subject = {
   name: string;
   level: string;
   levelSlug: string;
+  courseSlug?: string;
+  semester?: number;
+  stream?: string;
   category: string;
   description: string;
   overview: string;

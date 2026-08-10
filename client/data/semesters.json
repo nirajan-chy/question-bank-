@@ -1,0 +1,202 @@
+[
+  {
+    "id": "sem-bsc-csit-1",
+    "slug": "bsc-csit-semester-1",
+    "name": "Semester 1",
+    "short": "Sem 1",
+    "number": 1,
+    "courseSlug": "bsc-csit",
+    "description": "Foundation courses in programming, digital logic and discrete structures.",
+    "tags": ["Programming", "Digital Logic", "Discrete Structures"]
+  },
+  {
+    "id": "sem-bsc-csit-2",
+    "slug": "bsc-csit-semester-2",
+    "name": "Semester 2",
+    "short": "Sem 2",
+    "number": 2,
+    "courseSlug": "bsc-csit",
+    "description": "Data structures, microprocessor and computer architecture fundamentals.",
+    "tags": ["Data Structures", "Microprocessor", "Architecture"]
+  },
+  {
+    "id": "sem-bsc-csit-3",
+    "slug": "bsc-csit-semester-3",
+    "name": "Semester 3",
+    "short": "Sem 3",
+    "number": 3,
+    "courseSlug": "bsc-csit",
+    "description": "Algorithms, operating systems and database management systems.",
+    "tags": ["Algorithms", "OS", "DBMS"]
+  },
+  {
+    "id": "sem-bsc-csit-4",
+    "slug": "bsc-csit-semester-4",
+    "name": "Semester 4",
+    "short": "Sem 4",
+    "number": 4,
+    "courseSlug": "bsc-csit",
+    "description": "Computer networks, software engineering and theory of computation.",
+    "tags": ["Networks", "SE", "Theory"]
+  },
+  {
+    "id": "sem-bsc-csit-5",
+    "slug": "bsc-csit-semester-5",
+    "name": "Semester 5",
+    "short": "Sem 5",
+    "number": 5,
+    "courseSlug": "bsc-csit",
+    "description": "Artificial intelligence, web technologies and numerical methods.",
+    "tags": ["AI", "Web", "Numerical"]
+  },
+  {
+    "id": "sem-bsc-csit-6",
+    "slug": "bsc-csit-semester-6",
+    "name": "Semester 6",
+    "short": "Sem 6",
+    "number": 6,
+    "courseSlug": "bsc-csit",
+    "description": "Machine learning, image processing and embedded systems.",
+    "tags": ["ML", "Image Processing", "Embedded"]
+  },
+  {
+    "id": "sem-bsc-csit-7",
+    "slug": "bsc-csit-semester-7",
+    "name": "Semester 7",
+    "short": "Sem 7",
+    "number": 7,
+    "courseSlug": "bsc-csit",
+    "description": "Cloud computing, DevOps and advanced electives.",
+    "tags": ["Cloud", "DevOps", "Electives"]
+  },
+  {
+    "id": "sem-bsc-csit-8",
+    "slug": "bsc-csit-semester-8",
+    "name": "Semester 8",
+    "short": "Sem 8",
+    "number": 8,
+    "courseSlug": "bsc-csit",
+    "description": "Project work, internships and capstone projects.",
+    "tags": ["Project", "Internship", "Capstone"]
+  },
+  {
+    "id": "sem-bba-1",
+    "slug": "bba-semester-1",
+    "name": "Semester 1",
+    "short": "Sem 1",
+    "number": 1,
+    "courseSlug": "bba",
+    "description": "Introduction to business, microeconomics and business English.",
+    "tags": ["Business", "Economics", "English"]
+  },
+  {
+    "id": "sem-bba-2",
+    "slug": "bba-semester-2",
+    "name": "Semester 2",
+    "short": "Sem 2",
+    "number": 2,
+    "courseSlug": "bba",
+    "description": "Financial accounting, business statistics and organizational behavior.",
+    "tags": ["Accounting", "Statistics", "OB"]
+  },
+  {
+    "id": "sem-bba-3",
+    "slug": "bba-semester-3",
+    "name": "Semester 3",
+    "short": "Sem 3",
+    "number": 3,
+    "courseSlug": "bba",
+    "description": "Principles of marketing, cost accounting and business communication.",
+    "tags": ["Marketing", "Cost Accounting", "Communication"]
+  },
+  {
+    "id": "sem-bba-4",
+    "slug": "bba-semester-4",
+    "name": "Semester 4",
+    "short": "Sem 4",
+    "number": 4,
+    "courseSlug": "bba",
+    "description": "Financial management, human resource management and business law.",
+    "tags": ["Finance", "HRM", "Law"]
+  },
+  {
+    "id": "sem-bba-5",
+    "slug": "bba-semester-5",
+    "name": "Semester 5",
+    "short": "Sem 5",
+    "number": 5,
+    "courseSlug": "bba",
+    "description": "Macroeconomics, operations management and business research methods.",
+    "tags": ["Macro", "Operations", "Research"]
+  },
+  {
+    "id": "sem-bba-6",
+    "slug": "bba-semester-6",
+    "name": "Semester 6",
+    "short": "Sem 6",
+    "number": 6,
+    "courseSlug": "bba",
+    "description": "Strategic management, entrepreneurship and international business.",
+    "tags": ["Strategy", "Entrepreneurship", "International"]
+  },
+  {
+    "id": "sem-bba-7",
+    "slug": "bba-semester-7",
+    "name": "Semester 7",
+    "short": "Sem 7",
+    "number": 7,
+    "courseSlug": "bba",
+    "description": "Elective courses, case studies and internship preparation.",
+    "tags": ["Electives", "Case Studies", "Internship"]
+  },
+  {
+    "id": "sem-bba-8",
+    "slug": "bba-semester-8",
+    "name": "Semester 8",
+    "short": "Sem 8",
+    "number": 8,
+    "courseSlug": "bba",
+    "description": "Capstone project, internship report and final assessment.",
+    "tags": ["Capstone", "Internship", "Assessment"]
+  },
+  {
+    "id": "sem-mba-1",
+    "slug": "mba-semester-1",
+    "name": "Semester 1",
+    "short": "Sem 1",
+    "number": 1,
+    "courseSlug": "mba",
+    "description": "Managerial economics, financial accounting and organizational behavior.",
+    "tags": ["Economics", "Accounting", "OB"]
+  },
+  {
+    "id": "sem-mba-2",
+    "slug": "mba-semester-2",
+    "name": "Semester 2",
+    "short": "Sem 2",
+    "number": 2,
+    "courseSlug": "mba",
+    "description": "Marketing management, corporate finance and business research methods.",
+    "tags": ["Marketing", "Finance", "Research"]
+  },
+  {
+    "id": "sem-mba-3",
+    "slug": "mba-semester-3",
+    "name": "Semester 3",
+    "short": "Sem 3",
+    "number": 3,
+    "courseSlug": "mba",
+    "description": "Strategic management, leadership and business analytics.",
+    "tags": ["Strategy", "Leadership", "Analytics"]
+  },
+  {
+    "id": "sem-mba-4",
+    "slug": "mba-semester-4",
+    "name": "Semester 4",
+    "short": "Sem 4",
+    "number": 4,
+    "courseSlug": "mba",
+    "description": "Capstone project, thesis and strategic simulation.",
+    "tags": ["Capstone", "Thesis", "Simulation"]
+  }
+]

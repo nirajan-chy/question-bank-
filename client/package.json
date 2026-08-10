@@ -2,7 +2,7 @@
   "name": "sandarbh-nepal",
   "version": "0.1.0",
   "private": true,
-  "description": "Sandarbh — A premium education platform for Nepal (Class 8–Master, SEE, CTEVT, TU/KU/PU/Pokhara)",
+  "description": "Sandarbh — A premium education platform for Nepal (NEB Class 12, CTEVT, Bachelor & Master, TU/KU/PU/Pokhara)",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

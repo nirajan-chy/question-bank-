@@ -3,6 +3,8 @@ const { sequelize } = require("../config/postgres");
 const Level = require("./level.model")(sequelize);
 const University = require("./university.model")(sequelize);
 const Faculty = require("./faculty.model")(sequelize);
+const Course = require("./course.model")(sequelize);
+const Semester = require("./semester.model")(sequelize);
 const Subject = require("./subject.model")(sequelize);
 const Note = require("./note.model")(sequelize);
 const Book = require("./book.model")(sequelize);
@@ -26,6 +28,8 @@ const models = {
   Level,
   University,
   Faculty,
+  Course,
+  Semester,
   Subject,
   Note,
   Book,

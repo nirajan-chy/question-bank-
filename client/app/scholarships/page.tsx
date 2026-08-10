@@ -4,7 +4,7 @@ import { ScholarshipsPage } from "@/features/opportunities/components/scholarshi
 export const metadata = seo({
   title: "Scholarships",
   description:
-    "Government and private scholarships in Nepal with live deadlines — for SEE, NEB, CTEVT, Bachelor and Master students.",
+    "Government and private scholarships in Nepal with live deadlines — for NEB, CTEVT, Bachelor and Master students.",
   path: "/scholarships",
 });
 

@@ -34,7 +34,7 @@ export function QuestionBanksPage() {
       <PageHeader
         icon={FileQuestion}
         title="Question Banks"
-        description="Exam-pattern practice built from the last decade of SEE, NEB, CTEVT and university papers. Solved and explained."
+        description="Exam-pattern practice built from the last decade of NEB, CTEVT and university papers. Solved and explained."
         crumbs={[{ label: "Question Banks" }]}
       />
       <section className="py-12 md:py-16">

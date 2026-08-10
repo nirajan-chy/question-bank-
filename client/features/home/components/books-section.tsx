@@ -15,7 +15,7 @@ export function BooksSection() {
         <SectionHeader
           eyebrow="Books"
           title="Books every student needs"
-          description="Textbooks, guides and reference books for SEE, NEB, CTEVT and every university program."
+          description="Textbooks, guides and reference books for NEB, CTEVT and every university program."
           href="/books"
           linkLabel="All books"
         />

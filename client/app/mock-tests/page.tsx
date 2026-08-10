@@ -4,7 +4,7 @@ import { MockTestsPage } from "@/features/resources/components/mock-tests-page";
 export const metadata = seo({
   title: "Mock Tests",
   description:
-    "Timed mock tests for SEE, NEB, CTEVT and university exams with instant scoring, GPA projection and solutions.",
+    "Timed mock tests for NEB, CTEVT and university exams with instant scoring, GPA projection and solutions.",
   path: "/mock-tests",
 });
 

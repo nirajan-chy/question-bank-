@@ -4,7 +4,7 @@ import { QuestionBanksPage } from "@/features/resources/components/question-bank
 export const metadata = seo({
   title: "Question Banks",
   description:
-    "Exam-pattern question banks for SEE, NEB, CTEVT, TU, KU and PU — built from the last decade of papers.",
+    "Exam-pattern question banks for NEB, CTEVT, TU, KU and PU — built from the last decade of papers.",
   path: "/question-banks",
 });
 

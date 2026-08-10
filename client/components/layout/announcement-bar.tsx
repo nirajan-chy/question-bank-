@@ -14,7 +14,7 @@ export function AnnouncementBar() {
       <div className="container flex items-center justify-center gap-2 py-2 text-center text-xs font-medium md:text-sm">
         <Sparkles className="h-3.5 w-3.5 shrink-0" />
         <p className="truncate">
-          SEE 2082 mock tests are live —{" "}
+          NEB Class 12 mock tests are live —{" "}
           <Link href="/mock-tests" className="underline underline-offset-2 hover:opacity-90">
             start practicing free →
           </Link>

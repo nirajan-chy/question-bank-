@@ -34,7 +34,7 @@ const timeline = [
   { year: "2022", title: "The idea", text: "A group of +2 students frustrated by scattered resources starts collecting past papers in a shared folder." },
   { year: "2023", title: "First community", text: "The folder grows into a community of 5,000 students sharing notes, solutions and study tips across Nepal." },
   { year: "2024", title: "Sandarbh goes live", text: "We rebuild as a proper platform with question banks, mock tests and a structured curriculum map for every level." },
-  { year: "2025", title: "128,000+ learners", text: "Sandarbh now serves students in all 77 districts — from SEE classrooms to master's research labs." },
+  { year: "2025", title: "128,000+ learners", text: "Sandarbh now serves students in all 77 districts — from NEB classrooms to master's research labs." },
 ];
 
 export function AboutSections() {
