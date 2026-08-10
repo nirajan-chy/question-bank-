@@ -2,16 +2,23 @@
 
 Sandarbh is a full-stack education platform for Nepal covering **Class 8 → Master** (SEE, +2 / NEB, CTEVT, TU / KU / PU / Pokhara University). It includes a public study portal (notes, books, question banks, past papers, mock tests, scholarships, results, notices, blog, and a community Q&A) plus an **admin panel** with **authentication** for managing all content.
 
-Built as a monorepo with two apps:
+Built as a monorepo with three apps:
 
 | Folder | Description | Stack |
 | --- | --- | --- |
 | `client/` | Next.js web app (public site + admin panel) | Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS, TanStack Query, Zustand, react-hook-form + Zod |
 | `server/` | REST API | Express 5, Sequelize 6, PostgreSQL (Aiven), JWT auth, bcrypt |
+| `rag/` | RAG microservice (Self Learning Center) | Python, FastAPI, SQLAlchemy, pgvector, OpenRouter (LLM + embeddings) |
 
 ---
 
 ## ✨ Features
+
+### Self Learning Center (`rag/` + `server/` + `client/`)
+- **Private documents** — logged-in users upload their own study material (PDF / DOCX / TXT); files are chunked, embedded and stored in PostgreSQL via **pgvector**, scoped per user
+- **Grounded Q&A** — the AI answers *only* from the user's documents, with numbered citations (document + page) returned for verification
+- **Quiz Builder** — generates 3–20 MCQs at easy / medium / hard difficulty, optionally focused on a topic or a single document, with instant scoring and explanations
+- Streaming answers (SSE) proxied from the Python service through the Express API
 
 ### Public site (`client/`)
 - **Study resources** — notes, books, question banks, past papers, mock tests per subject/level
@@ -65,6 +72,7 @@ npm run dev              # starts API on http://localhost:5000
 | `JWT_SECRET` | Secret used to sign auth tokens |
 | `ADMIN_EMAIL` / `ADMIN_PASSWORD` | Admin account created/updated by the seed |
 | `SMTP_USER`, `SMTP_PASSWORD` | Optional — used by `/api/contact` to send email |
+| `RAG_SERVICE_URL` / `RAG_SERVICE_SECRET` | RAG microservice base URL and shared secret (used by `/api/rag/*`) |
 
 > **Health check:** `http://localhost:5000/api/health`
 
@@ -83,7 +91,24 @@ npm run dev                  # starts app on http://localhost:3000
 | --- | --- |
 | `NEXT_PUBLIC_API_URL` | Base URL of the backend API (default `http://localhost:5000/api`) |
 
-### 3. Log in to the admin panel
+### 3. RAG microservice (Self Learning Center)
+
+```bash
+cd rag
+python -m venv .venv
+.venv\Scripts\activate          # Windows · source .venv/bin/activate on Linux/macOS
+pip install -r requirements.txt
+cp .env.example .env            # fill in RAG_DB_URL, OPENROUTER_API_KEY, RAG_SERVICE_SECRET
+uvicorn app.main:app --reload --port 8000
+```
+
+- Uses the **same PostgreSQL** as the server (`RAG_DB_URL`) — it enables the `vector`
+  extension and creates its tables (`rag_documents`, `rag_chunks`, `rag_messages`, `rag_quizzes`)
+  automatically on startup.
+- Requires an **OpenRouter API key** for both chat and embeddings.
+- `RAG_SERVICE_SECRET` must match `RAG_SERVICE_SECRET` in `server/.env`.
+
+### 4. Log in to the admin panel
 
 1. Open `http://localhost:3000/login`
 2. Use the seeded admin credentials (or your `ADMIN_EMAIL` / `ADMIN_PASSWORD`):
@@ -155,6 +180,24 @@ All endpoints return the envelope: `{ success, message, data, errors }`.
 
 `resource` is one of: `levels`, `universities`, `faculties`, `subjects`, `notes`, `books`, `question-banks`, `past-papers`, `mock-tests`, `scholarships`, `notices`, `results`, `testimonials`, `faqs`, `posts`, `community`, `communities`, `leaderboard`, `contacts`.
 
+### Self Learning Center (all require `Authorization: Bearer <token>`)
+
+The Express server validates the JWT and proxies to the Python service (`RAG_SERVICE_URL`),
+forwarding the user id + `RAG_SERVICE_SECRET`.
+
+| Endpoint | Description |
+| --- | --- |
+| `POST /api/rag/documents` | Upload + index a PDF / DOCX / TXT file (multipart `file`) |
+| `GET /api/rag/documents` · `DELETE /api/rag/documents/:id` | List / delete the user's documents |
+| `POST /api/rag/chat` | Grounded answer `{ question, document_ids?, history? }` → `{ answer, sources }` |
+| `POST /api/rag/chat/stream` | Same, streamed as SSE events (`meta`, `delta`*, `sources`, `done`) |
+| `GET /api/rag/chat/history?limit=` | Previous chat messages |
+| `POST /api/rag/mcq/generate` | `{ count, difficulty, topics?, document_ids?, notes? }` → sanitized quiz |
+| `GET /api/rag/mcq/:id` | Fetch a quiz (answers hidden) |
+| `POST /api/rag/mcq/:id/submit` | `{ answers: [indices] }` → score + explanations |
+
+> See [`rag/README.md`](rag/README.md) for the full RAG pipeline documentation.
+
 > Public content endpoints are **read-only** — all writes go through the protected `/api/admin/*` routes.
 
 ---
@@ -179,11 +222,19 @@ question_bank/
     │   ├── config/                # dotenv + Postgres (Sequelize) config
     │   ├── models/                # 19 Sequelize models (incl. User)
     │   ├── controllers/           # base CRUD factory + auth/admin/community/etc.
-    │   ├── routes/                # public, auth, and admin routers
+    │   ├── routes/                # public, auth, admin and rag routers
+    │   ├── rag/                   # proxy to the Python RAG service
     │   ├── middleware/            # auth (JWT), adminOnly, notFound, errorHandler
     │   ├── seed/seed.js           # Seeds all collections + admin user from client/data
     │   └── utils/                 # asyncHandler, ApiError, sendSuccess, slugify
     └── .env.example
+└── rag/                           # Python RAG microservice (Self Learning Center)
+    ├── requirements.txt
+    └── app/
+        ├── main.py                # FastAPI app + route mounting + DB bootstrap
+        ├── config.py · database.py · models.py · schemas.py
+        ├── api/                   # documents, chat (SSE), mcq routers + auth deps
+        └── services/              # ingestion, embeddings, llm, retriever, rag, mcq
 ```
 
 ---

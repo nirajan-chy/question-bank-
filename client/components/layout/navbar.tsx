@@ -13,6 +13,7 @@ import {
   User,
   ShieldCheck,
   LogOut,
+  GraduationCap,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { mainNav, resourcesNav } from "@/lib/nav";
@@ -156,6 +157,11 @@ export function Navbar() {
                   </DropdownMenuItem>
                 )}
                 <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href="/learn" className="gap-2">
+                    <GraduationCap className="h-4 w-4" /> Self Learning Center
+                  </Link>
+                </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link href="/settings" className="gap-2">
                     <Settings className="h-4 w-4" /> Settings

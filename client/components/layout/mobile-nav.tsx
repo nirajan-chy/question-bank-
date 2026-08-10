@@ -96,6 +96,9 @@ export function MobileNav() {
                 <Button variant="outline" size="sm" asChild onClick={() => setOpen(false)}>
                   <Link href="/dashboard">Dashboard</Link>
                 </Button>
+                <Button variant="outline" size="sm" asChild onClick={() => setOpen(false)}>
+                  <Link href="/learn">Learn</Link>
+                </Button>
                 {isAdmin && (
                   <Button variant="outline" size="sm" asChild onClick={() => setOpen(false)}>
                     <Link href="/admin">

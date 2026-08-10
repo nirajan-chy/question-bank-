@@ -13,6 +13,7 @@ import {
   Settings,
   Users,
   Search,
+  GraduationCap,
 } from "lucide-react";
 
 export type NavLink = {
@@ -51,6 +52,7 @@ export const resourcesNav: NavLink[] = [
 
 export const dashboardNav: NavLink[] = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { label: "Self Learning Center", href: "/learn", icon: GraduationCap, description: "Upload documents, chat with AI, take AI quizzes" },
   { label: "My Profile", href: "/profile", icon: User },
   { label: "Bookmarks", href: "/bookmarks", icon: Bookmark },
   { label: "Settings", href: "/settings", icon: Settings },

@@ -422,3 +422,77 @@ export type BookmarkItem = {
   savedAt: string;
   icon: string;
 };
+
+// ─── Self Learning Center (RAG) ───────────────────────────────────────────────
+
+export type RagDocument = {
+  id: string;
+  filename: string;
+  file_type: "pdf" | "docx" | "txt";
+  status: "processing" | "ready" | "failed";
+  error?: string | null;
+  chunk_count: number;
+  char_count: number;
+  created_at: string;
+};
+
+export type RagSource = {
+  document_id: string;
+  document_name: string;
+  snippet: string;
+  page?: number | null;
+};
+
+export type RagAnswer = {
+  answer: string;
+  sources: RagSource[];
+};
+
+export type RagMessage = {
+  id: string;
+  role: "user" | "assistant";
+  content: string;
+  sources?: RagSource[] | null;
+  created_at: string;
+};
+
+export type McqGenerateRequest = {
+  count: number;
+  difficulty: "easy" | "medium" | "hard";
+  topics?: string;
+  document_ids?: string[] | null;
+  notes?: string;
+};
+
+export type McqQuestion = {
+  question: string;
+  options: string[];
+  topic?: string | null;
+};
+
+export type McqQuiz = {
+  id: string;
+  title: string;
+  difficulty: "easy" | "medium" | "hard";
+  status: "pending" | "submitted";
+  score: number;
+  total: number;
+  created_at: string;
+  questions: McqQuestion[];
+};
+
+export type McqResultQuestion = McqQuestion & {
+  selected: number | null;
+  correct_index: number;
+  correct: boolean;
+  explanation: string;
+};
+
+export type McqResult = {
+  id: string;
+  score: number;
+  total: number;
+  passed: boolean;
+  pass_percent: number;
+  results: McqResultQuestion[];
+};

@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { api, admin } from "./api";
+import { api, admin, learn } from "./api";
+import type { McqGenerateRequest } from "@/types";
 
 export const queryKeys = {
   levels: ["levels"] as const,
@@ -137,4 +138,64 @@ export const useAdminUsers = () =>
     queryKey: ["admin", "users"] as const,
     queryFn: admin.users,
     retry: false,
+  });
+
+// ─── Self Learning Center (RAG) ───────────────────────────────────────────────
+
+export const queryKeysLearn = {
+  documents: ["learn", "documents"] as const,
+  chatHistory: ["learn", "chat-history"] as const,
+  quiz: (id: string) => ["learn", "quiz", id] as const,
+};
+
+export const useRagDocuments = () =>
+  useQuery({ queryKey: queryKeysLearn.documents, queryFn: learn.documents });
+
+export const useUploadDocument = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (file: File) => learn.uploadDocument(file),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: queryKeysLearn.documents }),
+  });
+};
+
+export const useDeleteDocument = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => learn.deleteDocument(id),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: queryKeysLearn.documents }),
+  });
+};
+
+export const useRagChatHistory = () =>
+  useQuery({ queryKey: queryKeysLearn.chatHistory, queryFn: () => learn.chatHistory(50) });
+
+export const useAskQuestion = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ question, documentIds }: { question: string; documentIds?: string[] | null }) =>
+      learn.ask(question, documentIds ?? null),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: queryKeysLearn.chatHistory }),
+  });
+};
+
+export const useMcqGenerate = () =>
+  useMutation({
+    mutationFn: (payload: McqGenerateRequest) => learn.mcqGenerate(payload),
+  });
+
+export const useMcq = (id: string | null) =>
+  useQuery({
+    queryKey: queryKeysLearn.quiz(id ?? ""),
+    queryFn: () => learn.mcq(id as string),
+    enabled: Boolean(id),
+  });
+
+export const useMcqSubmit = () =>
+  useMutation({
+    mutationFn: ({ id, answers }: { id: string; answers: number[] }) =>
+      learn.mcqSubmit(id, answers),
   });

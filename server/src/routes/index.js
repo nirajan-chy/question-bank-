@@ -24,5 +24,6 @@ router.use("/search", require("./search.routes"));
 router.use("/contact", require("./contact.routes"));
 router.use("/auth", require("./auth.routes"));
 router.use("/admin", require("./admin.routes"));
+router.use("/rag", require("./rag.routes"));
 
 module.exports = router;
