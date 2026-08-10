@@ -5,6 +5,14 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+const API_ORIGIN = (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000/api").replace(/\/api\/?$/, "");
+
+export function resolveFileUrl(url?: string | null): string {
+  if (!url) return "";
+  if (/^https?:\/\//.test(url)) return url;
+  return `${API_ORIGIN}${url.startsWith("/") ? url : `/${url}`}`;
+}
+
 export function formatNumber(n: number): string {
   return new Intl.NumberFormat("en-US", {
     notation: n >= 1000 ? "compact" : "standard",
