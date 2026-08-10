@@ -57,7 +57,7 @@ beforeEach(() => {
   communities.length = 0;
   messages.length = 0;
   communities.push({
-    id: "class-8",
+    id: "class-12-neb",
     channels: [{ id: "general" }, { id: "random" }],
   });
 });
@@ -71,17 +71,17 @@ test("listMessages returns 404 for an unknown community", async () => {
 
 test("listMessages returns 404 for an unknown channel", async () => {
   await assert.rejects(
-    () => settle(ctrl.listMessages, { params: { id: "class-8" }, query: { channel: "nope" } }),
+    () => settle(ctrl.listMessages, { params: { id: "class-12-neb" }, query: { channel: "nope" } }),
     (e) => e.statusCode === 404
   );
 });
 
 test("listMessages returns only messages for the requested channel", async () => {
-  messages.push({ id: "m1", communityId: "class-8", channelId: "general" });
-  messages.push({ id: "m2", communityId: "class-8", channelId: "random" });
+  messages.push({ id: "m1", communityId: "class-12-neb", channelId: "general" });
+  messages.push({ id: "m2", communityId: "class-12-neb", channelId: "random" });
 
   const res = await settle(ctrl.listMessages, {
-    params: { id: "class-8" },
+    params: { id: "class-12-neb" },
     query: { channel: "general" },
   });
   assert.equal(res._status, 200);
@@ -93,7 +93,7 @@ test("sendMessage rejects blank content with 400", async () => {
   await assert.rejects(
     () =>
       settle(ctrl.sendMessage, {
-        params: { id: "class-8" },
+        params: { id: "class-12-neb" },
         body: { channelId: "general", content: "   " },
       }),
     (e) => e.statusCode === 400
@@ -104,7 +104,7 @@ test("sendMessage rejects an unknown channel with 404", async () => {
   await assert.rejects(
     () =>
       settle(ctrl.sendMessage, {
-        params: { id: "class-8" },
+        params: { id: "class-12-neb" },
         body: { channelId: "nope", content: "Hello" },
       }),
     (e) => e.statusCode === 404
@@ -113,7 +113,7 @@ test("sendMessage rejects an unknown channel with 404", async () => {
 
 test("sendMessage creates a message with author avatar", async () => {
   const res = await settle(ctrl.sendMessage, {
-    params: { id: "class-8" },
+    params: { id: "class-12-neb" },
     body: { channelId: "general", author: "Hello", content: "Hello!" },
   });
   assert.equal(res._status, 201);
