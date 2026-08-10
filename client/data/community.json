@@ -1,50 +1,5 @@
 [
   {
-    "id": "c1",
-    "slug": "how-to-solve-quadratic-equation-by-completing-square",
-    "title": "How do I solve a quadratic equation by completing the square?",
-    "body": "I'm stuck on the SEE maths question: x² - 6x + 5 = 0. The textbook shows completing the square but I get confused about when to add the (b/2)² term. Can someone walk me through the steps for this specific equation?",
-    "author": "Suman Tamang",
-    "authorRole": "SEE Student",
-    "avatar": "ST",
-    "tags": ["mathematics", "see", "algebra", "quadratic"],
-    "views": 1420,
-    "votes": 12,
-    "answers": [
-      {
-        "id": "a1",
-        "author": "Priya Adhikari",
-        "authorRole": "Math Teacher",
-        "avatar": "PA",
-        "body": "Here's the full process for x² - 6x + 5 = 0:\n\n1. Move constant to RHS: x² - 6x = -5\n2. Take half of the coefficient of x (-6/2 = -3) and square it: (-3)² = 9\n3. Add 9 to BOTH sides: x² - 6x + 9 = -5 + 9 → (x - 3)² = 4\n4. Take square root: x - 3 = ±2\n5. Solve: x = 3 ± 2 → x = 5 or x = 1\n\nThe rule: always add (coefficient of x ÷ 2)² to both sides. The left side then always factors into (x - half)².",
-        "votes": 24,
-        "accepted": true,
-        "createdAt": "2026-07-05",
-        "comments": [
-          { "author": "Suman Tamang", "body": "Thank you! I kept forgetting to square the half. Now it clicks.", "createdAt": "2026-07-05" },
-          { "author": "Rajiv Thapa", "body": "Great explanation — the (x - 3)² pattern is the key.", "createdAt": "2026-07-06" }
-        ]
-      },
-      {
-        "id": "a2",
-        "author": "Krishna Mahato",
-        "authorRole": "SEE Topper 2081",
-        "avatar": "KM",
-        "body": "A shortcut that works for SEE: if the coefficient of x² is 1 and the constant is positive, just check if two numbers multiply to the constant (5) and add to the middle coefficient (6)... wait, they must add to -6. So -5 and -1. Hence x² - 6x + 5 = (x - 5)(x - 1) = 0, so x = 5, 1. Completing the square is for when factoring isn't obvious.",
-        "votes": 9,
-        "accepted": false,
-        "createdAt": "2026-07-05",
-        "comments": []
-      }
-    ],
-    "answerCount": 2,
-    "viewsFormatted": "1.4k",
-    "answered": true,
-    "acceptedAnswerId": "a1",
-    "createdAt": "2026-07-05",
-    "bounty": 50
-  },
-  {
     "id": "c2",
     "slug": "difference-between-dogma-and-hypothesis",
     "title": "Difference between Law, Hypothesis and Theory — Biology",
