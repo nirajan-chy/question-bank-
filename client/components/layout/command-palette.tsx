@@ -41,6 +41,7 @@ const commands = [
   ]},
   { group: "Account", items: [
     { label: "Dashboard", icon: LayoutDashboard, href: "/dashboard" },
+    { label: "Self Learning Center", icon: Sparkles, href: "/learn" },
     { label: "Bookmarks", icon: Bookmark, href: "/bookmarks" },
     { label: "Settings", icon: Settings, href: "/settings" },
   ]},
