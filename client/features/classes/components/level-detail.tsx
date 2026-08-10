@@ -33,15 +33,7 @@ export function LevelDetail({ slug }: { slug: string }) {
       <PageHeader
         title={level.name}
         description={level.description}
-        gradient={level.gradient}
         crumbs={[{ label: "Classes", href: "/classes" }, { label: level.name }]}
-        actions={
-          level.badge ? (
-            <span className={cn("inline-flex items-center rounded-full bg-gradient-to-r px-3 py-1 text-xs font-semibold text-white", level.gradient)}>
-              {level.badge}
-            </span>
-          ) : undefined
-        }
       />
 
       {/* Stream Filter for Class 12 */}

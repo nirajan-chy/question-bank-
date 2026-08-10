@@ -22,6 +22,7 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: "PDF",
       },
+      pdfUrl: { type: DataTypes.STRING, allowNull: true },
       description: { type: DataTypes.TEXT, allowNull: false },
       tags: { type: DataTypes.JSONB, allowNull: false, defaultValue: [] },
     },

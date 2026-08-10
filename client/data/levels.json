@@ -5,10 +5,6 @@
     "name": "Class 12 · NEB",
     "short": "NEB",
     "description": "Final board year of +2. Ace the NEB exams with solved past papers and full-syllabus mock tests.",
-    "icon": "GraduationCap",
-    "gradient": "from-purple-600 to-fuchsia-600",
-    "color": "#a855f7",
-    "badge": "Board Exam",
     "streams": ["Science", "Management"],
     "subjects": ["Physics", "Chemistry", "Biology", "Mathematics", "English", "Accountancy", "Economics", "Business Studies", "Computer Science"]
   },
@@ -18,9 +14,6 @@
     "name": "CTEVT",
     "short": "CTEVT",
     "description": "Council for Technical Education and Vocational Training. Diploma engineering, health sciences, and TSLC programs.",
-    "icon": "Wrench",
-    "gradient": "from-amber-500 to-orange-600",
-    "color": "#f59e0b",
     "subjects": ["Diploma Civil Engineering", "Diploma Computer Engineering", "Diploma Nursing", "Diploma Pharmacy", "Diploma Electrical Engineering"]
   },
   {
@@ -29,10 +22,6 @@
     "name": "Bachelor",
     "short": "Bachelor",
     "description": "TU, KU, PU, Purbanchal & more. CSIT, engineering, management, nursing, law and humanities degree resources.",
-    "icon": "Landmark",
-    "gradient": "from-sky-600 to-blue-700",
-    "color": "#0284c7",
-    "badge": "TU · KU · PU",
     "subjects": ["BSc CSIT", "BBA", "BBS", "BE Civil Engineering", "BE Computer Engineering", "BHM", "BPH", "LLB", "B.Sc. Nursing", "B.Ed"]
   },
   {
@@ -41,9 +30,6 @@
     "name": "Master",
     "short": "Master",
     "description": "MBA, MSc, MBS, M.Ed & research-level resources for graduate students across Nepali universities.",
-    "icon": "Award",
-    "gradient": "from-rose-500 to-pink-600",
-    "color": "#f43f5e",
     "subjects": ["MBA", "MBS", "M.Sc. Physics", "M.Sc. Computer Science", "M.Ed", "MA English", "MPH"]
   }
 ]

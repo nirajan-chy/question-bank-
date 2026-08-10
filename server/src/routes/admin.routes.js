@@ -3,10 +3,22 @@ const { auth, adminOnly } = require("../middleware/auth");
 const adminCtrl = require("../controllers/admin.controller");
 const sendSuccess = require("../utils/sendSuccess");
 const ApiError = require("../utils/ApiError");
+const { upload } = require("../utils/upload");
 const models = require("../models");
 const { createBaseController } = require("../controllers/base.controller");
 
 router.use(auth, adminOnly);
+
+router.post("/upload", upload.single("file"), (req, res) => {
+  if (!req.file) throw new ApiError(400, "No file uploaded");
+  const url = `/uploads/${req.file.filename}`;
+  sendSuccess(res, {
+    url,
+    filename: req.file.filename,
+    size: req.file.size,
+    mimeType: req.file.mimetype,
+  }, 201, "File uploaded");
+});
 
 router.get("/stats", adminCtrl.getStats);
 
@@ -14,6 +26,8 @@ const resources = [
   { path: "levels", model: models.Level, ctrl: require("../controllers/level.controller") },
   { path: "universities", model: models.University, ctrl: require("../controllers/university.controller") },
   { path: "faculties", model: models.Faculty, ctrl: require("../controllers/faculty.controller") },
+  { path: "courses", model: models.Course, ctrl: require("../controllers/course.controller") },
+  { path: "semesters", model: models.Semester, ctrl: require("../controllers/semester.controller") },
   { path: "subjects", model: models.Subject, ctrl: require("../controllers/subject.controller") },
   { path: "notes", model: models.Note, ctrl: require("../controllers/note.controller") },
   { path: "books", model: models.Book, ctrl: require("../controllers/book.controller") },
@@ -28,6 +42,7 @@ const resources = [
   { path: "posts", model: models.Post, ctrl: require("../controllers/post.controller") },
   { path: "community", model: models.CommunityQuestion, ctrl: require("../controllers/community.controller") },
   { path: "communities", model: models.Community, ctrl: require("../controllers/communities.controller") },
+  { path: "community-messages", model: models.CommunityMessage, ctrl: createBaseController(models.CommunityMessage) },
   { path: "leaderboard", model: models.LeaderboardEntry, ctrl: require("../controllers/leaderboard.controller") },
   { path: "contacts", model: models.Contact, ctrl: require("../controllers/contact.controller") },
 ];

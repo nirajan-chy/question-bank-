@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   ArrowLeft,
@@ -36,6 +36,7 @@ import {
 
 const SKIP_FIELDS = new Set(["createdAt", "updatedAt"]);
 const NONE_VALUE = "__none__";
+const UPLOAD_FIELD_KEYS = new Set(["pdfUrl"]);
 
 const humanize = (key: string) =>
   key
@@ -342,6 +343,17 @@ function ResourceForm({
         <form onSubmit={onSubmit} className="grid gap-4 sm:grid-cols-2">
           {fields.map((f) => {
             const isPk = f.primaryKey;
+            if (UPLOAD_FIELD_KEYS.has(f.key)) {
+              return (
+                <FieldUpload
+                  key={f.key}
+                  field={f}
+                  value={values[f.key]}
+                  onChange={(v) => set(f.key, v)}
+                  className="sm:col-span-2"
+                />
+              );
+            }
             if (f.type === "BOOLEAN") {
               return (
                 <div key={f.key} className="flex items-center justify-between rounded-lg border p-3 sm:col-span-2">
@@ -484,6 +496,74 @@ function FieldSelect({
           ))}
         </SelectContent>
       </Select>
+    </div>
+  );
+}
+
+function FieldUpload({
+  field,
+  value,
+  onChange,
+  className,
+}: {
+  field: ResourceField;
+  value: string;
+  onChange: (v: string) => void;
+  className?: string;
+}) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+
+  const handleFile = async (file?: File) => {
+    if (!file) return;
+    setUploading(true);
+    try {
+      const result = await admin.upload(file);
+      onChange(result.url);
+      toast.success("File uploaded", { description: result.filename });
+    } catch (error) {
+      toast.error("Upload failed", {
+        description: error instanceof Error ? error.message : "Please try again.",
+      });
+    } finally {
+      setUploading(false);
+      if (inputRef.current) inputRef.current.value = "";
+    }
+  };
+
+  return (
+    <div className={cn("space-y-1.5", className)}>
+      <Label htmlFor={`f-${field.key}`}>
+        {humanize(field.key)}
+        <Badge variant="outline" className="ml-2 text-[9px]">PDF upload</Badge>
+      </Label>
+      <div className="flex flex-wrap items-center gap-2">
+        <input
+          ref={inputRef}
+          id={`f-${field.key}`}
+          type="file"
+          accept="application/pdf"
+          className="block w-full min-w-0 flex-1 text-sm text-muted-foreground file:mr-3 file:cursor-pointer file:rounded-md file:border-0 file:bg-primary/10 file:px-3 file:py-2 file:text-xs file:font-semibold file:text-primary"
+          onChange={(e) => handleFile(e.target.files?.[0])}
+          disabled={uploading}
+        />
+        {value ? (
+          <a
+            href={value.startsWith("http") ? value : `http://localhost:5000${value}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 rounded-md border border-primary/30 px-3 py-2 text-xs font-medium text-primary hover:bg-primary/10"
+          >
+            View file
+          </a>
+        ) : null}
+        {value ? (
+          <Button variant="ghost" size="sm" onClick={() => onChange("")} type="button">
+            <X className="h-4 w-4" /> Clear
+          </Button>
+        ) : null}
+      </div>
+      {uploading && <p className="text-xs text-muted-foreground">Uploading…</p>}
     </div>
   );
 }

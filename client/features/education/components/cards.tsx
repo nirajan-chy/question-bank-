@@ -15,7 +15,7 @@ import type {
   Notice,
   ResultEntry,
 } from "@/types";
-import { formatDate, formatNumber } from "@/lib/utils";
+import { formatDate, formatNumber, resolveFileUrl } from "@/lib/utils";
 
 export function LevelCard({
   name,
@@ -23,7 +23,7 @@ export function LevelCard({
   description,
   badge,
   subjects,
-  gradient,
+  gradient = "from-indigo-600 via-violet-600 to-fuchsia-600",
 }: {
   name: string;
   slug: string;
@@ -31,7 +31,7 @@ export function LevelCard({
   description: string;
   badge?: string;
   subjects: string[];
-  gradient: string;
+  gradient?: string;
 }) {
   return (
     <Link href={`/classes/${slug}`}>
@@ -104,31 +104,52 @@ export function SubjectCard({ subject }: { subject: Subject }) {
 }
 
 export function NoteCard({ note }: { note: Note }) {
-  return (
+  const inner = (
+    <>
+      <div className="flex items-start justify-between gap-2">
+        <Badge variant="secondary" className="font-medium">{note.level}</Badge>
+        <BookmarkButton
+          item={{
+            id: note.id,
+            type: "note",
+            title: note.title,
+            subtitle: `${note.subjectName} · ${note.author}`,
+            href: `/subjects/${note.subjectSlug}?tab=notes`,
+            savedAt: new Date().toISOString(),
+            icon: "note",
+          }}
+        />
+      </div>
+      <h3 className="mt-3 line-clamp-2 font-semibold leading-snug group-hover:text-primary">{note.title}</h3>
+      <p className="mt-2 line-clamp-2 flex-1 text-xs text-muted-foreground">{note.description}</p>
+      {note.pdfUrl && (
+        <a
+          href={resolveFileUrl(note.pdfUrl)}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="mt-3 inline-flex w-fit items-center gap-1.5 rounded-md bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary transition-colors hover:bg-primary/20"
+        >
+          <FileText className="h-3.5 w-3.5" /> Open PDF
+        </a>
+      )}
+      <div className="mt-4 flex items-center justify-between border-t pt-3 text-[11px] text-muted-foreground">
+        <span className="flex items-center gap-1"><Star className="h-3 w-3 fill-amber-400 text-amber-400" /> {note.rating}</span>
+        <span>{formatNumber(note.downloads)} downloads</span>
+        <span className="truncate">{note.author}</span>
+      </div>
+    </>
+  );
+
+  const cardClass = "group flex h-full flex-col p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-card-hover";
+
+  return note.pdfUrl ? (
+    <Card className={cn(cardClass, "cursor-pointer")} onClick={() => window.open(resolveFileUrl(note.pdfUrl), "_blank")}>
+      {inner}
+    </Card>
+  ) : (
     <Link href={`/subjects/${note.subjectSlug}?tab=notes`}>
-      <Card className="group flex h-full flex-col p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-card-hover">
-        <div className="flex items-start justify-between gap-2">
-          <Badge variant="secondary" className="font-medium">{note.level}</Badge>
-          <BookmarkButton
-            item={{
-              id: note.id,
-              type: "note",
-              title: note.title,
-              subtitle: `${note.subjectName} · ${note.author}`,
-              href: `/subjects/${note.subjectSlug}?tab=notes`,
-              savedAt: new Date().toISOString(),
-              icon: "note",
-            }}
-          />
-        </div>
-        <h3 className="mt-3 line-clamp-2 font-semibold leading-snug group-hover:text-primary">{note.title}</h3>
-        <p className="mt-2 line-clamp-2 flex-1 text-xs text-muted-foreground">{note.description}</p>
-        <div className="mt-4 flex items-center justify-between border-t pt-3 text-[11px] text-muted-foreground">
-          <span className="flex items-center gap-1"><Star className="h-3 w-3 fill-amber-400 text-amber-400" /> {note.rating}</span>
-          <span>{formatNumber(note.downloads)} downloads</span>
-          <span className="truncate">{note.author}</span>
-        </div>
-      </Card>
+      <Card className={cardClass}>{inner}</Card>
     </Link>
   );
 }
@@ -175,66 +196,97 @@ export function BookCard({ book }: { book: Book }) {
 }
 
 export function QuestionBankCard({ qb }: { qb: QuestionBank }) {
-  return (
+  const inner = (
+    <>
+      <div className="flex items-start justify-between">
+        <Badge variant="secondary">{qb.level}</Badge>
+        <BookmarkButton
+          item={{
+            id: qb.id,
+            type: "question-bank",
+            title: qb.title,
+            subtitle: `${qb.subjectName} · ${qb.questions} questions`,
+            href: "/question-banks",
+            savedAt: new Date().toISOString(),
+            icon: "question-bank",
+          }}
+        />
+      </div>
+      <h3 className="mt-3 line-clamp-2 font-semibold leading-snug group-hover:text-primary">{qb.title}</h3>
+      <p className="mt-1 text-xs text-muted-foreground">{qb.subjectName} · {qb.year} BS</p>
+      <div className="mt-3 flex items-center gap-2">
+        <Badge variant="info">{qb.questions} Qs</Badge>
+        <Badge variant="default">{qb.difficulty}</Badge>
+        {qb.free ? <Badge variant="success">Free</Badge> : <Badge variant="warning">Premium</Badge>}
+      </div>
+      {qb.pdfUrl && (
+        <a
+          href={resolveFileUrl(qb.pdfUrl)}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="mt-3 inline-flex w-fit items-center gap-1.5 rounded-md bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary transition-colors hover:bg-primary/20"
+        >
+          <FileText className="h-3.5 w-3.5" /> Open PDF
+        </a>
+      )}
+      <div className="mt-4 flex items-center justify-between border-t pt-3 text-[11px] text-muted-foreground">
+        <span className="flex items-center gap-1"><Timer className="h-3 w-3" /> {formatNumber(qb.attempts)} attempts</span>
+        <span className="flex items-center gap-1"><Star className="h-3 w-3 fill-amber-400 text-amber-400" /> {qb.rating}</span>
+      </div>
+    </>
+  );
+
+  const cardClass = "group flex h-full flex-col p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-card-hover";
+
+  return qb.pdfUrl ? (
+    <Card className={cn(cardClass, "cursor-pointer")} onClick={() => window.open(resolveFileUrl(qb.pdfUrl), "_blank")}>
+      {inner}
+    </Card>
+  ) : (
     <Link href="/question-banks">
-      <Card className="group h-full p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-card-hover">
-        <div className="flex items-start justify-between">
-          <Badge variant="secondary">{qb.level}</Badge>
-          <BookmarkButton
-            item={{
-              id: qb.id,
-              type: "question-bank",
-              title: qb.title,
-              subtitle: `${qb.subjectName} · ${qb.questions} questions`,
-              href: "/question-banks",
-              savedAt: new Date().toISOString(),
-              icon: "question-bank",
-            }}
-          />
-        </div>
-        <h3 className="mt-3 line-clamp-2 font-semibold leading-snug group-hover:text-primary">{qb.title}</h3>
-        <p className="mt-1 text-xs text-muted-foreground">{qb.subjectName} · {qb.year} BS</p>
-        <div className="mt-3 flex items-center gap-2">
-          <Badge variant="info">{qb.questions} Qs</Badge>
-          <Badge variant="default">{qb.difficulty}</Badge>
-          {qb.free ? <Badge variant="success">Free</Badge> : <Badge variant="warning">Premium</Badge>}
-        </div>
-        <div className="mt-4 flex items-center justify-between border-t pt-3 text-[11px] text-muted-foreground">
-          <span className="flex items-center gap-1"><Timer className="h-3 w-3" /> {formatNumber(qb.attempts)} attempts</span>
-          <span className="flex items-center gap-1"><Star className="h-3 w-3 fill-amber-400 text-amber-400" /> {qb.rating}</span>
-        </div>
-      </Card>
+      <Card className={cardClass}>{inner}</Card>
     </Link>
   );
 }
 
 export function PastPaperCard({ paper }: { paper: PastPaper }) {
-  return (
+  const inner = (
+    <>
+      <div className="flex items-start justify-between">
+        <Badge variant="secondary">{paper.year} BS</Badge>
+        <span className="flex items-center gap-1 rounded-md bg-destructive/10 px-2 py-0.5 text-[10px] font-semibold text-destructive">
+          <FileText className="h-3 w-3" /> PDF
+        </span>
+      </div>
+      <h3 className="mt-3 line-clamp-2 font-semibold leading-snug group-hover:text-primary">{paper.title}</h3>
+      <p className="mt-1 text-xs text-muted-foreground">{paper.exam}</p>
+      <div className="mt-3 grid grid-cols-3 gap-2 text-center text-[11px]">
+        <div className="rounded-md bg-muted/50 p-1.5">
+          <p className="font-semibold">{paper.duration}</p>
+          <p className="text-muted-foreground">Duration</p>
+        </div>
+        <div className="rounded-md bg-muted/50 p-1.5">
+          <p className="font-semibold">{paper.fullMarks}</p>
+          <p className="text-muted-foreground">Full marks</p>
+        </div>
+        <div className="rounded-md bg-muted/50 p-1.5">
+          <p className="font-semibold">{formatNumber(paper.downloads)}</p>
+          <p className="text-muted-foreground">Downloads</p>
+        </div>
+      </div>
+    </>
+  );
+
+  const cardClass = "group flex h-full flex-col p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-card-hover";
+
+  return paper.pdfUrl ? (
+    <Card className={cn(cardClass, "cursor-pointer")} onClick={() => window.open(resolveFileUrl(paper.pdfUrl), "_blank")}>
+      {inner}
+    </Card>
+  ) : (
     <Link href="/past-papers">
-      <Card className="group h-full p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-card-hover">
-        <div className="flex items-start justify-between">
-          <Badge variant="secondary">{paper.year} BS</Badge>
-          <span className="flex items-center gap-1 rounded-md bg-destructive/10 px-2 py-0.5 text-[10px] font-semibold text-destructive">
-            <FileText className="h-3 w-3" /> PDF
-          </span>
-        </div>
-        <h3 className="mt-3 line-clamp-2 font-semibold leading-snug group-hover:text-primary">{paper.title}</h3>
-        <p className="mt-1 text-xs text-muted-foreground">{paper.exam}</p>
-        <div className="mt-3 grid grid-cols-3 gap-2 text-center text-[11px]">
-          <div className="rounded-md bg-muted/50 p-1.5">
-            <p className="font-semibold">{paper.duration}</p>
-            <p className="text-muted-foreground">Duration</p>
-          </div>
-          <div className="rounded-md bg-muted/50 p-1.5">
-            <p className="font-semibold">{paper.fullMarks}</p>
-            <p className="text-muted-foreground">Full marks</p>
-          </div>
-          <div className="rounded-md bg-muted/50 p-1.5">
-            <p className="font-semibold">{formatNumber(paper.downloads)}</p>
-            <p className="text-muted-foreground">Downloads</p>
-          </div>
-        </div>
-      </Card>
+      <Card className={cardClass}>{inner}</Card>
     </Link>
   );
 }
