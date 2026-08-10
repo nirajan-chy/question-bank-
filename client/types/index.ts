@@ -52,11 +52,7 @@ export type Level = {
   name: string;
   short: string;
   description: string;
-  icon: string;
-  gradient: string;
   subjects: string[];
-  color: string;
-  badge?: string;
   streams?: string[];
 };
 
@@ -161,6 +157,7 @@ export type Note = {
   views: number;
   rating: number;
   free: boolean;
+  pdfUrl?: string;
   tags: string[];
 };
 
@@ -200,6 +197,7 @@ export type QuestionBank = {
   updatedAt: string;
   description: string;
   format: "PDF" | "Interactive" | "Both";
+  pdfUrl?: string;
   free: boolean;
   tags: string[];
 };
@@ -220,6 +218,7 @@ export type PastPaper = {
   downloads: number;
   format: "PDF";
   description: string;
+  pdfUrl?: string;
   tags: string[];
 };
 

@@ -35,7 +35,7 @@ import type {
   McqResult,
 } from "@/types";
 
-import { http, httpForm, getAuthToken, BASE_URL } from "./http";
+import { http, httpForm, httpUpload, getAuthToken, BASE_URL } from "./http";
 
 type SearchResults = {
   subjects: Subject[];
@@ -137,6 +137,14 @@ type AdminResourceRecord = Record<string, unknown>;
 export const admin = {
   stats: () => http<AdminStats>("/admin/stats"),
   meta: (resource: string) => http<ResourceMeta>(`/admin/meta/${resource}`),
+  upload: (file: File) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    return httpUpload<{ url: string; filename: string; size: number; mimeType: string }>(
+      "/admin/upload",
+      formData
+    );
+  },
   users: () => http<User[]>("/admin/users"),
   updateUser: (id: string, patch: Partial<Pick<User, "name" | "role" | "avatar" | "bio">> & { password?: string }) =>
     http<User>(`/admin/users/${id}`, { method: "PUT", body: JSON.stringify(patch) }),
