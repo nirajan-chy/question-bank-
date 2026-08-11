@@ -1,5 +1,6 @@
 const path = require("path");
 const fs = require("fs");
+const { Op } = require("sequelize");
 const { sequelize } = require("../config/postgres");
 const models = require("../models");
 
@@ -29,20 +30,23 @@ const seedMap = [
   { model: models.Scholarship, file: "scholarships.json" },
   { model: models.Notice, file: "notices.json" },
   { model: models.ResultEntry, file: "results.json" },
-  { model: models.Testimonial, file: "testimonials.json" },
   { model: models.Faq, file: "faq.json" },
   { model: models.Post, file: "posts.json" },
-  { model: models.CommunityQuestion, file: "community.json" },
+  { model: models.CommunityQuestion, file: "community.json", userIdPattern: "c-%" },
   { model: models.Community, file: "community-channels.json", transform: (row, index) => ({ ...row, order: index }) },
-  { model: models.CommunityMessage, file: "community-messages.json" },
+  { model: models.CommunityMessage, file: "community-messages.json", userIdPattern: "msg-%" },
   { model: models.LeaderboardEntry, file: "leaderboard.json" },
 ];
 
+// Seed data files are the source of truth for every table, but some tables also
+// hold user-generated rows. For those we only clean up rows that match the seed
+// id shape (e.g. "c1", "m12") and are no longer present in the JSON — user rows
+// (e.g. "c-1738…", "msg-…") are always preserved.
 const getUpdateFields = (model) =>
   Object.keys(model.rawAttributes)
     .filter((key) => key !== "id" && key !== "createdAt" && key !== "updatedAt");
 
-async function seed() {
+async function seedDatabase({ closeConnection = true } = {}) {
   try {
     await sequelize.authenticate();
     console.log("✅ Database connected");
@@ -50,19 +54,41 @@ async function seed() {
     await sequelize.sync({ alter: true });
     console.log("✅ Tables synced (altered)");
 
-    for (const { model, file, transform } of seedMap) {
+    for (const { model, file, transform, userIdPattern } of seedMap) {
       const rows = transform ? readJson(file).map(transform) : readJson(file);
       if (rows.length === 0) continue;
 
       const seedIds = rows.map((r) => r.id).filter(Boolean);
       if (seedIds.length > 0) {
-        await model.destroy({ where: { id: { [require("sequelize").Op.notIn]: seedIds } } });
+        if (userIdPattern) {
+          await model.destroy({
+            where: { id: { [Op.notIn]: seedIds, [Op.notLike]: userIdPattern } },
+          });
+        } else {
+          await model.destroy({ where: { id: { [Op.notIn]: seedIds } } });
+        }
       }
+
+      // conflictAttributes (NOT upsertKeys — Sequelize ignores upsertKeys when
+      // updateOnDuplicate is set) makes the upsert target the primary key, so
+      // renames of unique columns (e.g. faculty slug) no longer collide.
       await model.bulkCreate(rows, {
         updateOnDuplicate: getUpdateFields(model),
-        upsertKeys: ["id"],
+        conflictAttributes: ["id"],
       });
       console.log(`✅ ${model.name}: ${rows.length} rows upserted`);
+    }
+
+    // Clean up messages that point at communities that no longer exist, while
+    // keeping user messages in communities that do.
+    const communityIds = (
+      await models.Community.findAll({ attributes: ["id"], raw: true })
+    ).map((r) => r.id);
+    if (communityIds.length > 0) {
+      const orphaned = await models.CommunityMessage.destroy({
+        where: { communityId: { [Op.notIn]: communityIds } },
+      });
+      if (orphaned > 0) console.log(`🧹 Removed ${orphaned} message(s) from removed communities`);
     }
 
     const adminEmail = (process.env.ADMIN_EMAIL || "admin@sandarbh.com").toLowerCase();
@@ -84,10 +110,18 @@ async function seed() {
     console.log("🎉 Seeding complete");
   } catch (error) {
     console.error("❌ Seeding failed:", error);
-    process.exitCode = 1;
+    throw error;
   } finally {
-    await sequelize.close();
+    if (closeConnection) {
+      await sequelize.close();
+    }
   }
 }
 
-seed();
+module.exports = { seedDatabase };
+
+if (require.main === module) {
+  seedDatabase().catch(() => {
+    process.exitCode = 1;
+  });
+}
