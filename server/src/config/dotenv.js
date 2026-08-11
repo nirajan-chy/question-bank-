@@ -10,6 +10,7 @@ const DB_PORT = process.env.DB_PORT;
 const JWT_SECRET = process.env.JWT_SECRET;
 const SMTP_USER = process.env.SMTP_USER;
 const SMTP_PASSWORD = process.env.SMTP_PASSWORD;
+const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN;
 
 module.exports = {
   DB_NAME,
@@ -20,4 +21,5 @@ module.exports = {
   JWT_SECRET,
   SMTP_USER,
   SMTP_PASSWORD,
+  CLIENT_ORIGIN,
 };

@@ -6,6 +6,7 @@ const apiRoutes = require("./routes");
 const notFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
 const { UPLOAD_DIR } = require("./utils/upload");
+const { CLIENT_ORIGIN } = require("./config/dotenv");
 
 const app = express();
 
@@ -15,7 +16,7 @@ app.set("trust proxy", true);
 
 app.use(
   cors({
-    origin: process.env.CLIENT_ORIGIN || true,
+    origin: CLIENT_ORIGIN || true,
     credentials: true,
   }),
 );
