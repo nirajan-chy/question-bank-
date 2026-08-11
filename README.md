@@ -30,6 +30,7 @@ Built as a monorepo with three apps:
 
 ### Authentication (`server/` + `client/`)
 - JWT-based auth: `register`, `login`, `me`
+- Social login with **Google** and **GitHub** (OAuth 2.0) via `GET /api/auth/:provider/start` → `GET /api/auth/:provider/callback`
 - Passwords hashed with **bcrypt**
 - Roles: `user` and `admin`
 - The navbar shows **Sign in / Sign up** when logged out, and the logged-in user's **initial** (first letter) with a profile dropdown and **Sign out**
@@ -37,7 +38,8 @@ Built as a monorepo with three apps:
 ### Admin panel (`client/admin/*` + `server/api/admin/*`)
 - Login-protected, admin-only area (`/admin`)
 - **Dashboard** — live record counts for every collection + recent contact messages and community questions
-- **Content manager** — add, edit, search and delete records for all 18 content collections
+- **Content manager** — add, edit, search and delete records for all 22 content collections
+- **File upload** — PDFs for notes, question banks and past papers are uploaded via `POST /api/admin/upload` and served from `/uploads`
 - **Schema-driven forms** — inputs are generated from the actual Sequelize model metadata:
   - Enum fields render as dropdowns (e.g. University `type`, Book `language`, difficulty/format fields)
   - Booleans as switches, numbers as number inputs, dates as date pickers
@@ -60,7 +62,7 @@ Built as a monorepo with three apps:
 cd server
 npm install
 cp .env.example .env     # fill in your database + JWT settings
-npm run seed             # creates tables, seeds all 18 collections + admin user
+npm run seed             # creates tables, seeds all 22 collections + admin user
 npm run dev              # starts API on http://localhost:5000
 ```
 
@@ -70,6 +72,9 @@ npm run dev              # starts API on http://localhost:5000
 | --- | --- |
 | `DB_NAME`, `DB_USERNAME`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT` | PostgreSQL connection |
 | `JWT_SECRET` | Secret used to sign auth tokens |
+| `CLIENT_URL` | Frontend origin for OAuth callbacks (default `http://localhost:3000`) |
+| `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` | OAuth app credentials for **Sign in with Google** |
+| `GITHUB_CLIENT_ID` / `GITHUB_CLIENT_SECRET` | OAuth app credentials for **Sign in with GitHub** |
 | `ADMIN_EMAIL` / `ADMIN_PASSWORD` | Admin account created/updated by the seed |
 | `SMTP_USER`, `SMTP_PASSWORD` | Optional — used by `/api/contact` to send email |
 | `RAG_SERVICE_URL` / `RAG_SERVICE_SECRET` | RAG microservice base URL and shared secret (used by `/api/rag/*`) |
@@ -120,6 +125,8 @@ uvicorn app.main:app --reload --port 8000
 
 3. You'll land on the **admin dashboard** — the navbar also shows **Admin panel** when an admin is signed in.
 
+> Regular users can also sign up / log in with **Google** or **GitHub** using the buttons on `/login` and `/register`.
+
 > ⚠️ Change `ADMIN_PASSWORD` (and `JWT_SECRET`) before deploying.
 
 ---
@@ -164,6 +171,8 @@ All endpoints return the envelope: `{ success, message, data, errors }`.
 | --- | --- |
 | `POST /api/auth/register` | Create an account → returns `{ token, user }` |
 | `POST /api/auth/login` | Sign in → returns `{ token, user }` |
+| `GET /api/auth/:provider/start` | Begin OAuth login (`google` or `github`) — redirects to the provider |
+| `GET /api/auth/:provider/callback` | Provider callback — exchanges code, signs in/creates user, redirects to `${CLIENT_URL}/auth/callback?token=…&user=…` |
 | `GET /api/auth/me` | Current user (requires `Authorization: Bearer <token>`) |
 
 ### Admin (all require `Authorization: Bearer <admin-token>`)
@@ -176,9 +185,10 @@ All endpoints return the envelope: `{ success, message, data, errors }`.
 | `POST /api/admin/:resource` | Create a record |
 | `PUT /api/admin/:resource/:id` | Update a record |
 | `DELETE /api/admin/:resource/:id` | Delete a record |
+| `POST /api/admin/upload` | Upload a PDF/image (multipart `file`) → `{ url, filename, size, mimeType }` |
 | `GET /api/admin/users` · `PUT /api/admin/users/:id` · `DELETE /api/admin/users/:id` | Manage users |
 
-`resource` is one of: `levels`, `universities`, `faculties`, `subjects`, `notes`, `books`, `question-banks`, `past-papers`, `mock-tests`, `scholarships`, `notices`, `results`, `testimonials`, `faqs`, `posts`, `community`, `communities`, `leaderboard`, `contacts`.
+`resource` is one of: `levels`, `universities`, `faculties`, `courses`, `semesters`, `subjects`, `notes`, `books`, `question-banks`, `past-papers`, `mock-tests`, `scholarships`, `notices`, `results`, `testimonials`, `faqs`, `posts`, `community`, `communities`, `community-messages`, `leaderboard`, `contacts`.
 
 ### Self Learning Center (all require `Authorization: Bearer <token>`)
 
@@ -220,13 +230,14 @@ question_bank/
     ├── src/
     │   ├── app.js                 # Express app (CORS, routes, error handling)
     │   ├── config/                # dotenv + Postgres (Sequelize) config
-    │   ├── models/                # 19 Sequelize models (incl. User)
+    │   ├── models/                # 23 Sequelize models (incl. User)
     │   ├── controllers/           # base CRUD factory + auth/admin/community/etc.
     │   ├── routes/                # public, auth, admin and rag routers
     │   ├── rag/                   # proxy to the Python RAG service
     │   ├── middleware/            # auth (JWT), adminOnly, notFound, errorHandler
     │   ├── seed/seed.js           # Seeds all collections + admin user from client/data
     │   └── utils/                 # asyncHandler, ApiError, sendSuccess, slugify
+    ├── uploads/                   # PDF/image uploads (served at /uploads) — gitignored
     └── .env.example
 └── rag/                           # Python RAG microservice (Self Learning Center)
     ├── requirements.txt

@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
 import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/shared/logo";
+import { OAuthButtons } from "./oauth-buttons";
 
 const schema = z.object({
   email: z.string().email("Enter a valid email address"),
@@ -60,6 +61,16 @@ export function LoginForm() {
 
       <Card>
         <CardContent className="p-6 md:p-8">
+          <OAuthButtons />
+
+          <div className="my-6 flex items-center gap-3">
+            <span className="h-px flex-1 bg-border" />
+            <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+              or continue with email
+            </span>
+            <span className="h-px flex-1 bg-border" />
+          </div>
+
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
