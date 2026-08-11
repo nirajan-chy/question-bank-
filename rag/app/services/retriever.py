@@ -16,6 +16,14 @@ def search_chunks(
 ) -> list[tuple[Chunk, float]]:
     """Vector similarity search over the user's chunks using cosine distance (<=>)."""
     k = top_k or settings.rag_top_k
+
+    # Short-circuit: skip the embedding API call when there are no chunks
+    count_stmt = select(Chunk.id).where(Chunk.user_id == user_id).limit(1)
+    if document_ids:
+        count_stmt = count_stmt.where(Chunk.document_id.in_(document_ids))
+    if not db.execute(count_stmt).first():
+        return []
+
     query_vector = embed_text(query)
 
     stmt = (

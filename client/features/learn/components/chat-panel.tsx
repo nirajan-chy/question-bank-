@@ -1,7 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { FileText, Loader2, Send, Square, Sparkles } from "lucide-react";
+import {
+  Bot,
+  FileText,
+  Loader2,
+  Send,
+  Square,
+  Sparkles,
+  User,
+  BookOpen,
+} from "lucide-react";
 import { streamChat, type ChatStreamEvent } from "@/services/api";
 import { useRagChatHistory, useRagDocuments } from "@/services/queries";
 import type { RagMessage, RagSource } from "@/types";
@@ -27,10 +36,22 @@ type ChatEntry = {
 };
 
 const SUGGESTIONS = [
-  "Summarize the key topics in my documents",
-  "What are the most important definitions?",
-  "Explain the main concepts as if I'm new to this subject",
-  "Create a quick revision summary of chapter one",
+  {
+    icon: BookOpen,
+    text: "Summarize the key topics in my documents",
+  },
+  {
+    icon: Sparkles,
+    text: "What are the most important definitions?",
+  },
+  {
+    icon: Bot,
+    text: "Explain the main concepts step by step",
+  },
+  {
+    icon: FileText,
+    text: "Create a quick revision summary",
+  },
 ];
 
 export function ChatPanel() {
@@ -42,6 +63,7 @@ export function ChatPanel() {
   const [streaming, setStreaming] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
   const endRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     if (!history) return;
@@ -63,7 +85,10 @@ export function ChatPanel() {
     const text = question.trim();
     if (!text || streaming) return;
     setInput("");
-    setMessages((prev) => [...prev, { id: `q-${Date.now()}`, role: "user", content: text }]);
+    setMessages((prev) => [
+      ...prev,
+      { id: `q-${Date.now()}`, role: "user", content: text },
+    ]);
     setMessages((prev) => [
       ...prev,
       { id: `a-${Date.now()}`, role: "assistant", content: "", streaming: true },
@@ -98,7 +123,7 @@ export function ChatPanel() {
             setMessages((prev) => {
               const next = [...prev];
               const last = next[next.length - 1];
-              if (last?.streaming) last.content = `⚠️ ${event.data.message}`;
+              if (last?.streaming) last.content = `\u26a0\ufe0f ${event.data.message}`;
               return next;
             });
           }
@@ -110,7 +135,7 @@ export function ChatPanel() {
         setMessages((prev) => {
           const next = [...prev];
           const last = next[next.length - 1];
-          if (last?.streaming) last.content = `⚠️ ${(err as Error).message}`;
+          if (last?.streaming) last.content = `\u26a0\ufe0f ${(err as Error).message}`;
           return next;
         });
       }
@@ -128,10 +153,18 @@ export function ChatPanel() {
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_300px]">
       <Card className="flex flex-col overflow-hidden">
-        <div className="flex items-center justify-between gap-3 border-b px-4 py-3">
-          <div className="flex items-center gap-2 text-sm font-medium">
-            <Sparkles className="h-4 w-4 text-primary" />
-            Chat with your material
+        {/* Header */}
+        <div className="flex items-center justify-between gap-3 border-b bg-muted/30 px-5 py-3">
+          <div className="flex items-center gap-2.5">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-gradient text-white shadow-sm">
+              <Sparkles className="h-4 w-4" />
+            </span>
+            <div>
+              <p className="text-sm font-semibold">AI Study Assistant</p>
+              <p className="text-[11px] text-muted-foreground">
+                Answers grounded in your documents
+              </p>
+            </div>
           </div>
           <Select value={scope} onValueChange={setScope}>
             <SelectTrigger className="h-8 w-52 text-xs">
@@ -150,70 +183,112 @@ export function ChatPanel() {
           </Select>
         </div>
 
+        {/* Messages */}
         <ScrollArea className="h-[520px]">
-          <div className="space-y-4 p-4">
+          <div className="space-y-5 p-5">
             {messages.length === 0 && (
-              <div className="space-y-3 pt-6">
-                <p className="text-center text-sm text-muted-foreground">
-                  Ask anything about your uploaded documents. Answers include numbered citations
-                  into your own material.
+              <div className="flex flex-col items-center pt-12 text-center">
+                <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-gradient text-white shadow-glow-sm">
+                  <Bot className="h-8 w-8" />
+                </span>
+                <h3 className="mt-5 font-display text-lg font-semibold">
+                  Ask anything about your documents
+                </h3>
+                <p className="mt-1.5 max-w-sm text-sm text-muted-foreground leading-relaxed">
+                  The AI reads your uploaded material and gives you grounded answers with
+                  numbered citations you can verify.
                 </p>
-                <div className="mx-auto grid max-w-md gap-2">
+                <div className="mx-auto mt-6 grid max-w-md gap-2 sm:grid-cols-2">
                   {SUGGESTIONS.map((s) => (
-                    <Button
-                      key={s}
-                      variant="outline"
-                      className="justify-start text-left text-xs"
-                      onClick={() => send(s)}
+                    <button
+                      key={s.text}
+                      type="button"
+                      className="group flex items-start gap-2.5 rounded-xl border bg-background/60 px-3.5 py-3 text-left text-xs transition-all hover:border-primary/30 hover:bg-primary/5 hover:shadow-sm"
+                      onClick={() => send(s.text)}
                       disabled={streaming}
                     >
-                      {s}
-                    </Button>
+                      <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary">
+                        <s.icon className="h-3.5 w-3.5" />
+                      </span>
+                      <span className="leading-relaxed">{s.text}</span>
+                    </button>
                   ))}
                 </div>
               </div>
             )}
 
             {messages.map((m) => (
-              <div
-                key={m.id}
-                className={cn(
-                  "flex",
-                  m.role === "user" ? "justify-end" : "justify-start"
-                )}
-              >
-                <div
+              <div key={m.id} className="flex gap-3">
+                {/* Avatar */}
+                <span
                   className={cn(
-                    "max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap",
+                    "flex h-8 w-8 shrink-0 items-center justify-center rounded-lg",
                     m.role === "user"
-                      ? "bg-primary text-primary-foreground"
-                      : "border bg-card"
+                      ? "bg-secondary text-secondary-foreground"
+                      : "bg-brand-gradient text-white shadow-sm"
                   )}
                 >
-                  {m.content || (m.streaming && (
-                    <span className="inline-flex items-center gap-1.5 text-muted-foreground">
-                      <Loader2 className="h-3.5 w-3.5 animate-spin" /> Reading your documents…
-                    </span>
-                  ))}
-                  {m.streaming && m.content && <span className="ml-0.5 inline-block h-4 w-0.5 animate-pulse bg-current align-middle" />}
+                  {m.role === "user" ? (
+                    <User className="h-4 w-4" />
+                  ) : (
+                    <Sparkles className="h-4 w-4" />
+                  )}
+                </span>
 
+                {/* Bubble */}
+                <div className="min-w-0 max-w-[85%]">
+                  <p className="mb-1.5 text-[11px] font-semibold text-muted-foreground">
+                    {m.role === "user" ? "You" : "AI Assistant"}
+                  </p>
+                  <div
+                    className={cn(
+                      "rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap",
+                      m.role === "user"
+                        ? "bg-primary text-primary-foreground rounded-tl-md"
+                        : "border bg-card rounded-tl-md"
+                    )}
+                  >
+                    {m.content ||
+                      (m.streaming && (
+                        <span className="inline-flex items-center gap-1.5 text-muted-foreground">
+                          <Loader2 className="h-3.5 w-3.5 animate-spin" /> Reading your
+                          documents\u2026
+                        </span>
+                      ))}
+                    {m.streaming && m.content && (
+                      <span className="ml-0.5 inline-block h-4 w-0.5 animate-pulse bg-current align-middle" />
+                    )}
+                  </div>
+
+                  {/* Sources */}
                   {m.sources && m.sources.length > 0 && (
-                    <div className="mt-3 border-t pt-2">
-                      <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                    <div className="mt-2.5 space-y-1.5">
+                      <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                        <FileText className="h-3 w-3" />
                         Sources
                       </p>
-                      <ul className="mt-1.5 space-y-1.5">
+                      <div className="flex flex-wrap gap-1.5">
                         {m.sources.map((s, i) => (
-                          <li key={i} className="flex items-start gap-2 text-xs text-muted-foreground">
-                            <FileText className="mt-0.5 h-3.5 w-3.5 shrink-0" />
-                            <span>
-                              <span className="font-medium text-foreground">{s.document_name}</span>
-                              {s.page ? ` · page ${s.page}` : ""}
-                              <p className="mt-0.5 line-clamp-2 italic">{"\u201C"}{s.snippet}{"\u201D"}</p>
+                          <span
+                            key={i}
+                            className="inline-flex items-center gap-1.5 rounded-lg border bg-muted/40 px-2.5 py-1.5 text-xs"
+                          >
+                            <span className="font-medium text-foreground">
+                              {s.document_name}
                             </span>
-                          </li>
+                            {s.page && (
+                              <span className="text-muted-foreground">
+                                p.{s.page}
+                              </span>
+                            )}
+                          </span>
                         ))}
-                      </ul>
+                      </div>
+                      {m.sources[0]?.snippet && (
+                        <div className="mt-1 rounded-lg bg-muted/30 px-3 py-2 text-xs italic text-muted-foreground leading-relaxed">
+                          &ldquo;{m.sources[0].snippet}&rdquo;
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
@@ -223,9 +298,11 @@ export function ChatPanel() {
           </div>
         </ScrollArea>
 
-        <div className="border-t p-4">
+        {/* Input */}
+        <div className="border-t bg-muted/20 p-4">
           <div className="flex items-end gap-2">
             <Textarea
+              ref={inputRef}
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => {
@@ -234,35 +311,79 @@ export function ChatPanel() {
                   send(input);
                 }
               }}
-              placeholder="Ask a question about your documents… (Enter to send)"
-              className="max-h-32 min-h-[52px] flex-1 resize-none"
+              placeholder="Ask a question about your documents\u2026"
+              className="max-h-32 min-h-[48px] flex-1 resize-none rounded-xl border bg-background/80"
               disabled={streaming}
             />
             {streaming ? (
-              <Button size="icon" variant="secondary" onClick={stop} aria-label="Stop generating">
+              <Button
+                size="icon"
+                variant="destructive"
+                onClick={stop}
+                aria-label="Stop generating"
+                className="rounded-xl"
+              >
                 <Square className="h-4 w-4" />
               </Button>
             ) : (
-              <Button size="icon" onClick={() => send(input)} disabled={!input.trim()} aria-label="Send question">
+              <Button
+                size="icon"
+                onClick={() => send(input)}
+                disabled={!input.trim()}
+                aria-label="Send question"
+                className="rounded-xl"
+              >
                 <Send className="h-4 w-4" />
               </Button>
             )}
           </div>
-          <p className="mt-2 text-[11px] text-muted-foreground">
-            Answers are grounded strictly in your uploaded documents.
+          <p className="mt-2 text-center text-[11px] text-muted-foreground">
+            Answers are grounded strictly in your uploaded documents
           </p>
         </div>
       </Card>
 
-      <Card className="h-fit p-5">
-        <p className="text-sm font-semibold">Tips</p>
-        <ul className="mt-3 list-disc space-y-2 pl-4 text-xs leading-relaxed text-muted-foreground">
-          <li>Ask follow-up details like {"\u201C"}compare{"\u201D"}, {"\u201C"}define{"\u201D"}, {"\u201C"}give examples{"\u201D"}.</li>
-          <li>Restrict a question to one document with the dropdown above the chat.</li>
-          <li>Every answer cites the exact document and page it came from.</li>
-          <li>If the answer {"isn't"} in your material, the assistant will say so instead of guessing.</li>
-        </ul>
-      </Card>
+      {/* Tips sidebar */}
+      <div className="space-y-4">
+        <Card className="p-5">
+          <h4 className="text-sm font-semibold">How it works</h4>
+          <ul className="mt-3 space-y-3">
+            {[
+              {
+                step: "1",
+                text: "Your documents are split into small searchable chunks",
+              },
+              {
+                step: "2",
+                text: "When you ask a question, the AI finds the most relevant chunks",
+              },
+              {
+                step: "3",
+                text: "It generates an answer using only those chunks, with citations",
+              },
+            ].map((item) => (
+              <li key={item.step} className="flex items-start gap-2.5">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-gradient text-[10px] font-bold text-white">
+                  {item.step}
+                </span>
+                <span className="text-xs text-muted-foreground leading-relaxed">
+                  {item.text}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </Card>
+
+        <Card className="p-5">
+          <h4 className="text-sm font-semibold">Tips</h4>
+          <ul className="mt-3 space-y-2 text-xs text-muted-foreground leading-relaxed">
+            <li>Ask follow-up: &ldquo;compare&rdquo;, &ldquo;define&rdquo;, &ldquo;give examples&rdquo;</li>
+            <li>Restrict to one document with the dropdown above</li>
+            <li>Every answer cites the exact document and page</li>
+            <li>If the answer isn&apos;t in your material, the AI will say so</li>
+          </ul>
+        </Card>
+      </div>
     </div>
   );
 }

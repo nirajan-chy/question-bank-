@@ -10,7 +10,7 @@ const router = express.Router();
 
 const upload = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: 25 * 1024 * 1024 },
+  limits: { fileSize: 100 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     const allowed = ["pdf", "docx", "txt"];
     const ext = (file.originalname || "").split(".").pop().toLowerCase();
