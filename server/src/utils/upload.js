@@ -2,10 +2,19 @@ const path = require("path");
 const fs = require("fs");
 const multer = require("multer");
 
-const UPLOAD_DIR = path.resolve(__dirname, "../../uploads");
+// Vercel serverless runs on a read-only filesystem except /tmp
+const isServerless = Boolean(process.env.VERCEL);
 
-if (!fs.existsSync(UPLOAD_DIR)) {
-  fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+const UPLOAD_DIR = isServerless
+  ? path.join("/tmp", "uploads")
+  : path.resolve(__dirname, "../../uploads");
+
+try {
+  if (!fs.existsSync(UPLOAD_DIR)) {
+    fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+  }
+} catch (error) {
+  console.error("⚠️ Could not create upload directory:", error.message);
 }
 
 const allowedMimeTypes = new Set([

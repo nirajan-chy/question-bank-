@@ -39,8 +39,11 @@ const connectDB = async () => {
     await sequelize.authenticate();
     console.log("✅ PostgreSQL Connected Successfully");
 
-    await sequelize.sync();
-    console.log("✅ Database Tables Synchronized");
+    // Don't run DDL sync in serverless production — tables are created via seed.
+    if (!process.env.VERCEL) {
+      await sequelize.sync();
+      console.log("✅ Database Tables Synchronized");
+    }
     return true;
   } catch (error) {
     console.error("❌ Database Connection Error:", error.message);
