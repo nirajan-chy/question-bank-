@@ -1,7 +1,7 @@
 .env
 src/seed/createAdmin.js
 .env.*
-!.env.example
+.env.example
 
 node_modules/
 dist/
