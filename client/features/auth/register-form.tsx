@@ -13,6 +13,7 @@ import { useAuthStore } from "@/store/use-auth-store";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/shared/logo";
 
@@ -75,7 +76,7 @@ export function RegisterForm() {
 
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
-              <Input id="password" type="password" placeholder="At least 6 characters" autoComplete="new-password" {...register("password")} />
+              <PasswordInput id="password" placeholder="At least 6 characters" autoComplete="new-password" {...register("password")} />
               {errors.password && <p className="text-xs text-destructive">{errors.password.message}</p>}
             </div>
 

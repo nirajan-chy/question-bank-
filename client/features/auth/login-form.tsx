@@ -6,13 +6,14 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { ArrowRight, LogIn, ShieldCheck } from "lucide-react";
+import { ArrowRight, LogIn } from "lucide-react";
 import { toast } from "sonner";
 import { auth } from "@/services/api";
 import { useAuthStore } from "@/store/use-auth-store";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/shared/logo";
 
@@ -70,7 +71,7 @@ export function LoginForm() {
               <div className="flex items-center justify-between">
                 <Label htmlFor="password">Password</Label>
               </div>
-              <Input id="password" type="password" placeholder="••••••••" autoComplete="current-password" {...register("password")} />
+              <PasswordInput id="password" placeholder="••••••••" autoComplete="current-password" {...register("password")} />
               {errors.password && <p className="text-xs text-destructive">{errors.password.message}</p>}
             </div>
 
@@ -79,7 +80,7 @@ export function LoginForm() {
             </Button>
           </form>
 
-          <div className="mt-6 rounded-lg border border-primary/20 bg-primary/5 p-4 text-sm">
+          {/* <div className="mt-6 rounded-lg border border-primary/20 bg-primary/5 p-4 text-sm">
             <p className="flex items-center gap-2 font-medium text-primary">
               <ShieldCheck className="h-4 w-4" /> Admin demo access
             </p>
@@ -87,7 +88,7 @@ export function LoginForm() {
               Email <code className="rounded bg-muted px-1 py-0.5 text-xs">admin@sandarbh.com</code> · Password{" "}
               <code className="rounded bg-muted px-1 py-0.5 text-xs">admin123</code>
             </p>
-          </div>
+          </div> */}
 
           <p className="mt-6 text-center text-sm text-muted-foreground">
             Don&apos;t have an account?{" "}
