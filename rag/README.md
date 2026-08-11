@@ -86,4 +86,4 @@ Express gateway — never call the service directly from the browser).
 | `RAG_CHUNK_SIZE` | 1000 | Target chunk size (characters) |
 | `RAG_CHUNK_OVERLAP` | 200 | Overlap between chunks |
 | `RAG_TOP_K` | 6 | Retrieved chunks per question |
-| `RAG_MAX_FILE_SIZE_MB` | 20 | Upload limit |
+| `RAG_MAX_FILE_SIZE_MB` | 100 | Upload limit (MB) |

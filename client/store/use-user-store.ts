@@ -2,7 +2,7 @@
 
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { BookmarkItem } from "@/types";
+import type { BookmarkItem, User } from "@/types";
 
 export type MockUser = {
   name: string;
@@ -19,18 +19,31 @@ export type MockUser = {
 };
 
 const defaultUser: MockUser = {
-  name: "Sujan Adhikari",
-  username: "sujanadhikari",
-  email: "sujan@example.com",
+  name: "Student",
+  username: "student",
+  email: "",
   level: "SEE · Class 10",
   faculty: "Science",
-  college: "Galaxy Public School",
+  college: "",
   city: "Kathmandu",
-  streak: 21,
-  xp: 4860,
-  badges: ["Early Bird", "Question Solver", "10-Day Streak"],
-  bio: "SEE aspirant aiming for GPA 4.0. Science & maths enthusiast, community helper.",
+  streak: 0,
+  xp: 0,
+  badges: [],
+  bio: "",
 };
+
+/** Sync real auth user data into the local user store (name, email, etc.) */
+export function syncAuthUser(authUser: User | null) {
+  if (!authUser) return;
+  const store = useUserStore.getState();
+  const current = store.user;
+  store.setUser({
+    name: authUser.name || current.name,
+    username: authUser.name?.split(" ")[0]?.toLowerCase() || current.username,
+    email: authUser.email || current.email,
+    bio: authUser.bio || current.bio,
+  });
+}
 
 type UserState = {
   user: MockUser;
