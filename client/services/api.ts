@@ -13,7 +13,6 @@ import type {
   Scholarship,
   Notice,
   ResultEntry,
-  Testimonial,
   Faq,
   Post,
   CommunityQuestion,
@@ -79,7 +78,6 @@ export const api = {
     http<Scholarship[]>(withQuery("/scholarships", opts)),
   notices: (opts?: { limit?: number }) => http<Notice[]>(withQuery("/notices", opts)),
   results: () => http<ResultEntry[]>("/results"),
-  testimonials: () => http<Testimonial[]>("/testimonials"),
   faqs: () => http<Faq[]>("/faqs"),
 
   posts: (opts?: { limit?: number }) => http<Post[]>(withQuery("/posts", opts)),

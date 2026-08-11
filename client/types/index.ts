@@ -284,17 +284,6 @@ export type ResultEntry = {
   notable: string[];
 };
 
-export type Testimonial = {
-  id: string;
-  name: string;
-  role: string;
-  level: string;
-  avatar: string;
-  quote: string;
-  rating: number;
-  achievement: string;
-};
-
 export type Faq = {
   id: string;
   question: string;

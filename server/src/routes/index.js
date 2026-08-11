@@ -14,7 +14,6 @@ router.use("/mock-tests", require("./mockTest.routes"));
 router.use("/scholarships", require("./scholarship.routes"));
 router.use("/notices", require("./notice.routes"));
 router.use("/results", require("./result.routes"));
-router.use("/testimonials", require("./testimonial.routes"));
 router.use("/faqs", require("./faq.routes"));
 router.use("/posts", require("./post.routes"));
 router.use("/community", require("./community.routes"));

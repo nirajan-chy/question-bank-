@@ -145,7 +145,7 @@ All endpoints return the envelope: `{ success, message, data, errors }`.
 | `/api/subjects` · `/api/subjects/:slug` · `/api/subjects/level/:levelSlug` · `/api/subjects/trending` | Subjects |
 | `/api/notes` · `/api/books` · `/api/question-banks` · `/api/past-papers` · `/api/mock-tests` | Study resources (optional `?limit=` / `?subjectSlug=` filters) |
 | `/api/scholarships` · `/api/notices` · `/api/results` | Opportunities & results |
-| `/api/testimonials` · `/api/faqs` | Site content |
+| `/api/faqs` | Site content |
 | `/api/posts` · `/api/posts/:slug` | Blog |
 | `/api/community` | Community Q&A |
 | `/api/communities` | Study communities (chat groups + channels) |
@@ -188,7 +188,7 @@ All endpoints return the envelope: `{ success, message, data, errors }`.
 | `POST /api/admin/upload` | Upload a PDF/image (multipart `file`) → `{ url, filename, size, mimeType }` |
 | `GET /api/admin/users` · `PUT /api/admin/users/:id` · `DELETE /api/admin/users/:id` | Manage users |
 
-`resource` is one of: `levels`, `universities`, `faculties`, `courses`, `semesters`, `subjects`, `notes`, `books`, `question-banks`, `past-papers`, `mock-tests`, `scholarships`, `notices`, `results`, `testimonials`, `faqs`, `posts`, `community`, `communities`, `community-messages`, `leaderboard`, `contacts`.
+`resource` is one of: `levels`, `universities`, `faculties`, `courses`, `semesters`, `subjects`, `notes`, `books`, `question-banks`, `past-papers`, `mock-tests`, `scholarships`, `notices`, `results`, `faqs`, `posts`, `community`, `communities`, `community-messages`, `leaderboard`, `contacts`.
 
 ### Self Learning Center (all require `Authorization: Bearer <token>`)
 

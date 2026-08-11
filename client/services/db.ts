@@ -12,7 +12,6 @@ import mockTests from "@/data/mock-tests.json";
 import scholarships from "@/data/scholarships.json";
 import notices from "@/data/notices.json";
 import results from "@/data/results.json";
-import testimonials from "@/data/testimonials.json";
 import faq from "@/data/faq.json";
 import posts from "@/data/posts.json";
 import community from "@/data/community.json";
@@ -33,7 +32,6 @@ import type {
   Scholarship,
   Notice,
   ResultEntry,
-  Testimonial,
   Faq,
   Post,
   CommunityQuestion,
@@ -55,7 +53,6 @@ export const db = {
   scholarships: scholarships as Scholarship[],
   notices: notices as Notice[],
   results: results as ResultEntry[],
-  testimonials: testimonials as Testimonial[],
   faq: faq as Faq[],
   posts: posts as Post[],
   community: community as CommunityQuestion[],
@@ -169,10 +166,6 @@ export function getResults() {
   return [...db.results].sort(
     (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   );
-}
-
-export function getTestimonials() {
-  return db.testimonials;
 }
 
 export function getFaqs() {

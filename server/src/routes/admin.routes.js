@@ -37,7 +37,6 @@ const resources = [
   { path: "scholarships", model: models.Scholarship, ctrl: require("../controllers/scholarship.controller") },
   { path: "notices", model: models.Notice, ctrl: require("../controllers/notice.controller") },
   { path: "results", model: models.ResultEntry, ctrl: require("../controllers/result.controller") },
-  { path: "testimonials", model: models.Testimonial, ctrl: require("../controllers/testimonial.controller") },
   { path: "faqs", model: models.Faq, ctrl: require("../controllers/faq.controller") },
   { path: "posts", model: models.Post, ctrl: require("../controllers/post.controller") },
   { path: "community", model: models.CommunityQuestion, ctrl: require("../controllers/community.controller") },

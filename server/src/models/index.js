@@ -14,7 +14,6 @@ const MockTest = require("./mockTest.model")(sequelize);
 const Scholarship = require("./scholarship.model")(sequelize);
 const Notice = require("./notice.model")(sequelize);
 const ResultEntry = require("./result.model")(sequelize);
-const Testimonial = require("./testimonial.model")(sequelize);
 const Faq = require("./faq.model")(sequelize);
 const Post = require("./post.model")(sequelize);
 const CommunityQuestion = require("./communityQuestion.model")(sequelize);
@@ -39,7 +38,6 @@ const models = {
   Scholarship,
   Notice,
   ResultEntry,
-  Testimonial,
   Faq,
   Post,
   CommunityQuestion,

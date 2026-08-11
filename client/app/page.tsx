@@ -9,7 +9,6 @@ import { QuestionBanksSection } from "@/features/home/components/question-banks-
 import { MockTestsSection } from "@/features/home/components/mock-tests-section";
 import { ScholarshipsSection } from "@/features/home/components/scholarships-section";
 import { NoticesResults } from "@/features/home/components/notices-results";
-import { Testimonials } from "@/features/home/components/testimonials";
 import { FaqSection } from "@/features/home/components/faq-section";
 import { Newsletter } from "@/features/home/components/newsletter";
 import { CtaBanner } from "@/features/home/components/cta-banner";
@@ -28,7 +27,6 @@ export default function HomePage() {
       <MockTestsSection />
       <ScholarshipsSection />
       <NoticesResults />
-      <Testimonials />
       <CtaBanner />
       <FaqSection />
       <Newsletter />

@@ -23,7 +23,6 @@ const MODEL_TO_RESOURCE: Record<string, string> = {
   Scholarship: "scholarships",
   Notice: "notices",
   ResultEntry: "results",
-  Testimonial: "testimonials",
   Faq: "faqs",
   Post: "posts",
   CommunityQuestion: "community",
