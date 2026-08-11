@@ -20,8 +20,8 @@ const sequelize = new Sequelize(
       // Keep the pool small: Aiven free-tier PostgreSQL caps connections (~5),
       // so min:0/max:3 prevents "remaining connection slots are reserved for
       // roles with the SUPERUSER attribute" errors under normal dev load.
-      max: 3,
-      min: 0,
+      max: 10,
+      min: 1,
       acquire: 30000,
       idle: 10000,
       evict: 60000,
