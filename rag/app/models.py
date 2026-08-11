@@ -47,7 +47,13 @@ class Chunk(Base):
     document: Mapped[Document] = relationship(back_populates="chunks")
 
     __table_args__ = (
-        Index("ix_rag_chunks_user_embedding", "user_id", "embedding", postgresql_using="hnsw"),
+        Index(
+            "ix_rag_chunks_embedding_hnsw",
+            "embedding",
+            postgresql_using="hnsw",
+            postgresql_with={"m": 16, "ef_construction": 64},
+            postgresql_ops={"embedding": "vector_cosine_ops"},
+        ),
     )
 
 

@@ -104,7 +104,7 @@ def generate_quiz(db, user_id: str, req: McqGenerateRequest) -> Quiz:
     if not questions:
         raise ValueError("The model could not generate valid questions. Please try again.")
 
-    title = req.topics.strip() or "General quiz"
+    title = (req.topics.strip() if req.topics else None) or "General quiz"
     quiz = Quiz(
         id=uuid.uuid4(),
         user_id=user_id,
