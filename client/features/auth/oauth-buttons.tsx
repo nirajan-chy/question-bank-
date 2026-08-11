@@ -3,7 +3,7 @@
 import { Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const API_ORIGIN = (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000/api").replace(/\/api\/?$/, "");
+const API_ORIGIN = (process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:5000/api").replace(/\/api\/?$/, "");
 
 function GoogleIcon({ className }: { className?: string }) {
   return (

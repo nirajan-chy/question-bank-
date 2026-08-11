@@ -5,7 +5,9 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-const API_ORIGIN = (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000/api").replace(/\/api\/?$/, "");
+const API_ORIGIN = (
+  process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:5000/api"
+).replace(/\/api\/?$/, "");
 
 export function resolveFileUrl(url?: string | null): string {
   if (!url) return "";
@@ -20,7 +22,10 @@ export function formatNumber(n: number): string {
   }).format(n);
 }
 
-export function formatDate(date: string | Date, opts?: Intl.DateTimeFormatOptions): string {
+export function formatDate(
+  date: string | Date,
+  opts?: Intl.DateTimeFormatOptions,
+): string {
   const d = typeof date === "string" ? new Date(date) : date;
   return new Intl.DateTimeFormat("en-US", {
     month: "short",
@@ -32,7 +37,10 @@ export function formatDate(date: string | Date, opts?: Intl.DateTimeFormatOption
 
 export function formatTime(date: string | Date): string {
   const d = typeof date === "string" ? new Date(date) : date;
-  return new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit" }).format(d);
+  return new Intl.DateTimeFormat("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+  }).format(d);
 }
 
 export function timeAgo(date: string | Date): string {
@@ -66,7 +74,7 @@ export function initials(name: string): string {
   return name
     .split(" ")
     .slice(0, 2)
-    .map((p) => p[0])
+    .map(p => p[0])
     .join("")
     .toUpperCase();
 }
