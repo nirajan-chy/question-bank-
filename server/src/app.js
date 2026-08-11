@@ -9,6 +9,10 @@ const { UPLOAD_DIR } = require("./utils/upload");
 
 const app = express();
 
+// Trust the reverse proxy (Vercel/Render) so req.protocol respects
+// the x-forwarded-proto header and produces https:// redirect URIs.
+app.set("trust proxy", true);
+
 app.use(
   cors({
     origin: process.env.CLIENT_ORIGIN || true,
