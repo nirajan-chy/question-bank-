@@ -17,13 +17,13 @@ const sequelize = new Sequelize(
       },
     },
     pool: {
-      // Keep the pool small: Aiven free-tier PostgreSQL caps connections (~5),
-      // so min:0/max:3 prevents "remaining connection slots are reserved for
-      // roles with the SUPERUSER attribute" errors under normal dev load.
-      max: 50,
+      // Aiven free-tier PostgreSQL caps connections (~5). In serverless each
+      // function instance opens its own pool, so keep it tiny (max:1) to avoid
+      // "remaining connection slots are reserved" errors. Locally max:3 is fine.
+      max: process.env.VERCEL ? 1 : 3,
       min: 0,
       acquire: 30000,
-      idle: 10000,
+      idle: 5000,
     },
     logging: false,
     retry: {
