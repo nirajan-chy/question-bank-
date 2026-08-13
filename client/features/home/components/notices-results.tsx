@@ -42,7 +42,7 @@ export function NoticesResults() {
           <SectionHeader
             eyebrow="Results"
             title="Exam results tracker"
-            description="SEE, NEB, TU, CTEVT and university results at a glance."
+            description="NEB, TU, CTEVT and university results at a glance."
             href="/results"
             linkLabel="All results"
           />

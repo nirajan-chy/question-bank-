@@ -6,7 +6,7 @@ import { ContactForm } from "@/features/contact/components/contact-form";
 
 export const metadata: Metadata = seo({
   title: "Contact",
-  description: "Questions, feedback or partnership ideas? Reach the Sandarbh team — we usually reply within a day.",
+  description: "Questions, feedback or partnership ideas? Reach the PrashnaHub team — we usually reply within a day.",
   path: "/contact",
 });
 

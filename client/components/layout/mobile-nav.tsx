@@ -45,19 +45,23 @@ export function MobileNav() {
             Explore
           </p>
           <nav className="flex flex-col gap-0.5">
-            {mainNav.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className={cn(
-                  "rounded-md px-2 py-2 text-sm font-medium transition-colors hover:bg-accent",
-                  isActive(link.href) ? "text-foreground" : "text-muted-foreground"
-                )}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {mainNav
+              .filter((link) => !resourcesNav.some((r) => r.href === link.href))
+              .map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className={cn(
+                    "rounded-md px-2 py-2 text-sm font-medium transition-colors hover:bg-accent",
+                    isActive(link.href)
+                      ? "text-foreground"
+                      : "text-muted-foreground"
+                  )}
+                >
+                  {link.label}
+                </Link>
+              ))}
           </nav>
           <Separator className="my-4" />
           <p className="px-2 pb-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">

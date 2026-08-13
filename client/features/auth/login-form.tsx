@@ -55,7 +55,7 @@ export function LoginForm() {
         <Logo className="mb-5" />
         <h1 className="font-display text-2xl font-bold">Welcome back</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Sign in to continue your Sandarbh journey.
+          Sign in to continue your PrashnaHub journey.
         </p>
       </div>
 

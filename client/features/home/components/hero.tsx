@@ -7,6 +7,7 @@ import { ArrowRight, Search, Sparkles, TrendingUp, BookOpen, Timer, Users } from
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CountUp } from "@/components/shared/count-up";
+import { StationeryBg } from "@/components/shared/stationery-bg";
 
 const stats = [
   { label: "Students learning", value: 128000, suffix: "+", icon: Users },
@@ -29,11 +30,8 @@ export function Hero({ onSearch }: { onSearch?: (q: string) => void }) {
   };
 
   return (
-    <section className="relative overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 bg-mesh-light dark:bg-mesh-dark" />
-      <div className="pointer-events-none absolute inset-0 bg-grid-pattern opacity-[0.5] mask-radial-faded" />
-      <div className="pointer-events-none absolute -left-40 top-20 h-80 w-80 rounded-full bg-primary/20 blur-3xl" />
-      <div className="pointer-events-none absolute -right-40 top-40 h-80 w-80 rounded-full bg-fuchsia-500/15 blur-3xl" />
+    <section className="relative overflow-hidden bg-background">
+      <StationeryBg />
 
       <div className="container relative px-4 pb-20 pt-16 md:pb-28 md:pt-24">
         <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
@@ -44,7 +42,7 @@ export function Hero({ onSearch }: { onSearch?: (q: string) => void }) {
             className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-xs font-medium text-primary md:text-sm"
           >
             <Sparkles className="h-3.5 w-3.5" />
-            Nepal’s #1 education platform · Class 8 → Master
+            Nepal&apos;s #1 education platform
           </motion.span>
 
           <motion.h1
@@ -55,7 +53,7 @@ export function Hero({ onSearch }: { onSearch?: (q: string) => void }) {
           >
             Ace every exam.
             <br />
-            <span className="text-gradient">From SEE to Master.</span>
+            <span className="text-primary">Your path to academic excellence.</span>
           </motion.h1>
 
           <motion.p
@@ -64,8 +62,8 @@ export function Hero({ onSearch }: { onSearch?: (q: string) => void }) {
             transition={{ duration: 0.6, delay: 0.2, ease }}
             className="mt-5 max-w-2xl text-sm text-muted-foreground text-pretty md:text-lg"
           >
-            Notes, books, question banks, past papers and mock tests for Class 8–12, CTEVT,
-            Bachelor & Master — covering TU, KU, PU, Purbanchal and more. Free for every
+            Notes, books, question banks, past papers and mock tests for NEB, CTEVT,
+            Bachelor and Master — covering TU, KU, PU, Purbanchal and more. Free for every
             Nepali student.
           </motion.p>
 
@@ -94,7 +92,7 @@ export function Hero({ onSearch }: { onSearch?: (q: string) => void }) {
             className="mt-5 flex flex-wrap items-center justify-center gap-2 text-xs text-muted-foreground"
           >
             <span>Popular:</span>
-            {["SEE Maths", "Grade 12 Physics", "BSc CSIT", "NEB Papers"].map((t) => (
+            {["Physics", "BSc CSIT", "NEB Papers", "CTEVT Nursing"].map((t) => (
               <Link
                 key={t}
                 href={`/search?q=${encodeURIComponent(t)}`}

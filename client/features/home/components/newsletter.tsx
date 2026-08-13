@@ -35,9 +35,7 @@ export function Newsletter() {
     <section className="py-16 md:py-24">
       <div className="container">
         <FadeIn>
-          <div className="relative overflow-hidden rounded-3xl bg-brand-gradient p-8 text-white md:p-14">
-            <div className="pointer-events-none absolute inset-0 bg-grid-pattern opacity-20" />
-            <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
+          <div className="relative overflow-hidden rounded-3xl bg-secondary p-8 text-white md:p-14">
             <div className="relative grid items-center gap-8 md:grid-cols-2">
               <div>
                 <h2 className="font-display text-2xl font-bold text-balance md:text-4xl">
@@ -73,7 +71,7 @@ export function Newsletter() {
                       <Button
                         type="submit"
                         disabled={isSubmitting}
-                        className="h-12 shrink-0 bg-white text-primary hover:bg-white/90"
+                        className="h-12 shrink-0 bg-white text-secondary hover:bg-white/90"
                       >
                         <Mail className="h-4 w-4" />
                         {isSubmitting ? "Subscribing..." : "Subscribe"}

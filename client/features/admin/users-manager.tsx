@@ -58,7 +58,7 @@ export function UsersManager() {
       <div>
         <h1 className="font-display text-2xl font-bold">Users</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Manage accounts and permissions across Sandarbh.
+          Manage accounts and permissions across PrashnaHub.
         </p>
       </div>
 

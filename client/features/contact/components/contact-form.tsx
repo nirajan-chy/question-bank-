@@ -53,7 +53,7 @@ export function ContactForm() {
         <Card className="border-primary/30 bg-brand-gradient p-6 text-white">
           <p className="font-display font-bold">For institutions</p>
           <p className="mt-2 text-sm text-white/80">
-            Schools, colleges and universities can host their question banks and notices on Sandarbh for free.
+            Schools, colleges and universities can host their question banks and notices on PrashnaHub for free.
           </p>
           <Button variant="secondary" size="sm" className="mt-4" asChild>
             <a href="mailto:partners@sandarbh.com.np">partner@sandarbh.com.np</a>

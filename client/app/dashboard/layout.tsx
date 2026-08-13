@@ -4,7 +4,7 @@ import { DashboardShell } from "@/features/dashboard/components/dashboard-shell"
 
 export const metadata: Metadata = seo({
   title: "Dashboard",
-  description: "Track your study streak, XP, sessions, pomodoro timer and leaderboard position on Sandarbh.",
+  description: "Track your study streak, XP, sessions, pomodoro timer and leaderboard position on PrashnaHub.",
   path: "/dashboard",
 });
 

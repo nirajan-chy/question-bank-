@@ -117,6 +117,13 @@ export const useAdminStats = () =>
     retry: false,
   });
 
+export const useAdminUserStats = () =>
+  useQuery({
+    queryKey: ["admin", "user-stats"] as const,
+    queryFn: admin.userStats,
+    retry: false,
+  });
+
 export const useAdminResource = (resource: string) =>
   useQuery({
     queryKey: ["admin", resource] as const,

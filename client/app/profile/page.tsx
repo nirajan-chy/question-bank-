@@ -4,7 +4,7 @@ import { ProfilePage } from "@/features/dashboard/components/profile-page";
 
 export const metadata: Metadata = seo({
   title: "My Profile",
-  description: "Your Sandarbh profile — study stats, badges, XP and weekly leaderboard position.",
+  description: "Your PrashnaHub profile — study stats, badges, XP and weekly leaderboard position.",
   path: "/profile",
 });
 

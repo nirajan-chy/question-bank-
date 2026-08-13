@@ -3,6 +3,8 @@ const ApiError = require("../utils/ApiError");
 const sendSuccess = require("../utils/sendSuccess");
 const models = require("../models");
 
+const { Op } = require("sequelize");
+
 const getStats = asyncHandler(async (req, res) => {
   const entries = await Promise.all(
     Object.entries(models).map(async ([key, Model]) => ({ resource: key, count: await Model.count() }))
@@ -68,4 +70,86 @@ const buildModelMeta = (Model) => ({
   })),
 });
 
-module.exports = { getStats, updateUser, deleteUser, buildModelMeta };
+const getUserStats = asyncHandler(async (req, res) => {
+  const now = new Date();
+  const oneDayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+  const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+  const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+
+  const [totalUsers, activeUsers24h, activeUsers7d, activeUsers30d, newThisWeek, newThisMonth, usersByRole] = await Promise.all([
+    models.User.count(),
+    models.User.count({ where: { updatedAt: { [Op.gte]: oneDayAgo } } }),
+    models.User.count({ where: { updatedAt: { [Op.gte]: sevenDaysAgo } } }),
+    models.User.count({ where: { updatedAt: { [Op.gte]: thirtyDaysAgo } } }),
+    models.User.count({ where: { createdAt: { [Op.gte]: sevenDaysAgo } } }),
+    models.User.count({ where: { createdAt: { [Op.gte]: thirtyDaysAgo } } }),
+    models.User.findAll({
+      attributes: ["role", [models.sequelize.fn("COUNT", models.sequelize.col("id")), "count"]],
+      group: ["role"],
+      raw: true,
+    }),
+  ]);
+
+  const last6Months = [];
+  for (let i = 5; i >= 0; i--) {
+    const monthStart = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    const monthEnd = new Date(now.getFullYear(), now.getMonth() - i + 1, 0, 23, 59, 59);
+    const count = await models.User.count({
+      where: { createdAt: { [Op.between]: [monthStart, monthEnd] } },
+    });
+    last6Months.push({
+      month: monthStart.toLocaleString("default", { month: "short", year: "numeric" }),
+      count,
+    });
+  }
+
+  const last7Days = [];
+  for (let i = 6; i >= 0; i--) {
+    const dayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i, 0, 0, 0);
+    const dayEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i, 23, 59, 59);
+    const count = await models.User.count({
+      where: { createdAt: { [Op.between]: [dayStart, dayEnd] } },
+    });
+    last7Days.push({
+      day: dayStart.toLocaleString("default", { weekday: "short" }),
+      date: dayStart.toISOString().split("T")[0],
+      count,
+    });
+  }
+
+  const signupByHour = [];
+  for (let h = 0; h < 24; h++) {
+    const hourStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, 0, 0);
+    const hourEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, 59, 59);
+    const count = await models.User.count({
+      where: { createdAt: { [Op.between]: [hourStart, hourEnd] } },
+    });
+    signupByHour.push({ hour: h, count });
+  }
+  const peakHour = signupByHour.reduce((max, h) => (h.count > max.count ? h : max), { hour: 0, count: 0 });
+
+  const [newestUser, oldestUser] = await Promise.all([
+    models.User.findOne({ order: [["createdAt", "DESC"]], attributes: ["id", "name", "email", "createdAt"] }),
+    models.User.findOne({ order: [["createdAt", "ASC"]], attributes: ["id", "name", "email", "createdAt"] }),
+  ]);
+
+  const roleBreakdown = {};
+  for (const r of usersByRole) {
+    roleBreakdown[r.role] = Number(r.count);
+  }
+
+  sendSuccess(res, {
+    totalUsers,
+    activeUsers: { last24h: activeUsers24h, last7d: activeUsers7d, last30d: activeUsers30d },
+    newThisWeek,
+    newThisMonth,
+    roleBreakdown,
+    growth: last6Months,
+    dailySignups: last7Days,
+    peakHour: { hour: peakHour.hour, count: peakHour.count },
+    newestUser,
+    oldestUser,
+  });
+});
+
+module.exports = { getStats, getUserStats, updateUser, deleteUser, buildModelMeta };

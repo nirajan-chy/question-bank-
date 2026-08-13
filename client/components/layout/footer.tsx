@@ -106,7 +106,10 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t pt-6 text-xs text-muted-foreground md:flex-row">
-          <p>© {new Date().getFullYear()} {siteConfig.fullName}. Made with ❤️ in Nepal.</p>
+          <div className="text-center md:text-left">
+            <p>© {new Date().getFullYear()} {siteConfig.fullName}. Made with ❤️ in Nepal.</p>
+            <p>Made by team CirqleX</p>
+          </div>
           <div className="flex items-center gap-4">
             <Link href="/about" className="transition-colors hover:text-foreground">About</Link>
             <Link href="/contact" className="transition-colors hover:text-foreground">Contact</Link>

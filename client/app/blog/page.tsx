@@ -29,7 +29,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ c
       <PageHeader
         icon={Newspaper}
         gradient="from-orange-500 via-amber-500 to-yellow-500"
-        title="The Sandarbh Blog"
+        title="The PrashnaHub Blog"
         description="Exam strategies, study plans and career guides written by toppers, teachers and counsellors — straight from the exam hall."
         crumbs={[{ label: "Home", href: "/" }, { label: "Blog" }]}
         actions={

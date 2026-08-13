@@ -114,23 +114,21 @@ const config = {
       },
       backgroundImage: {
         "brand-gradient":
-          "linear-gradient(135deg, hsl(243 75% 59%), hsl(262 83% 58%) 50%, hsl(293 69% 47%))",
+          "linear-gradient(135deg, hsl(152 67% 47%), hsl(152 55% 40%))",
         "brand-soft":
-          "linear-gradient(135deg, hsl(243 75% 59% / 0.12), hsl(293 69% 47% / 0.10))",
-        "saffron-gradient":
-          "linear-gradient(135deg, hsl(38 92% 50%), hsl(15 86% 50%))",
+          "linear-gradient(135deg, hsl(152 67% 47% / 0.10), hsl(152 55% 40% / 0.08))",
         "mesh-dark":
-          "radial-gradient(at 20% 0%, hsl(243 75% 59% / 0.22) 0px, transparent 50%), radial-gradient(at 85% 10%, hsl(293 69% 47% / 0.16) 0px, transparent 50%), radial-gradient(at 50% 100%, hsl(199 89% 48% / 0.10) 0px, transparent 50%)",
+          "radial-gradient(at 20% 0%, hsl(152 67% 47% / 0.08) 0px, transparent 50%), radial-gradient(at 80% 100%, hsl(152 55% 40% / 0.06) 0px, transparent 50%)",
         "mesh-light":
-          "radial-gradient(at 15% 0%, hsl(243 75% 59% / 0.12) 0px, transparent 50%), radial-gradient(at 90% 5%, hsl(293 69% 47% / 0.10) 0px, transparent 50%), radial-gradient(at 50% 100%, hsl(199 89% 48% / 0.08) 0px, transparent 50%)",
+          "radial-gradient(at 15% 0%, hsl(152 67% 47% / 0.05) 0px, transparent 50%), radial-gradient(at 85% 100%, hsl(152 55% 40% / 0.04) 0px, transparent 50%)",
         "grid-pattern":
           "linear-gradient(to right, hsl(var(--border) / 0.6) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--border) / 0.6) 1px, transparent 1px)",
         "grid-pattern-sm":
           "linear-gradient(to right, hsl(var(--border) / 0.4) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--border) / 0.4) 1px, transparent 1px)",
       },
       boxShadow: {
-        glow: "0 0 40px -12px hsl(243 75% 59% / 0.55)",
-        "glow-sm": "0 0 24px -8px hsl(243 75% 59% / 0.5)",
+        glow: "0 0 40px -12px hsl(152 67% 47% / 0.45)",
+        "glow-sm": "0 0 24px -8px hsl(152 67% 47% / 0.4)",
         card: "0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06)",
         "card-hover":
           "0 10px 40px -12px rgb(0 0 0 / 0.16), 0 2px 8px -2px rgb(0 0 0 / 0.08)",

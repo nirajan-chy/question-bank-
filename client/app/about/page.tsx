@@ -7,7 +7,7 @@ import { AboutSections } from "@/features/about/components/about-sections";
 
 export const metadata: Metadata = seo({
   title: "About Us",
-  description: "Sandarbh is Nepal's free education platform — notes, books, question banks, past papers and mock tests for every level, from NEB to Master.",
+  description: "PrashnaHub is Nepal's free education platform — notes, books, question banks, past papers and mock tests for every level, from NEB to Master.",
   path: "/about",
 });
 
@@ -18,7 +18,7 @@ export default function Page() {
         icon={GraduationCap}
         gradient="from-emerald-500 to-teal-500"
         title="Every Nepali student deserves quality study material."
-        description="Sandarbh (सन्दर्भ — 'reference') is a free, curriculum-first education platform covering NEB Class 12, CTEVT, Bachelor & Master across Nepal's major universities."
+        description="PrashnaHub is a free, curriculum-first education platform covering NEB Class 12, CTEVT, Bachelor & Master across Nepal's major universities."
         crumbs={[{ label: "Home", href: "/" }, { label: "About" }]}
       />
 

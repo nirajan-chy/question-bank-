@@ -1,7 +1,7 @@
 [
   {
     "id": "f1",
-    "question": "Is Sandarbh really free?",
+    "question": "Is PrashnaHub really free?",
     "answer": "Yes. Core resources — notes, question banks, past papers and community Q&A — are 100% free for all Nepali students. A small set of premium features (advanced mock tests, AI assistant, downloadable e-books) supports the platform and keeps everything else free.",
     "category": "General"
   },
@@ -38,7 +38,7 @@
   {
     "id": "f7",
     "question": "Is there a mobile app?",
-    "answer": "Sandarbh is a fully responsive web app that works great on phones, tablets and desktops. A native app is on our roadmap.",
+    "answer": "PrashnaHub is a fully responsive web app that works great on phones, tablets and desktops. A native app is on our roadmap.",
     "category": "Platform"
   },
   {
