@@ -64,7 +64,29 @@ const createBaseController = (Model, config = {}) => {
   });
 
   const create = asyncHandler(async (req, res) => {
-    const item = await Model.create(req.body);
+    const body = { ...req.body };
+    if (!body.id) {
+      const prefix =
+        String(Model.getTableName?.() || Model.name || "row")
+          .replace(/s$/, "")
+          .replace(/[^a-z0-9]/gi, "-")
+          .toLowerCase() || "row";
+      body.id = `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+    }
+    let item;
+    try {
+      item = await Model.create(body);
+    } catch (error) {
+      if (error?.name === "SequelizeUniqueConstraintError") {
+        const field = error.errors?.[0]?.path || "field";
+        throw new ApiError(409, `A record with this ${field} already exists`);
+      }
+      if (error?.name === "SequelizeValidationError") {
+        const detail = error.errors?.[0]?.message || "Invalid data";
+        throw new ApiError(400, detail);
+      }
+      throw error;
+    }
     sendSuccess(res, item, 201, `${Model.name} created`);
   });
 
