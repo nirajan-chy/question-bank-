@@ -10,10 +10,10 @@ import { CountUp } from "@/components/shared/count-up";
 import { StationeryBg } from "@/components/shared/stationery-bg";
 
 const stats = [
-  { label: "Students learning", value: 128000, suffix: "+", icon: Users },
-  { label: "Study resources", value: 2400, suffix: "+", icon: BookOpen },
-  { label: "Questions solved", value: 2400000, suffix: "+", icon: TrendingUp },
-  { label: "Mock tests taken", value: 360000, suffix: "+", icon: Timer },
+  // { label: "Students learning", value: 128000, suffix: "+", icon: Users },
+  // { label: "Study resources", value: 2400, suffix: "+", icon: BookOpen },
+  // { label: "Questions solved", value: 2400000, suffix: "+", icon: TrendingUp },
+  // { label: "Mock tests taken", value: 360000, suffix: "+", icon: Timer },
 ];
 
 const ease = [0.21, 0.47, 0.32, 0.98] as const;

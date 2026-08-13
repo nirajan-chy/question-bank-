@@ -1,16 +1,34 @@
+"use client";
+
 import Link from "next/link";
-import { GraduationCap } from "lucide-react";
+import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 
-export function Logo({ className, withText = true }: { className?: string; withText?: boolean }) {
+export function Logo({
+  className,
+  withText = true,
+}: {
+  className?: string;
+  withText?: boolean;
+}) {
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
+  const logoSrc = isDark
+    ? "/white%20and%20green.png"
+    : "/black%20and%20green.png";
+
   return (
-    <Link href="/" className={cn("group inline-flex items-center gap-2", className)}>
-      <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl bg-brand-gradient text-white shadow-glow-sm transition-transform group-hover:scale-105">
-        <GraduationCap className="h-5 w-5" />
-        <span className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-      </span>
+    <Link
+      href="/"
+      className={cn("group inline-flex items-center gap-2", className)}
+    >
+      <img
+        src={logoSrc}
+        alt="PrashnaHub logo"
+        className={cn("shrink-0 object-contain", "h-10  sm:h-12 sm:w-[70px]")}
+      />
       {withText && (
-        <span className="font-display text-lg font-bold tracking-tight">
+        <span className="font-display text-base font-bold tracking-tight sm:text-lg mr-[120px]">
           Prashna<span className="text-primary">Hub</span>
         </span>
       )}

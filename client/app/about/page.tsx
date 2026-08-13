@@ -24,19 +24,7 @@ export default function Page() {
 
       <section className="py-12 md:py-16">
         <div className="container">
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { value: "128k+", label: "Students learning" },
-              { value: "2,400+", label: "Study resources" },
-              { value: "77", label: "Districts reached" },
-              { value: "15", label: "Levels & streams" },
-            ].map((s) => (
-              <Card key={s.label} className="p-6 text-center">
-                <p className="font-display text-3xl font-extrabold text-gradient">{s.value}</p>
-                <p className="mt-1 text-sm text-muted-foreground">{s.label}</p>
-              </Card>
-            ))}
-          </div>
+    
         </div>
       </section>
 
