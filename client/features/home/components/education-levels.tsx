@@ -15,7 +15,7 @@ export function EducationLevels() {
         <SectionHeader
           eyebrow="Education Levels"
           title="One platform for every level"
-          description="NEB Class 12, CTEVT, Bachelor & Master — TU, KU, PU and every major Nepali university, all in one place."
+          description="NEB, CTEVT, Bachelor and Master — TU, KU, PU and every major Nepali university, all in one place."
           href="/classes"
           linkLabel="All classes"
         />

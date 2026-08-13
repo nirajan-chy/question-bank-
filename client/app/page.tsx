@@ -1,4 +1,5 @@
 import { Hero } from "@/features/home/components/hero";
+import { EducationQuotes } from "@/features/home/components/education-quotes";
 import { EducationLevels } from "@/features/home/components/education-levels";
 import { Faculties } from "@/features/home/components/faculties";
 import { Universities } from "@/features/home/components/universities";
@@ -17,6 +18,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <EducationQuotes />
       <EducationLevels />
       <Faculties />
       <Universities />
