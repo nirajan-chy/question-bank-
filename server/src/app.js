@@ -34,7 +34,8 @@ app.get("/api/health", async (req, res) => {
   try {
     const { sequelize } = require("./config/postgres");
     await sequelize.authenticate();
-    const levelCount = await require("./models/Level").count();
+    const { Level } = require("./models");
+    const levelCount = await Level.count();
     res.json({
       success: true,
       message: "API healthy",
