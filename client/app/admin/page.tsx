@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, Contact, MessageSquare, PlusCircle } from "lucide-react";
+import { ArrowUpRight, Contact, MessageSquare, PlusCircle, Users, UserCheck, UserPlus, TrendingUp } from "lucide-react";
 import { adminResources, adminUsersResource } from "@/features/admin/resource-config";
-import { useAdminStats } from "@/services/queries";
+import { useAdminStats, useAdminUserStats } from "@/services/queries";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -39,6 +39,7 @@ const resourceByPath = new Map(
 
 export default function AdminDashboardPage() {
   const { data, isLoading } = useAdminStats();
+  const { data: userStats, isLoading: loadingUserStats } = useAdminUserStats();
 
   const counts = data?.counts ?? {};
 
@@ -82,7 +83,7 @@ export default function AdminDashboardPage() {
                       </p>
                       <p className="mt-1 font-display text-3xl font-bold">{count}</p>
                     </div>
-                    <span className={`flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br ${resource?.color ?? "from-slate-500 to-slate-700"} text-white`}>
+                    <span className={`flex h-10 w-10 items-center justify-center rounded-lg ${resource?.color ?? "from-slate-500 to-slate-700"} text-white`}>
                       <Icon className="h-5 w-5" />
                     </span>
                   </CardContent>
@@ -91,6 +92,106 @@ export default function AdminDashboardPage() {
             );
           })}
         </div>
+      )}
+
+      {/* User Tracking Section */}
+      <div>
+        <h2 className="mb-4 font-display text-lg font-semibold flex items-center gap-2">
+          <Users className="h-5 w-5 text-primary" /> User Tracking
+        </h2>
+        {loadingUserStats ? (
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <Skeleton key={i} className="h-28" />
+            ))}
+          </div>
+        ) : userStats ? (
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <Card>
+              <CardContent className="p-5">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Total Users</p>
+                    <p className="mt-1 font-display text-3xl font-bold">{userStats.totalUsers}</p>
+                  </div>
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <Users className="h-5 w-5" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="p-5">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Active (7d)</p>
+                    <p className="mt-1 font-display text-3xl font-bold">{userStats.activeUsers}</p>
+                  </div>
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-success/10 text-success">
+                    <UserCheck className="h-5 w-5" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="p-5">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">New This Week</p>
+                    <p className="mt-1 font-display text-3xl font-bold">{userStats.newThisWeek}</p>
+                  </div>
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-info/10 text-info">
+                    <UserPlus className="h-5 w-5" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="p-5">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">New This Month</p>
+                    <p className="mt-1 font-display text-3xl font-bold">{userStats.newThisMonth}</p>
+                  </div>
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-warning/10 text-warning">
+                    <TrendingUp className="h-5 w-5" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        ) : null}
+      </div>
+
+      {/* User Growth Chart */}
+      {userStats && userStats.growth.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-base">
+              <TrendingUp className="h-4 w-4 text-muted-foreground" /> User Growth (Last 6 Months)
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-end gap-3 h-40">
+              {userStats.growth.map((month) => {
+                const maxCount = Math.max(...userStats.growth.map((m) => m.count), 1);
+                const height = (month.count / maxCount) * 100;
+                return (
+                  <div key={month.month} className="flex flex-1 flex-col items-center gap-2">
+                    <span className="text-xs font-medium text-muted-foreground">{month.count}</span>
+                    <div className="w-full flex justify-center">
+                      <div
+                        className="w-full max-w-[48px] rounded-t-md bg-primary transition-all"
+                        style={{ height: `${Math.max(height, 4)}%` }}
+                      />
+                    </div>
+                    <span className="text-[10px] text-muted-foreground">{month.month}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </CardContent>
+        </Card>
       )}
 
       <div className="grid gap-6 lg:grid-cols-2">

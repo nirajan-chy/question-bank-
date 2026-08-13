@@ -21,6 +21,7 @@ router.post("/upload", upload.single("file"), (req, res) => {
 });
 
 router.get("/stats", adminCtrl.getStats);
+router.get("/user-stats", adminCtrl.getUserStats);
 
 const resources = [
   { path: "levels", model: models.Level, ctrl: require("../controllers/level.controller") },

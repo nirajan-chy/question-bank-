@@ -3,6 +3,8 @@ const ApiError = require("../utils/ApiError");
 const sendSuccess = require("../utils/sendSuccess");
 const models = require("../models");
 
+const { Op } = require("sequelize");
+
 const getStats = asyncHandler(async (req, res) => {
   const entries = await Promise.all(
     Object.entries(models).map(async ([key, Model]) => ({ resource: key, count: await Model.count() }))
@@ -68,4 +70,49 @@ const buildModelMeta = (Model) => ({
   })),
 });
 
-module.exports = { getStats, updateUser, deleteUser, buildModelMeta };
+const getUserStats = asyncHandler(async (req, res) => {
+  const now = new Date();
+  const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+  const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+
+  const [totalUsers, activeUsers, newThisWeek, newThisMonth, usersByRole] = await Promise.all([
+    models.User.count(),
+    models.User.count({ where: { updatedAt: { [Op.gte]: sevenDaysAgo } } }),
+    models.User.count({ where: { createdAt: { [Op.gte]: sevenDaysAgo } } }),
+    models.User.count({ where: { createdAt: { [Op.gte]: thirtyDaysAgo } } }),
+    models.User.findAll({
+      attributes: ["role", [models.sequelize.fn("COUNT", models.sequelize.col("id")), "count"]],
+      group: ["role"],
+      raw: true,
+    }),
+  ]);
+
+  const last6Months = [];
+  for (let i = 5; i >= 0; i--) {
+    const monthStart = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    const monthEnd = new Date(now.getFullYear(), now.getMonth() - i + 1, 0, 23, 59, 59);
+    const count = await models.User.count({
+      where: { createdAt: { [Op.between]: [monthStart, monthEnd] } },
+    });
+    last6Months.push({
+      month: monthStart.toLocaleString("default", { month: "short", year: "numeric" }),
+      count,
+    });
+  }
+
+  const roleBreakdown = {};
+  for (const r of usersByRole) {
+    roleBreakdown[r.role] = Number(r.count);
+  }
+
+  sendSuccess(res, {
+    totalUsers,
+    activeUsers,
+    newThisWeek,
+    newThisMonth,
+    roleBreakdown,
+    growth: last6Months,
+  });
+});
+
+module.exports = { getStats, getUserStats, updateUser, deleteUser, buildModelMeta };

@@ -22,6 +22,15 @@ export type AdminStats = {
   recentQuestions: CommunityQuestion[];
 };
 
+export type UserStats = {
+  totalUsers: number;
+  activeUsers: number;
+  newThisWeek: number;
+  newThisMonth: number;
+  roleBreakdown: Record<string, number>;
+  growth: { month: string; count: number }[];
+};
+
 export type ContactSubmission = {
   id: string;
   name: string;

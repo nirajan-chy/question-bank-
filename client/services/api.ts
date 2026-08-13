@@ -23,6 +23,7 @@ import type {
   User,
   AuthResponse,
   AdminStats,
+  UserStats,
   ContactSubmission,
   ResourceMeta,
   RagDocument,
@@ -134,6 +135,7 @@ type AdminResourceRecord = Record<string, unknown>;
 
 export const admin = {
   stats: () => http<AdminStats>("/admin/stats"),
+  userStats: () => http<UserStats>("/admin/user-stats"),
   meta: (resource: string) => http<ResourceMeta>(`/admin/meta/${resource}`),
   upload: (file: File) => {
     const formData = new FormData();
