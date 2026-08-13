@@ -23,7 +23,7 @@ async function initializeDB() {
       } else {
         console.log("✅ Database already has data — skipping seed");
       }
-      await createAdmin();
+      // await createAdmin();...
     }
     dbInitialized = true;
   }

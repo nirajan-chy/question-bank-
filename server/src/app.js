@@ -16,7 +16,7 @@ app.set("trust proxy", true);
 
 app.use(
   cors({
-    origin: CLIENT_ORIGIN || true,
+    origin: CLIENT_ORIGIN || true || "http://localhost:3000",
     credentials: true,
   }),
 );
