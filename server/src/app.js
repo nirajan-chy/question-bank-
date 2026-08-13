@@ -27,15 +27,29 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(UPLOAD_DIR));
 
 app.get("/", (req, res) => {
-  res.json({ success: true, message: "Sandarbh API is running" });
+  res.json({ success: true, message: "PrashnaHub API is running" });
 });
 
-app.get("/api/health", (req, res) => {
-  res.json({
-    success: true,
-    message: "API healthy",
-    timestamp: new Date().toISOString(),
-  });
+app.get("/api/health", async (req, res) => {
+  try {
+    const { sequelize } = require("./config/postgres");
+    await sequelize.authenticate();
+    const levelCount = await require("./models/Level").count();
+    res.json({
+      success: true,
+      message: "API healthy",
+      database: "connected",
+      dataCount: levelCount,
+      timestamp: new Date().toISOString(),
+    });
+  } catch (err) {
+    res.status(503).json({
+      success: false,
+      message: "API running but database unavailable",
+      database: "disconnected",
+      timestamp: new Date().toISOString(),
+    });
+  }
 });
 
 app.use("/api", apiRoutes);

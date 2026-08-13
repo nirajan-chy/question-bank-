@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   ArrowLeft,
@@ -16,6 +16,7 @@ import {
 import { toast } from "sonner";
 import { admin } from "@/services/api";
 import { useAdminResource, useAdminResourceMeta } from "@/services/queries";
+import { FileDropzone } from "@/components/shared/file-dropzone";
 import type { ResourceField } from "@/types";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
@@ -511,7 +512,6 @@ function FieldUpload({
   onChange: (v: string) => void;
   className?: string;
 }) {
-  const inputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
 
   const handleFile = async (file?: File) => {
@@ -527,7 +527,6 @@ function FieldUpload({
       });
     } finally {
       setUploading(false);
-      if (inputRef.current) inputRef.current.value = "";
     }
   };
 
@@ -537,17 +536,16 @@ function FieldUpload({
         {humanize(field.key)}
         <Badge variant="outline" className="ml-2 text-[9px]">PDF upload</Badge>
       </Label>
-      <div className="flex flex-wrap items-center gap-2">
-        <input
-          ref={inputRef}
-          id={`f-${field.key}`}
-          type="file"
-          accept="application/pdf"
-          className="block w-full min-w-0 flex-1 text-sm text-muted-foreground file:mr-3 file:cursor-pointer file:rounded-md file:border-0 file:bg-primary/10 file:px-3 file:py-2 file:text-xs file:font-semibold file:text-primary"
-          onChange={(e) => handleFile(e.target.files?.[0])}
-          disabled={uploading}
-        />
-        {value ? (
+      <FileDropzone
+        id={`f-${field.key}`}
+        accept="application/pdf"
+        disabled={uploading}
+        onFiles={(files) => handleFile(files[0])}
+        className="py-4"
+      />
+      {uploading && <p className="text-xs text-muted-foreground">Uploading…</p>}
+      {value ? (
+        <div className="flex flex-wrap items-center gap-2">
           <a
             href={value.startsWith("http") ? value : `http://localhost:5000${value}`}
             target="_blank"
@@ -556,14 +554,11 @@ function FieldUpload({
           >
             View file
           </a>
-        ) : null}
-        {value ? (
           <Button variant="ghost" size="sm" onClick={() => onChange("")} type="button">
             <X className="h-4 w-4" /> Clear
           </Button>
-        ) : null}
-      </div>
-      {uploading && <p className="text-xs text-muted-foreground">Uploading…</p>}
+        </div>
+      ) : null}
     </div>
   );
 }

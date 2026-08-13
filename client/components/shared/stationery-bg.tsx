@@ -112,7 +112,7 @@ function seededRandom(seed: number) {
 }
 
 export function StationeryBg({ className, variant = "default" }: StationeryBgProps) {
-  const count = variant === "compact" ? 8 : variant === "wide" ? 16 : 12;
+  const count = variant === "compact" ? 80 : variant === "wide" ? 160 : 120;
   const rand = seededRandom(42);
 
   const items = Array.from({ length: count }, (_, i) => {
@@ -120,7 +120,7 @@ export function StationeryBg({ className, variant = "default" }: StationeryBgPro
     const x = rand() * 100;
     const y = rand() * 100;
     const rotate = rand() * 40 - 20;
-    const scale = 0.6 + rand() * 0.6;
+    const scale = 0.3 + rand() * 0.9;
     const animDelay = rand() * 5;
     const animDuration = 4 + rand() * 4;
     return { icon: IconFn(i), x, y, rotate, scale, animDelay, animDuration };
@@ -146,7 +146,7 @@ export function StationeryBg({ className, variant = "default" }: StationeryBgPro
           }}
         >
           <div
-            className="text-primary/[0.07]"
+            className="text-neutral-500/[0.12] dark:text-white/[0.08]"
             style={{
               transform: `rotate(${item.rotate}deg) scale(${item.scale})`,
             }}
