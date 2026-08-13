@@ -64,7 +64,7 @@ export function SettingsPage() {
           </span>
           <div>
             <h2 className="font-display font-bold">Profile information</h2>
-            <p className="text-xs text-muted-foreground">How you appear across Sandarbh.</p>
+            <p className="text-xs text-muted-foreground">How you appear across PrashnaHub.</p>
           </div>
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-5">

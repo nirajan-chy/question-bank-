@@ -26,15 +26,15 @@ const pillars = [
   {
     icon: Heart,
     title: "Made by students, for students",
-    text: "Notes are written by toppers and reviewed by teachers. We keep what works and fix what doesn't — because we use Sandarbh ourselves.",
+    text: "Notes are written by toppers and reviewed by teachers. We keep what works and fix what doesn't — because we use PrashnaHub ourselves.",
   },
 ];
 
 const timeline = [
   { year: "2022", title: "The idea", text: "A group of +2 students frustrated by scattered resources starts collecting past papers in a shared folder." },
   { year: "2023", title: "First community", text: "The folder grows into a community of 5,000 students sharing notes, solutions and study tips across Nepal." },
-  { year: "2024", title: "Sandarbh goes live", text: "We rebuild as a proper platform with question banks, mock tests and a structured curriculum map for every level." },
-  { year: "2025", title: "128,000+ learners", text: "Sandarbh now serves students in all 77 districts — from NEB classrooms to master's research labs." },
+  { year: "2024", title: "PrashnaHub goes live", text: "We rebuild as a proper platform with question banks, mock tests and a structured curriculum map for every level." },
+  { year: "2025", title: "128,000+ learners", text: "PrashnaHub now serves students in all 77 districts — from NEB classrooms to master's research labs." },
 ];
 
 export function AboutSections() {
@@ -43,7 +43,7 @@ export function AboutSections() {
       <section className="py-12 md:py-16">
         <div className="container">
           <div className="mb-10 text-center">
-            <Badge variant="gradient">Why Sandarbh</Badge>
+            <Badge variant="gradient">Why PrashnaHub</Badge>
             <h2 className="mt-3 font-display text-2xl font-bold md:text-3xl">Four promises we keep</h2>
           </div>
           <div className="grid gap-5 md:grid-cols-2">
@@ -101,7 +101,7 @@ export function AboutSections() {
                 <Award className="h-3.5 w-3.5" /> Join the movement
               </span>
               <h2 className="mx-auto mt-5 max-w-2xl font-display text-2xl font-bold md:text-3xl">
-                If you study in Nepal, Sandarbh is your reference.
+                If you study in Nepal, PrashnaHub is your reference.
               </h2>
               <p className="mx-auto mt-3 max-w-xl text-sm text-white/80">
                 Create a free account, bookmark your syllabus, and study with the questions that actually appear in your exams.

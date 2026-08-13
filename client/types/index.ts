@@ -1,4 +1,4 @@
-// ─── Domain types for Sandarbh ───────────────────────────────────────────────
+// ─── Domain types for PrashnaHub ───────────────────────────────────────────────
 
 export type User = {
   id: string;
@@ -24,11 +24,15 @@ export type AdminStats = {
 
 export type UserStats = {
   totalUsers: number;
-  activeUsers: number;
+  activeUsers: { last24h: number; last7d: number; last30d: number };
   newThisWeek: number;
   newThisMonth: number;
   roleBreakdown: Record<string, number>;
   growth: { month: string; count: number }[];
+  dailySignups: { day: string; date: string; count: number }[];
+  peakHour: { hour: number; count: number };
+  newestUser: { id: string; name: string; email: string; createdAt: string } | null;
+  oldestUser: { id: string; name: string; email: string; createdAt: string } | null;
 };
 
 export type ContactSubmission = {

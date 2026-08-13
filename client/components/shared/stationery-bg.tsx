@@ -70,6 +70,37 @@ const icons = [
       <path d="M8 28h16" stroke="currentColor" strokeWidth="1" strokeLinecap="round" opacity="0.5" />
     </svg>
   ),
+  // Eraser
+  (key: number) => (
+    <svg key={key} width="40" height="28" viewBox="0 0 40 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="4" width="28" height="20" rx="2" stroke="currentColor" strokeWidth="1.5" transform="rotate(-10 2 4)" />
+      <path d="M30 14l8-8M34 10l-4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  ),
+  // Protractor
+  (key: number) => (
+    <svg key={key} width="44" height="28" viewBox="0 0 44 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 26a20 20 0 0140 0" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M22 26V6" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeDasharray="2 2" />
+      <path d="M8 22l4-4M32 22l-4-4" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+    </svg>
+  ),
+  // Backpack
+  (key: number) => (
+    <svg key={key} width="36" height="44" viewBox="0 0 36 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="6" y="12" width="24" height="28" rx="4" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M12 12V8a6 6 0 0112 0v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M6 22h24" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+      <circle cx="18" cy="28" r="2" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  ),
+  // Sticky note
+  (key: number) => (
+    <svg key={key} width="36" height="40" viewBox="0 0 36 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 4h28v24H20l-4 4-4-4H4V4z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M12 14h12M12 20h8" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+    </svg>
+  ),
 ];
 
 function seededRandom(seed: number) {
@@ -81,7 +112,7 @@ function seededRandom(seed: number) {
 }
 
 export function StationeryBg({ className, variant = "default" }: StationeryBgProps) {
-  const count = variant === "compact" ? 5 : variant === "wide" ? 10 : 7;
+  const count = variant === "compact" ? 8 : variant === "wide" ? 16 : 12;
   const rand = seededRandom(42);
 
   const items = Array.from({ length: count }, (_, i) => {
@@ -89,8 +120,10 @@ export function StationeryBg({ className, variant = "default" }: StationeryBgPro
     const x = rand() * 100;
     const y = rand() * 100;
     const rotate = rand() * 40 - 20;
-    const scale = 0.7 + rand() * 0.5;
-    return { icon: IconFn(i), x, y, rotate, scale };
+    const scale = 0.6 + rand() * 0.6;
+    const animDelay = rand() * 5;
+    const animDuration = 4 + rand() * 4;
+    return { icon: IconFn(i), x, y, rotate, scale, animDelay, animDuration };
   });
 
   return (
@@ -104,14 +137,22 @@ export function StationeryBg({ className, variant = "default" }: StationeryBgPro
       {items.map((item, i) => (
         <div
           key={i}
-          className="absolute text-muted-foreground/[0.06]"
+          className="absolute animate-float"
           style={{
             left: `${item.x}%`,
             top: `${item.y}%`,
-            transform: `rotate(${item.rotate}deg) scale(${item.scale})`,
+            animationDelay: `${item.animDelay}s`,
+            animationDuration: `${item.animDuration}s`,
           }}
         >
-          {item.icon}
+          <div
+            className="text-primary/[0.07]"
+            style={{
+              transform: `rotate(${item.rotate}deg) scale(${item.scale})`,
+            }}
+          >
+            {item.icon}
+          </div>
         </div>
       ))}
     </div>

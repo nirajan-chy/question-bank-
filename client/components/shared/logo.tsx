@@ -11,8 +11,7 @@ export function Logo({ className, withText = true }: { className?: string; withT
       </span>
       {withText && (
         <span className="font-display text-lg font-bold tracking-tight">
-          Sandarbh
-          <span className="text-gradient ml-1 font-extrabold">Nepal</span>
+          Prashna<span className="text-primary">Hub</span>
         </span>
       )}
     </Link>

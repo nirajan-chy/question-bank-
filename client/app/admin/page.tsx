@@ -49,7 +49,7 @@ export default function AdminDashboardPage() {
         <div>
           <h1 className="font-display text-2xl font-bold">Dashboard</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Overview of your Sandarbh content library.
+            Overview of your PrashnaHub content library.
           </p>
         </div>
         <Link
@@ -101,97 +101,207 @@ export default function AdminDashboardPage() {
         </h2>
         {loadingUserStats ? (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {Array.from({ length: 4 }).map((_, i) => (
+            {Array.from({ length: 6 }).map((_, i) => (
               <Skeleton key={i} className="h-28" />
             ))}
           </div>
         ) : userStats ? (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <Card>
-              <CardContent className="p-5">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Total Users</p>
-                    <p className="mt-1 font-display text-3xl font-bold">{userStats.totalUsers}</p>
+          <>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <Card>
+                <CardContent className="p-5">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Total Users</p>
+                      <p className="mt-1 font-display text-3xl font-bold">{userStats.totalUsers}</p>
+                    </div>
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                      <Users className="h-5 w-5" />
+                    </div>
                   </div>
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <Users className="h-5 w-5" />
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-5">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Active (24h)</p>
+                      <p className="mt-1 font-display text-3xl font-bold">{userStats.activeUsers.last24h}</p>
+                    </div>
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-success/10 text-success">
+                      <UserCheck className="h-5 w-5" />
+                    </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-5">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Active (7d)</p>
-                    <p className="mt-1 font-display text-3xl font-bold">{userStats.activeUsers}</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-5">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">New This Week</p>
+                      <p className="mt-1 font-display text-3xl font-bold">{userStats.newThisWeek}</p>
+                    </div>
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-info/10 text-info">
+                      <UserPlus className="h-5 w-5" />
+                    </div>
                   </div>
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-success/10 text-success">
-                    <UserCheck className="h-5 w-5" />
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-5">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">New This Month</p>
+                      <p className="mt-1 font-display text-3xl font-bold">{userStats.newThisMonth}</p>
+                    </div>
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-warning/10 text-warning">
+                      <TrendingUp className="h-5 w-5" />
+                    </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-5">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">New This Week</p>
-                    <p className="mt-1 font-display text-3xl font-bold">{userStats.newThisWeek}</p>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Retention & Insights */}
+            <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <Card>
+                <CardContent className="p-5">
+                  <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">User Retention</p>
+                  <div className="mt-3 space-y-2">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-muted-foreground">Active in 24h</span>
+                      <span className="font-semibold">{userStats.activeUsers.last24h}</span>
+                    </div>
+                    <div className="h-1.5 rounded-full bg-muted overflow-hidden">
+                      <div className="h-full bg-success rounded-full" style={{ width: `${userStats.totalUsers > 0 ? (userStats.activeUsers.last24h / userStats.totalUsers) * 100 : 0}%` }} />
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-muted-foreground">Active in 7d</span>
+                      <span className="font-semibold">{userStats.activeUsers.last7d}</span>
+                    </div>
+                    <div className="h-1.5 rounded-full bg-muted overflow-hidden">
+                      <div className="h-full bg-info rounded-full" style={{ width: `${userStats.totalUsers > 0 ? (userStats.activeUsers.last7d / userStats.totalUsers) * 100 : 0}%` }} />
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-muted-foreground">Active in 30d</span>
+                      <span className="font-semibold">{userStats.activeUsers.last30d}</span>
+                    </div>
+                    <div className="h-1.5 rounded-full bg-muted overflow-hidden">
+                      <div className="h-full bg-primary rounded-full" style={{ width: `${userStats.totalUsers > 0 ? (userStats.activeUsers.last30d / userStats.totalUsers) * 100 : 0}%` }} />
+                    </div>
                   </div>
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-info/10 text-info">
-                    <UserPlus className="h-5 w-5" />
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-5">
+                  <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Role Breakdown</p>
+                  <div className="mt-3 space-y-3">
+                    {Object.entries(userStats.roleBreakdown).map(([role, count]) => (
+                      <div key={role}>
+                        <div className="flex items-center justify-between text-sm">
+                          <span className="capitalize text-muted-foreground">{role}</span>
+                          <span className="font-semibold">{count}</span>
+                        </div>
+                        <div className="mt-1 h-1.5 rounded-full bg-muted overflow-hidden">
+                          <div
+                            className={`h-full rounded-full ${role === "admin" ? "bg-warning" : "bg-primary"}`}
+                            style={{ width: `${userStats.totalUsers > 0 ? (count / userStats.totalUsers) * 100 : 0}%` }}
+                          />
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-5">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">New This Month</p>
-                    <p className="mt-1 font-display text-3xl font-bold">{userStats.newThisMonth}</p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-5">
+                  <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Insights</p>
+                  <div className="mt-3 space-y-2 text-sm">
+                    <div className="flex items-center justify-between">
+                      <span className="text-muted-foreground">Peak signup hour</span>
+                      <span className="font-semibold">{userStats.peakHour.hour}:00 ({userStats.peakHour.count} users)</span>
+                    </div>
+                    {userStats.newestUser && (
+                      <div className="flex items-center justify-between">
+                        <span className="text-muted-foreground">Newest user</span>
+                        <span className="font-semibold truncate max-w-[140px]">{userStats.newestUser.name}</span>
+                      </div>
+                    )}
+                    {userStats.oldestUser && (
+                      <div className="flex items-center justify-between">
+                        <span className="text-muted-foreground">First user</span>
+                        <span className="font-semibold truncate max-w-[140px]">{userStats.oldestUser.name}</span>
+                      </div>
+                    )}
                   </div>
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-warning/10 text-warning">
-                    <TrendingUp className="h-5 w-5" />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+                </CardContent>
+              </Card>
+            </div>
+          </>
         ) : null}
       </div>
 
       {/* User Growth Chart */}
       {userStats && userStats.growth.length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-base">
-              <TrendingUp className="h-4 w-4 text-muted-foreground" /> User Growth (Last 6 Months)
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex items-end gap-3 h-40">
-              {userStats.growth.map((month) => {
-                const maxCount = Math.max(...userStats.growth.map((m) => m.count), 1);
-                const height = (month.count / maxCount) * 100;
-                return (
-                  <div key={month.month} className="flex flex-1 flex-col items-center gap-2">
-                    <span className="text-xs font-medium text-muted-foreground">{month.count}</span>
-                    <div className="w-full flex justify-center">
-                      <div
-                        className="w-full max-w-[48px] rounded-t-md bg-primary transition-all"
-                        style={{ height: `${Math.max(height, 4)}%` }}
-                      />
+        <div className="grid gap-4 lg:grid-cols-2">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-base">
+                <TrendingUp className="h-4 w-4 text-muted-foreground" /> User Growth (Last 6 Months)
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-end gap-3 h-40">
+                {userStats.growth.map((month) => {
+                  const maxCount = Math.max(...userStats.growth.map((m) => m.count), 1);
+                  const height = (month.count / maxCount) * 100;
+                  return (
+                    <div key={month.month} className="flex flex-1 flex-col items-center gap-2">
+                      <span className="text-xs font-medium text-muted-foreground">{month.count}</span>
+                      <div className="w-full flex justify-center">
+                        <div
+                          className="w-full max-w-[48px] rounded-t-md bg-primary transition-all"
+                          style={{ height: `${Math.max(height, 4)}%` }}
+                        />
+                      </div>
+                      <span className="text-[10px] text-muted-foreground">{month.month}</span>
                     </div>
-                    <span className="text-[10px] text-muted-foreground">{month.month}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </CardContent>
-        </Card>
+                  );
+                })}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-base">
+                <UserPlus className="h-4 w-4 text-muted-foreground" /> Daily Signups (Last 7 Days)
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-end gap-3 h-40">
+                {userStats.dailySignups.map((day) => {
+                  const maxCount = Math.max(...userStats.dailySignups.map((d) => d.count), 1);
+                  const height = (day.count / maxCount) * 100;
+                  return (
+                    <div key={day.date} className="flex flex-1 flex-col items-center gap-2">
+                      <span className="text-xs font-medium text-muted-foreground">{day.count}</span>
+                      <div className="w-full flex justify-center">
+                        <div
+                          className="w-full max-w-[32px] rounded-t-md bg-info transition-all"
+                          style={{ height: `${Math.max(height, 4)}%` }}
+                        />
+                      </div>
+                      <span className="text-[10px] text-muted-foreground">{day.day}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       )}
 
       <div className="grid gap-6 lg:grid-cols-2">

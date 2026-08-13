@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 
 export const siteConfig = {
-  name: "Sandarbh",
-  fullName: "Sandarbh Nepal",
+  name: "PrashnaHub",
+  fullName: "PrashnaHub",
   description:
     "Nepal's premium education platform — Notes, books, question banks, past papers, mock tests and resources for NEB Class 12, CTEVT, Bachelor & Master across TU, KU, PU, Pokhara University and more.",
-  url: "https://sandarbh.edu.np",
+  url: "https://prashnahub.com",
   keywords: [
     "Nepal education",
     "NEB Class 12",
@@ -20,7 +20,7 @@ export const siteConfig = {
     "scholarships Nepal",
   ],
   og: {
-    title: "Sandarbh — Nepal's Education Platform",
+    title: "PrashnaHub — Nepal's Education Platform",
     description:
       "Everything you need to ace NEB, CTEVT, Bachelor & Master. Notes, books, question banks, past papers & mock tests.",
   },

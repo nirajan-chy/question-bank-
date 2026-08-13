@@ -31,7 +31,7 @@ export function FaqSection() {
           <SectionHeader
             eyebrow="FAQ"
             title="Frequently asked questions"
-            description="Everything you need to know about Sandarbh — and what it means for your studies."
+            description="Everything you need to know about PrashnaHub — and what it means for your studies."
             className="mb-0"
           />
         </div>

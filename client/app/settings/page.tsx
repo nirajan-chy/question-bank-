@@ -4,7 +4,7 @@ import { SettingsPage } from "@/features/dashboard/components/settings-page";
 
 export const metadata: Metadata = seo({
   title: "Settings",
-  description: "Manage your Sandarbh profile, preferences and notifications.",
+  description: "Manage your PrashnaHub profile, preferences and notifications.",
   path: "/settings",
 });
 

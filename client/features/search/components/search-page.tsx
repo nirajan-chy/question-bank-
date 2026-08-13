@@ -44,7 +44,7 @@ export function SearchPage({ initialQuery = "" }: { initialQuery?: string }) {
       <PageHeader
         icon={Search}
         gradient="from-violet-500 to-fuchsia-500"
-        title="Search Sandarbh"
+        title="Search PrashnaHub"
         description="Find notes, books, question banks, mock tests, scholarships, blog posts and community threads across every level."
         crumbs={[{ label: "Home", href: "/" }, { label: "Search" }]}
       />

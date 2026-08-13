@@ -129,7 +129,7 @@ export function BlogPostPage({ post }: { post: Post }) {
             </span>
             <div className="min-w-0 flex-1">
               <p className="font-display font-bold">{post.author}</p>
-              <p className="text-sm text-white/80">{post.authorRole} at Sandarbh</p>
+              <p className="text-sm text-white/80">{post.authorRole} at PrashnaHub</p>
             </div>
             <Button variant="secondary" size="sm" asChild>
               <Link href="/community">Ask a question</Link>

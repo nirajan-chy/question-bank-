@@ -38,7 +38,7 @@ export function RegisterForm() {
     try {
       const { token, user } = await auth.register(name, email, password);
       setAuth(token, user);
-      toast.success("Account created!", { description: `Welcome to Sandarbh, ${user.name.split(" ")[0]}!` });
+      toast.success("Account created!", { description: `Welcome to PrashnaHub, ${user.name.split(" ")[0]}!` });
       router.push("/");
       router.refresh();
     } catch (error) {
@@ -54,7 +54,7 @@ export function RegisterForm() {
     <div className="mx-auto w-full max-w-md">
       <div className="mb-8 flex flex-col items-center text-center">
         <Logo className="mb-5" />
-        <h1 className="font-display text-2xl font-bold">Join Sandarbh</h1>
+        <h1 className="font-display text-2xl font-bold">Join PrashnaHub</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Create a free account to ask questions and track your progress.
         </p>

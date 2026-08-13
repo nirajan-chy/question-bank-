@@ -14,7 +14,7 @@ import { Progress } from "@/components/ui/progress";
 const ease = [0.21, 0.47, 0.32, 0.98] as const;
 
 const badgeDefs: Record<string, { icon: typeof Flame; color: string; desc: string }> = {
-  "Early Bird": { icon: Sparkles, color: "from-violet-500 to-fuchsia-500", desc: "Joined Sandarbh in its first year" },
+  "Early Bird": { icon: Sparkles, color: "from-violet-500 to-fuchsia-500", desc: "Joined PrashnaHub in its first year" },
   "Question Solver": { icon: Target, color: "from-sky-500 to-blue-600", desc: "Answered 100+ practice questions" },
   "10-Day Streak": { icon: Flame, color: "from-orange-500 to-red-500", desc: "Studied 10 days in a row" },
   "Mock Test Veteran": { icon: Trophy, color: "from-amber-500 to-orange-500", desc: "Took 10+ full mock tests" },

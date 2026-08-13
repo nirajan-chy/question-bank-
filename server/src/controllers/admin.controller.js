@@ -72,12 +72,15 @@ const buildModelMeta = (Model) => ({
 
 const getUserStats = asyncHandler(async (req, res) => {
   const now = new Date();
+  const oneDayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
   const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
   const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
 
-  const [totalUsers, activeUsers, newThisWeek, newThisMonth, usersByRole] = await Promise.all([
+  const [totalUsers, activeUsers24h, activeUsers7d, activeUsers30d, newThisWeek, newThisMonth, usersByRole] = await Promise.all([
     models.User.count(),
+    models.User.count({ where: { updatedAt: { [Op.gte]: oneDayAgo } } }),
     models.User.count({ where: { updatedAt: { [Op.gte]: sevenDaysAgo } } }),
+    models.User.count({ where: { updatedAt: { [Op.gte]: thirtyDaysAgo } } }),
     models.User.count({ where: { createdAt: { [Op.gte]: sevenDaysAgo } } }),
     models.User.count({ where: { createdAt: { [Op.gte]: thirtyDaysAgo } } }),
     models.User.findAll({
@@ -100,6 +103,36 @@ const getUserStats = asyncHandler(async (req, res) => {
     });
   }
 
+  const last7Days = [];
+  for (let i = 6; i >= 0; i--) {
+    const dayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i, 0, 0, 0);
+    const dayEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i, 23, 59, 59);
+    const count = await models.User.count({
+      where: { createdAt: { [Op.between]: [dayStart, dayEnd] } },
+    });
+    last7Days.push({
+      day: dayStart.toLocaleString("default", { weekday: "short" }),
+      date: dayStart.toISOString().split("T")[0],
+      count,
+    });
+  }
+
+  const signupByHour = [];
+  for (let h = 0; h < 24; h++) {
+    const hourStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, 0, 0);
+    const hourEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, 59, 59);
+    const count = await models.User.count({
+      where: { createdAt: { [Op.between]: [hourStart, hourEnd] } },
+    });
+    signupByHour.push({ hour: h, count });
+  }
+  const peakHour = signupByHour.reduce((max, h) => (h.count > max.count ? h : max), { hour: 0, count: 0 });
+
+  const [newestUser, oldestUser] = await Promise.all([
+    models.User.findOne({ order: [["createdAt", "DESC"]], attributes: ["id", "name", "email", "createdAt"] }),
+    models.User.findOne({ order: [["createdAt", "ASC"]], attributes: ["id", "name", "email", "createdAt"] }),
+  ]);
+
   const roleBreakdown = {};
   for (const r of usersByRole) {
     roleBreakdown[r.role] = Number(r.count);
@@ -107,11 +140,15 @@ const getUserStats = asyncHandler(async (req, res) => {
 
   sendSuccess(res, {
     totalUsers,
-    activeUsers,
+    activeUsers: { last24h: activeUsers24h, last7d: activeUsers7d, last30d: activeUsers30d },
     newThisWeek,
     newThisMonth,
     roleBreakdown,
     growth: last6Months,
+    dailySignups: last7Days,
+    peakHour: { hour: peakHour.hour, count: peakHour.count },
+    newestUser,
+    oldestUser,
   });
 });
 
