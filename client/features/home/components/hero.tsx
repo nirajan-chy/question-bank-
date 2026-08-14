@@ -9,7 +9,9 @@ import { Input } from "@/components/ui/input";
 import { CountUp } from "@/components/shared/count-up";
 import { StationeryBg } from "@/components/shared/stationery-bg";
 
-const stats = [
+type HeroStat = { label: string; value: number; suffix: string; icon: React.ComponentType<{ className?: string }> };
+
+const stats: HeroStat[] = [
   // { label: "Students learning", value: 128000, suffix: "+", icon: Users },
   // { label: "Study resources", value: 2400, suffix: "+", icon: BookOpen },
   // { label: "Questions solved", value: 2400000, suffix: "+", icon: TrendingUp },

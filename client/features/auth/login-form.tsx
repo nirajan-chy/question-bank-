@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -27,8 +27,19 @@ type Form = z.infer<typeof schema>;
 
 export function LoginForm() {
   const router = useRouter();
+  const token = useAuthStore((s) => s.token);
+  const user = useAuthStore((s) => s.user);
+  const isAdmin = useAuthStore((s) => s.isAdmin);
+  const hasHydrated = useAuthStore((s) => s.hasHydrated);
   const setAuth = useAuthStore((s) => s.setAuth);
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (!hasHydrated) return;
+    if (token && user) {
+      router.replace(isAdmin ? "/admin" : "/");
+    }
+  }, [hasHydrated, token, user, isAdmin, router]);
 
   const { register, handleSubmit, formState: { errors } } = useForm<Form>({ resolver: zodResolver(schema) });
 
@@ -48,6 +59,24 @@ export function LoginForm() {
       setSubmitting(false);
     }
   };
+
+  if (!hasHydrated) {
+    return (
+      <div className="mx-auto w-full max-w-md text-center">
+        <Logo className="mb-5" />
+        <p className="text-sm text-muted-foreground">Loading…</p>
+      </div>
+    );
+  }
+
+  if (token && user) {
+    return (
+      <div className="mx-auto w-full max-w-md text-center">
+        <Logo className="mb-5" />
+        <p className="text-sm text-muted-foreground">Redirecting…</p>
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto w-full max-w-md">

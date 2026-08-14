@@ -8,7 +8,6 @@ module.exports = (sequelize) => {
       name: { type: DataTypes.STRING, allowNull: false },
       description: { type: DataTypes.TEXT, allowNull: false, defaultValue: "" },
       icon: { type: DataTypes.STRING, allowNull: false, defaultValue: "Hash" },
-      gradient: { type: DataTypes.STRING, allowNull: false, defaultValue: "" },
       memberCount: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
       badge: { type: DataTypes.STRING, allowNull: true },
       channels: { type: DataTypes.JSONB, allowNull: false, defaultValue: [] },

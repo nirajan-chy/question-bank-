@@ -7,6 +7,7 @@ import { GridSkeleton } from "@/components/shared/skeletons";
 import { SubjectCard } from "@/features/education/components/cards";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { gradientFor } from "@/lib/gradients";
 import { BookOpen } from "lucide-react";
 
 export function CourseDetail({ slug }: { slug: string }) {
@@ -27,7 +28,7 @@ export function CourseDetail({ slug }: { slug: string }) {
       <PageHeader
         title={course.name}
         description={course.description}
-        gradient={course.gradient}
+        gradient={gradientFor(course.name)}
         crumbs={[
           { label: "Classes", href: "/classes" },
           { label: course.levelSlug === "bachelor" ? "Bachelor" : "Master", href: "/classes" },

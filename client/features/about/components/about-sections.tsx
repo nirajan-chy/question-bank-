@@ -30,6 +30,34 @@ const pillars = [
   },
 ];
 
+const timeline = [
+  {
+    year: "2019",
+    title: "A shared Google Drive",
+    text: "Started as a folder of scanned notes and old questions passed between classmates in Kathmandu.",
+  },
+  {
+    year: "2021",
+    title: "PrashnaHub goes online",
+    text: "The first version of the platform launched with notes and past papers for SEE and NEB Class 12.",
+  },
+  {
+    year: "2023",
+    title: "Community Q&A opens",
+    text: "Students across Nepal started answering each other's questions — answers now number in the tens of thousands.",
+  },
+  {
+    year: "2025",
+    title: "Mock tests and AI study tools",
+    text: "Full-syllabus mock tests, question banks and a self-learning center with AI-powered Q&A joined the platform.",
+  },
+  {
+    year: "2026",
+    title: "Your reference for every exam",
+    text: "Serving hundreds of thousands of students across Nepal, with TU, KU, PU, Purbanchal, CTEVT and NEB covered.",
+  },
+];
+
 
 
 export function AboutSections() {

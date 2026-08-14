@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight, BookOpen, FileQuestion, FileText, Flame, PlayCircle, Star, Timer } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { gradientFor } from "@/lib/gradients";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { BookmarkButton } from "@/components/shared/bookmark-button";
@@ -79,7 +80,7 @@ export function SubjectCard({ subject }: { subject: Subject }) {
           <span
             className={cn(
               "flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br text-xl text-white shadow-sm",
-              subject.gradient
+              gradientFor(subject.name)
             )}
           >
             {subject.emoji}
@@ -293,7 +294,7 @@ export function PastPaperCard({ paper }: { paper: PastPaper }) {
 
 export function MockTestCard({ mock }: { mock: MockTest }) {
   return (
-    <Link href="/mock-tests">
+    <Link href={`/mock-tests/${mock.slug}`}>
       <Card className="group h-full p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-card-hover">
         <div className="flex items-start justify-between">
           <Badge variant="secondary">{mock.level}</Badge>
@@ -327,13 +328,13 @@ export function ScholarshipCard({ scholarship }: { scholarship: Scholarship }) {
   return (
     <Link href="/scholarships">
       <Card className="group relative h-full overflow-hidden p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-card-hover">
-        <div className={cn("absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r", scholarship.gradient)} />
+        <div className={cn("absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r", gradientFor(scholarship.title))} />
         <div className="flex items-start justify-between gap-3">
           <div>
             <h3 className="line-clamp-2 font-semibold leading-snug group-hover:text-primary">{scholarship.title}</h3>
             <p className="mt-1 text-xs text-muted-foreground">{scholarship.provider}</p>
           </div>
-          <span className={cn("shrink-0 rounded-full bg-gradient-to-r px-3 py-1 text-xs font-bold text-white", scholarship.gradient)}>
+          <span className={cn("shrink-0 rounded-full bg-gradient-to-r px-3 py-1 text-xs font-bold text-white", gradientFor(scholarship.title))}>
             {scholarship.amount}
           </span>
         </div>

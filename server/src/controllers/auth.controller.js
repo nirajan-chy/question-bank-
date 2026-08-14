@@ -15,7 +15,11 @@ const signToken = (user) => {
   return jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "7d" });
 };
 
-const sanitize = (user) => user.get({ plain: true });
+const sanitize = (user) => {
+  const plain = user.get({ plain: true });
+  delete plain.password;
+  return plain;
+};
 
 const register = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body || {};

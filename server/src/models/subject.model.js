@@ -18,7 +18,6 @@ module.exports = (sequelize) => {
       units: { type: DataTypes.JSONB, allowNull: false, defaultValue: [] },
       syllabus: { type: DataTypes.JSONB, allowNull: false, defaultValue: [] },
       emoji: { type: DataTypes.STRING, allowNull: false },
-      gradient: { type: DataTypes.STRING, allowNull: false },
       popularity: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
       notes: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
       books: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },

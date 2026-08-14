@@ -11,6 +11,7 @@ module.exports = (sequelize) => {
       subjectName: { type: DataTypes.STRING, allowNull: false },
       level: { type: DataTypes.STRING, allowNull: false },
       questions: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
+      questionData: { type: DataTypes.JSONB, allowNull: false, defaultValue: [] },
       durationMinutes: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
       fullMarks: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
       attempts: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },

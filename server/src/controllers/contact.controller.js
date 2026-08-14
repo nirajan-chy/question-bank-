@@ -6,7 +6,10 @@ const ApiError = require("../utils/ApiError");
 const sendSuccess = require("../utils/sendSuccess");
 const { SMTP_USER, SMTP_PASSWORD } = require("../config/dotenv");
 
-const controller = createBaseController(Contact, { slugField: "id" });
+const controller = createBaseController(Contact, {
+  slugField: "id",
+  searchFields: ["name", "email", "subject", "message"],
+});
 
 const sendEmail = async ({ name, email, subject, message }) => {
   if (!SMTP_USER || !SMTP_PASSWORD) {

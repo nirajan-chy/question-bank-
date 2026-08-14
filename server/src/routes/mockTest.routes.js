@@ -4,5 +4,6 @@ const ctrl = require("../controllers/mockTest.controller");
 router.get("/", ctrl.list);
 router.get("/:slug", ctrl.getBySlug);
 router.get("/id/:id", ctrl.getById);
+router.post("/submit", ctrl.submit);
 
 module.exports = router;

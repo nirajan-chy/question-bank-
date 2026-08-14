@@ -26,6 +26,7 @@ import type {
   UserStats,
   ContactSubmission,
   ResourceMeta,
+  MockTestResult,
   RagDocument,
   RagSource,
   RagAnswer,
@@ -35,7 +36,7 @@ import type {
   McqResult,
 } from "@/types";
 
-import { http, httpForm, httpUpload, getAuthToken, BASE_URL } from "./http";
+import { http, httpForm, httpUpload, getAuthToken, BASE_URL, ApiClientError } from "./http";
 
 type SearchResults = {
   subjects: Subject[];
@@ -75,6 +76,12 @@ export const api = {
     http<PastPaper[]>(withQuery("/past-papers", opts)),
   mockTests: (opts?: { limit?: number; subjectSlug?: string }) =>
     http<MockTest[]>(withQuery("/mock-tests", opts)),
+  mockTest: (slug: string) => http<MockTest>(`/mock-tests/${slug}`),
+  submitMockTest: (slug: string, answers: Record<string, number>) =>
+    http<MockTestResult>("/mock-tests/submit", {
+      method: "POST",
+      body: JSON.stringify({ slug, answers }),
+    }),
   scholarships: (opts?: { limit?: number; featured?: boolean }) =>
     http<Scholarship[]>(withQuery("/scholarships", opts)),
   notices: (opts?: { limit?: number }) => http<Notice[]>(withQuery("/notices", opts)),
@@ -145,13 +152,49 @@ export const admin = {
       formData
     );
   },
+  uploadWithProgress: (
+    file: File,
+    onProgress?: (percent: number) => void
+  ): Promise<{ url: string; filename: string; size: number; mimeType: string }> =>
+    new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", `${BASE_URL}/admin/upload`);
+      const token = getAuthToken();
+      if (token) xhr.setRequestHeader("Authorization", `Bearer ${token}`);
+      xhr.upload.onprogress = (e) => {
+        if (e.lengthComputable && onProgress) {
+          onProgress(Math.round((e.loaded / e.total) * 100));
+        }
+      };
+      xhr.onload = () => {
+        let body: { success: boolean; message?: string; data?: unknown; errors?: unknown[] };
+        try {
+          body = JSON.parse(xhr.responseText);
+        } catch {
+          reject(new ApiClientError(xhr.status, "Unexpected upload response"));
+          return;
+        }
+        if (xhr.status >= 200 && xhr.status < 300 && body.success) {
+          resolve(body.data as { url: string; filename: string; size: number; mimeType: string });
+        } else {
+          reject(new ApiClientError(xhr.status, body.message ?? "Upload failed", body.errors ?? []));
+        }
+      };
+      xhr.onerror = () => reject(new ApiClientError(0, "Upload failed — check your network"));
+      const formData = new FormData();
+      formData.append("file", file);
+      xhr.send(formData);
+    }),
   users: () => http<User[]>("/admin/users"),
   updateUser: (id: string, patch: Partial<Pick<User, "name" | "role" | "avatar" | "bio">> & { password?: string }) =>
     http<User>(`/admin/users/${id}`, { method: "PUT", body: JSON.stringify(patch) }),
   deleteUser: (id: string) =>
     http<null>(`/admin/users/${id}`, { method: "DELETE" }),
 
-  list: (resource: string) => http<AdminResourceRecord[]>(`/admin/${resource}`),
+  list: (resource: string, search = "") =>
+    http<AdminResourceRecord[]>(
+      withQuery(`/admin/${resource}`, search.trim() ? { search: search.trim() } : undefined)
+    ),
   create: (resource: string, data: AdminResourceRecord) =>
     http<AdminResourceRecord>(`/admin/${resource}`, {
       method: "POST",

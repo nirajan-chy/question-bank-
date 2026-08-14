@@ -8,6 +8,7 @@ import { PageHeader } from "@/components/shared/page-header";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { cn, formatNumber } from "@/lib/utils";
+import { gradientFor } from "@/lib/gradients";
 import { GridSkeleton } from "@/components/shared/skeletons";
 
 const types = ["All", "Constituent", "Autonomous", "Affiliated"] as const;
@@ -74,7 +75,7 @@ export function UniversitiesPage() {
                     <span
                       className={cn(
                         "flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br font-display text-lg font-bold text-white",
-                        uni.gradient
+                        gradientFor(uni.name)
                       )}
                     >
                       {uni.short}

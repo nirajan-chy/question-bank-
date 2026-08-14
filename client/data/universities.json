@@ -8,11 +8,19 @@
     "location": "Kirtipur, Kathmandu",
     "type": "Constituent",
     "description": "Nepal's largest and oldest university, enrolling over 400,000 students across 60+ constituent and 1,000+ affiliated colleges nationwide. Known for BSc CSIT, BBA, MBBS, engineering and humanities programs.",
-    "programs": ["BSc CSIT", "BBA", "BBS", "BE", "MBBS", "B.Ed", "BHM", "M.Sc"],
+    "programs": [
+      "BSc CSIT",
+      "BBA",
+      "BBS",
+      "BE",
+      "MBBS",
+      "B.Ed",
+      "BHM",
+      "M.Sc"
+    ],
     "ranking": "#1 National",
     "students": 415000,
-    "website": "https://tu.edu.np",
-    "gradient": "from-emerald-600 to-teal-700"
+    "website": "https://tu.edu.np"
   },
   {
     "id": "u2",
@@ -23,11 +31,18 @@
     "location": "Dhulikhel, Kavre",
     "type": "Autonomous",
     "description": "Nepal's first autonomous, private, non-profit university. Renowned for engineering (BE), medicine (MBBS), management (BBA) and science research with semester-based modern curricula.",
-    "programs": ["BE", "MBBS", "BBA", "B.Tech", "M.Tech", "M.Sc", "MBA"],
+    "programs": [
+      "BE",
+      "MBBS",
+      "BBA",
+      "B.Tech",
+      "M.Tech",
+      "M.Sc",
+      "MBA"
+    ],
     "ranking": "#1 Private",
     "students": 14500,
-    "website": "https://ku.edu.np",
-    "gradient": "from-indigo-600 to-violet-700"
+    "website": "https://ku.edu.np"
   },
   {
     "id": "u3",
@@ -38,11 +53,18 @@
     "location": "Pokhara, Kaski",
     "type": "Autonomous",
     "description": "A semester-based autonomous university known for quality management, health sciences and engineering programs with a strong focus on practical education in the beautiful Lakeside city.",
-    "programs": ["BE", "BBA", "B.Sc", "B.Pharm", "BPT", "MBA", "M.Sc"],
+    "programs": [
+      "BE",
+      "BBA",
+      "B.Sc",
+      "B.Pharm",
+      "BPT",
+      "MBA",
+      "M.Sc"
+    ],
     "ranking": "#3 Overall",
     "students": 62000,
-    "website": "https://pu.edu.np",
-    "gradient": "from-sky-600 to-blue-700"
+    "website": "https://pu.edu.np"
   },
   {
     "id": "u4",
@@ -53,11 +75,17 @@
     "location": "Biratnagar, Koshi",
     "type": "Constituent",
     "description": "Eastern Nepal's premier university covering engineering, management, education, health and humanities across Morang, Sunsari and beyond.",
-    "programs": ["BE", "BBA", "B.Ed", "MBBS", "BHM", "MBA"],
+    "programs": [
+      "BE",
+      "BBA",
+      "B.Ed",
+      "MBBS",
+      "BHM",
+      "MBA"
+    ],
     "ranking": "#1 East Nepal",
     "students": 86000,
-    "website": "https://purbuniv.edu.np",
-    "gradient": "from-orange-500 to-red-600"
+    "website": "https://purbuniv.edu.np"
   },
   {
     "id": "u5",
@@ -68,11 +96,16 @@
     "location": "Lamachaur, Pokhara",
     "type": "Autonomous",
     "description": "A young, technology-focused university with modern programs in engineering, science, management and health built around applied research.",
-    "programs": ["BE", "B.Sc", "BBA", "B.Sc Nursing", "M.Sc"],
+    "programs": [
+      "BE",
+      "B.Sc",
+      "BBA",
+      "B.Sc Nursing",
+      "M.Sc"
+    ],
     "ranking": "Emerging",
     "students": 2200,
-    "website": "https://www.gandakiuniversity.edu.np",
-    "gradient": "from-teal-500 to-emerald-700"
+    "website": "https://www.gandakiuniversity.edu.np"
   },
   {
     "id": "u6",
@@ -83,11 +116,16 @@
     "location": "Birendranagar, Surkhet",
     "type": "Constituent",
     "description": "The hub of higher education in Karnali province, offering programs across education, management, science, engineering and health.",
-    "programs": ["BBA", "B.Ed", "BE", "B.Sc", "MBA"],
+    "programs": [
+      "BBA",
+      "B.Ed",
+      "BE",
+      "B.Sc",
+      "MBA"
+    ],
     "ranking": "#1 Karnali",
     "students": 34000,
-    "website": "https://mu.edu.np",
-    "gradient": "from-lime-500 to-green-700"
+    "website": "https://mu.edu.np"
   },
   {
     "id": "u7",
@@ -98,11 +136,16 @@
     "location": "Mahendranagar, Sudurpashchim",
     "type": "Constituent",
     "description": "Serving the Sudurpashchim region with programs in education, management, science, engineering and medical sciences.",
-    "programs": ["BBA", "B.Ed", "BE", "B.Sc", "MBBS"],
+    "programs": [
+      "BBA",
+      "B.Ed",
+      "BE",
+      "B.Sc",
+      "MBBS"
+    ],
     "ranking": "#1 Far West",
     "students": 29000,
-    "website": "https://fwu.edu.np",
-    "gradient": "from-cyan-500 to-sky-700"
+    "website": "https://fwu.edu.np"
   },
   {
     "id": "u8",
@@ -113,11 +156,15 @@
     "location": "Beljhundi, Dang",
     "type": "Constituent",
     "description": "The national centre for Sanskrit, Vedic and traditional knowledge, also offering modern humanities and education programs.",
-    "programs": ["MA", "B.Ed", "BA", "M.Phil"],
+    "programs": [
+      "MA",
+      "B.Ed",
+      "BA",
+      "M.Phil"
+    ],
     "ranking": "Specialist",
     "students": 8000,
-    "website": "https://nsu.edu.np",
-    "gradient": "from-amber-500 to-yellow-600"
+    "website": "https://nsu.edu.np"
   },
   {
     "id": "u9",
@@ -128,11 +175,15 @@
     "location": "Lumbini, Rupandehi",
     "type": "Autonomous",
     "description": "The first Buddhist university in Nepal, blending Buddhist studies, culture, tourism and modern liberal arts education.",
-    "programs": ["BA", "MA", "M.Phil", "BTTM"],
+    "programs": [
+      "BA",
+      "MA",
+      "M.Phil",
+      "BTTM"
+    ],
     "ranking": "Specialist",
     "students": 5000,
-    "website": "https://lbu.edu.np",
-    "gradient": "from-yellow-500 to-orange-600"
+    "website": "https://lbu.edu.np"
   },
   {
     "id": "u10",
@@ -143,11 +194,15 @@
     "location": "Rampur, Chitwan",
     "type": "Constituent",
     "description": "Nepal's dedicated university for agriculture, forestry, animal science and veterinary medicine located in the heart of the Terai.",
-    "programs": ["B.Sc Agriculture", "B.V.Sc", "B.Sc Forestry", "M.Sc"],
+    "programs": [
+      "B.Sc Agriculture",
+      "B.V.Sc",
+      "B.Sc Forestry",
+      "M.Sc"
+    ],
     "ranking": "#1 Agriculture",
     "students": 11000,
-    "website": "https://afu.edu.np",
-    "gradient": "from-green-500 to-emerald-700"
+    "website": "https://afu.edu.np"
   },
   {
     "id": "u11",
@@ -158,11 +213,16 @@
     "location": "Lalitpur",
     "type": "Autonomous",
     "description": "Nepal's first open and distance learning university offering flexible online programs for working professionals.",
-    "programs": ["BBA", "MCA", "M.Ed", "B.Ed", "PhD"],
+    "programs": [
+      "BBA",
+      "MCA",
+      "M.Ed",
+      "B.Ed",
+      "PhD"
+    ],
     "ranking": "#1 Distance",
     "students": 9000,
-    "website": "https://nou.edu.np",
-    "gradient": "from-fuchsia-500 to-pink-600"
+    "website": "https://nou.edu.np"
   },
   {
     "id": "u12",
@@ -173,10 +233,13 @@
     "location": "Jumla, Karnali",
     "type": "Autonomous",
     "description": "A health-sciences academy focused on medical and nursing education tailored to the remote Karnali region.",
-    "programs": ["MBBS", "B.Sc Nursing", "B.Pharm"],
+    "programs": [
+      "MBBS",
+      "B.Sc Nursing",
+      "B.Pharm"
+    ],
     "ranking": "Health Specialist",
     "students": 2500,
-    "website": "https://kahs.edu.np",
-    "gradient": "from-rose-500 to-red-700"
+    "website": "https://kahs.edu.np"
   }
 ]

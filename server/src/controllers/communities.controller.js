@@ -6,6 +6,7 @@ const sendSuccess = require("../utils/sendSuccess");
 
 const controller = createBaseController(Community, {
   order: [["order", "ASC"]],
+  searchFields: ["name", "description", "icon"],
 });
 
 const generateId = (prefix) =>
