@@ -17,7 +17,6 @@ router.use("/results", require("./result.routes"));
 router.use("/faqs", require("./faq.routes"));
 router.use("/posts", require("./post.routes"));
 router.use("/community", require("./community.routes"));
-router.use("/communities", require("./communities.routes"));
 router.use("/leaderboard", require("./leaderboard.routes"));
 router.use("/search", require("./search.routes"));
 router.use("/contact", require("./contact.routes"));

@@ -41,6 +41,7 @@ export const useAuthStore = create<AuthState>()(
     }),
     {
       name: "sandarbh-auth",
+      skipHydration: true,
       partialize: (state) => ({ token: state.token, user: state.user, isAdmin: state.isAdmin }),
       onRehydrateStorage: () => (state) => {
         // With localStorage, persist hydrates synchronously during store

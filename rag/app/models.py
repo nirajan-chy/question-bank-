@@ -8,7 +8,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .database import Base, settings
 
-EMBEDDING_DIM = 1536  # openai/text-embedding-3-small
+EMBEDDING_DIM = settings.rag_embedding_dim
 
 
 class Document(Base):

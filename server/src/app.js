@@ -6,17 +6,26 @@ const apiRoutes = require("./routes");
 const notFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
 const { UPLOAD_DIR } = require("./utils/upload");
-const { CLIENT_ORIGIN } = require("./config/dotenv");
+const { CLIENT_ORIGINS } = require("./config/dotenv");
 
 const app = express();
 
-// Trust the reverse proxy (Vercel/Render) so req.protocol respects
-// the x-forwarded-proto header and produces https:// redirect URIs.
-app.set("trust proxy", true);
+// Trust a single reverse proxy hop (Vercel/Render) so req.protocol respects
+// the x-forwarded-proto header. Limiting to one hop prevents arbitrary clients
+// from spoofing X-Forwarded-* headers (and bypassing IP-based rate limiting).
+app.set("trust proxy", 1);
 
 app.use(
   cors({
-    origin: CLIENT_ORIGIN || true || "http://localhost:3000",
+    // Deny-by-default allowlist. Requests with no Origin header (curl,
+    // server-to-server) are allowed; browser cross-origin requests must
+    // match an explicit origin in CLIENT_ORIGINS.
+    origin: (origin, cb) => {
+      // Requests without an Origin header (curl, server-to-server) pass through.
+      // Disallowed browser origins get no CORS headers, so the browser blocks
+      // reading the response — they are not server-side errors.
+      cb(null, !origin || CLIENT_ORIGINS.includes(origin));
+    },
     credentials: true,
   }),
 );

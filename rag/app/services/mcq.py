@@ -15,13 +15,13 @@ DIFFICULTY_GUIDE = {
 }
 
 
-def _context_from_request(db, user_id: str, req: McqGenerateRequest) -> str:
+async def _context_from_request(db, user_id: str, req: McqGenerateRequest) -> str:
     chunks = None
     if req.topics and req.topics.strip():
         query = f"{req.topics.strip()} ({req.difficulty} level)"
-        chunks = [c for c, _ in search_chunks(db, user_id, query, top_k=15, document_ids=req.document_ids)]
+        chunks = [c for c, _ in await search_chunks(db, user_id, query, top_k=15, document_ids=req.document_ids)]
     if not chunks:
-        chunks = sample_chunks(db, user_id, limit=15, document_ids=req.document_ids)
+        chunks = await sample_chunks(db, user_id, limit=15, document_ids=req.document_ids)
 
     if not chunks:
         return ""
@@ -67,8 +67,8 @@ def _validate_questions(payload: dict) -> list[dict]:
     return validated
 
 
-def generate_quiz(db, user_id: str, req: McqGenerateRequest) -> Quiz:
-    context = _context_from_request(db, user_id, req)
+async def generate_quiz(db, user_id: str, req: McqGenerateRequest) -> Quiz:
+    context = await _context_from_request(db, user_id, req)
     if not context:
         raise ValueError(
             "You need to upload at least one document before generating a quiz. "
@@ -99,7 +99,7 @@ def generate_quiz(db, user_id: str, req: McqGenerateRequest) -> Quiz:
         f"{context}"
     )
 
-    payload = chat_json([{"role": "user", "content": prompt}], temperature=0.4, max_tokens=4000)
+    payload = await chat_json([{"role": "user", "content": prompt}], temperature=0.4, max_tokens=4000)
     questions = _validate_questions(payload)
     if not questions:
         raise ValueError("The model could not generate valid questions. Please try again.")

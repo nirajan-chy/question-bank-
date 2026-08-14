@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api, admin, learn } from "./api";
-import type { McqGenerateRequest } from "@/types";
+import type { McqGenerateRequest, RagDocument } from "@/types";
 
 export const queryKeys = {
   levels: ["levels"] as const,
@@ -161,7 +161,15 @@ export const queryKeysLearn = {
 };
 
 export const useRagDocuments = () =>
-  useQuery({ queryKey: queryKeysLearn.documents, queryFn: learn.documents });
+  useQuery({
+    queryKey: queryKeysLearn.documents,
+    queryFn: learn.documents,
+    refetchInterval: (query) => {
+      const docs = query.state.data as RagDocument[] | undefined;
+      if (docs?.some((d) => d.status === "processing")) return 2000;
+      return false;
+    },
+  });
 
 export const useUploadDocument = () => {
   const queryClient = useQueryClient();

@@ -1,16 +1,14 @@
 import json
 import re
 
-import httpx
-
-from ..config import get_settings
-
-settings = get_settings()
+from ..http_client import get_client
 
 CHAT_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 
-def _headers() -> dict[str, str]:
+async def _headers() -> dict[str, str]:
+    from ..config import get_settings
+    settings = get_settings()
     if not settings.openrouter_api_key:
         raise RuntimeError("OPENROUTER_API_KEY is not configured in rag/.env")
     return {
@@ -19,57 +17,61 @@ def _headers() -> dict[str, str]:
     }
 
 
-def chat(messages: list[dict], temperature: float = 0.3, max_tokens: int = 1500) -> str:
+async def chat(messages: list[dict], temperature: float = 0.3, max_tokens: int = 1500) -> str:
     """Non-streaming chat completion. Returns the assistant text."""
-    with httpx.Client(timeout=180) as client:
-        response = client.post(
-            CHAT_URL,
-            headers=_headers(),
-            json={
-                "model": settings.rag_llm_model,
-                "messages": messages,
-                "temperature": temperature,
-                "max_tokens": max_tokens,
-            },
-        )
-        response.raise_for_status()
-        return response.json()["choices"][0]["message"]["content"]
+    from ..config import get_settings
+    settings = get_settings()
+    client = await get_client()
+    response = await client.post(
+        CHAT_URL,
+        headers=await _headers(),
+        json={
+            "model": settings.rag_llm_model,
+            "messages": messages,
+            "temperature": temperature,
+            "max_tokens": max_tokens,
+        },
+    )
+    response.raise_for_status()
+    return response.json()["choices"][0]["message"]["content"]
 
 
-def chat_stream(messages: list[dict], temperature: float = 0.3, max_tokens: int = 1500):
+async def chat_stream(messages: list[dict], temperature: float = 0.3, max_tokens: int = 1500):
     """Streaming chat completion. Yields text deltas."""
-    with httpx.Client(timeout=180) as client:
-        with client.stream(
-            "POST",
-            CHAT_URL,
-            headers=_headers(),
-            json={
-                "model": settings.rag_llm_model,
-                "messages": messages,
-                "temperature": temperature,
-                "max_tokens": max_tokens,
-                "stream": True,
-            },
-        ) as response:
-            response.raise_for_status()
-            for line in response.iter_lines():
-                if not line or not line.startswith("data:"):
-                    continue
-                payload = line[5:].strip()
-                if payload == "[DONE]":
-                    break
-                try:
-                    delta = json.loads(payload)["choices"][0]["delta"].get("content")
-                except (json.JSONDecodeError, KeyError, IndexError, TypeError):
-                    continue
-                if delta:
-                    yield delta
+    from ..config import get_settings
+    settings = get_settings()
+    client = await get_client()
+    async with client.stream(
+        "POST",
+        CHAT_URL,
+        headers=await _headers(),
+        json={
+            "model": settings.rag_llm_model,
+            "messages": messages,
+            "temperature": temperature,
+            "max_tokens": max_tokens,
+            "stream": True,
+        },
+    ) as response:
+        response.raise_for_status()
+        async for line in response.aiter_lines():
+            if not line or not line.startswith("data:"):
+                continue
+            payload = line[5:].strip()
+            if payload == "[DONE]":
+                break
+            try:
+                delta = json.loads(payload)["choices"][0]["delta"].get("content")
+            except (json.JSONDecodeError, KeyError, IndexError, TypeError):
+                continue
+            if delta:
+                yield delta
 
 
 _JSON_FENCE = re.compile(r"```(?:json)?\s*([\s\S]*?)```")
 
 
-def chat_json(messages: list[dict], temperature: float = 0.2, max_tokens: int = 3000) -> dict:
+async def chat_json(messages: list[dict], temperature: float = 0.2, max_tokens: int = 3000) -> dict:
     """Chat completion that must return a JSON object. Strips markdown fences."""
     messages = list(messages) + [
         {
@@ -78,7 +80,7 @@ def chat_json(messages: list[dict], temperature: float = 0.2, max_tokens: int = 
             "no trailing text. Output must parse with json.loads.",
         }
     ]
-    raw = chat(messages, temperature=temperature, max_tokens=max_tokens)
+    raw = await chat(messages, temperature=temperature, max_tokens=max_tokens)
     fenced = _JSON_FENCE.search(raw)
     candidate = fenced.group(1) if fenced else raw
     try:

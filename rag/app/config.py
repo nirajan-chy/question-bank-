@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     rag_chunk_overlap: int = 200
     rag_top_k: int = 6
     rag_max_file_size_mb: int = 100
+    rag_embedding_dim: int = 1536
 
     @property
     def max_file_bytes(self) -> int:

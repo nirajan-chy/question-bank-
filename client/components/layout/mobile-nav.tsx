@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Menu, LogOut, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { mainNav, resourcesNav } from "@/lib/nav";
@@ -15,14 +15,12 @@ import { useAuthStore } from "@/store/use-auth-store";
 
 export function MobileNav() {
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const user = useAuthStore((s) => s.user);
   const isAdmin = useAuthStore((s) => s.isAdmin);
   const logout = useAuthStore((s) => s.logout);
-
-  useEffect(() => setMounted(true), []);
+  const hasHydrated = useAuthStore((s) => s.hasHydrated);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -83,7 +81,7 @@ export function MobileNav() {
             ))}
           </nav>
           <Separator className="my-4" />
-          {mounted && user ? (
+          {hasHydrated && user ? (
             <div className="px-2">
               <div className="flex items-center gap-3 rounded-lg border p-3">
                 <Avatar className="h-9 w-9">
