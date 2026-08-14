@@ -10,6 +10,41 @@ const toNumber = (value) => {
 
 const toBoolean = (value) => value === "true" || value === true || value === "1";
 
+const slugify = (value) =>
+  String(value || "")
+    .toLowerCase()
+    .trim()
+    .replace(/['"]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 80);
+
+/**
+ * Auto-generate a slug for models that have a slug column when the request
+ * body does not provide one (admins no longer manage slugs — the server does).
+ * Uniqueness is enforced by appending a numeric suffix on collision.
+ */
+const ensureSlug = async (Model, body) => {
+  if (!Model.rawAttributes?.slug) return;
+  if (body.slug && String(body.slug).trim()) return;
+  const source = body.name ?? body.title ?? body.question ?? body.exam ?? body.id;
+  if (!source) return;
+  const base = slugify(source);
+  if (!base) return;
+  let candidate = base;
+  let suffix = 1;
+  while (Model.rawAttributes.slug.unique) {
+    const existing = await Model.findOne({
+      where: { slug: candidate },
+      attributes: ["id"],
+      raw: true,
+    });
+    if (!existing) break;
+    candidate = `${base}-${suffix++}`;
+  }
+  body.slug = candidate;
+};
+
 /**
  * Factory that generates the standard CRUD + listing controller
  * for a Sequelize model, with configurable filter/order behaviour.
@@ -21,6 +56,8 @@ const createBaseController = (Model, config = {}) => {
     // { field: "featured", boolean: true }
     filters = [],
     order = [],
+    // Fields searched with `?search=...` (iLike across the listed columns)
+    searchFields = [],
     // Fields allowed for slug-based lookup
     slugField = "slug",
   } = config;
@@ -41,8 +78,14 @@ const createBaseController = (Model, config = {}) => {
   };
 
   const list = asyncHandler(async (req, res) => {
-    const { limit } = req.query;
+    const { limit, search } = req.query;
     const where = buildWhere(req.query);
+    if (search && String(search).trim() && searchFields.length) {
+      const q = String(search).trim();
+      where[Op.or] = searchFields.map((field) => ({
+        [field]: { [Op.iLike]: `%${q}%` },
+      }));
+    }
     const items = await Model.findAll({
       where,
       order,
@@ -73,6 +116,7 @@ const createBaseController = (Model, config = {}) => {
           .toLowerCase() || "row";
       body.id = `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
     }
+    await ensureSlug(Model, body);
     let item;
     try {
       item = await Model.create(body);

@@ -8,13 +8,25 @@
     "amount": "NRs 1,00,000/year",
     "deadline": "2026-09-15",
     "seats": 20,
-    "eligibility": ["Nepali citizen", "SEE GPA 3.6+ or +2 CGPA 3.4+", "Annual family income below NRs 5,00,000"],
-    "requirements": ["Completed application form", "Academic transcripts", "Recommendation letter", "Personal statement"],
+    "eligibility": [
+      "Nepali citizen",
+      "SEE GPA 3.6+ or +2 CGPA 3.4+",
+      "Annual family income below NRs 5,00,000"
+    ],
+    "requirements": [
+      "Completed application form",
+      "Academic transcripts",
+      "Recommendation letter",
+      "Personal statement"
+    ],
     "category": "Merit-cum-Means",
     "description": "Full-tuition support and stipend for financially constrained yet high-performing bachelor students across TU, PU and KU.",
-    "gradient": "from-indigo-500 to-violet-600",
     "featured": true,
-    "tags": ["Bachelor", "Merit", "Need-based"]
+    "tags": [
+      "Bachelor",
+      "Merit",
+      "Need-based"
+    ]
   },
   {
     "id": "sch2",
@@ -25,13 +37,24 @@
     "amount": "Full Tuition",
     "deadline": "2026-08-30",
     "seats": 150,
-    "eligibility": ["Entrance exam qualifiers", "SEE pass", "Economically disadvantaged families"],
-    "requirements": ["Entrance score", "Income certificate", "Tribal/indigenous or Dalit quota documents if applicable"],
+    "eligibility": [
+      "Entrance exam qualifiers",
+      "SEE pass",
+      "Economically disadvantaged families"
+    ],
+    "requirements": [
+      "Entrance score",
+      "Income certificate",
+      "Tribal/indigenous or Dalit quota documents if applicable"
+    ],
     "category": "Government",
     "description": "Government-sponsored quota scholarships for diploma engineering, health and IT students in CTEVT institutes nationwide.",
-    "gradient": "from-amber-500 to-orange-600",
     "featured": true,
-    "tags": ["CTEVT", "Government", "Diploma"]
+    "tags": [
+      "CTEVT",
+      "Government",
+      "Diploma"
+    ]
   },
   {
     "id": "sch3",
@@ -42,13 +65,25 @@
     "amount": "Full Tuition + Stipend",
     "deadline": "2026-09-10",
     "seats": 100,
-    "eligibility": ["Female students", "SEE GPA 3.0+", "Public college admission"],
-    "requirements": ["SEE transcript", "College admission proof", "Citizenship"],
+    "eligibility": [
+      "Female students",
+      "SEE GPA 3.0+",
+      "Public college admission"
+    ],
+    "requirements": [
+      "SEE transcript",
+      "College admission proof",
+      "Citizenship"
+    ],
     "category": "Government",
     "description": "Fully funded +2 education for meritorious girls enrolled in public colleges to close the gender gap in higher education.",
-    "gradient": "from-rose-500 to-pink-600",
     "featured": true,
-    "tags": ["Class 11", "Class 12", "Girls", "Government"]
+    "tags": [
+      "Class 11",
+      "Class 12",
+      "Girls",
+      "Government"
+    ]
   },
   {
     "id": "sch4",
@@ -59,13 +94,24 @@
     "amount": "NRs 75,000/year",
     "deadline": "2026-10-01",
     "seats": 10,
-    "eligibility": ["Volunteer track record", "CGPA 3.0+", "Community involvement"],
-    "requirements": ["Service certificates", "Essay on community impact", "Two recommendations"],
+    "eligibility": [
+      "Volunteer track record",
+      "CGPA 3.0+",
+      "Community involvement"
+    ],
+    "requirements": [
+      "Service certificates",
+      "Essay on community impact",
+      "Two recommendations"
+    ],
     "category": "Community",
     "description": "Rewards students who have demonstrated extraordinary commitment to community service while maintaining strong academics.",
-    "gradient": "from-emerald-500 to-teal-600",
     "featured": false,
-    "tags": ["Bachelor", "Community", "Service"]
+    "tags": [
+      "Bachelor",
+      "Community",
+      "Service"
+    ]
   },
   {
     "id": "sch5",
@@ -76,13 +122,24 @@
     "amount": "NRs 50,000 (One-time)",
     "deadline": "2026-08-20",
     "seats": 50,
-    "eligibility": ["SEE 2082 result", "GPA 3.8+", "Government school student"],
-    "requirements": ["SEE marksheet", "School certificate", "Citizenship"],
+    "eligibility": [
+      "SEE 2082 result",
+      "GPA 3.8+",
+      "Government school student"
+    ],
+    "requirements": [
+      "SEE marksheet",
+      "School certificate",
+      "Citizenship"
+    ],
     "category": "Merit",
     "description": "Cash award for top-performing government school students in the SEE examination to encourage public schooling.",
-    "gradient": "from-sky-500 to-blue-600",
     "featured": false,
-    "tags": ["SEE", "Merit", "Government school"]
+    "tags": [
+      "SEE",
+      "Merit",
+      "Government school"
+    ]
   },
   {
     "id": "sch6",
@@ -93,13 +150,24 @@
     "amount": "NRs 2,00,000/year",
     "deadline": "2026-11-05",
     "seats": 5,
-    "eligibility": ["MA in Nepali literature or related", "Research proposal", "Published writing preferred"],
-    "requirements": ["Research proposal", "Academic record", "Writing samples"],
+    "eligibility": [
+      "MA in Nepali literature or related",
+      "Research proposal",
+      "Published writing preferred"
+    ],
+    "requirements": [
+      "Research proposal",
+      "Academic record",
+      "Writing samples"
+    ],
     "category": "Research",
     "description": "Supports postgraduate research in Nepali language, literature and culture with a generous stipend.",
-    "gradient": "from-purple-500 to-fuchsia-600",
     "featured": false,
-    "tags": ["Master", "Research", "Literature"]
+    "tags": [
+      "Master",
+      "Research",
+      "Literature"
+    ]
   },
   {
     "id": "sch7",
@@ -110,13 +178,24 @@
     "amount": "NRs 1,50,000/year",
     "deadline": "2026-09-25",
     "seats": 15,
-    "eligibility": ["Demonstrated leadership", "CGPA 3.5+", "Two endorsements"],
-    "requirements": ["Leadership portfolio", "Essays", "Interview"],
+    "eligibility": [
+      "Demonstrated leadership",
+      "CGPA 3.5+",
+      "Two endorsements"
+    ],
+    "requirements": [
+      "Leadership portfolio",
+      "Essays",
+      "Interview"
+    ],
     "category": "Leadership",
     "description": "For student leaders driving positive change — covers tuition and leadership development programs.",
-    "gradient": "from-orange-500 to-red-600",
     "featured": true,
-    "tags": ["Bachelor", "Master", "Leadership"]
+    "tags": [
+      "Bachelor",
+      "Master",
+      "Leadership"
+    ]
   },
   {
     "id": "sch8",
@@ -127,12 +206,23 @@
     "amount": "NRs 1,20,000/year",
     "deadline": "2026-10-15",
     "seats": 40,
-    "eligibility": ["Admission to CSIT/IT/Computer programs", "SEE +2 aggregate 65%+", "Nepali citizen"],
-    "requirements": ["Entrance rank", "Transcripts", "Statement of purpose"],
+    "eligibility": [
+      "Admission to CSIT/IT/Computer programs",
+      "SEE +2 aggregate 65%+",
+      "Nepali citizen"
+    ],
+    "requirements": [
+      "Entrance rank",
+      "Transcripts",
+      "Statement of purpose"
+    ],
     "category": "Government",
     "description": "Boosts Nepal's digital workforce by funding bright students in IT, CSIT and computer engineering programs.",
-    "gradient": "from-cyan-500 to-blue-600",
     "featured": false,
-    "tags": ["CSIT", "IT", "Government"]
+    "tags": [
+      "CSIT",
+      "IT",
+      "Government"
+    ]
   }
 ]

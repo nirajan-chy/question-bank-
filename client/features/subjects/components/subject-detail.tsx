@@ -19,6 +19,7 @@ import { notFound } from "next/navigation";
 import { toast } from "sonner";
 import { useSubject, useSubjects, useNotes, useBooks, useQuestionBanks, usePastPapers } from "@/services/queries";
 import { cn, formatNumber } from "@/lib/utils";
+import { gradientFor } from "@/lib/gradients";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -86,7 +87,7 @@ export function SubjectDetail({ slug, initialTab = "overview" }: { slug: string;
   return (
     <>
       <header className="relative overflow-hidden border-b bg-mesh-light dark:bg-mesh-dark">
-        <div className={cn("absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r", subject.gradient)} />
+        <div className={cn("absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r", gradientFor(subject.name))} />
         <div className="container py-10 md:py-14">
           <nav className="mb-6 flex items-center gap-1.5 text-sm text-muted-foreground">
             <Link href="/" className="hover:text-foreground">Home</Link>
@@ -98,7 +99,7 @@ export function SubjectDetail({ slug, initialTab = "overview" }: { slug: string;
           <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
             <div>
               <div className="flex flex-wrap items-center gap-3">
-                <span className={cn("flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br text-3xl text-white shadow-glow-sm", subject.gradient)}>
+                <span className={cn("flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br text-3xl text-white shadow-glow-sm", gradientFor(subject.name))}>
                   {subject.emoji}
                 </span>
                 <div>
@@ -129,7 +130,7 @@ export function SubjectDetail({ slug, initialTab = "overview" }: { slug: string;
                   <p className="text-sm font-medium">Your progress</p>
                   <span className="text-sm font-bold text-primary">62%</span>
                 </div>
-                <Progress value={62} className="mt-3" indicatorClassName={cn("bg-gradient-to-r", subject.gradient)} />
+                <Progress value={62} className="mt-3" indicatorClassName={cn("bg-gradient-to-r", gradientFor(subject.name))} />
                 <p className="mt-3 text-xs text-muted-foreground">
                   {formatNumber(420)} questions solved · {formatNumber(18)} hours studied
                 </p>
@@ -459,7 +460,7 @@ function VideosTab({ subject, videos }: { subject: NonNullable<ReturnType<typeof
     <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
       {videos.map((video) => (
         <Card key={video.id} className="group overflow-hidden transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-card-hover">
-          <div className={cn("relative flex aspect-video items-center justify-center bg-gradient-to-br", subject.gradient)}>
+          <div className={cn("relative flex aspect-video items-center justify-center bg-gradient-to-br", gradientFor(subject.name))}>
             <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/25 backdrop-blur-sm transition-transform group-hover:scale-110">
               <PlayCircle className="h-7 w-7 text-white" />
             </span>
@@ -536,7 +537,7 @@ function DownloadsTab({ subject, downloads }: { subject: NonNullable<ReturnType<
   return (
     <div className="mx-auto max-w-3xl space-y-3">
       <Card className="flex items-center gap-4 p-5">
-        <span className={cn("flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br text-white", subject.gradient)}>
+        <span className={cn("flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br text-white", gradientFor(subject.name))}>
           <Download className="h-5 w-5" />
         </span>
         <div className="min-w-0 flex-1">

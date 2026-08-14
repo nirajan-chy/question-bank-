@@ -2,6 +2,7 @@ const asyncHandler = require("../utils/asyncHandler");
 const ApiError = require("../utils/ApiError");
 const sendSuccess = require("../utils/sendSuccess");
 const models = require("../models");
+const { sequelize } = require("../config/postgres");
 
 const { Op } = require("sequelize");
 
@@ -84,7 +85,7 @@ const getUserStats = asyncHandler(async (req, res) => {
     models.User.count({ where: { createdAt: { [Op.gte]: sevenDaysAgo } } }),
     models.User.count({ where: { createdAt: { [Op.gte]: thirtyDaysAgo } } }),
     models.User.findAll({
-      attributes: ["role", [models.sequelize.fn("COUNT", models.sequelize.col("id")), "count"]],
+      attributes: ["role", [sequelize.fn("COUNT", sequelize.col("id")), "count"]],
       group: ["role"],
       raw: true,
     }),

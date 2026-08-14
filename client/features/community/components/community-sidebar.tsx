@@ -18,6 +18,7 @@ import {
   Award
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { gradientFor } from "@/lib/gradients";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import type { Community } from "@/types";
@@ -104,7 +105,7 @@ export function CommunitySidebar({
                 <div
                   className={cn(
                     "flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br text-white",
-                    community.gradient
+                    gradientFor(community.name)
                   )}
                 >
                   <Icon className="h-5 w-5" />

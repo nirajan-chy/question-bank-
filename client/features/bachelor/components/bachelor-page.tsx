@@ -7,6 +7,7 @@ import { PageHeader } from "@/components/shared/page-header";
 import { GridSkeleton } from "@/components/shared/skeletons";
 import { SubjectCard } from "@/features/education/components/cards";
 import { cn } from "@/lib/utils";
+import { gradientFor } from "@/lib/gradients";
 
 export function BachelorPage() {
   const { data: subjects, isLoading: loadingSubjects } = useSubjectsByLevel("bachelor");
@@ -40,7 +41,7 @@ export function BachelorPage() {
               key={f.id}
               className="rounded-xl border bg-background/80 p-3 text-center backdrop-blur-sm"
             >
-              <span className={cn("mx-auto flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br text-white", f.gradient)}>
+              <span className={cn("mx-auto flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br text-white", gradientFor(f.name))}>
                 {f.short.slice(0, 1)}
               </span>
               <p className="mt-2 text-xs font-semibold">{f.name}</p>
@@ -87,7 +88,7 @@ export function BachelorPage() {
                     href={`/universities/${uni.slug}`}
                     className="group flex items-center gap-4 rounded-xl border bg-card p-4 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-card-hover"
                   >
-                    <span className={cn("flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br font-display text-sm font-bold text-white", uni.gradient)}>
+                    <span className={cn("flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br font-display text-sm font-bold text-white", gradientFor(uni.name))}>
                       {uni.short}
                     </span>
                     <div className="min-w-0">

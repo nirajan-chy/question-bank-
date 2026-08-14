@@ -7,6 +7,7 @@ const slugify = require("../utils/slugify");
 
 const controller = createBaseController(CommunityQuestion, {
   order: [["createdAt", "DESC"]],
+  searchFields: ["title", "body", "author", "authorRole"],
 });
 
 const createQuestion = asyncHandler(async (req, res) => {

@@ -6,6 +6,7 @@ import { SectionHeader } from "@/components/shared/section-header";
 import { Stagger, StaggerItem } from "@/components/shared/motion";
 import { cn } from "@/lib/utils";
 import { formatNumber } from "@/lib/utils";
+import { gradientFor } from "@/lib/gradients";
 
 export function Universities() {
   const { data: universities, isLoading } = useUniversities();
@@ -37,7 +38,7 @@ export function Universities() {
                   <span
                     className={cn(
                       "flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br font-display text-lg font-bold text-white shadow-sm",
-                      uni.gradient
+                      gradientFor(uni.name)
                     )}
                   >
                     {uni.short}

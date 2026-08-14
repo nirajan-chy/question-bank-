@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Loader2, ShieldAlert } from "lucide-react";
 import { useAuthStore } from "@/store/use-auth-store";
+import { auth } from "@/services/api";
+import { ApiClientError } from "@/services/http";
 import { AdminNav } from "@/components/admin/admin-nav";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/shared/logo";
@@ -14,10 +16,41 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const token = useAuthStore((s) => s.token);
   const user = useAuthStore((s) => s.user);
   const isAdmin = useAuthStore((s) => s.isAdmin);
+  const hasHydrated = useAuthStore((s) => s.hasHydrated);
+  const logout = useAuthStore((s) => s.logout);
 
   useEffect(() => {
-    if (!token) router.replace("/login");
-  }, [token, router]);
+    if (!hasHydrated) return;
+    if (!token) {
+      router.replace("/login");
+      return;
+    }
+    let cancelled = false;
+    auth
+      .me()
+      .catch((error: unknown) => {
+        if (cancelled) return;
+        // Only a genuine invalid/expired token should end the session. Transient
+        // network/server errors must not log the admin out (that caused the
+        // "refresh → login" / login-loop regressions).
+        if (error instanceof ApiClientError && error.status === 401) {
+          logout();
+          router.replace("/login");
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [hasHydrated, token, router, logout]);
+
+  if (!hasHydrated) {
+    return (
+      <div className="flex min-h-[60vh] flex-col items-center justify-center gap-3">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        <p className="text-sm text-muted-foreground">Restoring session…</p>
+      </div>
+    );
+  }
 
   if (!token) {
     return (

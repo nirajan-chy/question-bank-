@@ -19,7 +19,6 @@ module.exports = (sequelize) => {
       ranking: { type: DataTypes.STRING, allowNull: false },
       students: { type: DataTypes.INTEGER, allowNull: false },
       website: { type: DataTypes.STRING, allowNull: false },
-      gradient: { type: DataTypes.STRING, allowNull: false },
     },
     { tableName: "universities", timestamps: true }
   );

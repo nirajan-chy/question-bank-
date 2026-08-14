@@ -1,7 +1,6 @@
 import { BASEURL } from "@/config/env";
 
 export const BASE_URL = BASEURL;
-console.log(BASE_URL);
 export class ApiClientError extends Error {
   status: number;
   errors: unknown[];

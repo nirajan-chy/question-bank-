@@ -4,18 +4,49 @@
     "name": "Class 12 · NEB Community",
     "description": "Final board year of +2 education under NEB curriculum.",
     "icon": "GraduationCap",
-    "gradient": "from-purple-600 to-fuchsia-600",
     "memberCount": 19800,
     "badge": "Board Exam",
     "channels": [
-      { "id": "general", "name": "general", "description": "General discussion about Class 12" },
-      { "id": "doubt-solving", "name": "doubt-solving", "description": "Ask and solve doubts" },
-      { "id": "exam-prep", "name": "exam-prep", "description": "Exam preparation and tips" },
-      { "id": "past-papers", "name": "past-papers", "description": "Share and discuss past papers" },
-      { "id": "study-materials", "name": "study-materials", "description": "Share and find study materials" },
-      { "id": "university-admissions", "name": "university-admissions", "description": "University admission guidance" },
-      { "id": "career-guidance", "name": "career-guidance", "description": "Career guidance after +2" },
-      { "id": "random", "name": "random", "description": "Random discussions" }
+      {
+        "id": "general",
+        "name": "general",
+        "description": "General discussion about Class 12"
+      },
+      {
+        "id": "doubt-solving",
+        "name": "doubt-solving",
+        "description": "Ask and solve doubts"
+      },
+      {
+        "id": "exam-prep",
+        "name": "exam-prep",
+        "description": "Exam preparation and tips"
+      },
+      {
+        "id": "past-papers",
+        "name": "past-papers",
+        "description": "Share and discuss past papers"
+      },
+      {
+        "id": "study-materials",
+        "name": "study-materials",
+        "description": "Share and find study materials"
+      },
+      {
+        "id": "university-admissions",
+        "name": "university-admissions",
+        "description": "University admission guidance"
+      },
+      {
+        "id": "career-guidance",
+        "name": "career-guidance",
+        "description": "Career guidance after +2"
+      },
+      {
+        "id": "random",
+        "name": "random",
+        "description": "Random discussions"
+      }
     ]
   },
   {
@@ -23,16 +54,43 @@
     "name": "CTEVT Community",
     "description": "Council for Technical Education and Vocational Training programs.",
     "icon": "Wrench",
-    "gradient": "from-amber-500 to-orange-600",
     "memberCount": 8700,
     "channels": [
-      { "id": "general", "name": "general", "description": "General discussion about CTEVT programs" },
-      { "id": "doubt-solving", "name": "doubt-solving", "description": "Ask and solve doubts" },
-      { "id": "exam-prep", "name": "exam-prep", "description": "Exam preparation and tips" },
-      { "id": "diploma-programs", "name": "diploma-programs", "description": "Diploma engineering, health, IT" },
-      { "id": "study-materials", "name": "study-materials", "description": "Share and find study materials" },
-      { "id": "career-guidance", "name": "career-guidance", "description": "Career guidance and advice" },
-      { "id": "random", "name": "random", "description": "Random discussions" }
+      {
+        "id": "general",
+        "name": "general",
+        "description": "General discussion about CTEVT programs"
+      },
+      {
+        "id": "doubt-solving",
+        "name": "doubt-solving",
+        "description": "Ask and solve doubts"
+      },
+      {
+        "id": "exam-prep",
+        "name": "exam-prep",
+        "description": "Exam preparation and tips"
+      },
+      {
+        "id": "diploma-programs",
+        "name": "diploma-programs",
+        "description": "Diploma engineering, health, IT"
+      },
+      {
+        "id": "study-materials",
+        "name": "study-materials",
+        "description": "Share and find study materials"
+      },
+      {
+        "id": "career-guidance",
+        "name": "career-guidance",
+        "description": "Career guidance and advice"
+      },
+      {
+        "id": "random",
+        "name": "random",
+        "description": "Random discussions"
+      }
     ]
   },
   {
@@ -40,21 +98,64 @@
     "name": "Bachelor Community",
     "description": "University degree programs including BSc CSIT, BBA, BBS, and more.",
     "icon": "Landmark",
-    "gradient": "from-sky-600 to-blue-700",
     "memberCount": 31200,
     "badge": "TU · KU · PU",
     "channels": [
-      { "id": "general", "name": "general", "description": "General discussion about bachelor programs" },
-      { "id": "bsc-csit", "name": "bsc-csit", "description": "BSc CSIT specific discussions" },
-      { "id": "bba", "name": "bba", "description": "BBA specific discussions" },
-      { "id": "bbs", "name": "bbs", "description": "BBS specific discussions" },
-      { "id": "engineering", "name": "engineering", "description": "BE Civil, BE Computer, and other engineering" },
-      { "id": "doubt-solving", "name": "doubt-solving", "description": "Ask and solve doubts" },
-      { "id": "exam-prep", "name": "exam-prep", "description": "Exam preparation and tips" },
-      { "id": "projects", "name": "projects", "description": "Project ideas and collaboration" },
-      { "id": "study-materials", "name": "study-materials", "description": "Share and find study materials" },
-      { "id": "career-guidance", "name": "career-guidance", "description": "Career guidance and advice" },
-      { "id": "random", "name": "random", "description": "Random discussions" }
+      {
+        "id": "general",
+        "name": "general",
+        "description": "General discussion about bachelor programs"
+      },
+      {
+        "id": "bsc-csit",
+        "name": "bsc-csit",
+        "description": "BSc CSIT specific discussions"
+      },
+      {
+        "id": "bba",
+        "name": "bba",
+        "description": "BBA specific discussions"
+      },
+      {
+        "id": "bbs",
+        "name": "bbs",
+        "description": "BBS specific discussions"
+      },
+      {
+        "id": "engineering",
+        "name": "engineering",
+        "description": "BE Civil, BE Computer, and other engineering"
+      },
+      {
+        "id": "doubt-solving",
+        "name": "doubt-solving",
+        "description": "Ask and solve doubts"
+      },
+      {
+        "id": "exam-prep",
+        "name": "exam-prep",
+        "description": "Exam preparation and tips"
+      },
+      {
+        "id": "projects",
+        "name": "projects",
+        "description": "Project ideas and collaboration"
+      },
+      {
+        "id": "study-materials",
+        "name": "study-materials",
+        "description": "Share and find study materials"
+      },
+      {
+        "id": "career-guidance",
+        "name": "career-guidance",
+        "description": "Career guidance and advice"
+      },
+      {
+        "id": "random",
+        "name": "random",
+        "description": "Random discussions"
+      }
     ]
   },
   {
@@ -62,15 +163,38 @@
     "name": "Master Community",
     "description": "Graduate programs including MBA, MSc, MBS, and more.",
     "icon": "Award",
-    "gradient": "from-rose-500 to-pink-600",
     "memberCount": 6500,
     "channels": [
-      { "id": "general", "name": "general", "description": "General discussion about master programs" },
-      { "id": "doubt-solving", "name": "doubt-solving", "description": "Ask and solve doubts" },
-      { "id": "research", "name": "research", "description": "Research methodology and thesis" },
-      { "id": "study-materials", "name": "study-materials", "description": "Share and find study materials" },
-      { "id": "career-guidance", "name": "career-guidance", "description": "Career guidance and advice" },
-      { "id": "random", "name": "random", "description": "Random discussions" }
+      {
+        "id": "general",
+        "name": "general",
+        "description": "General discussion about master programs"
+      },
+      {
+        "id": "doubt-solving",
+        "name": "doubt-solving",
+        "description": "Ask and solve doubts"
+      },
+      {
+        "id": "research",
+        "name": "research",
+        "description": "Research methodology and thesis"
+      },
+      {
+        "id": "study-materials",
+        "name": "study-materials",
+        "description": "Share and find study materials"
+      },
+      {
+        "id": "career-guidance",
+        "name": "career-guidance",
+        "description": "Career guidance and advice"
+      },
+      {
+        "id": "random",
+        "name": "random",
+        "description": "Random discussions"
+      }
     ]
   }
 ]

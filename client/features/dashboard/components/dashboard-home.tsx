@@ -21,6 +21,7 @@ import { useUserStore } from "@/store/use-user-store";
 import { useStudyStore } from "@/store/use-study-store";
 import { useLeaderboard, useSubjects } from "@/services/queries";
 import { cn, formatNumber } from "@/lib/utils";
+import { gradientFor } from "@/lib/gradients";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -322,7 +323,7 @@ export function DashboardHome() {
           <div className="mt-4 space-y-3">
             {subjects.slice(0, 3).map((s, i) => (
               <Link key={s.id} href={`/subjects/${s.slug}`} className="flex items-center gap-3 rounded-xl border p-3 transition-colors hover:border-primary/40 hover:bg-accent/40">
-                <span className={cn("flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br text-lg", s.gradient)}>{s.emoji}</span>
+                <span className={cn("flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br text-lg", gradientFor(s.name))}>{s.emoji}</span>
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-medium">{s.name}</p>
                   <div className="mt-1.5 flex items-center gap-2">

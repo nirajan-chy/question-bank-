@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { CheckCircle2, ShieldCheck, Trash2, X } from "lucide-react";
+import { CheckCircle2, Search, ShieldCheck, Trash2, X } from "lucide-react";
 import { toast } from "sonner";
 import { admin } from "@/services/api";
 import { useAdminUsers } from "@/services/queries";
@@ -11,13 +11,21 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Input } from "@/components/ui/input";
 
 export function UsersManager() {
   const queryClient = useQueryClient();
   const { data: users = [], isLoading } = useAdminUsers();
   const currentUserId = useAuthStore((s) => s.user?.id);
+  const [query, setQuery] = useState("");
   const [confirmingId, setConfirmingId] = useState<string | null>(null);
   const [savingId, setSavingId] = useState<string | null>(null);
+
+  const filtered = users.filter((u) => {
+    const q = query.trim().toLowerCase();
+    if (!q) return true;
+    return u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q);
+  });
 
   const invalidate = () => {
     queryClient.invalidateQueries({ queryKey: ["admin", "users"] });
@@ -64,17 +72,33 @@ export function UsersManager() {
 
       <Card>
         <CardContent className="p-0">
+          <div className="flex items-center gap-2 border-b p-3">
+            <Search className="h-4 w-4 text-muted-foreground" />
+            <Input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search users by name or email…"
+              className="h-8 border-0 shadow-none focus-visible:ring-0"
+            />
+            {query && (
+              <Button variant="ghost" size="icon-sm" onClick={() => setQuery("")} aria-label="Clear search">
+                <X className="h-4 w-4" />
+              </Button>
+            )}
+          </div>
           {isLoading ? (
             <div className="space-y-3 p-4">
               {Array.from({ length: 4 }).map((_, i) => (
                 <Skeleton key={i} className="h-12" />
               ))}
             </div>
-          ) : users.length === 0 ? (
-            <p className="p-8 text-center text-sm text-muted-foreground">No users yet.</p>
+          ) : filtered.length === 0 ? (
+            <p className="p-8 text-center text-sm text-muted-foreground">
+              {query ? "No users match your search." : "No users yet."}
+            </p>
           ) : (
             <ul className="divide-y">
-              {users.map((u) => (
+              {filtered.map((u) => (
                 <li key={u.id} className="flex flex-wrap items-center gap-3 px-4 py-3">
                   <div className="flex min-w-0 flex-1 items-center gap-3">
                     <span

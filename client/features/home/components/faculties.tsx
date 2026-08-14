@@ -5,6 +5,7 @@ import { useFaculties } from "@/services/queries";
 import { SectionHeader } from "@/components/shared/section-header";
 import { Stagger, StaggerItem } from "@/components/shared/motion";
 import { cn } from "@/lib/utils";
+import { gradientFor } from "@/lib/gradients";
 
 export function Faculties() {
   const { data: faculties, isLoading } = useFaculties();
@@ -41,7 +42,7 @@ export function Faculties() {
                 href="/classes"
                 className="group flex h-full flex-col rounded-2xl border bg-background p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-card-hover"
               >
-                <span className={cn("flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br text-white", faculty.gradient)}>
+                <span className={cn("flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br text-white", gradientFor(faculty.name))}>
                   {faculty.short.slice(0, 1)}
                 </span>
                 <h3 className="mt-4 font-semibold group-hover:text-primary">{faculty.name}</h3>

@@ -5,7 +5,9 @@ const asyncHandler = require("../utils/asyncHandler");
 const ApiError = require("../utils/ApiError");
 const sendSuccess = require("../utils/sendSuccess");
 
-const controller = createBaseController(Subject);
+const controller = createBaseController(Subject, {
+  searchFields: ["name", "level", "stream", "category", "description"],
+});
 
 const listByLevel = asyncHandler(async (req, res) => {
   const items = await Subject.findAll({

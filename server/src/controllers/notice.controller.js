@@ -6,6 +6,7 @@ const controller = createBaseController(Notice, {
     ["pinned", "DESC"],
     ["date", "DESC"],
   ],
+  searchFields: ["title", "category", "body"],
 });
 
 module.exports = controller;

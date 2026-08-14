@@ -10,6 +10,7 @@ import { SubjectCard } from "@/features/education/components/cards";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { gradientFor } from "@/lib/gradients";
 
 export function LevelDetail({ slug }: { slug: string }) {
   const { data: levels, isLoading: loadingLevels } = useLevels();
@@ -90,7 +91,7 @@ export function LevelDetail({ slug }: { slug: string }) {
                     <Link key={course.id} href={`/courses/${course.slug}`}>
                       <div className="group h-full overflow-hidden rounded-xl border bg-card p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-card-hover">
                         <div className="flex items-start justify-between">
-                          <span className={cn("flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br text-2xl text-white shadow-sm", course.gradient)}>
+                          <span className={cn("flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br text-2xl text-white shadow-sm", gradientFor(course.name))}>
                             {course.icon}
                           </span>
                           <ArrowRight className="h-5 w-5 shrink-0 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />

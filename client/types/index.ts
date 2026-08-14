@@ -78,7 +78,6 @@ export type Course = {
   levelSlug: string;
   category: string;
   icon: string;
-  gradient: string;
   semesterCount: number;
   university: string;
   tags: string[];
@@ -108,7 +107,6 @@ export type University = {
   ranking: string;
   students: number;
   website: string;
-  gradient: string;
 };
 
 export type Faculty = {
@@ -118,7 +116,6 @@ export type Faculty = {
   short: string;
   description: string;
   icon: string;
-  gradient: string;
   programs: string[];
 };
 
@@ -137,7 +134,6 @@ export type Subject = {
   units: string[];
   syllabus: { unit: string; topics: string[]; hours: number }[];
   emoji: string;
-  gradient: string;
   popularity: number;
   notes: number;
   books: number;
@@ -235,6 +231,31 @@ export type PastPaper = {
   tags: string[];
 };
 
+export type MockTestQuestion = {
+  id: string;
+  question: string;
+  options: string[];
+  correctIndex: number;
+  marks?: number;
+  topic?: string | null;
+  explanation?: string | null;
+  difficulty?: "Easy" | "Medium" | "Hard";
+};
+
+export type MockTestResultQuestion = MockTestQuestion & {
+  selected: number | null;
+  correct: boolean;
+};
+
+export type MockTestResult = {
+  score: number;
+  total: number;
+  percentage: number;
+  passed: boolean;
+  passPercent: number;
+  results: MockTestResultQuestion[];
+};
+
 export type MockTest = {
   id: string;
   slug: string;
@@ -252,6 +273,7 @@ export type MockTest = {
   description: string;
   premium: boolean;
   tags: string[];
+  questionData?: MockTestQuestion[];
 };
 
 export type Scholarship = {
@@ -267,7 +289,6 @@ export type Scholarship = {
   requirements: string[];
   category: string;
   description: string;
-  gradient: string;
   featured: boolean;
   tags: string[];
 };
@@ -364,7 +385,6 @@ export type Community = {
   name: string;
   description: string;
   icon: string;
-  gradient: string;
   memberCount: number;
   badge?: string;
   channels: CommunityChannel[];
