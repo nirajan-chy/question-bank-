@@ -9,13 +9,13 @@ router = APIRouter(prefix="/mcq", tags=["mcq"])
 
 
 @router.post("/generate", response_model=McqOut, status_code=201)
-def generate(
+async def generate(
     payload: McqGenerateRequest,
     user_id: str = Depends(require_service),
     db=Depends(get_db),
 ):
     try:
-        quiz = mcq.generate_quiz(db, user_id, payload)
+        quiz = await mcq.generate_quiz(db, user_id, payload)
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     except Exception as exc:
@@ -45,6 +45,6 @@ def submit(
     try:
         return mcq.submit_quiz(db, user_id, quiz_id, payload.answers)
     except KeyError as exc:
-        raise HTTPException(status_code=404, detail=str(exc)) from exc
+        raise HTTPException(status_code=404, detail=str(exc))
     except ValueError as exc:
-        raise HTTPException(status_code=400, detail=str(exc)) from exc
+        raise HTTPException(status_code=400, detail=str(exc))

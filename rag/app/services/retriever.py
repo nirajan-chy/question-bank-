@@ -1,4 +1,5 @@
 from sqlalchemy import delete, select, text
+from sqlalchemy.orm import joinedload
 
 from ..config import get_settings
 from ..models import Chunk, Document
@@ -7,7 +8,7 @@ from .embeddings import embed_text
 settings = get_settings()
 
 
-def search_chunks(
+async def search_chunks(
     db,
     user_id: str,
     query: str,
@@ -24,13 +25,14 @@ def search_chunks(
     if not db.execute(count_stmt).first():
         return []
 
-    query_vector = embed_text(query)
+    query_vector = await embed_text(query)
 
     stmt = (
         select(
             Chunk,
             (Chunk.embedding.cosine_distance(query_vector)).label("distance"),
         )
+        .options(joinedload(Chunk.document))
         .where(Chunk.user_id == user_id)
         .order_by(Chunk.embedding.cosine_distance(query_vector))
         .limit(k)
@@ -38,18 +40,24 @@ def search_chunks(
     if document_ids:
         stmt = stmt.where(Chunk.document_id.in_(document_ids))
 
-    rows = db.execute(stmt).all()
+    rows = db.execute(stmt).unique().all()
     return [(chunk, float(distance)) for chunk, distance in rows]
 
 
-def sample_chunks(
+async def sample_chunks(
     db, user_id: str, limit: int, document_ids: list[str] | None = None
 ) -> list[Chunk]:
     """Random-ish sample of chunks across the user's documents (used for broad MCQs)."""
-    stmt = select(Chunk).where(Chunk.user_id == user_id).order_by(text("random()")).limit(limit)
+    stmt = (
+        select(Chunk)
+        .options(joinedload(Chunk.document))
+        .where(Chunk.user_id == user_id)
+        .order_by(text("random()"))
+        .limit(limit)
+    )
     if document_ids:
         stmt = stmt.where(Chunk.document_id.in_(document_ids))
-    return list(db.execute(stmt).scalars().all())
+    return list(db.execute(stmt).unique().scalars().all())
 
 
 def list_documents(db, user_id: str) -> list[Document]:

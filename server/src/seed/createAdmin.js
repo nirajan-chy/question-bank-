@@ -1,47 +1,44 @@
 const { User } = require("../models");
 
 async function createAdmin() {
-  try {
-    const adminEmail = (
-      process.env.ADMIN_EMAIL || "bunny@gmail.com"
-    ).toLowerCase();
-    const adminPassword = process.env.ADMIN_PASSWORD || "Bunny@123";
+  const adminEmail = process.env.ADMIN_EMAIL;
+  const adminPassword = process.env.ADMIN_PASSWORD;
 
-    let admin = await User.findOne({
-      where: {
-        email: adminEmail,
-      },
-    });
+  if (!adminEmail || !adminPassword) {
+    console.warn("⚠️  ADMIN_EMAIL and ADMIN_PASSWORD not set — skipping admin bootstrap");
+    return;
+  }
+
+  try {
+    let admin = await User.findOne({ where: { email: adminEmail } });
 
     if (!admin) {
-      admin = await User.findOne({
-        where: {
-          role: "admin",
-        },
-      });
+      admin = await User.findOne({ where: { role: "admin" } });
     }
 
     if (admin) {
-      await admin.update({
-        name: admin.name || "Dada",
-        email: adminEmail,
-        role: "admin",
-        password: adminPassword,
-      });
-      console.log("Admin already exists; password refreshed");
+      // Promote to admin but never overwrite an existing password.
+      const updates = {};
+      if (admin.role !== "admin") updates.role = "admin";
+      if (admin.email !== adminEmail) updates.email = adminEmail;
+      if (Object.keys(updates).length > 0) {
+        await admin.update(updates);
+        console.log("✅ Admin account promoted/updated (password unchanged)");
+      } else {
+        console.log("ℹ️  Admin already exists — skipping");
+      }
       return;
     }
 
     await User.create({
-      name: "Dada",
+      name: "Admin",
       email: adminEmail,
       password: adminPassword,
       role: "admin",
     });
-
-    console.log("Admin created successfully");
+    console.log("✅ Admin created successfully");
   } catch (error) {
-    console.error("Error creating admin:", error);
+    console.error("❌ Error creating admin:", error);
   }
 }
 
