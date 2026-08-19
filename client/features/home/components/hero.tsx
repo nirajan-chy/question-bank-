@@ -53,9 +53,9 @@ export function Hero({ onSearch }: { onSearch?: (q: string) => void }) {
             transition={{ duration: 0.6, delay: 0.1, ease }}
             className="mt-6 font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-balance md:text-6xl lg:text-7xl"
           >
-            Ace every exam.
+            Ace Every Exam.
             <br />
-            <span className="text-primary">Your path to academic excellence.</span>
+            <span className="text-primary">Your Learning Space at Your Own Pace.</span>
           </motion.h1>
 
           <motion.p
