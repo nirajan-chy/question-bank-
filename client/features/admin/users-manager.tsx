@@ -15,7 +15,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 export function UsersManager() {
   const queryClient = useQueryClient();
   const { data: users = [], isLoading } = useAdminUsers();
-  const currentUserId = useAuthStore((s) => s.user?.id);
+  const currentUserId = useAuthStore(s => s.user?.id);
   const [confirmingId, setConfirmingId] = useState<string | null>(null);
   const [savingId, setSavingId] = useState<string | null>(null);
 
@@ -32,12 +32,18 @@ export function UsersManager() {
       invalidate();
     } catch (error) {
       toast.error("Update failed", {
-        description: error instanceof Error ? error.message : "Please try again.",
+        description:
+          error instanceof Error ? error.message : "Please try again.",
       });
     } finally {
       setSavingId(null);
     }
   };
+  const sortedUsers = [...users].sort((a, b) => {
+    if (a.role === "admin" && b.role !== "admin") return -1;
+    if (a.role !== "admin" && b.role === "admin") return 1;
+    return 0;
+  });
 
   const remove = async (id: string) => {
     try {
@@ -46,7 +52,8 @@ export function UsersManager() {
       invalidate();
     } catch (error) {
       toast.error("Delete failed", {
-        description: error instanceof Error ? error.message : "Please try again.",
+        description:
+          error instanceof Error ? error.message : "Please try again.",
       });
     } finally {
       setConfirmingId(null);
@@ -71,15 +78,22 @@ export function UsersManager() {
               ))}
             </div>
           ) : users.length === 0 ? (
-            <p className="p-8 text-center text-sm text-muted-foreground">No users yet.</p>
+            <p className="p-8 text-center text-sm text-muted-foreground">
+              No users yet.
+            </p>
           ) : (
             <ul className="divide-y">
-              {users.map((u) => (
-                <li key={u.id} className="flex flex-wrap items-center gap-3 px-4 py-3">
+              {sortedUsers.map(u => (
+                <li
+                  key={u.id}
+                  className="flex flex-wrap items-center gap-3 px-4 py-3"
+                >
                   <div className="flex min-w-0 flex-1 items-center gap-3">
                     <span
                       className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white ${
-                        u.role === "admin" ? "bg-gradient-to-br from-violet-500 to-purple-600" : "bg-gradient-to-br from-slate-500 to-slate-700"
+                        u.role === "admin"
+                          ? "bg-gradient-to-br from-violet-500 to-purple-600"
+                          : "bg-gradient-to-br from-slate-500 to-slate-700"
                       }`}
                     >
                       {u.name.slice(0, 2).toUpperCase()}
@@ -88,10 +102,14 @@ export function UsersManager() {
                       <p className="flex items-center gap-1.5 truncate text-sm font-semibold">
                         {u.name}
                         {u.id === currentUserId && (
-                          <Badge variant="outline" className="text-[9px]">you</Badge>
+                          <Badge variant="outline" className="text-[9px]">
+                            you
+                          </Badge>
                         )}
                       </p>
-                      <p className="truncate text-xs text-muted-foreground">{u.email}</p>
+                      <p className="truncate text-xs text-muted-foreground">
+                        {u.email}
+                      </p>
                     </div>
                   </div>
 
@@ -100,7 +118,9 @@ export function UsersManager() {
                       variant={u.role === "admin" ? "default" : "outline"}
                       className={u.role === "admin" ? "gap-1" : ""}
                     >
-                      {u.role === "admin" && <ShieldCheck className="h-3 w-3" />}
+                      {u.role === "admin" && (
+                        <ShieldCheck className="h-3 w-3" />
+                      )}
                       {u.role === "admin" ? "Admin" : "User"}
                     </Badge>
 
@@ -134,7 +154,11 @@ export function UsersManager() {
                         >
                           <CheckCircle2 className="h-4 w-4" /> Confirm
                         </Button>
-                        <Button variant="ghost" size="icon-sm" onClick={() => setConfirmingId(null)}>
+                        <Button
+                          variant="ghost"
+                          size="icon-sm"
+                          onClick={() => setConfirmingId(null)}
+                        >
                           <X className="h-4 w-4" />
                         </Button>
                       </div>
