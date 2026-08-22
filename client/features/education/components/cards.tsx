@@ -281,13 +281,9 @@ export function PastPaperCard({ paper }: { paper: PastPaper }) {
 
   const cardClass = "group flex h-full flex-col p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-card-hover";
 
-  return paper.pdfUrl ? (
-    <Card className={cn(cardClass, "cursor-pointer")} onClick={() => window.open(resolveFileUrl(paper.pdfUrl), "_blank")}>
-      {inner}
-    </Card>
-  ) : (
-    <Link href="/past-papers">
-      <Card className={cardClass}>{inner}</Card>
+  return (
+    <Link href={paper.pdfUrl ? `/past-papers/${paper.slug}` : "/past-papers"} aria-disabled={!paper.pdfUrl}>
+      <Card className={cn(cardClass, !paper.pdfUrl && "opacity-70")}>{inner}</Card>
     </Link>
   );
 }

@@ -10,6 +10,8 @@ module.exports = (sequelize) => {
       subjectSlug: { type: DataTypes.STRING, allowNull: false },
       subjectName: { type: DataTypes.STRING, allowNull: false },
       level: { type: DataTypes.STRING, allowNull: false },
+      courseSlug: { type: DataTypes.STRING, allowNull: true },
+      semester: { type: DataTypes.INTEGER, allowNull: true },
       year: { type: DataTypes.INTEGER, allowNull: false },
       exam: { type: DataTypes.STRING, allowNull: false },
       board: { type: DataTypes.STRING, allowNull: false },

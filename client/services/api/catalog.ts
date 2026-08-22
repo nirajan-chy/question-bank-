@@ -60,6 +60,7 @@ export const catalog = {
     http<QuestionBank[]>(withQuery("/question-banks", opts)),
   pastPapers: (opts?: { limit?: number; subjectSlug?: string }) =>
     http<PastPaper[]>(withQuery("/past-papers", opts)),
+  pastPaper: (slug: string) => http<PastPaper>(`/past-papers/${slug}`),
   mockTests: (opts?: { limit?: number; subjectSlug?: string }) =>
     http<MockTest[]>(withQuery("/mock-tests", opts)),
   mockTest: (slug: string) => http<MockTest>(`/mock-tests/${slug}`),

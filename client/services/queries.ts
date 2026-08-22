@@ -23,6 +23,7 @@ export const queryKeys = {
   questionBanks: (opts?: { limit?: number; subjectSlug?: string }) =>
     ["question-banks", opts] as const,
   pastPapers: (opts?: { limit?: number; subjectSlug?: string }) => ["past-papers", opts] as const,
+  pastPaper: (slug: string) => ["past-papers", "detail", slug] as const,
   mockTests: (opts?: { limit?: number; subjectSlug?: string }) => ["mock-tests", opts] as const,
   mockTest: (slug: string) => ["mock-tests", slug] as const,
   scholarships: (opts?: { limit?: number; featured?: boolean }) => ["scholarships", opts] as const,
@@ -68,6 +69,12 @@ export const useQuestionBanks = (opts?: { limit?: number; subjectSlug?: string }
   useQuery({ queryKey: queryKeys.questionBanks(opts), queryFn: () => api.questionBanks(opts) });
 export const usePastPapers = (opts?: { limit?: number; subjectSlug?: string }) =>
   useQuery({ queryKey: queryKeys.pastPapers(opts), queryFn: () => api.pastPapers(opts) });
+export const usePastPaper = (slug: string) =>
+  useQuery({
+    queryKey: queryKeys.pastPaper(slug),
+    queryFn: () => api.pastPaper(slug),
+    enabled: Boolean(slug),
+  });
 export const useMockTests = (opts?: { limit?: number; subjectSlug?: string }) =>
   useQuery({ queryKey: queryKeys.mockTests(opts), queryFn: () => api.mockTests(opts) });
 export const useMockTest = (slug: string) =>
