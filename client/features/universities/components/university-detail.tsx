@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatNumber } from "@/lib/utils";
 import { cn } from "@/lib/utils";
+import { gradientFor } from "@/lib/gradients";
 
 export function UniversityDetail({ slug }: { slug: string }) {
   const { data: universities, isLoading } = useUniversities();
@@ -21,7 +22,7 @@ export function UniversityDetail({ slug }: { slug: string }) {
       <PageHeader
         title={university.name}
         description={university.description}
-        gradient={university.gradient}
+        gradient={gradientFor(university.name)}
         crumbs={[{ label: "Universities", href: "/universities" }, { label: university.name }]}
         actions={
           <Badge variant="gradient" className="px-4 py-1.5 text-sm">
@@ -78,7 +79,7 @@ export function UniversityDetail({ slug }: { slug: string }) {
               </div>
               <div className="mt-6 flex flex-wrap gap-2">
                 {university.programs.map((p) => (
-                  <span key={p} className={cn("rounded-full bg-gradient-to-r px-3 py-1 text-xs font-semibold text-white", university.gradient)}>
+                  <span key={p} className={cn("rounded-full bg-gradient-to-r px-3 py-1 text-xs font-semibold text-white", gradientFor(university.name))}>
                     {p}
                   </span>
                 ))}

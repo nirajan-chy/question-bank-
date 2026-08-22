@@ -1,8 +1,11 @@
 require("dotenv").config();
 
+const validateEnv = require("./src/config/validateEnv");
+validateEnv();
+
 const app = require("./src/app");
 const { connectDB } = require("./src/config/postgres");
-const createAdmin = require("./src/seed/createAdmin");
+// const createAdmin = require("./src/seed/createAdmin");
 const { seedDatabase } = require("./src/seed/seed");
 const { Level } = require("./src/models");
 
@@ -23,7 +26,7 @@ async function initializeDB() {
       } else {
         console.log("✅ Database already has data — skipping seed");
       }
-      // await createAdmin();...
+      // await createAdmin();
     }
     dbInitialized = true;
   }

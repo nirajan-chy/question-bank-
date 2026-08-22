@@ -12,7 +12,6 @@ module.exports = (sequelize) => {
       levelSlug: { type: DataTypes.STRING, allowNull: false },
       category: { type: DataTypes.STRING, allowNull: false },
       icon: { type: DataTypes.STRING, allowNull: false },
-      gradient: { type: DataTypes.STRING, allowNull: false },
       semesterCount: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 8 },
       university: { type: DataTypes.STRING, allowNull: false, defaultValue: "TU" },
       tags: { type: DataTypes.JSONB, allowNull: false, defaultValue: [] },

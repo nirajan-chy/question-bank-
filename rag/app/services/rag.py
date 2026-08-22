@@ -2,6 +2,7 @@ import traceback
 import uuid
 
 from ..config import get_settings
+from ..database import SessionLocal
 from ..models import Chunk, Document
 from .embeddings import embed_texts
 from .ingestion import (
@@ -15,10 +16,9 @@ from .ingestion import (
 settings = get_settings()
 
 
-def ingest_document(db, user_id: str, filename: str, data: bytes) -> Document:
-    """Full ingestion pipeline: validate → extract → clean → chunk → embed → store."""
+def create_document_record(db, user_id: str, filename: str, data: bytes) -> Document:
+    """Persist the document in 'processing' state so the UI can poll it immediately."""
     ext = validate_upload(filename, len(data))
-
     document = Document(
         id=uuid.uuid4(),
         user_id=user_id,
@@ -31,8 +31,21 @@ def ingest_document(db, user_id: str, filename: str, data: bytes) -> Document:
     db.add(document)
     db.commit()
     db.refresh(document)
+    return document
 
+
+async def ingest_document(document_id: str, user_id: str, filename: str, data: bytes) -> None:
+    """Full ingestion pipeline: validate → extract → clean → chunk → embed → store.
+
+    Runs in its own SessionLocal so it does not hold the request-scoped session
+    during the (potentially slow) embedding API calls.
+    """
+    db = SessionLocal()
     try:
+        document = db.get(Document, document_id)
+        if document is None:
+            return
+
         raw_text, page_mapping = extract_text(filename, data)
         text = clean_text(raw_text)
         if not text:
@@ -43,7 +56,7 @@ def ingest_document(db, user_id: str, filename: str, data: bytes) -> Document:
             raise IngestionError("Could not split the document into chunks.")
 
         contents = [chunk["content"] for chunk in chunks]
-        embeddings = embed_texts(contents)
+        embeddings = await embed_texts(contents)
 
         rows = []
         for index, (chunk, vector) in enumerate(zip(chunks, embeddings)):
@@ -66,15 +79,17 @@ def ingest_document(db, user_id: str, filename: str, data: bytes) -> Document:
         db.commit()
     except Exception as exc:
         db.rollback()
-        document.status = "failed"
-        document.error = str(exc)
-        if isinstance(exc, IngestionError):
-            db.commit()
-        else:
-            document.error = f"{type(exc).__name__}: {exc}\n{traceback.format_exc(limit=3)}"
-            db.commit()
+        try:
+            document = db.get(Document, document_id)
+            if document:
+                document.status = "failed"
+                document.error = f"{type(exc).__name__}: {exc}"
+                db.commit()
+        except Exception:
+            db.rollback()
         raise
-    return document
+    finally:
+        db.close()
 
 
 def _format_context(chunks: list[Chunk]) -> tuple[str, list[dict]]:
@@ -115,12 +130,12 @@ def _history_messages(history: list[dict] | None, max_items: int = 8) -> list[di
     return cleaned[-max_items * 2 :]
 
 
-def answer(db, user_id: str, question: str, document_ids: list[str] | None, history: list[dict] | None):
+async def answer(db, user_id: str, question: str, document_ids: list[str] | None, history: list[dict] | None):
     """Non-streaming RAG answer with citations."""
     from .llm import chat
     from .retriever import search_chunks
 
-    chunks = [chunk for chunk, _ in search_chunks(db, user_id, question, document_ids=document_ids)]
+    chunks = [chunk for chunk, _ in await search_chunks(db, user_id, question, document_ids=document_ids)]
     if not chunks:
         return {
             "answer": "Upload a document first, then I can answer questions about it. "
@@ -133,33 +148,56 @@ def answer(db, user_id: str, question: str, document_ids: list[str] | None, hist
         {"role": "system", "content": _system_prompt(context)},
         {"role": "user", "content": question},
     ]
-    answer_text = chat(messages, temperature=0.2)
+    answer_text = await chat(messages, temperature=0.2)
     return {"answer": answer_text, "sources": sources}
 
 
-def answer_stream(db, user_id: str, question: str, document_ids: list[str] | None, history: list[dict] | None):
-    """Streaming RAG answer. Yields {'type': 'delta'|'sources'|'error', ...} dicts."""
-    from .llm import chat_stream
+async def prepare_chat(db, user_id: str, question: str, document_ids: list[str] | None, history: list[dict] | None) -> tuple[list[dict], list[dict]]:
+    """Resolve chunks and build messages for the streaming endpoint."""
     from .retriever import search_chunks
 
-    try:
-        chunks = [chunk for chunk, _ in search_chunks(db, user_id, question, document_ids=document_ids)]
-        if not chunks:
-            yield {
-                "type": "delta",
-                "data": "Upload a document first, then I can answer questions about it. "
-                "Go to the Documents tab and upload a PDF, DOCX or TXT file.",
-            }
-            yield {"type": "sources", "data": []}
-            return
+    chunks = [chunk for chunk, _ in await search_chunks(db, user_id, question, document_ids=document_ids)]
+    if not chunks:
+        return [], []
 
-        context, sources = _format_context(chunks)
-        messages = _history_messages(history) + [
-            {"role": "system", "content": _system_prompt(context)},
-            {"role": "user", "content": question},
-        ]
-        for delta in chat_stream(messages, temperature=0.2):
+    context, sources = _format_context(chunks)
+    messages = _history_messages(history) + [
+        {"role": "system", "content": _system_prompt(context)},
+        {"role": "user", "content": question},
+    ]
+    return messages, sources
+
+
+async def stream_chat(messages: list[dict], sources: list[dict]):
+    """Async generator that yields SSE-friendly dicts for the streaming endpoint."""
+    from .llm import chat_stream
+
+    try:
+        async for delta in chat_stream(messages, temperature=0.2):
             yield {"type": "delta", "data": delta}
         yield {"type": "sources", "data": sources}
     except Exception as exc:
         yield {"type": "error", "data": str(exc)}
+
+
+async def no_documents_reply():
+    yield {
+        "type": "delta",
+        "data": "Upload a document first, then I can answer questions about it. "
+        "Go to the Documents tab and upload a PDF, DOCX or TXT file.",
+    }
+    yield {"type": "sources", "data": []}
+
+
+async def save_message_pair(user_id: str, question: str, answer_text: str, sources: list[dict]) -> None:
+    """Persist user + assistant messages in a fresh session (called after streaming ends)."""
+    from ..models import Message
+    db = SessionLocal()
+    try:
+        db.add_all([
+            Message(id=uuid.uuid4(), user_id=user_id, role="user", content=question, sources=None),
+            Message(id=uuid.uuid4(), user_id=user_id, role="assistant", content=answer_text, sources=sources),
+        ])
+        db.commit()
+    finally:
+        db.close()

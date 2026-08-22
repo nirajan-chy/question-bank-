@@ -42,7 +42,7 @@ const resources = [
   { path: "posts", model: models.Post, ctrl: require("../controllers/post.controller") },
   { path: "community", model: models.CommunityQuestion, ctrl: require("../controllers/community.controller") },
   { path: "communities", model: models.Community, ctrl: require("../controllers/communities.controller") },
-  { path: "community-messages", model: models.CommunityMessage, ctrl: createBaseController(models.CommunityMessage) },
+  { path: "community-messages", model: models.CommunityMessage, ctrl: createBaseController(models.CommunityMessage, { searchFields: ["author", "content"] }) },
   { path: "leaderboard", model: models.LeaderboardEntry, ctrl: require("../controllers/leaderboard.controller") },
   { path: "contacts", model: models.Contact, ctrl: require("../controllers/contact.controller") },
 ];
@@ -63,7 +63,7 @@ for (const { path, ctrl } of resources) {
   router.delete(`/${path}/:id`, ctrl.remove);
 }
 
-const userCtrl = createBaseController(models.User);
+const userCtrl = createBaseController(models.User, { searchFields: ["name", "email"] });
 router.get("/users", userCtrl.list);
 router.get("/users/:id", userCtrl.getById);
 router.put("/users/:id", adminCtrl.updateUser);

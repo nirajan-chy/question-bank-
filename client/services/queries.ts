@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api, admin, learn } from "./api";
-import type { McqGenerateRequest } from "@/types";
+import type { McqGenerateRequest, RagDocument } from "@/types";
 
 export const queryKeys = {
   levels: ["levels"] as const,
@@ -24,6 +24,7 @@ export const queryKeys = {
     ["question-banks", opts] as const,
   pastPapers: (opts?: { limit?: number; subjectSlug?: string }) => ["past-papers", opts] as const,
   mockTests: (opts?: { limit?: number; subjectSlug?: string }) => ["mock-tests", opts] as const,
+  mockTest: (slug: string) => ["mock-tests", slug] as const,
   scholarships: (opts?: { limit?: number; featured?: boolean }) => ["scholarships", opts] as const,
   notices: (opts?: { limit?: number }) => ["notices", opts] as const,
   results: ["results"] as const,
@@ -69,6 +70,12 @@ export const usePastPapers = (opts?: { limit?: number; subjectSlug?: string }) =
   useQuery({ queryKey: queryKeys.pastPapers(opts), queryFn: () => api.pastPapers(opts) });
 export const useMockTests = (opts?: { limit?: number; subjectSlug?: string }) =>
   useQuery({ queryKey: queryKeys.mockTests(opts), queryFn: () => api.mockTests(opts) });
+export const useMockTest = (slug: string) =>
+  useQuery({
+    queryKey: queryKeys.mockTest(slug),
+    queryFn: () => api.mockTest(slug),
+    enabled: Boolean(slug),
+  });
 export const useScholarships = (opts?: { limit?: number; featured?: boolean }) =>
   useQuery({ queryKey: queryKeys.scholarships(opts), queryFn: () => api.scholarships(opts) });
 export const useNotices = (opts?: { limit?: number }) =>
@@ -124,10 +131,10 @@ export const useAdminUserStats = () =>
     retry: false,
   });
 
-export const useAdminResource = (resource: string) =>
+export const useAdminResource = (resource: string, search = "") =>
   useQuery({
-    queryKey: ["admin", resource] as const,
-    queryFn: () => admin.list(resource),
+    queryKey: ["admin", resource, search] as const,
+    queryFn: () => admin.list(resource, search),
     retry: false,
   });
 
@@ -154,7 +161,15 @@ export const queryKeysLearn = {
 };
 
 export const useRagDocuments = () =>
-  useQuery({ queryKey: queryKeysLearn.documents, queryFn: learn.documents });
+  useQuery({
+    queryKey: queryKeysLearn.documents,
+    queryFn: learn.documents,
+    refetchInterval: (query) => {
+      const docs = query.state.data as RagDocument[] | undefined;
+      if (docs?.some((d) => d.status === "processing")) return 2000;
+      return false;
+    },
+  });
 
 export const useUploadDocument = () => {
   const queryClient = useQueryClient();

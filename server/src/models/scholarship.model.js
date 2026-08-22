@@ -16,7 +16,6 @@ module.exports = (sequelize) => {
       requirements: { type: DataTypes.JSONB, allowNull: false, defaultValue: [] },
       category: { type: DataTypes.STRING, allowNull: false },
       description: { type: DataTypes.TEXT, allowNull: false },
-      gradient: { type: DataTypes.STRING, allowNull: false },
       featured: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
       tags: { type: DataTypes.JSONB, allowNull: false, defaultValue: [] },
     },

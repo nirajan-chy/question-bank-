@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const asyncHandler = require("../utils/asyncHandler");
 const ApiError = require("../utils/ApiError");
 const models = require("../models");
+const { getCachedUser, setCachedUser } = require("../utils/userCache");
 
 const getToken = (req) => {
   const header = req.headers.authorization || "";
@@ -12,9 +13,6 @@ const getToken = (req) => {
 const auth = asyncHandler(async (req, res, next) => {
   const token = getToken(req);
   if (!token) throw new ApiError(401, "Authentication required");
-  if (!process.env.JWT_SECRET) {
-    throw new ApiError(500, "Server misconfigured: JWT_SECRET is not set in the environment");
-  }
 
   let payload;
   try {
@@ -23,9 +21,16 @@ const auth = asyncHandler(async (req, res, next) => {
     throw new ApiError(401, "Invalid or expired token");
   }
 
+  const cached = getCachedUser(payload.id);
+  if (cached) {
+    req.user = cached;
+    return next();
+  }
+
   const user = await models.User.findByPk(payload.id);
   if (!user) throw new ApiError(401, "User no longer exists");
 
+  setCachedUser(payload.id, user);
   req.user = user;
   next();
 });

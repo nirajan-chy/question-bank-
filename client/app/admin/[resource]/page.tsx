@@ -3,6 +3,7 @@
 import { use } from "react";
 import { adminResources } from "@/features/admin/resource-config";
 import { ResourceManager } from "@/features/admin/resource-manager";
+import { MockTestsManager } from "@/features/admin/mock-tests-manager";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -34,6 +35,10 @@ export default function AdminResourcePage({
         </Card>
       </div>
     );
+  }
+
+  if (resource === "mock-tests") {
+    return <MockTestsManager />;
   }
 
   return <ResourceManager resource={config.path} label={config.label} />;

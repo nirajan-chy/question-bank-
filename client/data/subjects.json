@@ -9,16 +9,69 @@
     "category": "Science & Technology",
     "description": "Mechanics, thermodynamics, waves, optics, electricity & modern physics for NEB +2 Science.",
     "overview": "NEB Physics (Class 12) is a theoretical + numerical heavy subject worth 75 marks in theory and 25 in practical. Mastering derivations, laws and problem-solving with unit-wise question banks is essential for a strong +2 GPA and medical/engineering entrance preparation.",
-    "units": ["Mechanics", "Heat & Thermodynamics", "Waves & Optics", "Electricity & Magnetism", "Modern Physics"],
+    "units": [
+      "Mechanics",
+      "Heat & Thermodynamics",
+      "Waves & Optics",
+      "Electricity & Magnetism",
+      "Modern Physics"
+    ],
     "syllabus": [
-      { "unit": "Mechanics", "topics": ["Kinematics", "Laws of motion", "Work, energy & power", "Rotational motion", "Gravitation"], "hours": 30 },
-      { "unit": "Heat & Thermodynamics", "topics": ["Thermal properties", "First law of thermodynamics", "Second law & entropy", "Kinetic theory"], "hours": 20 },
-      { "unit": "Waves & Optics", "topics": ["Wave motion", "Sound", "Reflection & refraction", "Lenses & optical instruments", "Wave nature of light"], "hours": 24 },
-      { "unit": "Electricity & Magnetism", "topics": ["Electric fields", "Capacitors", "DC circuits", "Magnetic fields", "Electromagnetic induction"], "hours": 26 },
-      { "unit": "Modern Physics", "topics": ["Photoelectric effect", "Atomic structure", "Nuclei & radioactivity", "Semiconductors"], "hours": 14 }
+      {
+        "unit": "Mechanics",
+        "topics": [
+          "Kinematics",
+          "Laws of motion",
+          "Work, energy & power",
+          "Rotational motion",
+          "Gravitation"
+        ],
+        "hours": 30
+      },
+      {
+        "unit": "Heat & Thermodynamics",
+        "topics": [
+          "Thermal properties",
+          "First law of thermodynamics",
+          "Second law & entropy",
+          "Kinetic theory"
+        ],
+        "hours": 20
+      },
+      {
+        "unit": "Waves & Optics",
+        "topics": [
+          "Wave motion",
+          "Sound",
+          "Reflection & refraction",
+          "Lenses & optical instruments",
+          "Wave nature of light"
+        ],
+        "hours": 24
+      },
+      {
+        "unit": "Electricity & Magnetism",
+        "topics": [
+          "Electric fields",
+          "Capacitors",
+          "DC circuits",
+          "Magnetic fields",
+          "Electromagnetic induction"
+        ],
+        "hours": 26
+      },
+      {
+        "unit": "Modern Physics",
+        "topics": [
+          "Photoelectric effect",
+          "Atomic structure",
+          "Nuclei & radioactivity",
+          "Semiconductors"
+        ],
+        "hours": 14
+      }
     ],
     "emoji": "⚛️",
-    "gradient": "from-blue-500 to-indigo-600",
     "popularity": 96,
     "notes": 52,
     "books": 20,
@@ -29,8 +82,16 @@
     "videos": 80,
     "downloads": 44,
     "trending": true,
-    "relatedSlugs": ["chemistry", "mathematics-12"],
-    "tags": ["NEB", "Mechanics", "Optics", "Electricity"]
+    "relatedSlugs": [
+      "chemistry",
+      "mathematics-12"
+    ],
+    "tags": [
+      "NEB",
+      "Mechanics",
+      "Optics",
+      "Electricity"
+    ]
   },
   {
     "id": "s-chemistry-12",
@@ -42,15 +103,57 @@
     "category": "Science & Technology",
     "description": "Physical, inorganic and organic chemistry with complete NEB syllabus coverage for +2 Science.",
     "overview": "NEB Chemistry is a 75-mark theory subject (plus practicals) covering physical chemistry fundamentals, inorganic reactions and full organic chemistry.",
-    "units": ["Physical Chemistry", "Inorganic Chemistry", "Organic Chemistry", "Applied Chemistry"],
+    "units": [
+      "Physical Chemistry",
+      "Inorganic Chemistry",
+      "Organic Chemistry",
+      "Applied Chemistry"
+    ],
     "syllabus": [
-      { "unit": "Physical Chemistry", "topics": ["Gaseous state", "Chemical equilibrium", "Acids & bases", "Thermochemistry", "Electrochemistry"], "hours": 28 },
-      { "unit": "Inorganic Chemistry", "topics": ["Periodic classification", "Hydrogen & water", "s-block elements", "p-block elements", "d-block & f-block"], "hours": 26 },
-      { "unit": "Organic Chemistry", "topics": ["Hydrocarbons", "Alcohols & phenols", "Aldehydes & ketones", "Carboxylic acids", "Amines"], "hours": 30 },
-      { "unit": "Applied Chemistry", "topics": ["Polymers", "Chemistry in daily life", "Environmental chemistry"], "hours": 10 }
+      {
+        "unit": "Physical Chemistry",
+        "topics": [
+          "Gaseous state",
+          "Chemical equilibrium",
+          "Acids & bases",
+          "Thermochemistry",
+          "Electrochemistry"
+        ],
+        "hours": 28
+      },
+      {
+        "unit": "Inorganic Chemistry",
+        "topics": [
+          "Periodic classification",
+          "Hydrogen & water",
+          "s-block elements",
+          "p-block elements",
+          "d-block & f-block"
+        ],
+        "hours": 26
+      },
+      {
+        "unit": "Organic Chemistry",
+        "topics": [
+          "Hydrocarbons",
+          "Alcohols & phenols",
+          "Aldehydes & ketones",
+          "Carboxylic acids",
+          "Amines"
+        ],
+        "hours": 30
+      },
+      {
+        "unit": "Applied Chemistry",
+        "topics": [
+          "Polymers",
+          "Chemistry in daily life",
+          "Environmental chemistry"
+        ],
+        "hours": 10
+      }
     ],
     "emoji": "🧪",
-    "gradient": "from-emerald-500 to-green-600",
     "popularity": 94,
     "notes": 46,
     "books": 18,
@@ -61,8 +164,16 @@
     "videos": 66,
     "downloads": 38,
     "trending": true,
-    "relatedSlugs": ["physics", "biology"],
-    "tags": ["NEB", "Organic", "Physical", "Inorganic"]
+    "relatedSlugs": [
+      "physics",
+      "biology"
+    ],
+    "tags": [
+      "NEB",
+      "Organic",
+      "Physical",
+      "Inorganic"
+    ]
   },
   {
     "id": "s-biology-12",
@@ -74,16 +185,64 @@
     "category": "Science & Technology",
     "description": "Botany and zoology for NEB +2 Science — full syllabus, labeled diagrams and MCQs for medical entrance.",
     "overview": "NEB Biology combines botany and zoology into a 75-mark theory subject. Diagram-based answers, classification, anatomy and physiology dominate the paper.",
-    "units": ["Botany", "Zoology", "Human Biology", "Genetics & Evolution", "Ecology"],
+    "units": [
+      "Botany",
+      "Zoology",
+      "Human Biology",
+      "Genetics & Evolution",
+      "Ecology"
+    ],
     "syllabus": [
-      { "unit": "Botany", "topics": ["Plant kingdom", "Plant anatomy", "Plant physiology", "Plant tissue culture"], "hours": 26 },
-      { "unit": "Zoology", "topics": ["Animal kingdom", "Comparative anatomy", "Mammals & aves"], "hours": 22 },
-      { "unit": "Human Biology", "topics": ["Digestive system", "Circulatory system", "Nervous system", "Endocrine system", "Reproductive system"], "hours": 24 },
-      { "unit": "Genetics & Evolution", "topics": ["Mendelian genetics", "DNA & gene expression", "Evolution evidence"], "hours": 12 },
-      { "unit": "Ecology", "topics": ["Ecosystems", "Biodiversity", "Environmental issues"], "hours": 8 }
+      {
+        "unit": "Botany",
+        "topics": [
+          "Plant kingdom",
+          "Plant anatomy",
+          "Plant physiology",
+          "Plant tissue culture"
+        ],
+        "hours": 26
+      },
+      {
+        "unit": "Zoology",
+        "topics": [
+          "Animal kingdom",
+          "Comparative anatomy",
+          "Mammals & aves"
+        ],
+        "hours": 22
+      },
+      {
+        "unit": "Human Biology",
+        "topics": [
+          "Digestive system",
+          "Circulatory system",
+          "Nervous system",
+          "Endocrine system",
+          "Reproductive system"
+        ],
+        "hours": 24
+      },
+      {
+        "unit": "Genetics & Evolution",
+        "topics": [
+          "Mendelian genetics",
+          "DNA & gene expression",
+          "Evolution evidence"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Ecology",
+        "topics": [
+          "Ecosystems",
+          "Biodiversity",
+          "Environmental issues"
+        ],
+        "hours": 8
+      }
     ],
     "emoji": "🧬",
-    "gradient": "from-green-500 to-teal-600",
     "popularity": 92,
     "notes": 44,
     "books": 16,
@@ -94,8 +253,16 @@
     "videos": 58,
     "downloads": 36,
     "trending": true,
-    "relatedSlugs": ["chemistry", "physics"],
-    "tags": ["NEB", "Botany", "Zoology", "Genetics"]
+    "relatedSlugs": [
+      "chemistry",
+      "physics"
+    ],
+    "tags": [
+      "NEB",
+      "Botany",
+      "Zoology",
+      "Genetics"
+    ]
   },
   {
     "id": "s-math-12",
@@ -107,16 +274,64 @@
     "category": "Science & Technology",
     "description": "NEB grade 12 mathematics — calculus, algebra, conics, vectors and statistics with full solutions.",
     "overview": "NEB Mathematics (Class 12) is a rigorous 75-mark subject for Science and Management streams.",
-    "units": ["Algebra", "Calculus", "Analytic Geometry", "Vectors & 3D", "Statistics & Probability"],
+    "units": [
+      "Algebra",
+      "Calculus",
+      "Analytic Geometry",
+      "Vectors & 3D",
+      "Statistics & Probability"
+    ],
     "syllabus": [
-      { "unit": "Algebra", "topics": ["Sets & functions", "Complex numbers", "Sequence & series", "Binomial theorem", "Matrices & determinants"], "hours": 26 },
-      { "unit": "Calculus", "topics": ["Limits & continuity", "Differentiation", "Application of derivatives", "Integration", "Differential equations"], "hours": 32 },
-      { "unit": "Analytic Geometry", "topics": ["Straight lines", "Conic sections", "Parabola, ellipse & hyperbola"], "hours": 16 },
-      { "unit": "Vectors & 3D", "topics": ["Vectors in space", "Lines & planes in 3D"], "hours": 12 },
-      { "unit": "Statistics & Probability", "topics": ["Measures of dispersion", "Correlation", "Probability & distributions"], "hours": 12 }
+      {
+        "unit": "Algebra",
+        "topics": [
+          "Sets & functions",
+          "Complex numbers",
+          "Sequence & series",
+          "Binomial theorem",
+          "Matrices & determinants"
+        ],
+        "hours": 26
+      },
+      {
+        "unit": "Calculus",
+        "topics": [
+          "Limits & continuity",
+          "Differentiation",
+          "Application of derivatives",
+          "Integration",
+          "Differential equations"
+        ],
+        "hours": 32
+      },
+      {
+        "unit": "Analytic Geometry",
+        "topics": [
+          "Straight lines",
+          "Conic sections",
+          "Parabola, ellipse & hyperbola"
+        ],
+        "hours": 16
+      },
+      {
+        "unit": "Vectors & 3D",
+        "topics": [
+          "Vectors in space",
+          "Lines & planes in 3D"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Statistics & Probability",
+        "topics": [
+          "Measures of dispersion",
+          "Correlation",
+          "Probability & distributions"
+        ],
+        "hours": 12
+      }
     ],
     "emoji": "📈",
-    "gradient": "from-violet-500 to-purple-600",
     "popularity": 93,
     "notes": 40,
     "books": 16,
@@ -127,8 +342,16 @@
     "videos": 62,
     "downloads": 36,
     "trending": true,
-    "relatedSlugs": ["physics", "computer-science-12"],
-    "tags": ["NEB", "Calculus", "Algebra", "Vectors"]
+    "relatedSlugs": [
+      "physics",
+      "computer-science-12"
+    ],
+    "tags": [
+      "NEB",
+      "Calculus",
+      "Algebra",
+      "Vectors"
+    ]
   },
   {
     "id": "s-english-12",
@@ -140,15 +363,54 @@
     "category": "Humanities",
     "description": "Reading comprehension, grammar, vocabulary and essay writing for the NEB English paper.",
     "overview": "NEB English (Class 12) evaluates reading comprehension, grammar in context, vocabulary, writing and creative skills.",
-    "units": ["Reading", "Writing", "Grammar", "Speaking & Listening"],
+    "units": [
+      "Reading",
+      "Writing",
+      "Grammar",
+      "Speaking & Listening"
+    ],
     "syllabus": [
-      { "unit": "Reading", "topics": ["Comprehension passages", "Inference & vocabulary", "Nepali-English translation"], "hours": 18 },
-      { "unit": "Writing", "topics": ["Essay writing", "Letter & email", "Notice & diary", "Story & description"], "hours": 18 },
-      { "unit": "Grammar", "topics": ["Tenses & voice", "Conditionals", "Reported speech", "Prepositions & connectors", "Sentence transformation"], "hours": 16 },
-      { "unit": "Speaking & Listening", "topics": ["Pronunciation", "Listening comprehension", "Conversation skills"], "hours": 8 }
+      {
+        "unit": "Reading",
+        "topics": [
+          "Comprehension passages",
+          "Inference & vocabulary",
+          "Nepali-English translation"
+        ],
+        "hours": 18
+      },
+      {
+        "unit": "Writing",
+        "topics": [
+          "Essay writing",
+          "Letter & email",
+          "Notice & diary",
+          "Story & description"
+        ],
+        "hours": 18
+      },
+      {
+        "unit": "Grammar",
+        "topics": [
+          "Tenses & voice",
+          "Conditionals",
+          "Reported speech",
+          "Prepositions & connectors",
+          "Sentence transformation"
+        ],
+        "hours": 16
+      },
+      {
+        "unit": "Speaking & Listening",
+        "topics": [
+          "Pronunciation",
+          "Listening comprehension",
+          "Conversation skills"
+        ],
+        "hours": 8
+      }
     ],
     "emoji": "📖",
-    "gradient": "from-emerald-500 to-teal-600",
     "popularity": 95,
     "notes": 40,
     "books": 20,
@@ -159,8 +421,16 @@
     "videos": 55,
     "downloads": 30,
     "trending": false,
-    "relatedSlugs": ["nepali-12", "social-studies-12"],
-    "tags": ["NEB", "Grammar", "Essay", "Comprehension"]
+    "relatedSlugs": [
+      "nepali-12",
+      "social-studies-12"
+    ],
+    "tags": [
+      "NEB",
+      "Grammar",
+      "Essay",
+      "Comprehension"
+    ]
   },
   {
     "id": "s-computer-12",
@@ -172,15 +442,51 @@
     "category": "Computing & IT",
     "description": "Computer fundamentals, programming and web development for NEB Computer Science.",
     "overview": "NEB Computer Science introduces computer fundamentals, programming concepts and web development.",
-    "units": ["Computer Fundamentals", "Programming", "Web Development", "Networking"],
+    "units": [
+      "Computer Fundamentals",
+      "Programming",
+      "Web Development",
+      "Networking"
+    ],
     "syllabus": [
-      { "unit": "Computer Fundamentals", "topics": ["Computer generations", "Hardware & software", "Number systems"], "hours": 12 },
-      { "unit": "Programming", "topics": ["C programming basics", "Loops & arrays", "Functions"], "hours": 20 },
-      { "unit": "Web Development", "topics": ["HTML basics", "CSS fundamentals", "JavaScript intro"], "hours": 16 },
-      { "unit": "Networking", "topics": ["Network types", "Internet services", "Cyber safety"], "hours": 8 }
+      {
+        "unit": "Computer Fundamentals",
+        "topics": [
+          "Computer generations",
+          "Hardware & software",
+          "Number systems"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Programming",
+        "topics": [
+          "C programming basics",
+          "Loops & arrays",
+          "Functions"
+        ],
+        "hours": 20
+      },
+      {
+        "unit": "Web Development",
+        "topics": [
+          "HTML basics",
+          "CSS fundamentals",
+          "JavaScript intro"
+        ],
+        "hours": 16
+      },
+      {
+        "unit": "Networking",
+        "topics": [
+          "Network types",
+          "Internet services",
+          "Cyber safety"
+        ],
+        "hours": 8
+      }
     ],
     "emoji": "💻",
-    "gradient": "from-cyan-500 to-blue-600",
     "popularity": 92,
     "notes": 30,
     "books": 14,
@@ -191,8 +497,16 @@
     "videos": 48,
     "downloads": 28,
     "trending": true,
-    "relatedSlugs": ["mathematics-12", "physics"],
-    "tags": ["NEB", "Programming", "HTML", "Networking"]
+    "relatedSlugs": [
+      "mathematics-12",
+      "physics"
+    ],
+    "tags": [
+      "NEB",
+      "Programming",
+      "HTML",
+      "Networking"
+    ]
   },
   {
     "id": "s-accountancy-12",
@@ -204,16 +518,62 @@
     "category": "Management",
     "description": "Financial accounting, journal, ledger, trial balance and final accounts for NEB Management.",
     "overview": "Accountancy is the highest-scoring subject in NEB Management (100 marks including practical).",
-    "units": ["Financial Accounting Basics", "Journal & Ledger", "Final Accounts", "Company & Cash Books", "Analysis & Ratios"],
+    "units": [
+      "Financial Accounting Basics",
+      "Journal & Ledger",
+      "Final Accounts",
+      "Company & Cash Books",
+      "Analysis & Ratios"
+    ],
     "syllabus": [
-      { "unit": "Financial Accounting Basics", "topics": ["Accounting concepts", "Double entry system", "Accounting equation"], "hours": 16 },
-      { "unit": "Journal & Ledger", "topics": ["Journal entries", "Ledger posting", "Subsidiary books", "Cash book"], "hours": 24 },
-      { "unit": "Final Accounts", "topics": ["Trading account", "Profit & loss account", "Balance sheet", "Adjustments"], "hours": 24 },
-      { "unit": "Company & Cash Books", "topics": ["Share capital", "Debentures", "Bank reconciliation"], "hours": 14 },
-      { "unit": "Analysis & Ratios", "topics": ["Financial statement analysis", "Accounting ratios"], "hours": 10 }
+      {
+        "unit": "Financial Accounting Basics",
+        "topics": [
+          "Accounting concepts",
+          "Double entry system",
+          "Accounting equation"
+        ],
+        "hours": 16
+      },
+      {
+        "unit": "Journal & Ledger",
+        "topics": [
+          "Journal entries",
+          "Ledger posting",
+          "Subsidiary books",
+          "Cash book"
+        ],
+        "hours": 24
+      },
+      {
+        "unit": "Final Accounts",
+        "topics": [
+          "Trading account",
+          "Profit & loss account",
+          "Balance sheet",
+          "Adjustments"
+        ],
+        "hours": 24
+      },
+      {
+        "unit": "Company & Cash Books",
+        "topics": [
+          "Share capital",
+          "Debentures",
+          "Bank reconciliation"
+        ],
+        "hours": 14
+      },
+      {
+        "unit": "Analysis & Ratios",
+        "topics": [
+          "Financial statement analysis",
+          "Accounting ratios"
+        ],
+        "hours": 10
+      }
     ],
     "emoji": "🧾",
-    "gradient": "from-amber-500 to-yellow-600",
     "popularity": 90,
     "notes": 38,
     "books": 15,
@@ -224,8 +584,16 @@
     "videos": 44,
     "downloads": 28,
     "trending": false,
-    "relatedSlugs": ["economics-12", "business-studies"],
-    "tags": ["NEB", "Management", "Journal", "Final Accounts"]
+    "relatedSlugs": [
+      "economics-12",
+      "business-studies"
+    ],
+    "tags": [
+      "NEB",
+      "Management",
+      "Journal",
+      "Final Accounts"
+    ]
   },
   {
     "id": "s-economics-12",
@@ -237,15 +605,54 @@
     "category": "Management",
     "description": "Micro & macro economics with Nepali context — supply, demand, market structures and development.",
     "overview": "NEB Economics covers microeconomic foundations, macroeconomics, and Nepali development context.",
-    "units": ["Microeconomics", "Macroeconomics", "Development Economics", "Nepali Economy"],
+    "units": [
+      "Microeconomics",
+      "Macroeconomics",
+      "Development Economics",
+      "Nepali Economy"
+    ],
     "syllabus": [
-      { "unit": "Microeconomics", "topics": ["Demand & supply", "Elasticity", "Consumer behavior", "Production & cost", "Market structures"], "hours": 28 },
-      { "unit": "Macroeconomics", "topics": ["National income", "Money & banking", "Inflation", "Employment"], "hours": 20 },
-      { "unit": "Development Economics", "topics": ["Growth vs development", "Planning in Nepal", "Poverty & inequality"], "hours": 14 },
-      { "unit": "Nepali Economy", "topics": ["Structure of Nepali economy", "Agriculture & industry", "Foreign trade & aid"], "hours": 12 }
+      {
+        "unit": "Microeconomics",
+        "topics": [
+          "Demand & supply",
+          "Elasticity",
+          "Consumer behavior",
+          "Production & cost",
+          "Market structures"
+        ],
+        "hours": 28
+      },
+      {
+        "unit": "Macroeconomics",
+        "topics": [
+          "National income",
+          "Money & banking",
+          "Inflation",
+          "Employment"
+        ],
+        "hours": 20
+      },
+      {
+        "unit": "Development Economics",
+        "topics": [
+          "Growth vs development",
+          "Planning in Nepal",
+          "Poverty & inequality"
+        ],
+        "hours": 14
+      },
+      {
+        "unit": "Nepali Economy",
+        "topics": [
+          "Structure of Nepali economy",
+          "Agriculture & industry",
+          "Foreign trade & aid"
+        ],
+        "hours": 12
+      }
     ],
     "emoji": "📊",
-    "gradient": "from-lime-500 to-green-600",
     "popularity": 86,
     "notes": 34,
     "books": 14,
@@ -256,8 +663,16 @@
     "videos": 38,
     "downloads": 24,
     "trending": false,
-    "relatedSlugs": ["accountancy", "business-studies"],
-    "tags": ["NEB", "Micro", "Macro", "Development"]
+    "relatedSlugs": [
+      "accountancy",
+      "business-studies"
+    ],
+    "tags": [
+      "NEB",
+      "Micro",
+      "Macro",
+      "Development"
+    ]
   },
   {
     "id": "s-business",
@@ -269,15 +684,53 @@
     "category": "Management",
     "description": "Principles of management, business environment and entrepreneurship for NEB Management.",
     "overview": "NEB Business Studies covers management principles, functions, business environment, and entrepreneurship.",
-    "units": ["Management Foundations", "Functions of Management", "Business Environment", "Entrepreneurship"],
+    "units": [
+      "Management Foundations",
+      "Functions of Management",
+      "Business Environment",
+      "Entrepreneurship"
+    ],
     "syllabus": [
-      { "unit": "Management Foundations", "topics": ["Concept of management", "Evolution of management thought", "Management process"], "hours": 16 },
-      { "unit": "Functions of Management", "topics": ["Planning", "Organizing", "Staffing", "Directing", "Controlling"], "hours": 24 },
-      { "unit": "Business Environment", "topics": ["Internal & external environment", "Business in Nepal", "Corporate governance"], "hours": 14 },
-      { "unit": "Entrepreneurship", "topics": ["Entrepreneurship concept", "Business plan", "Small business in Nepal"], "hours": 12 }
+      {
+        "unit": "Management Foundations",
+        "topics": [
+          "Concept of management",
+          "Evolution of management thought",
+          "Management process"
+        ],
+        "hours": 16
+      },
+      {
+        "unit": "Functions of Management",
+        "topics": [
+          "Planning",
+          "Organizing",
+          "Staffing",
+          "Directing",
+          "Controlling"
+        ],
+        "hours": 24
+      },
+      {
+        "unit": "Business Environment",
+        "topics": [
+          "Internal & external environment",
+          "Business in Nepal",
+          "Corporate governance"
+        ],
+        "hours": 14
+      },
+      {
+        "unit": "Entrepreneurship",
+        "topics": [
+          "Entrepreneurship concept",
+          "Business plan",
+          "Small business in Nepal"
+        ],
+        "hours": 12
+      }
     ],
     "emoji": "💼",
-    "gradient": "from-teal-500 to-cyan-600",
     "popularity": 84,
     "notes": 32,
     "books": 13,
@@ -288,8 +741,15 @@
     "videos": 32,
     "downloads": 22,
     "trending": false,
-    "relatedSlugs": ["accountancy", "economics-12"],
-    "tags": ["NEB", "Management", "Entrepreneurship"]
+    "relatedSlugs": [
+      "accountancy",
+      "economics-12"
+    ],
+    "tags": [
+      "NEB",
+      "Management",
+      "Entrepreneurship"
+    ]
   },
   {
     "id": "s-nepali-12",
@@ -301,15 +761,56 @@
     "category": "Humanities",
     "description": "व्याकरण, पाठ बुझाइ र रचना — पूर्णाङ्क प्राप्त गर्न सम्पूर्ण सामग्री।",
     "overview": "NEB नेपाली विषयले व्याकरण, अपठित पाठ, कथा/निबन्ध लेखन र आधुनिक साहित्यको ज्ञान जाँच्छ।",
-    "units": ["व्याकरण", "अपठित पाठ", "रचना", "साहित्य"],
+    "units": [
+      "व्याकरण",
+      "अपठित पाठ",
+      "रचना",
+      "साहित्य"
+    ],
     "syllabus": [
-      { "unit": "व्याकरण", "topics": ["सन्धि", "समास", "कारक", "वाक्य रूपान्तरण", "पर्यायवाची", "विपरीतार्थक"], "hours": 20 },
-      { "unit": "अपठित पाठ", "topics": ["गद्यांश बुझाइ", "पद्यांश बुझाइ", "भाव सम्प्रेषण"], "hours": 12 },
-      { "unit": "रचना", "topics": ["निबन्ध लेखन", "पत्र लेखन", "रिपोर्ट तथा समाचार", "संवाद लेखन"], "hours": 16 },
-      { "unit": "साहित्य", "topics": ["कथा", "कविता", "नाटक", "निबन्ध"], "hours": 12 }
+      {
+        "unit": "व्याकरण",
+        "topics": [
+          "सन्धि",
+          "समास",
+          "कारक",
+          "वाक्य रूपान्तरण",
+          "पर्यायवाची",
+          "विपरीतार्थक"
+        ],
+        "hours": 20
+      },
+      {
+        "unit": "अपठित पाठ",
+        "topics": [
+          "गद्यांश बुझाइ",
+          "पद्यांश बुझाइ",
+          "भाव सम्प्रेषण"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "रचना",
+        "topics": [
+          "निबन्ध लेखन",
+          "पत्र लेखन",
+          "रिपोर्ट तथा समाचार",
+          "संवाद लेखन"
+        ],
+        "hours": 16
+      },
+      {
+        "unit": "साहित्य",
+        "topics": [
+          "कथा",
+          "कविता",
+          "नाटक",
+          "निबन्ध"
+        ],
+        "hours": 12
+      }
     ],
     "emoji": "🇳🇵",
-    "gradient": "from-rose-500 to-red-600",
     "popularity": 94,
     "notes": 36,
     "books": 14,
@@ -320,8 +821,16 @@
     "videos": 40,
     "downloads": 26,
     "trending": false,
-    "relatedSlugs": ["english-12", "social-studies-12"],
-    "tags": ["NEB", "Nepali", "व्याकरण", "रचना"]
+    "relatedSlugs": [
+      "english-12",
+      "social-studies-12"
+    ],
+    "tags": [
+      "NEB",
+      "Nepali",
+      "व्याकरण",
+      "रचना"
+    ]
   },
   {
     "id": "s-social-12",
@@ -333,15 +842,55 @@
     "category": "Humanities & Social Sciences",
     "description": "History, civics, geography and economics of Nepal — the NEB paper that rewards structured answers.",
     "overview": "NEB Social Studies covers our nation's history, constitutional development, civics, geography and current affairs.",
-    "units": ["History of Nepal", "Civics & Constitution", "Geography", "Economics & Development"],
+    "units": [
+      "History of Nepal",
+      "Civics & Constitution",
+      "Geography",
+      "Economics & Development"
+    ],
     "syllabus": [
-      { "unit": "History of Nepal", "topics": ["Ancient & medieval Nepal", "Unification of Nepal", "Rana & Shah era", "Democracy movements"], "hours": 18 },
-      { "unit": "Civics & Constitution", "topics": ["Constitution of Nepal 2072", "Fundamental rights", "Organs of state", "Local governance"], "hours": 16 },
-      { "unit": "Geography", "topics": ["Physiography of Nepal", "Climate & vegetation", "Map work", "Population distribution"], "hours": 14 },
-      { "unit": "Economics & Development", "topics": ["Basic economics", "Development planning", "Industries & tourism", "Sustainable development"], "hours": 12 }
+      {
+        "unit": "History of Nepal",
+        "topics": [
+          "Ancient & medieval Nepal",
+          "Unification of Nepal",
+          "Rana & Shah era",
+          "Democracy movements"
+        ],
+        "hours": 18
+      },
+      {
+        "unit": "Civics & Constitution",
+        "topics": [
+          "Constitution of Nepal 2072",
+          "Fundamental rights",
+          "Organs of state",
+          "Local governance"
+        ],
+        "hours": 16
+      },
+      {
+        "unit": "Geography",
+        "topics": [
+          "Physiography of Nepal",
+          "Climate & vegetation",
+          "Map work",
+          "Population distribution"
+        ],
+        "hours": 14
+      },
+      {
+        "unit": "Economics & Development",
+        "topics": [
+          "Basic economics",
+          "Development planning",
+          "Industries & tourism",
+          "Sustainable development"
+        ],
+        "hours": 12
+      }
     ],
     "emoji": "🏔️",
-    "gradient": "from-amber-500 to-orange-600",
     "popularity": 90,
     "notes": 34,
     "books": 12,
@@ -352,8 +901,16 @@
     "videos": 36,
     "downloads": 24,
     "trending": false,
-    "relatedSlugs": ["nepali-12", "english-12"],
-    "tags": ["NEB", "Civics", "History", "Geography"]
+    "relatedSlugs": [
+      "nepali-12",
+      "english-12"
+    ],
+    "tags": [
+      "NEB",
+      "Civics",
+      "History",
+      "Geography"
+    ]
   },
   {
     "id": "s-diploma-civil",
@@ -364,15 +921,51 @@
     "category": "Engineering",
     "description": "CTEVT 3-year diploma in civil engineering — surveying, drawing and construction technology.",
     "overview": "The CTEVT Diploma in Civil Engineering is a 3-year, 6-semester program producing mid-level engineering technicians.",
-    "units": ["Drawing & Design", "Surveying", "Construction", "Estimation & Materials"],
+    "units": [
+      "Drawing & Design",
+      "Surveying",
+      "Construction",
+      "Estimation & Materials"
+    ],
     "syllabus": [
-      { "unit": "Drawing & Design", "topics": ["Engineering Drawing I-II", "AutoCAD", "Building Drawing"], "hours": 45 },
-      { "unit": "Surveying", "topics": ["Chain & Compass Surveying", "Leveling", "Theodolite & Modern Survey"], "hours": 40 },
-      { "unit": "Construction", "topics": ["Building Construction", "Concrete Technology", "Irrigation Engineering"], "hours": 40 },
-      { "unit": "Estimation & Materials", "topics": ["Estimating & Costing", "Construction Materials", "Soil Mechanics Basics"], "hours": 30 }
+      {
+        "unit": "Drawing & Design",
+        "topics": [
+          "Engineering Drawing I-II",
+          "AutoCAD",
+          "Building Drawing"
+        ],
+        "hours": 45
+      },
+      {
+        "unit": "Surveying",
+        "topics": [
+          "Chain & Compass Surveying",
+          "Leveling",
+          "Theodolite & Modern Survey"
+        ],
+        "hours": 40
+      },
+      {
+        "unit": "Construction",
+        "topics": [
+          "Building Construction",
+          "Concrete Technology",
+          "Irrigation Engineering"
+        ],
+        "hours": 40
+      },
+      {
+        "unit": "Estimation & Materials",
+        "topics": [
+          "Estimating & Costing",
+          "Construction Materials",
+          "Soil Mechanics Basics"
+        ],
+        "hours": 30
+      }
     ],
     "emoji": "🏗️",
-    "gradient": "from-amber-500 to-orange-600",
     "popularity": 87,
     "notes": 40,
     "books": 16,
@@ -383,8 +976,15 @@
     "videos": 38,
     "downloads": 30,
     "trending": false,
-    "relatedSlugs": ["diploma-nursing"],
-    "tags": ["CTEVT", "Civil", "Surveying", "Diploma"]
+    "relatedSlugs": [
+      "diploma-nursing"
+    ],
+    "tags": [
+      "CTEVT",
+      "Civil",
+      "Surveying",
+      "Diploma"
+    ]
   },
   {
     "id": "s-diploma-nursing",
@@ -395,15 +995,51 @@
     "category": "Health Sciences",
     "description": "PCL Nursing — anatomy, pharmacology, medical-surgical nursing and midwifery for CTEVT nursing.",
     "overview": "CTEVT Proficiency Certificate Level (PCL) Nursing is a 3-year diploma creating registered nurses.",
-    "units": ["Foundations", "Medical-Surgical", "Midwifery", "Community Health"],
+    "units": [
+      "Foundations",
+      "Medical-Surgical",
+      "Midwifery",
+      "Community Health"
+    ],
     "syllabus": [
-      { "unit": "Foundations", "topics": ["Anatomy & Physiology", "Microbiology", "Nutrition", "Nursing Foundations"], "hours": 50 },
-      { "unit": "Medical-Surgical", "topics": ["Medical-Surgical Nursing I-II", "Pharmacology", "Pediatric Nursing"], "hours": 55 },
-      { "unit": "Midwifery", "topics": ["Midwifery I-II", "Maternal & Child Health"], "hours": 40 },
-      { "unit": "Community Health", "topics": ["Community Health Nursing", "Mental Health Nursing", "Primary Health Care"], "hours": 30 }
+      {
+        "unit": "Foundations",
+        "topics": [
+          "Anatomy & Physiology",
+          "Microbiology",
+          "Nutrition",
+          "Nursing Foundations"
+        ],
+        "hours": 50
+      },
+      {
+        "unit": "Medical-Surgical",
+        "topics": [
+          "Medical-Surgical Nursing I-II",
+          "Pharmacology",
+          "Pediatric Nursing"
+        ],
+        "hours": 55
+      },
+      {
+        "unit": "Midwifery",
+        "topics": [
+          "Midwifery I-II",
+          "Maternal & Child Health"
+        ],
+        "hours": 40
+      },
+      {
+        "unit": "Community Health",
+        "topics": [
+          "Community Health Nursing",
+          "Mental Health Nursing",
+          "Primary Health Care"
+        ],
+        "hours": 30
+      }
     ],
     "emoji": "💉",
-    "gradient": "from-rose-500 to-pink-600",
     "popularity": 92,
     "notes": 48,
     "books": 20,
@@ -414,10 +1050,16 @@
     "videos": 44,
     "downloads": 36,
     "trending": true,
-    "relatedSlugs": ["diploma-civil"],
-    "tags": ["CTEVT", "Nursing", "Midwifery", "Health"]
+    "relatedSlugs": [
+      "diploma-civil"
+    ],
+    "tags": [
+      "CTEVT",
+      "Nursing",
+      "Midwifery",
+      "Health"
+    ]
   },
-
   {
     "id": "s-csit-sem1-dl",
     "slug": "csit-sem1-digital-logic",
@@ -429,16 +1071,62 @@
     "category": "Computing & IT",
     "description": "Boolean algebra, logic gates, combinational and sequential circuits for BSc CSIT Semester 1.",
     "overview": "Digital Logic introduces the fundamentals of digital systems including number systems, Boolean algebra, logic gates, combinational circuits, sequential circuits and state machines. Essential foundation for computer architecture.",
-    "units": ["Number Systems", "Boolean Algebra", "Combinational Circuits", "Sequential Circuits", "State Machines"],
+    "units": [
+      "Number Systems",
+      "Boolean Algebra",
+      "Combinational Circuits",
+      "Sequential Circuits",
+      "State Machines"
+    ],
     "syllabus": [
-      { "unit": "Number Systems", "topics": ["Binary, octal, hexadecimal", "Codes", "Binary arithmetic"], "hours": 8 },
-      { "unit": "Boolean Algebra", "topics": ["Postulates & theorems", "Simplification", "Karnaugh maps"], "hours": 10 },
-      { "unit": "Combinational Circuits", "topics": ["Multiplexers", "Decoders", "Adders", "Comparators"], "hours": 10 },
-      { "unit": "Sequential Circuits", "topics": ["Flip-flops", "Counters", "Registers"], "hours": 12 },
-      { "unit": "State Machines", "topics": ["State diagrams", "State tables", "Minimization"], "hours": 8 }
+      {
+        "unit": "Number Systems",
+        "topics": [
+          "Binary, octal, hexadecimal",
+          "Codes",
+          "Binary arithmetic"
+        ],
+        "hours": 8
+      },
+      {
+        "unit": "Boolean Algebra",
+        "topics": [
+          "Postulates & theorems",
+          "Simplification",
+          "Karnaugh maps"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Combinational Circuits",
+        "topics": [
+          "Multiplexers",
+          "Decoders",
+          "Adders",
+          "Comparators"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Sequential Circuits",
+        "topics": [
+          "Flip-flops",
+          "Counters",
+          "Registers"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "State Machines",
+        "topics": [
+          "State diagrams",
+          "State tables",
+          "Minimization"
+        ],
+        "hours": 8
+      }
     ],
     "emoji": "🔧",
-    "gradient": "from-indigo-500 to-blue-600",
     "popularity": 80,
     "notes": 12,
     "books": 8,
@@ -449,8 +1137,16 @@
     "videos": 15,
     "downloads": 10,
     "trending": false,
-    "relatedSlugs": ["csit-sem1-physics", "csit-sem1-calculus"],
-    "tags": ["CSIT", "Sem 1", "Digital Logic", "Boolean Algebra"]
+    "relatedSlugs": [
+      "csit-sem1-physics",
+      "csit-sem1-calculus"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 1",
+      "Digital Logic",
+      "Boolean Algebra"
+    ]
   },
   {
     "id": "s-csit-sem1-physics",
@@ -463,15 +1159,54 @@
     "category": "Science & Technology",
     "description": "Mechanics, waves and thermodynamics fundamentals for BSc CSIT Semester 1.",
     "overview": "Physics I covers classical mechanics, oscillations, waves and thermal physics. Provides the mathematical and conceptual foundation for understanding physical systems.",
-    "units": ["Classical Mechanics", "Oscillations", "Waves", "Thermal Physics"],
+    "units": [
+      "Classical Mechanics",
+      "Oscillations",
+      "Waves",
+      "Thermal Physics"
+    ],
     "syllabus": [
-      { "unit": "Classical Mechanics", "topics": ["Kinematics", "Newton's laws", "Work & energy", "Rotational mechanics"], "hours": 14 },
-      { "unit": "Oscillations", "topics": ["SHM", "Damped oscillations", "Forced oscillations", "Resonance"], "hours": 8 },
-      { "unit": "Waves", "topics": ["Wave equation", "Superposition", "Standing waves", "Sound"], "hours": 10 },
-      { "unit": "Thermal Physics", "topics": ["Laws of thermodynamics", "Heat engines", "Entropy"], "hours": 10 }
+      {
+        "unit": "Classical Mechanics",
+        "topics": [
+          "Kinematics",
+          "Newton's laws",
+          "Work & energy",
+          "Rotational mechanics"
+        ],
+        "hours": 14
+      },
+      {
+        "unit": "Oscillations",
+        "topics": [
+          "SHM",
+          "Damped oscillations",
+          "Forced oscillations",
+          "Resonance"
+        ],
+        "hours": 8
+      },
+      {
+        "unit": "Waves",
+        "topics": [
+          "Wave equation",
+          "Superposition",
+          "Standing waves",
+          "Sound"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Thermal Physics",
+        "topics": [
+          "Laws of thermodynamics",
+          "Heat engines",
+          "Entropy"
+        ],
+        "hours": 10
+      }
     ],
     "emoji": "⚛️",
-    "gradient": "from-blue-500 to-indigo-600",
     "popularity": 75,
     "notes": 10,
     "books": 6,
@@ -482,8 +1217,16 @@
     "videos": 12,
     "downloads": 8,
     "trending": false,
-    "relatedSlugs": ["csit-sem1-digital-logic", "csit-sem1-calculus"],
-    "tags": ["CSIT", "Sem 1", "Physics", "Mechanics"]
+    "relatedSlugs": [
+      "csit-sem1-digital-logic",
+      "csit-sem1-calculus"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 1",
+      "Physics",
+      "Mechanics"
+    ]
   },
   {
     "id": "s-csit-sem1-calculus",
@@ -496,15 +1239,52 @@
     "category": "Science & Technology",
     "description": "Limits, derivatives, integrals and differential equations for BSc CSIT Semester 1.",
     "overview": "Calculus I covers limits, continuity, differentiation, integration and elementary differential equations. Provides mathematical foundation for algorithm analysis and modeling.",
-    "units": ["Limits & Continuity", "Differentiation", "Integration", "Differential Equations"],
+    "units": [
+      "Limits & Continuity",
+      "Differentiation",
+      "Integration",
+      "Differential Equations"
+    ],
     "syllabus": [
-      { "unit": "Limits & Continuity", "topics": ["Limits", "Continuity", "L'Hôpital's rule"], "hours": 10 },
-      { "unit": "Differentiation", "topics": ["Derivatives", "Chain rule", "Implicit differentiation", "Applications"], "hours": 12 },
-      { "unit": "Integration", "topics": ["Definite integrals", "Techniques of integration", "Applications"], "hours": 14 },
-      { "unit": "Differential Equations", "topics": ["First order ODEs", "Separable equations", "Linear equations"], "hours": 10 }
+      {
+        "unit": "Limits & Continuity",
+        "topics": [
+          "Limits",
+          "Continuity",
+          "L'Hôpital's rule"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Differentiation",
+        "topics": [
+          "Derivatives",
+          "Chain rule",
+          "Implicit differentiation",
+          "Applications"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Integration",
+        "topics": [
+          "Definite integrals",
+          "Techniques of integration",
+          "Applications"
+        ],
+        "hours": 14
+      },
+      {
+        "unit": "Differential Equations",
+        "topics": [
+          "First order ODEs",
+          "Separable equations",
+          "Linear equations"
+        ],
+        "hours": 10
+      }
     ],
     "emoji": "📈",
-    "gradient": "from-violet-500 to-purple-600",
     "popularity": 78,
     "notes": 14,
     "books": 8,
@@ -515,8 +1295,16 @@
     "videos": 16,
     "downloads": 10,
     "trending": false,
-    "relatedSlugs": ["csit-sem1-digital-logic", "csit-sem1-physics"],
-    "tags": ["CSIT", "Sem 1", "Calculus", "Mathematics"]
+    "relatedSlugs": [
+      "csit-sem1-digital-logic",
+      "csit-sem1-physics"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 1",
+      "Calculus",
+      "Mathematics"
+    ]
   },
   {
     "id": "s-csit-sem1-english",
@@ -529,15 +1317,51 @@
     "category": "Humanities",
     "description": "Technical writing, comprehension and communication skills for BSc CSIT Semester 1.",
     "overview": "English I develops academic reading, writing and presentation skills. Covers technical writing, comprehension, grammar and communication for CS students.",
-    "units": ["Reading Skills", "Writing Skills", "Grammar", "Presentation"],
+    "units": [
+      "Reading Skills",
+      "Writing Skills",
+      "Grammar",
+      "Presentation"
+    ],
     "syllabus": [
-      { "unit": "Reading Skills", "topics": ["Academic reading", "Critical analysis", "Note-taking"], "hours": 8 },
-      { "unit": "Writing Skills", "topics": ["Essay writing", "Report writing", "Technical documentation"], "hours": 10 },
-      { "unit": "Grammar", "topics": ["Sentence structure", "Punctuation", "Academic style"], "hours": 8 },
-      { "unit": "Presentation", "topics": ["Oral presentation", "Group discussion", "Interview skills"], "hours": 6 }
+      {
+        "unit": "Reading Skills",
+        "topics": [
+          "Academic reading",
+          "Critical analysis",
+          "Note-taking"
+        ],
+        "hours": 8
+      },
+      {
+        "unit": "Writing Skills",
+        "topics": [
+          "Essay writing",
+          "Report writing",
+          "Technical documentation"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Grammar",
+        "topics": [
+          "Sentence structure",
+          "Punctuation",
+          "Academic style"
+        ],
+        "hours": 8
+      },
+      {
+        "unit": "Presentation",
+        "topics": [
+          "Oral presentation",
+          "Group discussion",
+          "Interview skills"
+        ],
+        "hours": 6
+      }
     ],
     "emoji": "📖",
-    "gradient": "from-emerald-500 to-teal-600",
     "popularity": 70,
     "notes": 8,
     "books": 6,
@@ -548,8 +1372,15 @@
     "videos": 8,
     "downloads": 6,
     "trending": false,
-    "relatedSlugs": ["csit-sem1-calculus"],
-    "tags": ["CSIT", "Sem 1", "English", "Communication"]
+    "relatedSlugs": [
+      "csit-sem1-calculus"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 1",
+      "English",
+      "Communication"
+    ]
   },
   {
     "id": "s-csit-sem1-c",
@@ -562,16 +1393,66 @@
     "category": "Computing & IT",
     "description": "Programming fundamentals in C — variables, control structures, functions, pointers and files.",
     "overview": "C Programming introduces procedural programming concepts. Covers variables, data types, control structures, functions, arrays, pointers, structures and file handling. Builds strong programming foundation.",
-    "units": ["Basics", "Control Structures", "Functions", "Arrays & Pointers", "Structures & Files"],
+    "units": [
+      "Basics",
+      "Control Structures",
+      "Functions",
+      "Arrays & Pointers",
+      "Structures & Files"
+    ],
     "syllabus": [
-      { "unit": "Basics", "topics": ["Data types", "Variables", "Operators", "Input/Output"], "hours": 8 },
-      { "unit": "Control Structures", "topics": ["if-else", "switch", "loops", "break/continue"], "hours": 10 },
-      { "unit": "Functions", "topics": ["Function definition", "Parameters", "Recursion", "Scope"], "hours": 10 },
-      { "unit": "Arrays & Pointers", "topics": ["Arrays", "Strings", "Pointers", "Pointer arithmetic"], "hours": 12 },
-      { "unit": "Structures & Files", "topics": ["Structures", "Unions", "File handling", "Dynamic memory"], "hours": 8 }
+      {
+        "unit": "Basics",
+        "topics": [
+          "Data types",
+          "Variables",
+          "Operators",
+          "Input/Output"
+        ],
+        "hours": 8
+      },
+      {
+        "unit": "Control Structures",
+        "topics": [
+          "if-else",
+          "switch",
+          "loops",
+          "break/continue"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Functions",
+        "topics": [
+          "Function definition",
+          "Parameters",
+          "Recursion",
+          "Scope"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Arrays & Pointers",
+        "topics": [
+          "Arrays",
+          "Strings",
+          "Pointers",
+          "Pointer arithmetic"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Structures & Files",
+        "topics": [
+          "Structures",
+          "Unions",
+          "File handling",
+          "Dynamic memory"
+        ],
+        "hours": 8
+      }
     ],
     "emoji": "💻",
-    "gradient": "from-cyan-500 to-blue-600",
     "popularity": 85,
     "notes": 16,
     "books": 10,
@@ -582,8 +1463,15 @@
     "videos": 20,
     "downloads": 12,
     "trending": false,
-    "relatedSlugs": ["csit-sem1-digital-logic"],
-    "tags": ["CSIT", "Sem 1", "C", "Programming"]
+    "relatedSlugs": [
+      "csit-sem1-digital-logic"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 1",
+      "C",
+      "Programming"
+    ]
   },
   {
     "id": "s-csit-sem2-dsa",
@@ -596,15 +1484,55 @@
     "category": "Computing & IT",
     "description": "Arrays, linked lists, trees, graphs, sorting and searching algorithms for BSc CSIT Semester 2.",
     "overview": "Data Structures & Algorithms covers fundamental data structures (arrays, linked lists, stacks, queues, trees, graphs) and algorithm analysis. Core subject for technical interviews and competitive programming.",
-    "units": ["Data Structures", "Trees & Graphs", "Sorting Algorithms", "Searching & Hashing"],
+    "units": [
+      "Data Structures",
+      "Trees & Graphs",
+      "Sorting Algorithms",
+      "Searching & Hashing"
+    ],
     "syllabus": [
-      { "unit": "Data Structures", "topics": ["Arrays", "Linked lists", "Stacks", "Queues"], "hours": 14 },
-      { "unit": "Trees & Graphs", "topics": ["Binary trees", "BST", "Heaps", "Graph traversal"], "hours": 16 },
-      { "unit": "Sorting Algorithms", "topics": ["Bubble sort", "Merge sort", "Quick sort", "Heap sort"], "hours": 12 },
-      { "unit": "Searching & Hashing", "topics": ["Linear search", "Binary search", "Hash tables", "Collision resolution"], "hours": 8 }
+      {
+        "unit": "Data Structures",
+        "topics": [
+          "Arrays",
+          "Linked lists",
+          "Stacks",
+          "Queues"
+        ],
+        "hours": 14
+      },
+      {
+        "unit": "Trees & Graphs",
+        "topics": [
+          "Binary trees",
+          "BST",
+          "Heaps",
+          "Graph traversal"
+        ],
+        "hours": 16
+      },
+      {
+        "unit": "Sorting Algorithms",
+        "topics": [
+          "Bubble sort",
+          "Merge sort",
+          "Quick sort",
+          "Heap sort"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Searching & Hashing",
+        "topics": [
+          "Linear search",
+          "Binary search",
+          "Hash tables",
+          "Collision resolution"
+        ],
+        "hours": 8
+      }
     ],
     "emoji": "🌳",
-    "gradient": "from-green-500 to-emerald-600",
     "popularity": 92,
     "notes": 18,
     "books": 12,
@@ -615,8 +1543,16 @@
     "videos": 22,
     "downloads": 14,
     "trending": true,
-    "relatedSlugs": ["csit-sem1-c-programming", "csit-sem2-microprocessor"],
-    "tags": ["CSIT", "Sem 2", "DSA", "Algorithms"]
+    "relatedSlugs": [
+      "csit-sem1-c-programming",
+      "csit-sem2-microprocessor"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 2",
+      "DSA",
+      "Algorithms"
+    ]
   },
   {
     "id": "s-csit-sem2-microprocessor",
@@ -629,15 +1565,53 @@
     "category": "Computing & IT",
     "description": "8085/8086 microprocessor architecture, assembly language programming and interfacing.",
     "overview": "Microprocessor covers 8085 and 8086 architecture, assembly language programming, interrupts and interfacing. Understanding hardware-software interface at the lowest level.",
-    "units": ["8085 Architecture", "Assembly Programming", "8086 Architecture", "Interfacing"],
+    "units": [
+      "8085 Architecture",
+      "Assembly Programming",
+      "8086 Architecture",
+      "Interfacing"
+    ],
     "syllabus": [
-      { "unit": "8085 Architecture", "topics": ["Pin diagram", "Registers", "Memory interfacing", "Timing diagrams"], "hours": 12 },
-      { "unit": "Assembly Programming", "topics": ["8085 instruction set", "Addressing modes", "Programs"], "hours": 14 },
-      { "unit": "8086 Architecture", "topics": ["8086 pins", "Memory segmentation", "Addressing modes"], "hours": 12 },
-      { "unit": "Interfacing", "topics": ["I/O interfacing", "Interrupts", "DMA", "ADC/DAC"], "hours": 10 }
+      {
+        "unit": "8085 Architecture",
+        "topics": [
+          "Pin diagram",
+          "Registers",
+          "Memory interfacing",
+          "Timing diagrams"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Assembly Programming",
+        "topics": [
+          "8085 instruction set",
+          "Addressing modes",
+          "Programs"
+        ],
+        "hours": 14
+      },
+      {
+        "unit": "8086 Architecture",
+        "topics": [
+          "8086 pins",
+          "Memory segmentation",
+          "Addressing modes"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Interfacing",
+        "topics": [
+          "I/O interfacing",
+          "Interrupts",
+          "DMA",
+          "ADC/DAC"
+        ],
+        "hours": 10
+      }
     ],
     "emoji": "🔌",
-    "gradient": "from-orange-500 to-red-600",
     "popularity": 72,
     "notes": 10,
     "books": 8,
@@ -648,8 +1622,15 @@
     "videos": 10,
     "downloads": 8,
     "trending": false,
-    "relatedSlugs": ["csit-sem2-data-structures"],
-    "tags": ["CSIT", "Sem 2", "Microprocessor", "Assembly"]
+    "relatedSlugs": [
+      "csit-sem2-data-structures"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 2",
+      "Microprocessor",
+      "Assembly"
+    ]
   },
   {
     "id": "s-csit-sem2-math3",
@@ -662,15 +1643,54 @@
     "category": "Science & Technology",
     "description": "Linear algebra, probability and statistics for BSc CSIT Semester 2.",
     "overview": "Mathematics III covers linear algebra (matrices, eigenvalues), probability theory and statistical methods. Essential for machine learning and data analysis foundations.",
-    "units": ["Linear Algebra", "Probability", "Statistics", "Applications"],
+    "units": [
+      "Linear Algebra",
+      "Probability",
+      "Statistics",
+      "Applications"
+    ],
     "syllabus": [
-      { "unit": "Linear Algebra", "topics": ["Matrices", "Determinants", "Eigenvalues", "Vector spaces"], "hours": 14 },
-      { "unit": "Probability", "topics": ["Probability spaces", "Random variables", "Distributions", "Bayes theorem"], "hours": 12 },
-      { "unit": "Statistics", "topics": ["Descriptive statistics", "Inference", "Regression", "Hypothesis testing"], "hours": 12 },
-      { "unit": "Applications", "topics": ["Applications in CS", "Data analysis", "Statistical computing"], "hours": 6 }
+      {
+        "unit": "Linear Algebra",
+        "topics": [
+          "Matrices",
+          "Determinants",
+          "Eigenvalues",
+          "Vector spaces"
+        ],
+        "hours": 14
+      },
+      {
+        "unit": "Probability",
+        "topics": [
+          "Probability spaces",
+          "Random variables",
+          "Distributions",
+          "Bayes theorem"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Statistics",
+        "topics": [
+          "Descriptive statistics",
+          "Inference",
+          "Regression",
+          "Hypothesis testing"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Applications",
+        "topics": [
+          "Applications in CS",
+          "Data analysis",
+          "Statistical computing"
+        ],
+        "hours": 6
+      }
     ],
     "emoji": "📊",
-    "gradient": "from-purple-500 to-fuchsia-600",
     "popularity": 76,
     "notes": 12,
     "books": 8,
@@ -681,8 +1701,15 @@
     "videos": 14,
     "downloads": 10,
     "trending": false,
-    "relatedSlugs": ["csit-sem2-data-structures"],
-    "tags": ["CSIT", "Sem 2", "Mathematics", "Linear Algebra"]
+    "relatedSlugs": [
+      "csit-sem2-data-structures"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 2",
+      "Mathematics",
+      "Linear Algebra"
+    ]
   },
   {
     "id": "s-csit-sem2-comarch",
@@ -695,15 +1722,54 @@
     "category": "Computing & IT",
     "description": "CPU design, memory hierarchy, pipelining and I/O organization for BSc CSIT Semester 2.",
     "overview": "Computer Architecture covers CPU organization, instruction sets, memory hierarchy, pipelining, parallel processing and I/O systems. Understanding how computers execute programs efficiently.",
-    "units": ["CPU Design", "Memory", "Pipelining", "I/O Systems"],
+    "units": [
+      "CPU Design",
+      "Memory",
+      "Pipelining",
+      "I/O Systems"
+    ],
     "syllabus": [
-      { "unit": "CPU Design", "topics": ["Instruction set architecture", "Datapath", "Control unit"], "hours": 14 },
-      { "unit": "Memory", "topics": ["Cache memory", "Virtual memory", "Memory hierarchy", "Performance"], "hours": 12 },
-      { "unit": "Pipelining", "topics": ["Pipeline stages", "Hazards", "Branch prediction", "Superscalar"], "hours": 12 },
-      { "unit": "I/O Systems", "topics": ["I/O methods", "Interrupts", "DMA", "Bus architecture"], "hours": 8 }
+      {
+        "unit": "CPU Design",
+        "topics": [
+          "Instruction set architecture",
+          "Datapath",
+          "Control unit"
+        ],
+        "hours": 14
+      },
+      {
+        "unit": "Memory",
+        "topics": [
+          "Cache memory",
+          "Virtual memory",
+          "Memory hierarchy",
+          "Performance"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Pipelining",
+        "topics": [
+          "Pipeline stages",
+          "Hazards",
+          "Branch prediction",
+          "Superscalar"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "I/O Systems",
+        "topics": [
+          "I/O methods",
+          "Interrupts",
+          "DMA",
+          "Bus architecture"
+        ],
+        "hours": 8
+      }
     ],
     "emoji": "🖥️",
-    "gradient": "from-sky-500 to-cyan-600",
     "popularity": 74,
     "notes": 10,
     "books": 8,
@@ -714,8 +1780,15 @@
     "videos": 12,
     "downloads": 8,
     "trending": false,
-    "relatedSlugs": ["csit-sem2-microprocessor"],
-    "tags": ["CSIT", "Sem 2", "Architecture", "CPU"]
+    "relatedSlugs": [
+      "csit-sem2-microprocessor"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 2",
+      "Architecture",
+      "CPU"
+    ]
   },
   {
     "id": "s-csit-sem3-toc",
@@ -728,15 +1801,53 @@
     "category": "Computing & IT",
     "description": "Automata theory, formal languages, computability and complexity for BSc CSIT Semester 3.",
     "overview": "Theory of Computation covers finite automata, context-free grammars, pushdown automata, Turing machines, computability and computational complexity. Theoretical foundation of computer science.",
-    "units": ["Automata", "Formal Languages", "Turing Machines", "Complexity"],
+    "units": [
+      "Automata",
+      "Formal Languages",
+      "Turing Machines",
+      "Complexity"
+    ],
     "syllabus": [
-      { "unit": "Automata", "topics": ["Finite automata", "Regular expressions", "NFA", "DFA minimization"], "hours": 12 },
-      { "unit": "Formal Languages", "topics": ["Context-free grammars", "Pushdown automata", "CFG simplification"], "hours": 14 },
-      { "unit": "Turing Machines", "topics": ["Turing machine model", "Computability", "Halting problem"], "hours": 10 },
-      { "unit": "Complexity", "topics": ["P vs NP", "NP-completeness", "Reductions", "Complexity classes"], "hours": 10 }
+      {
+        "unit": "Automata",
+        "topics": [
+          "Finite automata",
+          "Regular expressions",
+          "NFA",
+          "DFA minimization"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Formal Languages",
+        "topics": [
+          "Context-free grammars",
+          "Pushdown automata",
+          "CFG simplification"
+        ],
+        "hours": 14
+      },
+      {
+        "unit": "Turing Machines",
+        "topics": [
+          "Turing machine model",
+          "Computability",
+          "Halting problem"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Complexity",
+        "topics": [
+          "P vs NP",
+          "NP-completeness",
+          "Reductions",
+          "Complexity classes"
+        ],
+        "hours": 10
+      }
     ],
     "emoji": "🤖",
-    "gradient": "from-indigo-500 to-violet-600",
     "popularity": 70,
     "notes": 10,
     "books": 8,
@@ -747,8 +1858,15 @@
     "videos": 10,
     "downloads": 8,
     "trending": false,
-    "relatedSlugs": ["csit-sem4-algorithm-design"],
-    "tags": ["CSIT", "Sem 3", "Automata", "TOC"]
+    "relatedSlugs": [
+      "csit-sem4-algorithm-design"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 3",
+      "Automata",
+      "TOC"
+    ]
   },
   {
     "id": "s-csit-sem3-os",
@@ -761,15 +1879,57 @@
     "category": "Computing & IT",
     "description": "Process management, memory management, file systems and OS design for BSc CSIT Semester 3.",
     "overview": "Operating Systems covers process management, CPU scheduling, memory management, file systems, I/O systems, protection and security. Understanding how software controls hardware resources.",
-    "units": ["Process Management", "Memory Management", "File Systems", "I/O & Security"],
+    "units": [
+      "Process Management",
+      "Memory Management",
+      "File Systems",
+      "I/O & Security"
+    ],
     "syllabus": [
-      { "unit": "Process Management", "topics": ["Processes", "Threads", "CPU scheduling", "Synchronization", "Deadlocks"], "hours": 16 },
-      { "unit": "Memory Management", "topics": ["Swapping", "Paging", "Segmentation", "Virtual memory", "Page replacement"], "hours": 14 },
-      { "unit": "File Systems", "topics": ["File concepts", "Directory structure", "Allocation methods", "Free space"], "hours": 10 },
-      { "unit": "I/O & Security", "topics": ["I/O hardware", "Disk scheduling", "Protection", "Security threats"], "hours": 8 }
+      {
+        "unit": "Process Management",
+        "topics": [
+          "Processes",
+          "Threads",
+          "CPU scheduling",
+          "Synchronization",
+          "Deadlocks"
+        ],
+        "hours": 16
+      },
+      {
+        "unit": "Memory Management",
+        "topics": [
+          "Swapping",
+          "Paging",
+          "Segmentation",
+          "Virtual memory",
+          "Page replacement"
+        ],
+        "hours": 14
+      },
+      {
+        "unit": "File Systems",
+        "topics": [
+          "File concepts",
+          "Directory structure",
+          "Allocation methods",
+          "Free space"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "I/O & Security",
+        "topics": [
+          "I/O hardware",
+          "Disk scheduling",
+          "Protection",
+          "Security threats"
+        ],
+        "hours": 8
+      }
     ],
     "emoji": "⚙️",
-    "gradient": "from-amber-500 to-orange-600",
     "popularity": 82,
     "notes": 14,
     "books": 10,
@@ -780,8 +1940,15 @@
     "videos": 16,
     "downloads": 10,
     "trending": false,
-    "relatedSlugs": ["csit-sem3-dbms"],
-    "tags": ["CSIT", "Sem 3", "OS", "Linux"]
+    "relatedSlugs": [
+      "csit-sem3-dbms"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 3",
+      "OS",
+      "Linux"
+    ]
   },
   {
     "id": "s-csit-sem3-dbms",
@@ -794,15 +1961,55 @@
     "category": "Computing & IT",
     "description": "Relational databases, SQL, normalization, transactions and NoSQL for BSc CSIT Semester 3.",
     "overview": "DBMS covers relational model, SQL, normalization, transaction management, concurrency control and recovery. Essential for building data-driven applications.",
-    "units": ["Relational Model", "SQL", "Normalization", "Transactions"],
+    "units": [
+      "Relational Model",
+      "SQL",
+      "Normalization",
+      "Transactions"
+    ],
     "syllabus": [
-      { "unit": "Relational Model", "topics": ["ER diagrams", "Relational algebra", "Relational calculus"], "hours": 10 },
-      { "unit": "SQL", "topics": ["DDL", "DML", "Joins", "Subqueries", "Views", "Stored procedures"], "hours": 14 },
-      { "unit": "Normalization", "topics": ["Functional dependencies", "1NF-BCNF", "Decomposition"], "hours": 10 },
-      { "unit": "Transactions", "topics": ["ACID properties", "Concurrency control", "Recovery", "Indexing"], "hours": 12 }
+      {
+        "unit": "Relational Model",
+        "topics": [
+          "ER diagrams",
+          "Relational algebra",
+          "Relational calculus"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "SQL",
+        "topics": [
+          "DDL",
+          "DML",
+          "Joins",
+          "Subqueries",
+          "Views",
+          "Stored procedures"
+        ],
+        "hours": 14
+      },
+      {
+        "unit": "Normalization",
+        "topics": [
+          "Functional dependencies",
+          "1NF-BCNF",
+          "Decomposition"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Transactions",
+        "topics": [
+          "ACID properties",
+          "Concurrency control",
+          "Recovery",
+          "Indexing"
+        ],
+        "hours": 12
+      }
     ],
     "emoji": "🗃️",
-    "gradient": "from-emerald-500 to-green-600",
     "popularity": 88,
     "notes": 16,
     "books": 10,
@@ -813,8 +2020,16 @@
     "videos": 18,
     "downloads": 12,
     "trending": true,
-    "relatedSlugs": ["csit-sem3-operating-systems", "csit-sem3-networks"],
-    "tags": ["CSIT", "Sem 3", "DBMS", "SQL"]
+    "relatedSlugs": [
+      "csit-sem3-operating-systems",
+      "csit-sem3-networks"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 3",
+      "DBMS",
+      "SQL"
+    ]
   },
   {
     "id": "s-csit-sem3-networks",
@@ -827,15 +2042,58 @@
     "category": "Computing & IT",
     "description": "OSI/TCP-IP models, routing, transport protocols and network security for BSc CSIT Semester 3.",
     "overview": "Computer Networks covers network architectures, protocols, routing algorithms, transport layer protocols and network security. Understanding how systems communicate over networks.",
-    "units": ["Network Models", "Data Link Layer", "Network Layer", "Transport Layer"],
+    "units": [
+      "Network Models",
+      "Data Link Layer",
+      "Network Layer",
+      "Transport Layer"
+    ],
     "syllabus": [
-      { "unit": "Network Models", "topics": ["OSI model", "TCP/IP model", "Protocols", "Topology"], "hours": 10 },
-      { "unit": "Data Link Layer", "topics": ["Framing", "Error detection", "MAC protocols", "Ethernet", "Switching"], "hours": 12 },
-      { "unit": "Network Layer", "topics": ["IP addressing", "Subnetting", "Routing algorithms", "ARP", "ICMP"], "hours": 14 },
-      { "unit": "Transport Layer", "topics": ["TCP", "UDP", "Flow control", "Congestion control", "Socket programming"], "hours": 10 }
+      {
+        "unit": "Network Models",
+        "topics": [
+          "OSI model",
+          "TCP/IP model",
+          "Protocols",
+          "Topology"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Data Link Layer",
+        "topics": [
+          "Framing",
+          "Error detection",
+          "MAC protocols",
+          "Ethernet",
+          "Switching"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Network Layer",
+        "topics": [
+          "IP addressing",
+          "Subnetting",
+          "Routing algorithms",
+          "ARP",
+          "ICMP"
+        ],
+        "hours": 14
+      },
+      {
+        "unit": "Transport Layer",
+        "topics": [
+          "TCP",
+          "UDP",
+          "Flow control",
+          "Congestion control",
+          "Socket programming"
+        ],
+        "hours": 10
+      }
     ],
     "emoji": "🌐",
-    "gradient": "from-cyan-500 to-blue-600",
     "popularity": 84,
     "notes": 14,
     "books": 10,
@@ -846,8 +2104,15 @@
     "videos": 16,
     "downloads": 10,
     "trending": false,
-    "relatedSlugs": ["csit-sem3-dbms"],
-    "tags": ["CSIT", "Sem 3", "Networks", "TCP/IP"]
+    "relatedSlugs": [
+      "csit-sem3-dbms"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 3",
+      "Networks",
+      "TCP/IP"
+    ]
   },
   {
     "id": "s-csit-sem3-numerical",
@@ -860,15 +2125,52 @@
     "category": "Science & Technology",
     "description": "Root finding, interpolation, numerical integration and differential equations for BSc CSIT Semester 3.",
     "overview": "Numerical Methods covers algorithms for solving mathematical problems numerically. Essential for scientific computing, simulation and data analysis.",
-    "units": ["Root Finding", "Interpolation", "Numerical Integration", "ODEs"],
+    "units": [
+      "Root Finding",
+      "Interpolation",
+      "Numerical Integration",
+      "ODEs"
+    ],
     "syllabus": [
-      { "unit": "Root Finding", "topics": ["Bisection method", "Newton-Raphson", "Secant method", "Fixed point iteration"], "hours": 10 },
-      { "unit": "Interpolation", "topics": ["Lagrange interpolation", "Newton's divided difference", "Splines"], "hours": 10 },
-      { "unit": "Numerical Integration", "topics": ["Trapezoidal rule", "Simpson's rules", "Gaussian quadrature"], "hours": 10 },
-      { "unit": "ODEs", "topics": ["Euler's method", "Runge-Kutta methods", "Systems of ODEs"], "hours": 10 }
+      {
+        "unit": "Root Finding",
+        "topics": [
+          "Bisection method",
+          "Newton-Raphson",
+          "Secant method",
+          "Fixed point iteration"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Interpolation",
+        "topics": [
+          "Lagrange interpolation",
+          "Newton's divided difference",
+          "Splines"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Numerical Integration",
+        "topics": [
+          "Trapezoidal rule",
+          "Simpson's rules",
+          "Gaussian quadrature"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "ODEs",
+        "topics": [
+          "Euler's method",
+          "Runge-Kutta methods",
+          "Systems of ODEs"
+        ],
+        "hours": 10
+      }
     ],
     "emoji": "🔢",
-    "gradient": "from-rose-500 to-pink-600",
     "popularity": 68,
     "notes": 8,
     "books": 6,
@@ -879,8 +2181,15 @@
     "videos": 10,
     "downloads": 8,
     "trending": false,
-    "relatedSlugs": ["csit-sem2-mathematics-iii"],
-    "tags": ["CSIT", "Sem 3", "Numerical", "Mathematics"]
+    "relatedSlugs": [
+      "csit-sem2-mathematics-iii"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 3",
+      "Numerical",
+      "Mathematics"
+    ]
   },
   {
     "id": "s-csit-sem4-se",
@@ -893,15 +2202,56 @@
     "category": "Computing & IT",
     "description": "Software development lifecycle, agile methods, testing and project management for BSc CSIT Semester 4.",
     "overview": "Software Engineering covers SDLC models, requirement analysis, design patterns, testing methodologies, project management and quality assurance. Professional software development practices.",
-    "units": ["SDLC", "Design", "Testing", "Project Management"],
+    "units": [
+      "SDLC",
+      "Design",
+      "Testing",
+      "Project Management"
+    ],
     "syllabus": [
-      { "unit": "SDLC", "topics": ["Waterfall", "Agile", "Spiral", "V-model", "Requirements gathering"], "hours": 12 },
-      { "unit": "Design", "topics": ["UML diagrams", "Design patterns", "Architecture patterns", "SOLID principles"], "hours": 14 },
-      { "unit": "Testing", "topics": ["Unit testing", "Integration testing", "System testing", "Test-driven development"], "hours": 10 },
-      { "unit": "Project Management", "topics": ["Planning", "Estimation", "Risk management", "Team management"], "hours": 10 }
+      {
+        "unit": "SDLC",
+        "topics": [
+          "Waterfall",
+          "Agile",
+          "Spiral",
+          "V-model",
+          "Requirements gathering"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Design",
+        "topics": [
+          "UML diagrams",
+          "Design patterns",
+          "Architecture patterns",
+          "SOLID principles"
+        ],
+        "hours": 14
+      },
+      {
+        "unit": "Testing",
+        "topics": [
+          "Unit testing",
+          "Integration testing",
+          "System testing",
+          "Test-driven development"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Project Management",
+        "topics": [
+          "Planning",
+          "Estimation",
+          "Risk management",
+          "Team management"
+        ],
+        "hours": 10
+      }
     ],
     "emoji": "🛠️",
-    "gradient": "from-teal-500 to-cyan-600",
     "popularity": 80,
     "notes": 12,
     "books": 10,
@@ -912,8 +2262,15 @@
     "videos": 14,
     "downloads": 10,
     "trending": false,
-    "relatedSlugs": ["csit-sem5-ai"],
-    "tags": ["CSIT", "Sem 4", "SE", "Agile"]
+    "relatedSlugs": [
+      "csit-sem5-ai"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 4",
+      "SE",
+      "Agile"
+    ]
   },
   {
     "id": "s-csit-sem4-algorithm",
@@ -926,15 +2283,56 @@
     "category": "Computing & IT",
     "description": "Divide and conquer, greedy algorithms, dynamic programming and NP-completeness for BSc CSIT Semester 4.",
     "overview": "Algorithm Design covers advanced algorithmic paradigms including divide-and-conquer, greedy algorithms, dynamic programming, graph algorithms and computational complexity. Core for competitive programming.",
-    "units": ["Divide & Conquer", "Greedy", "Dynamic Programming", "Graph Algorithms"],
+    "units": [
+      "Divide & Conquer",
+      "Greedy",
+      "Dynamic Programming",
+      "Graph Algorithms"
+    ],
     "syllabus": [
-      { "unit": "Divide & Conquer", "topics": ["Merge sort", "Quick sort", "Binary search", "Strassen's multiplication"], "hours": 10 },
-      { "unit": "Greedy", "topics": ["Activity selection", "Huffman coding", "Kruskal's", "Prim's"], "hours": 10 },
-      { "unit": "Dynamic Programming", "topics": ["Optimal substructure", "Memoization", "Knapsack", "LCS", "Matrix chain"], "hours": 16 },
-      { "unit": "Graph Algorithms", "topics": ["BFS", "DFS", "Shortest paths", "Network flow"], "hours": 10 }
+      {
+        "unit": "Divide & Conquer",
+        "topics": [
+          "Merge sort",
+          "Quick sort",
+          "Binary search",
+          "Strassen's multiplication"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Greedy",
+        "topics": [
+          "Activity selection",
+          "Huffman coding",
+          "Kruskal's",
+          "Prim's"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Dynamic Programming",
+        "topics": [
+          "Optimal substructure",
+          "Memoization",
+          "Knapsack",
+          "LCS",
+          "Matrix chain"
+        ],
+        "hours": 16
+      },
+      {
+        "unit": "Graph Algorithms",
+        "topics": [
+          "BFS",
+          "DFS",
+          "Shortest paths",
+          "Network flow"
+        ],
+        "hours": 10
+      }
     ],
     "emoji": "🧩",
-    "gradient": "from-violet-500 to-purple-600",
     "popularity": 86,
     "notes": 14,
     "books": 10,
@@ -945,8 +2343,16 @@
     "videos": 18,
     "downloads": 12,
     "trending": false,
-    "relatedSlugs": ["csit-sem2-data-structures", "csit-sem3-toc"],
-    "tags": ["CSIT", "Sem 4", "Algorithms", "DP"]
+    "relatedSlugs": [
+      "csit-sem2-data-structures",
+      "csit-sem3-toc"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 4",
+      "Algorithms",
+      "DP"
+    ]
   },
   {
     "id": "s-csit-sem4-web",
@@ -959,15 +2365,56 @@
     "category": "Computing & IT",
     "description": "HTML, CSS, JavaScript, server-side programming and web frameworks for BSc CSIT Semester 4.",
     "overview": "Web Technology covers modern web development including HTML5, CSS3, JavaScript, server-side programming, databases and web frameworks. Building full-stack web applications.",
-    "units": ["Frontend", "Backend", "Databases", "Frameworks"],
+    "units": [
+      "Frontend",
+      "Backend",
+      "Databases",
+      "Frameworks"
+    ],
     "syllabus": [
-      { "unit": "Frontend", "topics": ["HTML5", "CSS3", "JavaScript", "DOM manipulation", "Responsive design"], "hours": 14 },
-      { "unit": "Backend", "topics": ["HTTP protocol", "Server-side scripting", "REST APIs", "Authentication"], "hours": 12 },
-      { "unit": "Databases", "topics": ["Web databases", "SQL for web", "NoSQL", "ORM"], "hours": 8 },
-      { "unit": "Frameworks", "topics": ["React basics", "Node.js basics", "Express.js", "Deployment"], "hours": 12 }
+      {
+        "unit": "Frontend",
+        "topics": [
+          "HTML5",
+          "CSS3",
+          "JavaScript",
+          "DOM manipulation",
+          "Responsive design"
+        ],
+        "hours": 14
+      },
+      {
+        "unit": "Backend",
+        "topics": [
+          "HTTP protocol",
+          "Server-side scripting",
+          "REST APIs",
+          "Authentication"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Databases",
+        "topics": [
+          "Web databases",
+          "SQL for web",
+          "NoSQL",
+          "ORM"
+        ],
+        "hours": 8
+      },
+      {
+        "unit": "Frameworks",
+        "topics": [
+          "React basics",
+          "Node.js basics",
+          "Express.js",
+          "Deployment"
+        ],
+        "hours": 12
+      }
     ],
     "emoji": "🌍",
-    "gradient": "from-blue-500 to-indigo-600",
     "popularity": 88,
     "notes": 16,
     "books": 10,
@@ -978,8 +2425,15 @@
     "videos": 20,
     "downloads": 12,
     "trending": true,
-    "relatedSlugs": ["csit-sem4-software-engineering"],
-    "tags": ["CSIT", "Sem 4", "Web", "JavaScript"]
+    "relatedSlugs": [
+      "csit-sem4-software-engineering"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 4",
+      "Web",
+      "JavaScript"
+    ]
   },
   {
     "id": "s-csit-sem4-graphics",
@@ -992,15 +2446,55 @@
     "category": "Computing & IT",
     "description": "2D/3D graphics, transformations, rendering and OpenGL for BSc CSIT Semester 4.",
     "overview": "Computer Graphics covers 2D and 3D graphics fundamentals, transformations, clipping, rendering, illumination models and OpenGL programming. Creating visual content programmatically.",
-    "units": ["2D Graphics", "3D Graphics", "Rendering", "OpenGL"],
+    "units": [
+      "2D Graphics",
+      "3D Graphics",
+      "Rendering",
+      "OpenGL"
+    ],
     "syllabus": [
-      { "unit": "2D Graphics", "topics": ["Line drawing", "Circle algorithms", "Filling", "Clipping"], "hours": 10 },
-      { "unit": "3D Graphics", "topics": ["3D transformations", "Projections", "Hidden surface removal", "Curves"], "hours": 12 },
-      { "unit": "Rendering", "topics": ["Illumination models", "Shading", "Texture mapping", "Ray tracing"], "hours": 12 },
-      { "unit": "OpenGL", "topics": ["OpenGL pipeline", "Primitives", "Shaders", "3D rendering"], "hours": 10 }
+      {
+        "unit": "2D Graphics",
+        "topics": [
+          "Line drawing",
+          "Circle algorithms",
+          "Filling",
+          "Clipping"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "3D Graphics",
+        "topics": [
+          "3D transformations",
+          "Projections",
+          "Hidden surface removal",
+          "Curves"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Rendering",
+        "topics": [
+          "Illumination models",
+          "Shading",
+          "Texture mapping",
+          "Ray tracing"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "OpenGL",
+        "topics": [
+          "OpenGL pipeline",
+          "Primitives",
+          "Shaders",
+          "3D rendering"
+        ],
+        "hours": 10
+      }
     ],
     "emoji": "🎨",
-    "gradient": "from-fuchsia-500 to-pink-600",
     "popularity": 65,
     "notes": 8,
     "books": 6,
@@ -1011,8 +2505,15 @@
     "videos": 10,
     "downloads": 8,
     "trending": false,
-    "relatedSlugs": ["csit-sem4-web-technology"],
-    "tags": ["CSIT", "Sem 4", "Graphics", "OpenGL"]
+    "relatedSlugs": [
+      "csit-sem4-web-technology"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 4",
+      "Graphics",
+      "OpenGL"
+    ]
   },
   {
     "id": "s-csit-sem5-ai",
@@ -1025,15 +2526,54 @@
     "category": "Computing & IT",
     "description": "Search algorithms, knowledge representation, reasoning and ML intro for BSc CSIT Semester 5.",
     "overview": "Artificial Intelligence covers intelligent agent design, search algorithms, knowledge representation, reasoning, planning and introduction to machine learning. Foundations of AI systems.",
-    "units": ["Search", "Knowledge", "Reasoning", "ML Intro"],
+    "units": [
+      "Search",
+      "Knowledge",
+      "Reasoning",
+      "ML Intro"
+    ],
     "syllabus": [
-      { "unit": "Search", "topics": ["Uninformed search", "Informed search", "Game playing", "Constraint satisfaction"], "hours": 14 },
-      { "unit": "Knowledge", "topics": ["Knowledge representation", "Ontologies", "Semantic networks", "Frames"], "hours": 12 },
-      { "unit": "Reasoning", "topics": ["Logic programming", "Uncertainty", "Bayesian networks", "Fuzzy logic"], "hours": 12 },
-      { "unit": "ML Intro", "topics": ["Supervised learning", "Unsupervised learning", "Neural networks basics"], "hours": 10 }
+      {
+        "unit": "Search",
+        "topics": [
+          "Uninformed search",
+          "Informed search",
+          "Game playing",
+          "Constraint satisfaction"
+        ],
+        "hours": 14
+      },
+      {
+        "unit": "Knowledge",
+        "topics": [
+          "Knowledge representation",
+          "Ontologies",
+          "Semantic networks",
+          "Frames"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Reasoning",
+        "topics": [
+          "Logic programming",
+          "Uncertainty",
+          "Bayesian networks",
+          "Fuzzy logic"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "ML Intro",
+        "topics": [
+          "Supervised learning",
+          "Unsupervised learning",
+          "Neural networks basics"
+        ],
+        "hours": 10
+      }
     ],
     "emoji": "🤖",
-    "gradient": "from-indigo-500 to-blue-600",
     "popularity": 90,
     "notes": 16,
     "books": 12,
@@ -1044,8 +2584,15 @@
     "videos": 20,
     "downloads": 12,
     "trending": true,
-    "relatedSlugs": ["csit-sem6-ml"],
-    "tags": ["CSIT", "Sem 5", "AI", "Machine Learning"]
+    "relatedSlugs": [
+      "csit-sem6-ml"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 5",
+      "AI",
+      "Machine Learning"
+    ]
   },
   {
     "id": "s-csit-sem5-network",
@@ -1058,15 +2605,55 @@
     "category": "Computing & IT",
     "description": "Socket programming, protocols, concurrent servers and network application development.",
     "overview": "Network Programming covers socket API, TCP/UDP programming, concurrent server design, protocol implementation and network application development. Hands-on with real network systems.",
-    "units": ["Socket Programming", "Protocols", "Concurrency", "Applications"],
+    "units": [
+      "Socket Programming",
+      "Protocols",
+      "Concurrency",
+      "Applications"
+    ],
     "syllabus": [
-      { "unit": "Socket Programming", "topics": ["Socket API", "TCP sockets", "UDP sockets", "Client-server model"], "hours": 12 },
-      { "unit": "Protocols", "topics": ["Protocol design", "HTTP implementation", "DNS", "SMTP"], "hours": 10 },
-      { "unit": "Concurrency", "topics": ["Multithreaded servers", "Fork-based servers", "Event-driven", "Select/poll"], "hours": 12 },
-      { "unit": "Applications", "topics": ["Chat application", "File transfer", "Web server", "Proxy server"], "hours": 12 }
+      {
+        "unit": "Socket Programming",
+        "topics": [
+          "Socket API",
+          "TCP sockets",
+          "UDP sockets",
+          "Client-server model"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Protocols",
+        "topics": [
+          "Protocol design",
+          "HTTP implementation",
+          "DNS",
+          "SMTP"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Concurrency",
+        "topics": [
+          "Multithreaded servers",
+          "Fork-based servers",
+          "Event-driven",
+          "Select/poll"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Applications",
+        "topics": [
+          "Chat application",
+          "File transfer",
+          "Web server",
+          "Proxy server"
+        ],
+        "hours": 12
+      }
     ],
     "emoji": "🔗",
-    "gradient": "from-cyan-500 to-teal-600",
     "popularity": 72,
     "notes": 10,
     "books": 8,
@@ -1077,8 +2664,15 @@
     "videos": 12,
     "downloads": 8,
     "trending": false,
-    "relatedSlugs": ["csit-sem3-computer-networks"],
-    "tags": ["CSIT", "Sem 5", "Networks", "Socket"]
+    "relatedSlugs": [
+      "csit-sem3-computer-networks"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 5",
+      "Networks",
+      "Socket"
+    ]
   },
   {
     "id": "s-csit-sem5-image",
@@ -1091,15 +2685,55 @@
     "category": "Computing & IT",
     "description": "Image fundamentals, transforms, enhancement, segmentation and pattern recognition.",
     "overview": "Image Processing covers digital image fundamentals, image transforms, enhancement techniques, segmentation, feature extraction and pattern recognition. Foundation for computer vision.",
-    "units": ["Image Fundamentals", "Transforms", "Enhancement", "Segmentation"],
+    "units": [
+      "Image Fundamentals",
+      "Transforms",
+      "Enhancement",
+      "Segmentation"
+    ],
     "syllabus": [
-      { "unit": "Image Fundamentals", "topics": ["Digital image model", "Color spaces", "Histograms", "Sampling & quantization"], "hours": 10 },
-      { "unit": "Transforms", "topics": ["Fourier transform", "DCT", "Wavelet transform", "Hough transform"], "hours": 12 },
-      { "unit": "Enhancement", "topics": ["Spatial filtering", "Frequency filtering", "Contrast enhancement", "Noise removal"], "hours": 12 },
-      { "unit": "Segmentation", "topics": ["Edge detection", "Thresholding", "Region growing", "Watershed"], "hours": 10 }
+      {
+        "unit": "Image Fundamentals",
+        "topics": [
+          "Digital image model",
+          "Color spaces",
+          "Histograms",
+          "Sampling & quantization"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Transforms",
+        "topics": [
+          "Fourier transform",
+          "DCT",
+          "Wavelet transform",
+          "Hough transform"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Enhancement",
+        "topics": [
+          "Spatial filtering",
+          "Frequency filtering",
+          "Contrast enhancement",
+          "Noise removal"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Segmentation",
+        "topics": [
+          "Edge detection",
+          "Thresholding",
+          "Region growing",
+          "Watershed"
+        ],
+        "hours": 10
+      }
     ],
     "emoji": "🖼️",
-    "gradient": "from-rose-500 to-red-600",
     "popularity": 62,
     "notes": 8,
     "books": 6,
@@ -1110,8 +2744,15 @@
     "videos": 10,
     "downloads": 8,
     "trending": false,
-    "relatedSlugs": ["csit-sem5-artificial-intelligence"],
-    "tags": ["CSIT", "Sem 5", "Image", "Vision"]
+    "relatedSlugs": [
+      "csit-sem5-artificial-intelligence"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 5",
+      "Image",
+      "Vision"
+    ]
   },
   {
     "id": "s-csit-sem6-ml",
@@ -1124,15 +2765,56 @@
     "category": "Computing & IT",
     "description": "Supervised, unsupervised, reinforcement learning and neural networks for BSc CSIT Semester 6.",
     "overview": "Machine Learning covers supervised learning, unsupervised learning, reinforcement learning, neural networks and practical ML pipelines. Hands-on with real datasets and frameworks.",
-    "units": ["Supervised Learning", "Unsupervised Learning", "Neural Networks", "Practical ML"],
+    "units": [
+      "Supervised Learning",
+      "Unsupervised Learning",
+      "Neural Networks",
+      "Practical ML"
+    ],
     "syllabus": [
-      { "unit": "Supervised Learning", "topics": ["Linear regression", "Logistic regression", "SVM", "Decision trees", "Random forests"], "hours": 16 },
-      { "unit": "Unsupervised Learning", "topics": ["K-means", "Hierarchical clustering", "PCA", "Anomaly detection"], "hours": 10 },
-      { "unit": "Neural Networks", "topics": ["Perceptrons", "Backpropagation", "CNN basics", "RNN basics"], "hours": 14 },
-      { "unit": "Practical ML", "topics": ["Feature engineering", "Model evaluation", "Cross-validation", "ML pipelines"], "hours": 8 }
+      {
+        "unit": "Supervised Learning",
+        "topics": [
+          "Linear regression",
+          "Logistic regression",
+          "SVM",
+          "Decision trees",
+          "Random forests"
+        ],
+        "hours": 16
+      },
+      {
+        "unit": "Unsupervised Learning",
+        "topics": [
+          "K-means",
+          "Hierarchical clustering",
+          "PCA",
+          "Anomaly detection"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Neural Networks",
+        "topics": [
+          "Perceptrons",
+          "Backpropagation",
+          "CNN basics",
+          "RNN basics"
+        ],
+        "hours": 14
+      },
+      {
+        "unit": "Practical ML",
+        "topics": [
+          "Feature engineering",
+          "Model evaluation",
+          "Cross-validation",
+          "ML pipelines"
+        ],
+        "hours": 8
+      }
     ],
     "emoji": "🧠",
-    "gradient": "from-violet-500 to-fuchsia-600",
     "popularity": 94,
     "notes": 18,
     "books": 12,
@@ -1143,8 +2825,15 @@
     "videos": 22,
     "downloads": 14,
     "trending": true,
-    "relatedSlugs": ["csit-sem5-artificial-intelligence"],
-    "tags": ["CSIT", "Sem 6", "ML", "Deep Learning"]
+    "relatedSlugs": [
+      "csit-sem5-artificial-intelligence"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 6",
+      "ML",
+      "Deep Learning"
+    ]
   },
   {
     "id": "s-csit-sem6-devops",
@@ -1157,15 +2846,55 @@
     "category": "Computing & IT",
     "description": "CI/CD, Docker, Kubernetes, AWS/Azure and infrastructure as code for BSc CSIT Semester 6.",
     "overview": "DevOps & Cloud Computing covers CI/CD pipelines, containerization, orchestration, cloud platforms and infrastructure automation. Modern software deployment practices.",
-    "units": ["CI/CD", "Containers", "Orchestration", "Cloud Platforms"],
+    "units": [
+      "CI/CD",
+      "Containers",
+      "Orchestration",
+      "Cloud Platforms"
+    ],
     "syllabus": [
-      { "unit": "CI/CD", "topics": ["Version control", "Build automation", "Jenkins/GitHub Actions", "Testing pipelines"], "hours": 10 },
-      { "unit": "Containers", "topics": ["Docker fundamentals", "Images & containers", "Docker Compose", "Networking"], "hours": 12 },
-      { "unit": "Orchestration", "topics": ["Kubernetes basics", "Pods & services", "Deployments", "Scaling"], "hours": 12 },
-      { "unit": "Cloud Platforms", "topics": ["AWS basics", "Azure basics", "Serverless", "Infrastructure as Code"], "hours": 12 }
+      {
+        "unit": "CI/CD",
+        "topics": [
+          "Version control",
+          "Build automation",
+          "Jenkins/GitHub Actions",
+          "Testing pipelines"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Containers",
+        "topics": [
+          "Docker fundamentals",
+          "Images & containers",
+          "Docker Compose",
+          "Networking"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Orchestration",
+        "topics": [
+          "Kubernetes basics",
+          "Pods & services",
+          "Deployments",
+          "Scaling"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Cloud Platforms",
+        "topics": [
+          "AWS basics",
+          "Azure basics",
+          "Serverless",
+          "Infrastructure as Code"
+        ],
+        "hours": 12
+      }
     ],
     "emoji": "☁️",
-    "gradient": "from-sky-500 to-blue-600",
     "popularity": 82,
     "notes": 12,
     "books": 10,
@@ -1176,8 +2905,15 @@
     "videos": 16,
     "downloads": 10,
     "trending": false,
-    "relatedSlugs": ["csit-sem7-cloud"],
-    "tags": ["CSIT", "Sem 6", "DevOps", "Cloud"]
+    "relatedSlugs": [
+      "csit-sem7-cloud"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 6",
+      "DevOps",
+      "Cloud"
+    ]
   },
   {
     "id": "s-csit-sem6-embedded",
@@ -1190,15 +2926,55 @@
     "category": "Computing & IT",
     "description": "Microcontroller programming, RTOS, interrupts and real-time system design.",
     "overview": "Embedded Systems covers microcontroller architectures, programming, real-time operating systems, interrupt handling and embedded system design. IoT and hardware programming foundation.",
-    "units": ["Microcontrollers", "Programming", "RTOS", "Design"],
+    "units": [
+      "Microcontrollers",
+      "Programming",
+      "RTOS",
+      "Design"
+    ],
     "syllabus": [
-      { "unit": "Microcontrollers", "topics": ["ARM Cortex-M", "AVR", "Pin configurations", "Peripherals"], "hours": 12 },
-      { "unit": "Programming", "topics": ["Assembly & C for embedded", "GPIO", "Timers", "ADC/DAC"], "hours": 14 },
-      { "unit": "RTOS", "topics": ["Task scheduling", "Synchronization", "Memory management", "FreeRTOS"], "hours": 10 },
-      { "unit": "Design", "topics": ["System design", "Low power design", "Communication protocols", "Debugging"], "hours": 10 }
+      {
+        "unit": "Microcontrollers",
+        "topics": [
+          "ARM Cortex-M",
+          "AVR",
+          "Pin configurations",
+          "Peripherals"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Programming",
+        "topics": [
+          "Assembly & C for embedded",
+          "GPIO",
+          "Timers",
+          "ADC/DAC"
+        ],
+        "hours": 14
+      },
+      {
+        "unit": "RTOS",
+        "topics": [
+          "Task scheduling",
+          "Synchronization",
+          "Memory management",
+          "FreeRTOS"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Design",
+        "topics": [
+          "System design",
+          "Low power design",
+          "Communication protocols",
+          "Debugging"
+        ],
+        "hours": 10
+      }
     ],
     "emoji": "🔧",
-    "gradient": "from-orange-500 to-amber-600",
     "popularity": 60,
     "notes": 8,
     "books": 6,
@@ -1209,8 +2985,15 @@
     "videos": 10,
     "downloads": 8,
     "trending": false,
-    "relatedSlugs": ["csit-sem6-devops"],
-    "tags": ["CSIT", "Sem 6", "Embedded", "IoT"]
+    "relatedSlugs": [
+      "csit-sem6-devops"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 6",
+      "Embedded",
+      "IoT"
+    ]
   },
   {
     "id": "s-csit-sem7-project",
@@ -1223,15 +3006,55 @@
     "category": "Computing & IT",
     "description": "Capstone project planning, requirements, design and initial implementation.",
     "overview": "Project Work I focuses on project planning, requirements analysis, system design and initial implementation. Students work in teams on real-world software projects.",
-    "units": ["Planning", "Requirements", "Design", "Implementation"],
+    "units": [
+      "Planning",
+      "Requirements",
+      "Design",
+      "Implementation"
+    ],
     "syllabus": [
-      { "unit": "Planning", "topics": ["Project selection", "Team formation", "Project proposal", "Timeline planning"], "hours": 8 },
-      { "unit": "Requirements", "topics": ["Requirements gathering", "Use cases", "User stories", "Documentation"], "hours": 10 },
-      { "unit": "Design", "topics": ["System architecture", "Database design", "UI/UX design", "API design"], "hours": 14 },
-      { "unit": "Implementation", "topics": ["Coding standards", "Version control", "Code review", "Initial implementation"], "hours": 16 }
+      {
+        "unit": "Planning",
+        "topics": [
+          "Project selection",
+          "Team formation",
+          "Project proposal",
+          "Timeline planning"
+        ],
+        "hours": 8
+      },
+      {
+        "unit": "Requirements",
+        "topics": [
+          "Requirements gathering",
+          "Use cases",
+          "User stories",
+          "Documentation"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Design",
+        "topics": [
+          "System architecture",
+          "Database design",
+          "UI/UX design",
+          "API design"
+        ],
+        "hours": 14
+      },
+      {
+        "unit": "Implementation",
+        "topics": [
+          "Coding standards",
+          "Version control",
+          "Code review",
+          "Initial implementation"
+        ],
+        "hours": 16
+      }
     ],
     "emoji": "📋",
-    "gradient": "from-emerald-500 to-teal-600",
     "popularity": 70,
     "notes": 4,
     "books": 6,
@@ -1242,8 +3065,15 @@
     "videos": 6,
     "downloads": 4,
     "trending": false,
-    "relatedSlugs": ["csit-sem8-project"],
-    "tags": ["CSIT", "Sem 7", "Project", "Capstone"]
+    "relatedSlugs": [
+      "csit-sem8-project"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 7",
+      "Project",
+      "Capstone"
+    ]
   },
   {
     "id": "s-csit-sem7-cloud",
@@ -1256,15 +3086,57 @@
     "category": "Computing & IT",
     "description": "Cloud models, virtualization, containerization, serverless and cloud security.",
     "overview": "Cloud Computing covers cloud service models, virtualization technologies, container orchestration, serverless computing, cloud security and cost optimization. Enterprise cloud architecture.",
-    "units": ["Cloud Models", "Virtualization", "Serverless", "Security"],
+    "units": [
+      "Cloud Models",
+      "Virtualization",
+      "Serverless",
+      "Security"
+    ],
     "syllabus": [
-      { "unit": "Cloud Models", "topics": ["IaaS", "PaaS", "SaaS", "Hybrid cloud", "Multi-cloud"], "hours": 10 },
-      { "unit": "Virtualization", "topics": ["Hypervisors", "VMs", "Containers", "KVM", "VMware"], "hours": 12 },
-      { "unit": "Serverless", "topics": ["Functions as a service", "Event-driven", "API Gateway", "Cost models"], "hours": 10 },
-      { "unit": "Security", "topics": ["Cloud security", "IAM", "Encryption", "Compliance"], "hours": 10 }
+      {
+        "unit": "Cloud Models",
+        "topics": [
+          "IaaS",
+          "PaaS",
+          "SaaS",
+          "Hybrid cloud",
+          "Multi-cloud"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Virtualization",
+        "topics": [
+          "Hypervisors",
+          "VMs",
+          "Containers",
+          "KVM",
+          "VMware"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Serverless",
+        "topics": [
+          "Functions as a service",
+          "Event-driven",
+          "API Gateway",
+          "Cost models"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Security",
+        "topics": [
+          "Cloud security",
+          "IAM",
+          "Encryption",
+          "Compliance"
+        ],
+        "hours": 10
+      }
     ],
     "emoji": "☁️",
-    "gradient": "from-blue-500 to-indigo-600",
     "popularity": 78,
     "notes": 10,
     "books": 8,
@@ -1275,8 +3147,15 @@
     "videos": 12,
     "downloads": 8,
     "trending": false,
-    "relatedSlugs": ["csit-sem6-devops"],
-    "tags": ["CSIT", "Sem 7", "Cloud", "AWS"]
+    "relatedSlugs": [
+      "csit-sem6-devops"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 7",
+      "Cloud",
+      "AWS"
+    ]
   },
   {
     "id": "s-csit-sem8-project",
@@ -1289,15 +3168,55 @@
     "category": "Computing & IT",
     "description": "Final project implementation, testing, documentation and presentation.",
     "overview": "Project Work II is the continuation and completion of the capstone project. Focuses on full implementation, testing, documentation, deployment and final presentation.",
-    "units": ["Implementation", "Testing", "Documentation", "Presentation"],
+    "units": [
+      "Implementation",
+      "Testing",
+      "Documentation",
+      "Presentation"
+    ],
     "syllabus": [
-      { "unit": "Implementation", "topics": ["Full feature development", "Integration", "Bug fixing", "Optimization"], "hours": 20 },
-      { "unit": "Testing", "topics": ["Unit testing", "Integration testing", "User acceptance testing", "Performance testing"], "hours": 10 },
-      { "unit": "Documentation", "topics": ["Technical documentation", "User manual", "API docs", "Project report"], "hours": 8 },
-      { "unit": "Presentation", "topics": ["Demo preparation", "Oral presentation", "Q&A handling", "Viva"], "hours": 6 }
+      {
+        "unit": "Implementation",
+        "topics": [
+          "Full feature development",
+          "Integration",
+          "Bug fixing",
+          "Optimization"
+        ],
+        "hours": 20
+      },
+      {
+        "unit": "Testing",
+        "topics": [
+          "Unit testing",
+          "Integration testing",
+          "User acceptance testing",
+          "Performance testing"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Documentation",
+        "topics": [
+          "Technical documentation",
+          "User manual",
+          "API docs",
+          "Project report"
+        ],
+        "hours": 8
+      },
+      {
+        "unit": "Presentation",
+        "topics": [
+          "Demo preparation",
+          "Oral presentation",
+          "Q&A handling",
+          "Viva"
+        ],
+        "hours": 6
+      }
     ],
     "emoji": "🎓",
-    "gradient": "from-purple-500 to-fuchsia-600",
     "popularity": 75,
     "notes": 4,
     "books": 4,
@@ -1308,8 +3227,15 @@
     "videos": 4,
     "downloads": 4,
     "trending": false,
-    "relatedSlugs": ["csit-sem7-project-work"],
-    "tags": ["CSIT", "Sem 8", "Project", "Final"]
+    "relatedSlugs": [
+      "csit-sem7-project-work"
+    ],
+    "tags": [
+      "CSIT",
+      "Sem 8",
+      "Project",
+      "Final"
+    ]
   },
   {
     "id": "s-bba-sem1-intro",
@@ -1322,15 +3248,55 @@
     "category": "Management",
     "description": "Management concepts, functions, theories and organizational behavior for BBA Semester 1.",
     "overview": "Principles of Management covers management fundamentals, evolution of management thought, planning, organizing, staffing, directing and controlling. Foundation for business management.",
-    "units": ["Management Basics", "Planning", "Organizing", "Directing & Controlling"],
+    "units": [
+      "Management Basics",
+      "Planning",
+      "Organizing",
+      "Directing & Controlling"
+    ],
     "syllabus": [
-      { "unit": "Management Basics", "topics": ["Definition & scope", "Management levels", "Roles & skills", "Evolution"], "hours": 10 },
-      { "unit": "Planning", "topics": ["Objectives", "Strategy", "Policies", "Decision making"], "hours": 12 },
-      { "unit": "Organizing", "topics": ["Structure", "Authority", "Departmentation", "Delegation"], "hours": 12 },
-      { "unit": "Directing & Controlling", "topics": ["Motivation", "Leadership", "Communication", "Control systems"], "hours": 12 }
+      {
+        "unit": "Management Basics",
+        "topics": [
+          "Definition & scope",
+          "Management levels",
+          "Roles & skills",
+          "Evolution"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Planning",
+        "topics": [
+          "Objectives",
+          "Strategy",
+          "Policies",
+          "Decision making"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Organizing",
+        "topics": [
+          "Structure",
+          "Authority",
+          "Departmentation",
+          "Delegation"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Directing & Controlling",
+        "topics": [
+          "Motivation",
+          "Leadership",
+          "Communication",
+          "Control systems"
+        ],
+        "hours": 12
+      }
     ],
     "emoji": "📊",
-    "gradient": "from-sky-500 to-blue-600",
     "popularity": 82,
     "notes": 14,
     "books": 10,
@@ -1341,8 +3307,15 @@
     "videos": 14,
     "downloads": 10,
     "trending": false,
-    "relatedSlugs": ["bba-sem2-ob"],
-    "tags": ["BBA", "Sem 1", "Management", "OB"]
+    "relatedSlugs": [
+      "bba-sem2-ob"
+    ],
+    "tags": [
+      "BBA",
+      "Sem 1",
+      "Management",
+      "OB"
+    ]
   },
   {
     "id": "s-bba-sem1-micro",
@@ -1355,15 +3328,54 @@
     "category": "Management",
     "description": "Demand, supply, consumer behavior, production and market structures for BBA Semester 1.",
     "overview": "Microeconomics covers demand and supply analysis, consumer behavior, production theory, cost analysis and market structures. Economic foundation for business decisions.",
-    "units": ["Demand & Supply", "Consumer Theory", "Production & Cost", "Market Structures"],
+    "units": [
+      "Demand & Supply",
+      "Consumer Theory",
+      "Production & Cost",
+      "Market Structures"
+    ],
     "syllabus": [
-      { "unit": "Demand & Supply", "topics": ["Demand analysis", "Supply analysis", "Elasticity", "Market equilibrium"], "hours": 12 },
-      { "unit": "Consumer Theory", "topics": ["Utility analysis", "Indifference curves", "Budget constraints", "Consumer surplus"], "hours": 10 },
-      { "unit": "Production & Cost", "topics": ["Production functions", "Cost curves", "Economies of scale"], "hours": 12 },
-      { "unit": "Market Structures", "topics": ["Perfect competition", "Monopoly", "Oligopoly", "Monopolistic competition"], "hours": 12 }
+      {
+        "unit": "Demand & Supply",
+        "topics": [
+          "Demand analysis",
+          "Supply analysis",
+          "Elasticity",
+          "Market equilibrium"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Consumer Theory",
+        "topics": [
+          "Utility analysis",
+          "Indifference curves",
+          "Budget constraints",
+          "Consumer surplus"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Production & Cost",
+        "topics": [
+          "Production functions",
+          "Cost curves",
+          "Economies of scale"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Market Structures",
+        "topics": [
+          "Perfect competition",
+          "Monopoly",
+          "Oligopoly",
+          "Monopolistic competition"
+        ],
+        "hours": 12
+      }
     ],
     "emoji": "📈",
-    "gradient": "from-emerald-500 to-green-600",
     "popularity": 78,
     "notes": 12,
     "books": 10,
@@ -1374,8 +3386,15 @@
     "videos": 12,
     "downloads": 8,
     "trending": false,
-    "relatedSlugs": ["bba-sem5-macro"],
-    "tags": ["BBA", "Sem 1", "Microeconomics", "Demand"]
+    "relatedSlugs": [
+      "bba-sem5-macro"
+    ],
+    "tags": [
+      "BBA",
+      "Sem 1",
+      "Microeconomics",
+      "Demand"
+    ]
   },
   {
     "id": "s-bba-sem1-english",
@@ -1388,15 +3407,55 @@
     "category": "Humanities",
     "description": "Business communication, writing skills and professional English for BBA Semester 1.",
     "overview": "Business English develops professional communication skills for business contexts. Covers writing, speaking, presentation and interpersonal communication.",
-    "units": ["Writing Skills", "Speaking Skills", "Business Communication", "Professional Development"],
+    "units": [
+      "Writing Skills",
+      "Speaking Skills",
+      "Business Communication",
+      "Professional Development"
+    ],
     "syllabus": [
-      { "unit": "Writing Skills", "topics": ["Business letters", "Reports", "Proposals", "Emails"], "hours": 10 },
-      { "unit": "Speaking Skills", "topics": ["Presentations", "Negotiations", "Meetings", "Interviews"], "hours": 10 },
-      { "unit": "Business Communication", "topics": ["Communication process", "Barriers", "Non-verbal", "Cross-cultural"], "hours": 10 },
-      { "unit": "Professional Development", "topics": ["Resume writing", "Networking", "Professional ethics", "Workplace communication"], "hours": 8 }
+      {
+        "unit": "Writing Skills",
+        "topics": [
+          "Business letters",
+          "Reports",
+          "Proposals",
+          "Emails"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Speaking Skills",
+        "topics": [
+          "Presentations",
+          "Negotiations",
+          "Meetings",
+          "Interviews"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Business Communication",
+        "topics": [
+          "Communication process",
+          "Barriers",
+          "Non-verbal",
+          "Cross-cultural"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Professional Development",
+        "topics": [
+          "Resume writing",
+          "Networking",
+          "Professional ethics",
+          "Workplace communication"
+        ],
+        "hours": 8
+      }
     ],
     "emoji": "💼",
-    "gradient": "from-teal-500 to-cyan-600",
     "popularity": 72,
     "notes": 10,
     "books": 8,
@@ -1407,8 +3466,15 @@
     "videos": 10,
     "downloads": 8,
     "trending": false,
-    "relatedSlugs": ["bba-sem3-communication"],
-    "tags": ["BBA", "Sem 1", "English", "Communication"]
+    "relatedSlugs": [
+      "bba-sem3-communication"
+    ],
+    "tags": [
+      "BBA",
+      "Sem 1",
+      "English",
+      "Communication"
+    ]
   },
   {
     "id": "s-bba-sem1-stats",
@@ -1421,15 +3487,55 @@
     "category": "Science & Technology",
     "description": "Descriptive statistics, probability, sampling and hypothesis testing for BBA Semester 1.",
     "overview": "Business Statistics covers statistical methods for business decision-making. Includes descriptive statistics, probability, sampling distributions, estimation and hypothesis testing.",
-    "units": ["Descriptive Statistics", "Probability", "Sampling", "Inference"],
+    "units": [
+      "Descriptive Statistics",
+      "Probability",
+      "Sampling",
+      "Inference"
+    ],
     "syllabus": [
-      { "unit": "Descriptive Statistics", "topics": ["Central tendency", "Dispersion", "Skewness", "Kurtosis"], "hours": 10 },
-      { "unit": "Probability", "topics": ["Basic probability", "Conditional probability", "Bayes theorem", "Distributions"], "hours": 12 },
-      { "unit": "Sampling", "topics": ["Sampling methods", "Sample size", "Sampling distributions", "Central limit theorem"], "hours": 10 },
-      { "unit": "Inference", "topics": ["Estimation", "Hypothesis testing", "Chi-square test", "ANOVA"], "hours": 12 }
+      {
+        "unit": "Descriptive Statistics",
+        "topics": [
+          "Central tendency",
+          "Dispersion",
+          "Skewness",
+          "Kurtosis"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Probability",
+        "topics": [
+          "Basic probability",
+          "Conditional probability",
+          "Bayes theorem",
+          "Distributions"
+        ],
+        "hours": 12
+      },
+      {
+        "unit": "Sampling",
+        "topics": [
+          "Sampling methods",
+          "Sample size",
+          "Sampling distributions",
+          "Central limit theorem"
+        ],
+        "hours": 10
+      },
+      {
+        "unit": "Inference",
+        "topics": [
+          "Estimation",
+          "Hypothesis testing",
+          "Chi-square test",
+          "ANOVA"
+        ],
+        "hours": 12
+      }
     ],
     "emoji": "📊",
-    "gradient": "from-violet-500 to-purple-600",
     "popularity": 76,
     "notes": 12,
     "books": 8,
@@ -1440,7 +3546,14 @@
     "videos": 12,
     "downloads": 10,
     "trending": false,
-    "relatedSlugs": ["bba-sem2-accounting"],
-    "tags": ["BBA", "Sem 1", "Statistics", "Mathematics"]
+    "relatedSlugs": [
+      "bba-sem2-accounting"
+    ],
+    "tags": [
+      "BBA",
+      "Sem 1",
+      "Statistics",
+      "Mathematics"
+    ]
   }
 ]

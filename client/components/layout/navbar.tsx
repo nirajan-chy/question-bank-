@@ -41,13 +41,12 @@ export function Navbar() {
   const authUser = useAuthStore((s) => s.user);
   const isAdmin = useAuthStore((s) => s.isAdmin);
   const logout = useAuthStore((s) => s.logout);
-  const [mounted, setMounted] = useState(false);
+  const hasHydrated = useAuthStore((s) => s.hasHydrated);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    setMounted(true);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -115,7 +114,7 @@ export function Navbar() {
           </button>
           <ModeToggle />
 
-          {!mounted ? (
+          {!hasHydrated ? (
             <div className="h-8 w-8" aria-hidden />
           ) : authUser ? (
             <DropdownMenu>

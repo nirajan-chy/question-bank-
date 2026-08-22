@@ -3,6 +3,7 @@ const { createBaseController } = require("./base.controller");
 
 const controller = createBaseController(LeaderboardEntry, {
   order: [["rank", "ASC"]],
+  searchFields: ["name", "level"],
 });
 
 module.exports = controller;

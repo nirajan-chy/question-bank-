@@ -42,8 +42,20 @@ const FEATURES = [
 ];
 
 export function LearnShell() {
-  const { user } = useAuthStore();
+  const user = useAuthStore((s) => s.user);
+  const hasHydrated = useAuthStore((s) => s.hasHydrated);
   const [tab, setTab] = useState("documents");
+
+  if (!hasHydrated) {
+    return (
+      <div className="relative">
+        <div className="absolute inset-0 -z-10 bg-mesh-light opacity-40" />
+        <div className="container flex min-h-[70vh] items-center justify-center py-20 text-muted-foreground">
+          Loading...
+        </div>
+      </div>
+    );
+  }
 
   if (!user) {
     return (

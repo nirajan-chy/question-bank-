@@ -6,8 +6,12 @@
     "short": "Science",
     "description": "Physics, chemistry, biology, mathematics and applied science — the bedrock of SEE, +2 Science and BSc programs.",
     "icon": "FlaskConical",
-    "gradient": "from-sky-500 to-indigo-600",
-    "programs": ["BSc CSIT", "B.Sc", "M.Sc", "B.Tech"]
+    "programs": [
+      "BSc CSIT",
+      "B.Sc",
+      "M.Sc",
+      "B.Tech"
+    ]
   },
   {
     "id": "f2",
@@ -16,8 +20,12 @@
     "short": "Management",
     "description": "Accountancy, economics, business studies and finance from +2 Management to BBA, BBS and MBA.",
     "icon": "BarChart3",
-    "gradient": "from-emerald-500 to-teal-600",
-    "programs": ["BBA", "BBS", "MBA", "MBS"]
+    "programs": [
+      "BBA",
+      "BBS",
+      "MBA",
+      "MBS"
+    ]
   },
   {
     "id": "f3",
@@ -26,8 +34,12 @@
     "short": "Humanities",
     "description": "Nepali, English, sociology, history, journalism and liberal arts across BA and MA programs.",
     "icon": "BookOpenText",
-    "gradient": "from-violet-500 to-purple-600",
-    "programs": ["BA", "MA", "B.Ed", "M.Phil"]
+    "programs": [
+      "BA",
+      "MA",
+      "B.Ed",
+      "M.Phil"
+    ]
   },
   {
     "id": "f4",
@@ -36,8 +48,11 @@
     "short": "Education",
     "description": "Teacher training and pedagogy programs including B.Ed, M.Ed and the SEE/+2 foundations for future educators.",
     "icon": "Presentation",
-    "gradient": "from-amber-500 to-orange-600",
-    "programs": ["B.Ed", "M.Ed", "B.P.Ed"]
+    "programs": [
+      "B.Ed",
+      "M.Ed",
+      "B.P.Ed"
+    ]
   },
   {
     "id": "f5",
@@ -46,8 +61,12 @@
     "short": "Engineering",
     "description": "Civil, computer, electrical and mechanical engineering — CTEVT diplomas through BE and M.Tech degrees.",
     "icon": "Cpu",
-    "gradient": "from-orange-500 to-red-600",
-    "programs": ["BE", "B.Tech", "M.Tech", "Diploma"]
+    "programs": [
+      "BE",
+      "B.Tech",
+      "M.Tech",
+      "Diploma"
+    ]
   },
   {
     "id": "f6",
@@ -56,8 +75,13 @@
     "short": "Health",
     "description": "Nursing, pharmacy, public health and medicine — from PCL Nursing to MBBS, BPH and MPH.",
     "icon": "HeartPulse",
-    "gradient": "from-rose-500 to-pink-600",
-    "programs": ["MBBS", "B.Sc Nursing", "BPH", "B.Pharm", "MPH"]
+    "programs": [
+      "MBBS",
+      "B.Sc Nursing",
+      "BPH",
+      "B.Pharm",
+      "MPH"
+    ]
   },
   {
     "id": "f7",
@@ -66,8 +90,11 @@
     "short": "Law",
     "description": "Legal studies for LLB and LLM aspirants with Supreme Court and Nepal Bar resources.",
     "icon": "Scale",
-    "gradient": "from-slate-600 to-zinc-700",
-    "programs": ["LLB", "LLM", "B.A.LLB"]
+    "programs": [
+      "LLB",
+      "LLM",
+      "B.A.LLB"
+    ]
   },
   {
     "id": "f8",
@@ -76,8 +103,12 @@
     "short": "IT",
     "description": "Computer science, software engineering and information technology — BSc CSIT, BE Computer, MCA and more.",
     "icon": "Code2",
-    "gradient": "from-cyan-500 to-blue-600",
-    "programs": ["BSc CSIT", "BE Computer", "MCA", "BCA"]
+    "programs": [
+      "BSc CSIT",
+      "BE Computer",
+      "MCA",
+      "BCA"
+    ]
   },
   {
     "id": "f9",
@@ -86,8 +117,11 @@
     "short": "Agriculture",
     "description": "Agronomy, animal science and forestry from TSLC to B.Sc Agriculture and M.Sc.",
     "icon": "Sprout",
-    "gradient": "from-green-500 to-emerald-600",
-    "programs": ["B.Sc Agriculture", "B.V.Sc", "M.Sc Ag"]
+    "programs": [
+      "B.Sc Agriculture",
+      "B.V.Sc",
+      "M.Sc Ag"
+    ]
   },
   {
     "id": "f10",
@@ -96,8 +130,11 @@
     "short": "Hospitality",
     "description": "Hotel management, tourism and travel programs including BHM and BTTM for Nepal's thriving tourism sector.",
     "icon": "UtensilsCrossed",
-    "gradient": "from-yellow-500 to-amber-600",
-    "programs": ["BHM", "BTTM", "Diploma HM"]
+    "programs": [
+      "BHM",
+      "BTTM",
+      "Diploma HM"
+    ]
   },
   {
     "id": "f11",
@@ -106,8 +143,11 @@
     "short": "Arts",
     "description": "Fine arts, music, photography and creative design programs for emerging Nepali creators.",
     "icon": "Palette",
-    "gradient": "from-fuchsia-500 to-purple-600",
-    "programs": ["BFA", "BA Music", "B.Des"]
+    "programs": [
+      "BFA",
+      "BA Music",
+      "B.Des"
+    ]
   },
   {
     "id": "f12",
@@ -116,7 +156,10 @@
     "short": "TVET",
     "description": "CTEVT diplomas, TSLC and short-term skill programs in engineering, health, IT and agriculture.",
     "icon": "Wrench",
-    "gradient": "from-orange-500 to-amber-600",
-    "programs": ["Diploma", "TSLC", "Certificate"]
+    "programs": [
+      "Diploma",
+      "TSLC",
+      "Certificate"
+    ]
   }
 ]

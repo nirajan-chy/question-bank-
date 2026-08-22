@@ -9,7 +9,9 @@ import { Input } from "@/components/ui/input";
 import { CountUp } from "@/components/shared/count-up";
 import { StationeryBg } from "@/components/shared/stationery-bg";
 
-const stats = [
+type HeroStat = { label: string; value: number; suffix: string; icon: React.ComponentType<{ className?: string }> };
+
+const stats: HeroStat[] = [
   // { label: "Students learning", value: 128000, suffix: "+", icon: Users },
   // { label: "Study resources", value: 2400, suffix: "+", icon: BookOpen },
   // { label: "Questions solved", value: 2400000, suffix: "+", icon: TrendingUp },
@@ -51,9 +53,9 @@ export function Hero({ onSearch }: { onSearch?: (q: string) => void }) {
             transition={{ duration: 0.6, delay: 0.1, ease }}
             className="mt-6 font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-balance md:text-6xl lg:text-7xl"
           >
-            Ace every exam.
+            Ace Every Exam.
             <br />
-            <span className="text-primary">Your path to academic excellence.</span>
+            <span className="text-primary">Your Learning Space at Your Own Pace.</span>
           </motion.h1>
 
           <motion.p

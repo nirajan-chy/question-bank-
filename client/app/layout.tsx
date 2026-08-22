@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/footer";
 import { AnnouncementBar } from "@/components/layout/announcement-bar";
 import { CommandPalette } from "@/components/layout/command-palette";
 import { FloatingWidget } from "@/components/layout/floating-widget";
+import { ErrorBoundary } from "@/components/shared/error-boundary";
 import { seo } from "@/lib/seo";
 import "@/styles/globals.css";
 
@@ -50,7 +51,7 @@ export default function RootLayout({
           <div className="flex min-h-screen flex-col">
             <AnnouncementBar />
             <Navbar />
-            <main className="flex-1">{children}</main>
+            <main className="flex-1"><ErrorBoundary>{children}</ErrorBoundary></main>
             <Footer />
           </div>
           <CommandPalette />

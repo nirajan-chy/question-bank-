@@ -8,10 +8,14 @@
     "levelSlug": "bachelor",
     "category": "Computing & IT",
     "icon": "🤖",
-    "gradient": "from-indigo-500 to-blue-600",
     "semesterCount": 8,
     "university": "TU",
-    "tags": ["TU", "CSIT", "Programming", "DBMS"]
+    "tags": [
+      "TU",
+      "CSIT",
+      "Programming",
+      "DBMS"
+    ]
   },
   {
     "id": "c-bba",
@@ -22,10 +26,14 @@
     "levelSlug": "bachelor",
     "category": "Management",
     "icon": "📈",
-    "gradient": "from-sky-500 to-blue-600",
     "semesterCount": 8,
     "university": "TU/PU/KU",
-    "tags": ["TU", "PU", "KU", "Management"]
+    "tags": [
+      "TU",
+      "PU",
+      "KU",
+      "Management"
+    ]
   },
   {
     "id": "c-bbs",
@@ -36,10 +44,14 @@
     "levelSlug": "bachelor",
     "category": "Management",
     "icon": "🏛️",
-    "gradient": "from-stone-500 to-zinc-600",
     "semesterCount": 8,
     "university": "TU",
-    "tags": ["TU", "BBS", "Management", "Accounting"]
+    "tags": [
+      "TU",
+      "BBS",
+      "Management",
+      "Accounting"
+    ]
   },
   {
     "id": "c-be-civil",
@@ -50,10 +62,14 @@
     "levelSlug": "bachelor",
     "category": "Engineering",
     "icon": "🏗️",
-    "gradient": "from-orange-500 to-red-600",
     "semesterCount": 8,
     "university": "TU/PU",
-    "tags": ["TU", "PU", "Civil", "Structures"]
+    "tags": [
+      "TU",
+      "PU",
+      "Civil",
+      "Structures"
+    ]
   },
   {
     "id": "c-be-computer",
@@ -64,10 +80,14 @@
     "levelSlug": "bachelor",
     "category": "Engineering",
     "icon": "🖥️",
-    "gradient": "from-cyan-500 to-teal-600",
     "semesterCount": 8,
     "university": "KU/PU",
-    "tags": ["KU", "PU", "Computer", "Networks"]
+    "tags": [
+      "KU",
+      "PU",
+      "Computer",
+      "Networks"
+    ]
   },
   {
     "id": "c-mba",
@@ -78,9 +98,13 @@
     "levelSlug": "master",
     "category": "Management",
     "icon": "🎯",
-    "gradient": "from-fuchsia-500 to-pink-600",
     "semesterCount": 4,
     "university": "TU/KU/PU",
-    "tags": ["TU", "KU", "PU", "MBA"]
+    "tags": [
+      "TU",
+      "KU",
+      "PU",
+      "MBA"
+    ]
   }
 ]

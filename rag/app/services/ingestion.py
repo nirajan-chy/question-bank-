@@ -9,7 +9,7 @@ from ..config import get_settings
 settings = get_settings()
 
 ALLOWED_TYPES = {"pdf": "pdf", "docx": "docx", "txt": "txt"}
-_WHITESPACE = re.compile(r"\s+")
+_WHITESPACE = re.compile(r"[ \t]+")
 
 
 class IngestionError(Exception):
