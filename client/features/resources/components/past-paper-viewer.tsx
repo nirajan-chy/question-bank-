@@ -1,5 +1,6 @@
 "use client";
 
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -12,15 +13,33 @@ import {
   Clock,
 } from "lucide-react";
 import { usePastPaper } from "@/services/queries";
-import { resolveFileUrl } from "@/lib/utils";
+import { resolveFileUrl, resolveContentUrl } from "@/lib/utils";
 import { GridSkeleton } from "@/components/shared/skeletons";
 import { EmptyState } from "@/components/shared/empty-state";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { MarkdownViewer } from "./markdown-viewer";
+
+/** Markdown bodies live outside PostgreSQL — fetched once and cached. */
+function useMarkdownContent(contentPath?: string | null) {
+  return useQuery({
+    queryKey: ["past-paper-content", contentPath] as const,
+    queryFn: async () => {
+      const res = await fetch(resolveContentUrl(contentPath));
+      if (!res.ok) throw new Error("Could not load question content");
+      return res.text();
+    },
+    enabled: Boolean(contentPath),
+    staleTime: 10 * 60 * 1000,
+    retry: false,
+  });
+}
 
 export function PastPaperViewer({ slug }: { slug: string }) {
   const { data: paper, isLoading, isError } = usePastPaper(slug);
+  const isMarkdown = paper?.contentType === "markdown";
+  const markdownQuery = useMarkdownContent(isMarkdown ? paper?.contentPath : null);
 
   if (isLoading) {
     return (
@@ -42,7 +61,9 @@ export function PastPaperViewer({ slug }: { slug: string }) {
     );
   }
 
-  const pdfUrl = resolveFileUrl(paper.pdfUrl);
+  const pdfUrl = paper.contentType === "markdown" ? null : resolveFileUrl(paper.pdfUrl);
+  const contentUrl = isMarkdown ? resolveContentUrl(paper.contentPath) : null;
+  const fileUrl = pdfUrl ?? contentUrl;
 
   return (
     <div className="space-y-6">
@@ -57,17 +78,18 @@ export function PastPaperViewer({ slug }: { slug: string }) {
           <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
             <Badge variant="secondary">{paper.subjectName}</Badge>
             <Badge variant="outline">{paper.level}</Badge>
+            {isMarkdown && <Badge variant="outline">Text</Badge>}
           </div>
         </div>
-        {pdfUrl && (
+        {fileUrl && (
           <div className="flex gap-2">
             <Button variant="outline" asChild>
-              <a href={pdfUrl} target="_blank" rel="noopener noreferrer">
+              <a href={fileUrl} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="h-4 w-4" /> Open in new tab
               </a>
             </Button>
             <Button variant="gradient" asChild>
-              <a href={pdfUrl} download>
+              <a href={fileUrl} download>
                 <Download className="h-4 w-4" /> Download
               </a>
             </Button>
@@ -84,7 +106,24 @@ export function PastPaperViewer({ slug }: { slug: string }) {
         </CardContent>
       </Card>
 
-      {pdfUrl ? (
+      {isMarkdown ? (
+        markdownQuery.isLoading ? (
+          <SkeletonBar />
+        ) : markdownQuery.isError || !markdownQuery.data ? (
+          <EmptyState
+            title="Content unavailable"
+            description="The question file could not be loaded. Please try again later."
+            actionLabel="Back to papers"
+            actionHref="/past-papers"
+          />
+        ) : (
+          <Card>
+            <CardContent className="px-5 py-6 sm:px-8 sm:py-8">
+              <MarkdownViewer content={markdownQuery.data} basePath={paper.contentPath ?? undefined} />
+            </CardContent>
+          </Card>
+        )
+      ) : pdfUrl ? (
         <Card className="overflow-hidden">
           <iframe
             src={pdfUrl}

@@ -218,6 +218,8 @@ export type PastPaper = {
   subjectSlug: string;
   subjectName: string;
   level: string;
+  contentType?: "pdf" | "markdown";
+  contentPath?: string | null;
   year: number;
   exam: string;
   board: string;

@@ -24,6 +24,13 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: "PDF",
       },
+      // "pdf" (legacy/default — file at pdfUrl) or "markdown" (text at contentPath)
+      contentType: {
+        type: DataTypes.STRING(16),
+        allowNull: false,
+        defaultValue: "pdf",
+      },
+      contentPath: { type: DataTypes.STRING(512), allowNull: true },
       pdfUrl: { type: DataTypes.STRING, allowNull: true },
       description: { type: DataTypes.TEXT, allowNull: false },
       tags: { type: DataTypes.JSONB, allowNull: false, defaultValue: [] },

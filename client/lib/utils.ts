@@ -15,6 +15,28 @@ export function resolveFileUrl(url?: string | null): string {
   return `${API_ORIGIN}${url.startsWith("/") ? url : `/${url}`}`;
 }
 
+/** Full URL for a past-question markdown body stored under the API's /content mount. */
+export function resolveContentUrl(contentPath?: string | null): string {
+  if (!contentPath) return "";
+  const clean = contentPath.replace(/^\/+/, "");
+  return `${API_ORIGIN}/content/${clean}`;
+}
+
+/**
+ * Resolve an asset referenced inside a markdown file (e.g. "./images/q1.png")
+ * against its location under the /content mount.
+ */
+export function resolveContentAsset(
+  basePath: string | undefined,
+  src: string | undefined
+): string {
+  if (!src) return "";
+  if (/^(https?:|data:|\/\/)/i.test(src)) return src;
+  const rel = src.replace(/^\.?\//, "");
+  const dir = basePath ? basePath.split("/").slice(0, -1).join("/") : "";
+  return dir ? `${API_ORIGIN}/content/${dir}/${rel}` : `${API_ORIGIN}/content/${rel}`;
+}
+
 export function formatNumber(n: number): string {
   return new Intl.NumberFormat("en-US", {
     notation: n >= 1000 ? "compact" : "standard",

@@ -1,10 +1,12 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   ArrowLeft,
   CheckCircle2,
+  FileText,
+  PenLine,
   Pencil,
   Plus,
   Save,
@@ -24,7 +26,8 @@ import type { Subject } from "@/types";
 import { useDebounce } from "@/hooks/use-debounce";
 import { AdminFileUpload } from "@/components/shared/admin-file-upload";
 import type { ResourceField } from "@/types";
-import { cn } from "@/lib/utils";
+import { cn, resolveContentUrl } from "@/lib/utils";
+import { MarkdownViewer } from "@/features/resources/components/markdown-viewer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -56,14 +59,6 @@ const SUBJECT_LINKED_RESOURCES = new Set([
 const PICKER_MANAGED_FIELDS = new Set(["subjectName", "subjectId", "level", "courseSlug", "semester"]);
 const NONE_VALUE = "__none__";
 const UPLOAD_FIELD_KEYS = new Set(["pdfUrl", "cover", "avatar"]);
-
-type SubjectPicked = {
-  subjectSlug: string;
-  subjectName: string;
-  level: string;
-  courseSlug: string | null;
-  semester: number | null;
-};
 
 const EMPTY_PICK: { courseSlug: string; semester: string; subjectSlug: string } = {
   courseSlug: "",
@@ -315,6 +310,7 @@ function ResourceForm({
 }) {
   const isEdit = Boolean(initial);
   const subjectLinked = SUBJECT_LINKED_RESOURCES.has(resource);
+  const supportsMarkdown = resource === "past-papers";
   const [values, setValues] = useState<Record<string, string>>(() => {
     const init: Record<string, string> = {};
     for (const f of fields) {
@@ -322,6 +318,13 @@ function ResourceForm({
     }
     return init;
   });
+  // Past questions can be a PDF upload (default — existing behavior) or
+  // authored inline as Markdown stored on disk.
+  const [contentMode, setContentMode] = useState<"pdf" | "markdown">(
+    () => (supportsMarkdown && initial?.contentType === "markdown" ? "markdown" : "pdf")
+  );
+  const [markdown, setMarkdown] = useState("");
+  const markdownPath = supportsMarkdown ? String(initial?.contentPath ?? "") : "";
   const [picked, setPicked] = useState<{ courseSlug: string; semester: string; subjectSlug: string }>(
     () =>
       subjectLinked
@@ -333,6 +336,30 @@ function ResourceForm({
         : EMPTY_PICK
   );
   const [submitting, setSubmitting] = useState(false);
+
+  // Load an existing Markdown body from /content so admins can edit it.
+  useEffect(() => {
+    if (
+      !supportsMarkdown ||
+      contentMode !== "markdown" ||
+      !isEdit ||
+      !markdownPath ||
+      markdown
+    ) {
+      return;
+    }
+    let cancelled = false;
+    fetch(resolveContentUrl(markdownPath))
+      .then((r) => (r.ok ? r.text() : ""))
+      .then((text) => {
+        if (!cancelled && text) setMarkdown(text);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [contentMode, markdownPath]);
 
   const { data: courses = [] } = useQuery({
     queryKey: queryKeys.courses,
@@ -409,6 +436,20 @@ function ResourceForm({
       }
       Object.assign(payload, merged.values);
     }
+    if (supportsMarkdown) {
+      if (contentMode === "markdown") {
+        const md = markdown.trim();
+        if (!md) {
+          toast.error("Write the question content before saving");
+          return;
+        }
+        payload.contentType = "markdown";
+        payload.markdown = md;
+        delete payload.pdfUrl;
+      } else {
+        payload.contentType = "pdf";
+      }
+    }
 
     setSubmitting(true);
     try {
@@ -442,6 +483,64 @@ function ResourceForm({
         </div>
 
         <form onSubmit={onSubmit} className="grid gap-4 sm:grid-cols-2">
+          {supportsMarkdown && (
+            <div className="flex flex-wrap items-center gap-2 sm:col-span-2">
+              <span className="text-xs font-medium text-muted-foreground">Content type:</span>
+              <div className="inline-flex overflow-hidden rounded-lg border">
+                <button
+                  type="button"
+                  onClick={() => setContentMode("pdf")}
+                  className={cn(
+                    "inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-colors",
+                    contentMode === "pdf" ? "bg-primary text-primary-foreground" : "hover:bg-muted/60"
+                  )}
+                >
+                  <FileText className="h-3.5 w-3.5" /> Upload PDF
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setContentMode("markdown")}
+                  className={cn(
+                    "inline-flex items-center gap-1.5 border-l px-3 py-1.5 text-xs font-medium transition-colors",
+                    contentMode === "markdown"
+                      ? "bg-primary text-primary-foreground"
+                      : "hover:bg-muted/60"
+                  )}
+                >
+                  <PenLine className="h-3.5 w-3.5" /> Create with Markdown
+                </button>
+              </div>
+            </div>
+          )}
+          {supportsMarkdown && contentMode === "markdown" && (
+            <div className="space-y-3 sm:col-span-2">
+              <div className="space-y-1.5">
+                <Label htmlFor="f-markdown">
+                  Question content (Markdown)<span className="ml-0.5 text-destructive">*</span>
+                </Label>
+                <Textarea
+                  id="f-markdown"
+                  rows={14}
+                  value={markdown}
+                  onChange={(e) => setMarkdown(e.target.value)}
+                  placeholder={"# Computer Fundamentals — 2080\n\n## Question 1\n\nDefine an operating system. Explain its major functions.\n\n**[5 Marks]**"}
+                  className="font-mono text-xs"
+                />
+                <p className="text-[11px] text-muted-foreground">
+                  Supports headings, lists, tables, code blocks, math ($…$), and images
+                  (./images/q1.png — upload images via Admin → Upload).
+                </p>
+              </div>
+              {markdown.trim() && (
+                <div className="rounded-xl border bg-muted/30 p-4">
+                  <p className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                    Preview
+                  </p>
+                  <MarkdownViewer content={markdown} basePath={markdownPath || undefined} />
+                </div>
+              )}
+            </div>
+          )}
           {subjectLinked && (
             <div className="space-y-3 rounded-xl border border-primary/30 bg-primary/[0.04] p-4 sm:col-span-2">
               <div className="flex flex-wrap items-center justify-between gap-2">
@@ -528,6 +627,10 @@ function ResourceForm({
           )}
           {fields.map((f) => {
             const isPk = f.primaryKey;
+            // Markdown mode replaces the PDF uploader with the editor above.
+            if (supportsMarkdown && contentMode === "markdown" && f.key === "pdfUrl") {
+              return null;
+            }
             if (UPLOAD_FIELD_KEYS.has(f.key)) {
               return (
                 <AdminFileUpload
