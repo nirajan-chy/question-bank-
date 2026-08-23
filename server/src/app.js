@@ -6,6 +6,7 @@ const apiRoutes = require("./routes");
 const notFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
 const { UPLOAD_DIR } = require("./utils/upload");
+const { CONTENT_DIR } = require("./utils/contentStore");
 const { CLIENT_ORIGINS } = require("./config/dotenv");
 
 const app = express();
@@ -34,6 +35,16 @@ app.use(express.json({ limit: "2mb" }));
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/uploads", express.static(UPLOAD_DIR));
+
+// Markdown past-question bodies live on disk, not in PostgreSQL — served as
+// immutable static text so repeated reads never touch the database.
+app.use(
+  "/content",
+  express.static(CONTENT_DIR, {
+    maxAge: "1h",
+    setHeaders: (res) => res.setHeader("X-Content-Type-Options", "nosniff"),
+  }),
+);
 
 app.get("/", (req, res) => {
   res.json({ success: true, message: "PrashnaHub API is running" });

@@ -5,7 +5,15 @@ from .config import get_settings
 
 settings = get_settings()
 
-engine = create_engine(settings.rag_db_url, pool_pre_ping=True, pool_size=5, max_overflow=10)
+# Aiven free tier allows only a handful of concurrent connections — keep this
+# pool tiny so the RAG service coexists with the Express API against one DB.
+engine = create_engine(
+    settings.rag_db_url,
+    pool_pre_ping=True,
+    pool_size=1,
+    max_overflow=2,
+    pool_recycle=1800,
+)
 SessionLocal = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False)
 
 

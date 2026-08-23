@@ -281,9 +281,12 @@ export function PastPaperCard({ paper }: { paper: PastPaper }) {
 
   const cardClass = "group flex h-full flex-col p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-card-hover";
 
+  // Markdown questions have no pdfUrl — they still open the in-app viewer.
+  const hasContent = Boolean(paper.pdfUrl || paper.contentType === "markdown");
+
   return (
-    <Link href={paper.pdfUrl ? `/past-papers/${paper.slug}` : "/past-papers"} aria-disabled={!paper.pdfUrl}>
-      <Card className={cn(cardClass, !paper.pdfUrl && "opacity-70")}>{inner}</Card>
+    <Link href={hasContent ? `/past-papers/${paper.slug}` : "/past-papers"} aria-disabled={!hasContent}>
+      <Card className={cn(cardClass, !hasContent && "opacity-70")}>{inner}</Card>
     </Link>
   );
 }
