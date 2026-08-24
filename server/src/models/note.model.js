@@ -22,6 +22,7 @@ module.exports = (sequelize) => {
       rating: { type: DataTypes.FLOAT, allowNull: false, defaultValue: 0 },
       free: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
       pdfUrl: { type: DataTypes.STRING, allowNull: true },
+      content: { type: DataTypes.TEXT, allowNull: true },
       tags: { type: DataTypes.JSONB, allowNull: false, defaultValue: [] },
     },
     { tableName: "notes", timestamps: true }

@@ -167,6 +167,7 @@ export type Note = {
   rating: number;
   free: boolean;
   pdfUrl?: string;
+  content?: string | null;
   tags: string[];
 };
 
@@ -207,6 +208,7 @@ export type QuestionBank = {
   description: string;
   format: "PDF" | "Interactive" | "Both";
   pdfUrl?: string;
+  content?: string | null;
   free: boolean;
   tags: string[];
 };
