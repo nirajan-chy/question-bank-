@@ -23,6 +23,7 @@ import {
 import type { Subject } from "@/types";
 import { useDebounce } from "@/hooks/use-debounce";
 import { AdminFileUpload } from "@/components/shared/admin-file-upload";
+import { MarkdownEditor } from "@/components/shared/markdown-editor";
 import type { ResourceField } from "@/types";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
@@ -56,6 +57,8 @@ const SUBJECT_LINKED_RESOURCES = new Set([
 const PICKER_MANAGED_FIELDS = new Set(["subjectName", "subjectId", "level", "courseSlug", "semester"]);
 const NONE_VALUE = "__none__";
 const UPLOAD_FIELD_KEYS = new Set(["pdfUrl", "cover", "avatar"]);
+// Resources that use markdown content instead of PDF uploads — hide their pdfUrl field.
+const MD_RESOURCES = new Set(["notes", "question-banks"]);
 
 type SubjectPicked = {
   subjectSlug: string;
@@ -528,7 +531,20 @@ function ResourceForm({
           )}
           {fields.map((f) => {
             const isPk = f.primaryKey;
+            if (f.key === "content") {
+              return (
+                <MarkdownEditor
+                  key={f.key}
+                  id={`f-${f.key}`}
+                  label={humanize(f.key)}
+                  value={values[f.key]}
+                  onChange={(v) => set(f.key, v)}
+                  className="sm:col-span-2"
+                />
+              );
+            }
             if (UPLOAD_FIELD_KEYS.has(f.key)) {
+              if (f.key === "pdfUrl" && MD_RESOURCES.has(resource)) return null;
               return (
                 <AdminFileUpload
                   key={f.key}
