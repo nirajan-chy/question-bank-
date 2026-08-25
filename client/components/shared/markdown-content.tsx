@@ -2,6 +2,7 @@
 
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 import { cn } from "@/lib/utils";
 
 /**
@@ -29,6 +30,7 @@ export function MarkdownContent({ content, className }: { content: string; class
       <div className="relative z-10">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeRaw]}
           components={{
             h1: ({ children, className: cls }) => <h1 className={cn("mt-6 mb-3 font-display text-2xl font-bold first:mt-0", cls)}>{children}</h1>,
             h2: ({ children, className: cls }) => <h2 className={cn("mt-6 mb-2 border-b pb-1 font-display text-xl font-bold first:mt-0", cls)}>{children}</h2>,
