@@ -19,10 +19,10 @@ export function MarkdownContent({ content, className }: { content: string; class
         <img
           src="/black and green.png"
           alt=""
-          className="w-[70vw] max-w-[600px] select-none opacity-[0.06]"
+          className="w-[70vw] max-w-[600px] select-none opacity-[0.10]"
           style={{ filter: "grayscale(1)" }}
         />
-        <span className="select-none text-3xl font-display font-bold tracking-wide opacity-[0.04] text-foreground">
+        <span           className="select-none text-3xl font-display font-bold tracking-wide opacity-[0.06] text-foreground">
           PrashnaHub
         </span>
       </div>
