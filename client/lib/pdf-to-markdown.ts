@@ -5,11 +5,11 @@
  * converted to Markdown using font-size / layout heuristics. Nothing is
  * uploaded, so no file storage is needed on the server.
  *
- * The converter applies a question-paper-aware formatting pass that:
- *  - Centers university / institute / course metadata
- *  - Boldens exam labels (Full Marks, Pass Marks, Time)
- *  - Centers and boldens section headers
- *  - Wraps numbered questions with proper spacing
+ * Post-processing applies a question-paper-aware formatting pass:
+ *  - Center + bold university / institute / course metadata
+ *  - Bold marks/time on a separate line
+ *  - Center + bold section headers
+ *  - Properly spaced numbered questions
  */
 
 import * as pdfjs from "pdfjs-dist";
@@ -36,25 +36,20 @@ type Line = {
 const BULLET_RE = /^[\s]*([•●▪◦‣·∙*]|[-–—])(\s+|\u00a0)/;
 const NUMBERED_RE = /^[\s]*(\d{1,2})\s*[.)]\s+/;
 
-/** University / institute / board name */
 const HEADER_ORG_RE =
-  /^(Tribhuvan\s+University|Kathmandu\s+University|Pokhara\s+University|Purbanchal\s+University|Mid-Western\s+University|Far-Western\s+University|Nepal\s+University|Institute\s+of\s+Science\s+and\s+Technology|Institute\s+of\s+Engineering|Faculty\s+of\s+Science\s+and\s+Technology|[A-Z][a-z]+\s+University|[A-Z][a-z]+\s+Institute)/i;
+  /^(Tribhuvan\s+University|Kathmandu\s+University|Pokhara\s+University|Purbanchal\s+University|Mid-Western\s+University|Far-Western\s+University|Nepal\s+University|Institute\s+of\s+Science\s+and\s+Technology|Institute\s+of\s+Engineering|Faculty\s+of\s+[A-Za-z\s]+|[A-Z][a-z]+\s+University)/i;
 
-/** Course / level / semester line */
 const HEADER_COURSE_RE =
   /^(Bachelor\s+Level|Master\s+Level|Higher\s+Secondary|Class\s+\d|SEE|CTEVT|BSc\s+CSIT|BBA|BBS|BA|B\.?Ed|MBBS|BCA|BIT|B\.?Sc|B\.?Com|MBA|MBS|MA|M\.?Sc)/i;
 
-/** Year line — e.g. "2075 (BS)" or "2024 (AD)" */
 const HEADER_YEAR_RE = /^\d{4}\s*\(?\s*(BS|AD|CE)\s*\)?$/i;
+const YEAR_STANDALONE_RE = /^\d{4}$/;
 
-/** Exam metadata — "Full Marks: 60 + 20 + 20" etc. */
 const MARKS_RE =
-  /^(Full\s+Marks?|Pass\s+Marks?|Time|Duration|Total\s+Marks?|Maximum\s+Marks?|Minimum\s+Marks?)[\s:]/i;
+  /(Full\s+Marks?|Pass\s+Marks?|Time|Duration|Total\s+Marks?|Maximum\s+Marks?|Minimum\s+Marks?)[\s:]/i;
 
-/** Section header — "SECTION A", "Section - I" etc. */
 const SECTION_RE = /^Section[\s\-–—]*[A-Z0-9IVX]+\.?$/i;
 
-/** Question-paper instruction lines */
 const INSTRUCTION_RE =
   /^(Attempt|Candidates?\s+are\s+required|The\s+figures|Note[s]?[\s:])/i;
 
@@ -64,7 +59,6 @@ function round1(n: number) {
   return Math.round(n * 10) / 10;
 }
 
-/** Group raw text items into visual lines using their Y baseline. */
 function itemsToLines(items: PdfTextItem[]): Line[] {
   const lines: {
     y: number;
@@ -136,16 +130,10 @@ function headingLevel(size: number, body: number, line: Line): number {
   return 0;
 }
 
-/**
- * Returns true when `line` should be treated as a continuation of the
- * previous paragraph (i.e. the same logical line wrapped in the PDF).
- */
 function isContinuation(line: Line): boolean {
   const t = line.text.trimStart();
-  // Starts with lowercase or common continuation punctuation
   if (/^[a-zà-öø-ÿ]/.test(t)) return true;
   if (/^[,;:\-–—]|^['"]/.test(t)) return true;
-  // Starts with a lowercase preposition / conjunction
   if (/^(of|in|on|at|to|for|and|or|but|the|a|an|is|are|was|were|with|from|by)\b/i.test(t))
     return true;
   return false;
@@ -154,62 +142,105 @@ function isContinuation(line: Line): boolean {
 // ── question-paper post-processing ───────────────────────────────────
 
 /**
- * After basic markdown conversion, apply question-paper-specific
- * formatting rules using HTML (supported inside markdown).
+ * Split a combined line that contains course info + marks + instructions
+ * into separate lines at recognized boundaries.
  */
+function splitCombinedLine(text: string): string[] {
+  const parts: string[] = [];
+  let remaining = text;
+
+  // Split before "Full Marks:" / "Pass Marks:" / "Time:"
+  const marksIdx = remaining.search(/\b(Full\s+Marks?|Pass\s+Marks?|Time\s*:)/i);
+  if (marksIdx > 0) {
+    const before = remaining.slice(0, marksIdx).trim();
+    const after = remaining.slice(marksIdx).trim();
+    if (before) parts.push(before);
+    remaining = after;
+  }
+
+  // Split before "Candidates are required" / "The figures"
+  const instrIdx = remaining.search(/\b(Candidates?\s+are\s+required|The\s+figures)/i);
+  if (instrIdx > 0) {
+    const before = remaining.slice(0, instrIdx).trim();
+    const after = remaining.slice(instrIdx).trim();
+    if (before) parts.push(before);
+    if (after) parts.push(after);
+  } else {
+    if (remaining) parts.push(remaining);
+  }
+
+  return parts;
+}
+
 function postProcess(blocks: string[]): string[] {
   const out: string[] = [];
 
   for (let i = 0; i < blocks.length; i++) {
     const b = blocks[i];
+    const clean = b.replace(/^[#*>]+\s*/, "").trim();
 
-    // ── center header block (university / institute / course / year) ──
-    if (HEADER_ORG_RE.test(b.replace(/^[#*>]+\s*/, ""))) {
-      out.push(centerBold(b.replace(/^[#*>]+\s*/, "")));
-      continue;
-    }
-    if (HEADER_COURSE_RE.test(b.replace(/^[#*>]+\s*/, ""))) {
-      out.push(centerBold(b.replace(/^[#*>]+\s*/, "")));
-      continue;
-    }
-    if (HEADER_YEAR_RE.test(b.replace(/^[#*>]+\s*/, ""))) {
-      out.push(centerBold(b.replace(/^[#*>]+\s*/, "")));
-      continue;
-    }
-    // "Question Bank" / "Model Question" / "Past Paper" label
-    if (/^###?\s*(Question\s+Bank|Model\s+Question|Past\s+Paper|Practice\s+Set|Guess\s+Paper)/i.test(b)) {
-      out.push(centerBold(b.replace(/^#+\s*/, "")));
+    // ── University / Institute / Organization ──────────────────────
+    if (HEADER_ORG_RE.test(clean)) {
+      out.push(centerBold(clean));
       continue;
     }
 
-    // ── marks / time line ────────────────────────────────────────────
-    if (MARKS_RE.test(b.replace(/^[#*>]+\s*/, ""))) {
-      out.push(formatMarksTime(b.replace(/^[#*>]+\s*/, "")));
+    // ── Course / Level line ────────────────────────────────────────
+    if (HEADER_COURSE_RE.test(clean)) {
+      // This line often contains course + marks + instructions merged.
+      // Split them into separate lines.
+      const segments = splitCombinedLine(clean);
+      for (const seg of segments) {
+        if (MARKS_RE.test(seg)) {
+          out.push(centerBold(formatMarksTime(seg)));
+        } else if (INSTRUCTION_RE.test(seg)) {
+          out.push(centerText(seg));
+        } else {
+          out.push(centerBold(seg));
+        }
+      }
       continue;
     }
 
-    // ── section header ───────────────────────────────────────────────
-    if (SECTION_RE.test(b.replace(/^[#*>]+\s*/, ""))) {
-      out.push(centerBold(b.replace(/^[#*>]+\s*/, "")));
+    // ── Year (standalone "2081" or "2081 (BS)") ───────────────────
+    if (YEAR_STANDALONE_RE.test(clean) || HEADER_YEAR_RE.test(clean)) {
+      out.push(centerBold(clean));
       continue;
     }
 
-    // ── instruction lines (Attempt any TWO, etc.) ────────────────────
-    if (INSTRUCTION_RE.test(b.replace(/^[#*>]+\s*/, ""))) {
-      out.push(`*${b.replace(/^[#*>]+\s*/, "")}*`);
+    // ── "Question Bank" / "Model Question" label ──────────────────
+    if (/^(Question\s+Bank|Model\s+Question|Past\s+Paper|Practice\s+Set|Guess\s+Paper)/i.test(clean)) {
+      out.push(centerBold(clean));
       continue;
     }
 
-    // ── numbered question ────────────────────────────────────────────
+    // ── Marks / Time line ─────────────────────────────────────────
+    if (MARKS_RE.test(clean)) {
+      out.push(centerBold(formatMarksTime(clean)));
+      continue;
+    }
+
+    // ── Section header ────────────────────────────────────────────
+    if (SECTION_RE.test(clean)) {
+      out.push(centerBold(clean));
+      continue;
+    }
+
+    // ── Instruction lines ─────────────────────────────────────────
+    if (INSTRUCTION_RE.test(clean)) {
+      out.push(centerText(clean));
+      continue;
+    }
+
+    // ── Numbered question ─────────────────────────────────────────
     const qMatch = b.match(/^(\d{1,3})\s*[.)]\s*(.+)/);
     if (qMatch) {
       // Check if next block is a continuation of this question
       const next = blocks[i + 1];
       if (next && isContinuation({ text: next, y: 0, size: 0, bold: false })) {
-        // Merge the continuation into the question
         const merged = `${qMatch[1]}. ${qMatch[2]} ${next.trim()}`;
         out.push(merged);
-        i++; // skip the continuation block
+        i++;
       } else {
         out.push(b);
       }
@@ -222,26 +253,29 @@ function postProcess(blocks: string[]): string[] {
   return out;
 }
 
-/** Wrap text in centered bold HTML. */
+/** Center + bold text. */
 function centerBold(text: string): string {
   return `<div align="center">\n\n**${text}**\n\n</div>`;
 }
 
-/** Format marks / time line with bold labels. */
+/** Center text without bold. */
+function centerText(text: string): string {
+  return `<div align="center">\n\n${text}\n\n</div>`;
+}
+
+/** Format marks/time with bold labels. */
 function formatMarksTime(text: string): string {
-  const formatted = text
+  return text
     .replace(
       /(Full\s+Marks?|Pass\s+Marks?|Total\s+Marks?|Maximum\s+Marks?|Minimum\s+Marks?|Time|Duration)([\s:]*)/gi,
       "**$1:** "
     )
     .replace(/\s+/g, " ")
     .trim();
-  return `<div align="center">\n\n${formatted}\n\n</div>`;
 }
 
-// ── main conversion entry point ──────────────────────────────────────
+// ── main conversion ──────────────────────────────────────────────────
 
-/** Convert one page's extracted lines into markdown blocks. */
 function linesToMarkdown(lines: Line[], body: number): string[] {
   const blocks: string[] = [];
   let paragraph = "";
@@ -263,7 +297,6 @@ function linesToMarkdown(lines: Line[], body: number): string[] {
       paragraph = text;
       return;
     }
-    // De-hyphenate words split across wrapped lines.
     if (/[\u2010-\u2014-]$/.test(paragraph)) {
       paragraph = paragraph.replace(/[\u2010-\u2014-]+$/, "") + text;
     } else {
@@ -292,14 +325,13 @@ function linesToMarkdown(lines: Line[], body: number): string[] {
       continue;
     }
 
-    // A short ALL-CAPS or section-like line reads like a section label.
     if (
       line.text.length <= 60 &&
       /^[A-Z0-9][A-Z0-9\s&.,'()\-:/]+$/.test(line.text) &&
       /[A-Z]{3,}/.test(line.text)
     ) {
       flushParagraph();
-      blocks.push(`### ${line.text}`);
+      blocks.push(line.text);
       continue;
     }
 
