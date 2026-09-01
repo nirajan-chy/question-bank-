@@ -21,7 +21,6 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: "Medium",
       },
-      updatedAt: { type: DataTypes.DATEONLY, allowNull: false },
       description: { type: DataTypes.TEXT, allowNull: false },
       premium: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
       tags: { type: DataTypes.JSONB, allowNull: false, defaultValue: [] },

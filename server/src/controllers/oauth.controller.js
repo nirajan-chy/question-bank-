@@ -46,8 +46,6 @@ const PROVIDERS = {
 
 const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3000";
 
-const pendingStates = new Map();
-
 const signToken = (user) => {
   if (!process.env.JWT_SECRET) {
     throw new ApiError(500, "Server misconfigured: JWT_SECRET is not set in the environment");
@@ -55,7 +53,11 @@ const signToken = (user) => {
   return jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "7d" });
 };
 
-const sanitize = (user) => user.get({ plain: true });
+const sanitize = (user) => {
+  const plain = user.get({ plain: true });
+  delete plain.password;
+  return plain;
+};
 
 const getProvider = (provider) => {
   const config = PROVIDERS[provider];
@@ -74,15 +76,19 @@ const getProvider = (provider) => {
 const oauthStart = (req, res, next) => {
   try {
     const config = getProvider(req.params.provider);
-    const state = crypto.randomBytes(24).toString("hex");
-    pendingStates.set(state, { provider: req.params.provider, expires: Date.now() + 10 * 60 * 1000 });
+    const nonce = crypto.randomBytes(24).toString("hex");
+
+    const stateToken = jwt.sign(
+      { provider: req.params.provider, nonce, exp: Math.floor(Date.now() / 1000) + 600 },
+      process.env.JWT_SECRET
+    );
 
     const params = new URLSearchParams({
       client_id: config.clientId,
       redirect_uri: `${req.protocol}://${req.get("host")}/api/auth/${req.params.provider}/callback`,
       response_type: "code",
       scope: config.scope,
-      state,
+      state: stateToken,
     });
     res.redirect(`${config.authorizeUrl}?${params.toString()}`);
   } catch (error) {
@@ -98,10 +104,14 @@ const oauthCallback = async (req, res, next) => {
     if (providerError) throw new ApiError(400, `OAuth failed: ${providerError}`);
     if (!code) throw new ApiError(400, "Missing authorization code");
 
-    const stored = pendingStates.get(state);
-    pendingStates.delete(state);
-    if (!stored || stored.provider !== provider || stored.expires < Date.now()) {
+    let decoded;
+    try {
+      decoded = jwt.verify(state, process.env.JWT_SECRET);
+    } catch {
       throw new ApiError(400, "Invalid or expired OAuth state");
+    }
+    if (decoded.provider !== provider) {
+      throw new ApiError(400, "OAuth state provider mismatch");
     }
 
     const config = getProvider(provider);
@@ -149,8 +159,16 @@ const oauthCallback = async (req, res, next) => {
     }
 
     const token = signToken(user);
-    const redirectParams = new URLSearchParams({ token, user: JSON.stringify(sanitize(user)) });
-    res.redirect(`${CLIENT_URL}/auth/callback?${redirectParams.toString()}`);
+    const safeUser = sanitize(user);
+
+    res.cookie("auth_token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    res.redirect(`${CLIENT_URL}/auth/callback?user=${encodeURIComponent(JSON.stringify(safeUser))}`);
   } catch (error) {
     const message = error instanceof ApiError ? error.message : "OAuth sign-in failed";
     res.redirect(`${CLIENT_URL}/auth/callback?error=${encodeURIComponent(message)}`);

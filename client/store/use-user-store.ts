@@ -60,26 +60,7 @@ export const useUserStore = create<UserState>()(
   persist(
     (set, get) => ({
       user: defaultUser,
-      bookmarks: [
-        {
-          id: "n3",
-          type: "note",
-          title: "Class 11 Physics — Mechanics Notes (Unit 1)",
-          subtitle: "NEB · Class 11 · by Bikash Thapa",
-          href: "/subjects/physics?tab=notes",
-          savedAt: "2026-07-01",
-          icon: "note",
-        },
-        {
-          id: "q1",
-          type: "question-bank",
-          title: "SEE Mathematics — Full Syllabus Question Bank 2082",
-          subtitle: "SEE · Class 10 · 420 questions",
-          href: "/question-banks",
-          savedAt: "2026-06-28",
-          icon: "question-bank",
-        },
-      ],
+      bookmarks: [],
       setUser: (partial) => set((s) => ({ user: { ...s.user, ...partial } })),
       addBookmark: (item) =>
         set((s) => ({ bookmarks: [item, ...s.bookmarks.filter((b) => b.id !== item.id)] })),

@@ -91,42 +91,44 @@ const getUserStats = asyncHandler(async (req, res) => {
     }),
   ]);
 
-  const last6Months = [];
-  for (let i = 5; i >= 0; i--) {
-    const monthStart = new Date(now.getFullYear(), now.getMonth() - i, 1);
-    const monthEnd = new Date(now.getFullYear(), now.getMonth() - i + 1, 0, 23, 59, 59);
-    const count = await models.User.count({
-      where: { createdAt: { [Op.between]: [monthStart, monthEnd] } },
-    });
-    last6Months.push({
-      month: monthStart.toLocaleString("default", { month: "short", year: "numeric" }),
-      count,
-    });
-  }
+  const last6Months = await Promise.all(
+    Array.from({ length: 6 }, (_, i) => {
+      const idx = 5 - i;
+      const monthStart = new Date(now.getFullYear(), now.getMonth() - idx, 1);
+      const monthEnd = new Date(now.getFullYear(), now.getMonth() - idx + 1, 0, 23, 59, 59);
+      return models.User.count({
+        where: { createdAt: { [Op.between]: [monthStart, monthEnd] } },
+      }).then((count) => ({
+        month: monthStart.toLocaleString("default", { month: "short", year: "numeric" }),
+        count,
+      }));
+    })
+  );
 
-  const last7Days = [];
-  for (let i = 6; i >= 0; i--) {
-    const dayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i, 0, 0, 0);
-    const dayEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i, 23, 59, 59);
-    const count = await models.User.count({
-      where: { createdAt: { [Op.between]: [dayStart, dayEnd] } },
-    });
-    last7Days.push({
-      day: dayStart.toLocaleString("default", { weekday: "short" }),
-      date: dayStart.toISOString().split("T")[0],
-      count,
-    });
-  }
+  const last7Days = await Promise.all(
+    Array.from({ length: 7 }, (_, i) => {
+      const idx = 6 - i;
+      const dayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - idx, 0, 0, 0);
+      const dayEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate() - idx, 23, 59, 59);
+      return models.User.count({
+        where: { createdAt: { [Op.between]: [dayStart, dayEnd] } },
+      }).then((count) => ({
+        day: dayStart.toLocaleString("default", { weekday: "short" }),
+        date: dayStart.toISOString().split("T")[0],
+        count,
+      }));
+    })
+  );
 
-  const signupByHour = [];
-  for (let h = 0; h < 24; h++) {
-    const hourStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, 0, 0);
-    const hourEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, 59, 59);
-    const count = await models.User.count({
-      where: { createdAt: { [Op.between]: [hourStart, hourEnd] } },
-    });
-    signupByHour.push({ hour: h, count });
-  }
+  const signupByHour = await Promise.all(
+    Array.from({ length: 24 }, (_, h) => {
+      const hourStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, 0, 0);
+      const hourEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, 59, 59);
+      return models.User.count({
+        where: { createdAt: { [Op.between]: [hourStart, hourEnd] } },
+      }).then((count) => ({ hour: h, count }));
+    })
+  );
   const peakHour = signupByHour.reduce((max, h) => (h.count > max.count ? h : max), { hour: 0, count: 0 });
 
   const [newestUser, oldestUser] = await Promise.all([

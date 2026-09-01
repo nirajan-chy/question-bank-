@@ -11,12 +11,13 @@ const controller = createBaseController(CommunityQuestion, {
 });
 
 const createQuestion = asyncHandler(async (req, res) => {
-  const { title, body, author = "Anonymous", authorRole = "Student", tags = [], bounty } = req.body;
+  const { title, body, tags = [], bounty } = req.body;
 
   if (!title || !body) throw new ApiError(400, "title and body are required");
 
-  const now = new Date().toISOString().slice(0, 10);
   const slug = `${slugify(title)}-${Date.now().toString(36)}`;
+  const author = req.user.name || "User";
+  const authorRole = req.user.role || "Student";
 
   const question = await CommunityQuestion.create({
     id: `c-${Date.now()}`,
@@ -25,7 +26,7 @@ const createQuestion = asyncHandler(async (req, res) => {
     body,
     author,
     authorRole,
-    avatar: author.slice(0, 2).toUpperCase(),
+    avatar: req.user.avatar || author.slice(0, 2).toUpperCase(),
     tags,
     views: 0,
     votes: 0,
@@ -34,7 +35,6 @@ const createQuestion = asyncHandler(async (req, res) => {
     viewsFormatted: "0",
     answered: false,
     acceptedAnswerId: null,
-    createdAt: now,
     bounty: bounty || null,
   });
 
@@ -45,31 +45,30 @@ const addAnswer = asyncHandler(async (req, res) => {
   const question = await CommunityQuestion.findByPk(req.params.id);
   if (!question) throw new ApiError(404, "Community question not found");
 
-  const { author = "Anonymous", authorRole = "Student", body } = req.body;
+  const { body } = req.body;
   if (!body) throw new ApiError(400, "body is required");
 
+  const author = req.user.name || "User";
+  const authorRole = req.user.role || "Student";
   const answers = question.answers || [];
   const answer = {
     id: `a-${Date.now()}`,
     author,
     authorRole,
-    avatar: author.slice(0, 2).toUpperCase(),
+    avatar: req.user.avatar || author.slice(0, 2).toUpperCase(),
     body,
     votes: 0,
-    accepted: answers.length === 0,
+    accepted: false,
     createdAt: new Date().toISOString().slice(0, 10),
     comments: [],
   };
 
   answers.push(answer);
 
-  const acceptedAnswerId = answers.length === 1 ? answer.id : question.acceptedAnswerId;
-
   await question.update({
     answers,
     answerCount: answers.length,
     answered: true,
-    acceptedAnswerId,
   });
 
   sendSuccess(res, question, 201, "Answer added");

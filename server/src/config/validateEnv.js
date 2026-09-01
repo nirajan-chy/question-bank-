@@ -1,4 +1,4 @@
-const requiredVars = ["JWT_SECRET", "DB_NAME", "DB_HOST"];
+const requiredVars = ["JWT_SECRET", "DB_NAME", "DB_HOST", "DB_USERNAME", "DB_PASSWORD"];
 
 function validateEnv() {
   const missing = requiredVars.filter((v) => !process.env[v]);

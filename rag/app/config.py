@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     openrouter_api_key: str = ""
     rag_llm_model: str = "openai/gpt-4o-mini"
     rag_embedding_model: str = "openai/text-embedding-3-small"
-    rag_service_secret: str = "dev-secret-change-me"
+    rag_service_secret: str
     rag_chunk_size: int = 1000
     rag_chunk_overlap: int = 200
     rag_top_k: int = 6

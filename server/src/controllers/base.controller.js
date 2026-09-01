@@ -33,7 +33,9 @@ const ensureSlug = async (Model, body) => {
   if (!base) return;
   let candidate = base;
   let suffix = 1;
-  while (Model.rawAttributes.slug.unique) {
+  const MAX_SLUG_ATTEMPTS = 100;
+  let attempts = 0;
+  while (attempts < MAX_SLUG_ATTEMPTS) {
     const existing = await Model.findOne({
       where: { slug: candidate },
       attributes: ["id"],
@@ -41,7 +43,9 @@ const ensureSlug = async (Model, body) => {
     });
     if (!existing) break;
     candidate = `${base}-${suffix++}`;
+    attempts++;
   }
+  if (attempts >= MAX_SLUG_ATTEMPTS) throw new ApiError(500, "Could not generate a unique slug");
   body.slug = candidate;
 };
 

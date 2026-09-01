@@ -19,7 +19,6 @@ module.exports = (sequelize) => {
       viewsFormatted: { type: DataTypes.STRING, allowNull: false, defaultValue: "0" },
       answered: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
       acceptedAnswerId: { type: DataTypes.STRING, allowNull: true },
-      createdAt: { type: DataTypes.DATEONLY, allowNull: false },
       bounty: { type: DataTypes.INTEGER, allowNull: true },
     },
     { tableName: "community_questions", timestamps: true }

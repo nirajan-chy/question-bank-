@@ -69,48 +69,6 @@ export async function httpForm<T>(path: string, form: FormData): Promise<T> {
   return body.data as T;
 }
 
-export async function httpUpload<T>(
-  path: string,
-  formData: FormData,
-): Promise<T> {
-  const headers = new Headers();
-  if (authToken) headers.set("Authorization", `Bearer ${authToken}`);
-
-  let res: Response;
-  try {
-    res = await fetch(`${BASE_URL}${path}`, {
-      method: "POST",
-      headers,
-      body: formData,
-    });
-  } catch {
-    throw new ApiClientError(
-      0,
-      "Could not reach the server. Is the backend running?",
-    );
-  }
-
-  let body: ApiEnvelope<T>;
-  try {
-    body = (await res.json()) as ApiEnvelope<T>;
-  } catch {
-    throw new ApiClientError(
-      res.status,
-      `Unexpected response from server (${res.status})`,
-    );
-  }
-
-  if (!res.ok || !body.success) {
-    throw new ApiClientError(
-      res.status,
-      body.message ?? "Upload failed",
-      body.errors ?? [],
-    );
-  }
-
-  return body.data as T;
-}
-
 export async function http<T>(
   path: string,
   options: RequestInit = {},
@@ -149,3 +107,5 @@ export async function http<T>(
 
   return body.data as T;
 }
+
+export const httpUpload = httpForm;

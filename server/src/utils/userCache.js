@@ -1,6 +1,13 @@
 const userCache = new Map();
 const CACHE_TTL = 5 * 60 * 1000;
 
+setInterval(() => {
+  const now = Date.now();
+  for (const [id, entry] of userCache) {
+    if (now - entry.ts > CACHE_TTL) userCache.delete(id);
+  }
+}, CACHE_TTL).unref();
+
 function getCachedUser(id) {
   const entry = userCache.get(id);
   if (!entry) return null;
