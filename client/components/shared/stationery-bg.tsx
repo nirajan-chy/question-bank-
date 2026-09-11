@@ -146,7 +146,7 @@ export function StationeryBg({ className, variant = "default" }: StationeryBgPro
           }}
         >
           <div
-            className="text-neutral-500/[0.12] dark:text-white/[0.08]"
+            className="text-neutral-400/[0.25] dark:text-white/[0.18]"
             style={{
               transform: `rotate(${item.rotate}deg) scale(${item.scale})`,
             }}

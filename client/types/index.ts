@@ -94,6 +94,18 @@ export type Semester = {
   tags: string[];
 };
 
+export type AffiliatedCollege = {
+  name: string;
+  location: string;
+  type: "constituent" | "affiliated" | "community";
+};
+
+export type ProgramColleges = {
+  program: string;
+  constituent: AffiliatedCollege[];
+  affiliated: AffiliatedCollege[];
+};
+
 export type University = {
   id: string;
   slug: string;
@@ -101,12 +113,16 @@ export type University = {
   short: string;
   established: number;
   location: string;
-  type: "Constituent" | "Affiliated" | "Autonomous";
+  city: string;
+  type: "Public" | "Private" | "Open" | "Community";
   description: string;
   programs: string[];
   ranking: string;
   students: number;
   website: string;
+  ecoFriendly: boolean;
+  greenCampus: boolean;
+  affiliatedColleges?: ProgramColleges[];
 };
 
 export type Faculty = {

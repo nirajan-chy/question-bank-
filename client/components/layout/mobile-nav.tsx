@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import { Menu, LogOut, ShieldCheck } from "lucide-react";
+import { Menu, LogOut, ShieldCheck, Users, Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { mainNav, resourcesNav } from "@/lib/nav";
+import { mainNav } from "@/lib/nav";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Logo } from "@/components/shared/logo";
@@ -40,45 +40,50 @@ export function MobileNav() {
         </SheetHeader>
         <div className="px-4 py-4">
           <p className="px-2 pb-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-            Explore
+            Navigate
           </p>
           <nav className="flex flex-col gap-0.5">
-            {mainNav
-              .filter((link) => !resourcesNav.some((r) => r.href === link.href))
-              .map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className={cn(
-                    "rounded-md px-2 py-2 text-sm font-medium transition-colors hover:bg-accent",
-                    isActive(link.href)
-                      ? "text-foreground"
-                      : "text-muted-foreground"
-                  )}
-                >
-                  {link.label}
-                </Link>
-              ))}
-          </nav>
-          <Separator className="my-4" />
-          <p className="px-2 pb-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-            Resources
-          </p>
-          <nav className="flex flex-col gap-0.5">
-            {resourcesNav.map((link) => (
+            {mainNav.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
                 className={cn(
                   "rounded-md px-2 py-2 text-sm font-medium transition-colors hover:bg-accent",
-                  isActive(link.href) ? "text-foreground" : "text-muted-foreground"
+                  isActive(link.href)
+                    ? "text-foreground"
+                    : "text-muted-foreground"
                 )}
               >
                 {link.label}
               </Link>
             ))}
+          </nav>
+          <Separator className="my-4" />
+          <p className="px-2 pb-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            Quick Links
+          </p>
+          <nav className="flex flex-col gap-0.5">
+            <Link
+              href="/courses"
+              onClick={() => setOpen(false)}
+              className={cn(
+                "flex items-center gap-2 rounded-md px-2 py-2 text-sm font-medium transition-colors hover:bg-accent",
+                isActive("/courses") ? "text-foreground" : "text-muted-foreground"
+              )}
+            >
+              <Globe className="h-4 w-4" /> All Courses
+            </Link>
+            <Link
+              href="/community"
+              onClick={() => setOpen(false)}
+              className={cn(
+                "flex items-center gap-2 rounded-md px-2 py-2 text-sm font-medium transition-colors hover:bg-accent",
+                isActive("/community") ? "text-foreground" : "text-muted-foreground"
+              )}
+            >
+              <Users className="h-4 w-4" /> Community
+            </Link>
           </nav>
           <Separator className="my-4" />
           {hasHydrated && user ? (

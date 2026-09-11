@@ -4,8 +4,7 @@ import Link from "next/link";
 import { useUniversities } from "@/services/queries";
 import { SectionHeader } from "@/components/shared/section-header";
 import { Stagger, StaggerItem } from "@/components/shared/motion";
-import { cn } from "@/lib/utils";
-import { formatNumber } from "@/lib/utils";
+import { cn, formatNumber } from "@/lib/utils";
 import { gradientFor } from "@/lib/gradients";
 
 export function Universities() {
@@ -22,13 +21,13 @@ export function Universities() {
           linkLabel="All universities"
         />
         {isLoading || !universities ? (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {Array.from({ length: 6 }).map((_, i) => (
               <div key={i} className="h-28 animate-pulse rounded-xl bg-primary/10" />
             ))}
           </div>
         ) : (
-          <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {universities.slice(0, 6).map((uni) => (
               <StaggerItem key={uni.id}>
                 <Link

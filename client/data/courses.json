@@ -1,23 +1,5 @@
 [
   {
-    "id": "c-bsc-csit",
-    "slug": "bsc-csit",
-    "name": "BSc CSIT",
-    "short": "BSc CSIT",
-    "description": "Computer Science & Information Technology — 8 semesters of programming, algorithms, DBMS and AI at TU.",
-    "levelSlug": "bachelor",
-    "category": "Computing & IT",
-    "icon": "🤖",
-    "semesterCount": 8,
-    "university": "TU",
-    "tags": [
-      "TU",
-      "CSIT",
-      "Programming",
-      "DBMS"
-    ]
-  },
-  {
     "id": "c-bba",
     "slug": "bba",
     "name": "BBA",
@@ -28,12 +10,46 @@
     "icon": "📈",
     "semesterCount": 8,
     "university": "TU/PU/KU",
-    "tags": [
-      "TU",
-      "PU",
-      "KU",
-      "Management"
-    ]
+    "tags": ["TU", "PU", "KU", "Management"]
+  },
+  {
+    "id": "c-bca",
+    "slug": "bca",
+    "name": "BCA",
+    "short": "BCA",
+    "description": "Bachelor of Computer Applications — programming, web development, databases and software engineering.",
+    "levelSlug": "bachelor",
+    "category": "Computing & IT",
+    "icon": "💻",
+    "semesterCount": 6,
+    "university": "TU/PU",
+    "tags": ["TU", "PU", "Computing", "Programming"]
+  },
+  {
+    "id": "c-bit",
+    "slug": "bit",
+    "name": "BIT",
+    "short": "BIT",
+    "description": "Bachelor of Information Technology — networking, systems design, IT management and enterprise solutions.",
+    "levelSlug": "bachelor",
+    "category": "Computing & IT",
+    "icon": "🌐",
+    "semesterCount": 8,
+    "university": "TU",
+    "tags": ["TU", "IT", "Networking", "Systems"]
+  },
+  {
+    "id": "c-bsc-csit",
+    "slug": "bsc-csit",
+    "name": "BSc CSIT",
+    "short": "BSc CSIT",
+    "description": "Computer Science & Information Technology — 8 semesters of programming, algorithms, DBMS and AI at TU.",
+    "levelSlug": "bachelor",
+    "category": "Computing & IT",
+    "icon": "🤖",
+    "semesterCount": 8,
+    "university": "TU",
+    "tags": ["TU", "CSIT", "Programming", "DBMS"]
   },
   {
     "id": "c-bbs",
@@ -46,48 +62,98 @@
     "icon": "🏛️",
     "semesterCount": 8,
     "university": "TU",
-    "tags": [
-      "TU",
-      "BBS",
-      "Management",
-      "Accounting"
-    ]
+    "tags": ["TU", "BBS", "Management", "Accounting"]
   },
   {
-    "id": "c-be-civil",
-    "slug": "be-civil",
-    "name": "BE Civil Engineering",
-    "short": "BE Civil",
-    "description": "Structural, geotechnical, transportation and water resources engineering for BE Civil.",
+    "id": "c-bhm",
+    "slug": "bhm",
+    "name": "BHM",
+    "short": "BHM",
+    "description": "Bachelor of Hotel Management — hospitality operations, food service, tourism and event management.",
+    "levelSlug": "bachelor",
+    "category": "Hospitality",
+    "icon": "🏨",
+    "semesterCount": 8,
+    "university": "TU",
+    "tags": ["TU", "Hotel", "Hospitality", "Tourism"]
+  },
+  {
+    "id": "c-bbm",
+    "slug": "bbm",
+    "name": "BBM",
+    "short": "BBM",
+    "description": "Bachelor of Business Management — management principles, organizational behavior and business strategy.",
+    "levelSlug": "bachelor",
+    "category": "Management",
+    "icon": "📊",
+    "semesterCount": 8,
+    "university": "TU",
+    "tags": ["TU", "BBM", "Management", "Strategy"]
+  },
+  {
+    "id": "c-bitm",
+    "slug": "bitm",
+    "name": "BITM",
+    "short": "BITM",
+    "description": "Bachelor of Information Technology Management — IT systems, project management and digital business.",
+    "levelSlug": "bachelor",
+    "category": "Computing & IT",
+    "icon": "⚙️",
+    "semesterCount": 8,
+    "university": "TU",
+    "tags": ["TU", "IT", "Management", "Projects"]
+  },
+  {
+    "id": "c-bttm",
+    "slug": "bttm",
+    "name": "BTTM",
+    "short": "BTTM",
+    "description": "Bachelor of Travel and Tourism Management — tourism planning, eco-tourism, hospitality and cultural heritage.",
+    "levelSlug": "bachelor",
+    "category": "Hospitality",
+    "icon": "✈️",
+    "semesterCount": 8,
+    "university": "TU",
+    "tags": ["TU", "Tourism", "Travel", "Hospitality"]
+  },
+  {
+    "id": "c-ba",
+    "slug": "ba",
+    "name": "BA",
+    "short": "BA",
+    "description": "Bachelor of Arts — English, Nepali, History, Political Science, Economics and liberal arts at TU.",
+    "levelSlug": "bachelor",
+    "category": "Humanities",
+    "icon": "📚",
+    "semesterCount": 8,
+    "university": "TU",
+    "tags": ["TU", "Arts", "Humanities", "Liberal Arts"]
+  },
+  {
+    "id": "c-be",
+    "slug": "be",
+    "name": "BE",
+    "short": "BE",
+    "description": "Bachelor of Engineering — Civil, Computer, Electrical and Mechanical engineering at TU, KU and PU.",
     "levelSlug": "bachelor",
     "category": "Engineering",
     "icon": "🏗️",
     "semesterCount": 8,
-    "university": "TU/PU",
-    "tags": [
-      "TU",
-      "PU",
-      "Civil",
-      "Structures"
-    ]
+    "university": "TU/KU/PU",
+    "tags": ["TU", "KU", "PU", "Engineering"]
   },
   {
-    "id": "c-be-computer",
-    "slug": "be-computer",
-    "name": "BE Computer Engineering",
-    "short": "BE Computer",
-    "description": "Hardware-software co-design, microprocessors, networks and software systems for BE Computer.",
+    "id": "c-bsw",
+    "slug": "bsw",
+    "name": "BSW",
+    "short": "BSW",
+    "description": "Bachelor of Social Work — community development, social justice, counseling and welfare services.",
     "levelSlug": "bachelor",
-    "category": "Engineering",
-    "icon": "🖥️",
+    "category": "Social Sciences",
+    "icon": "🤝",
     "semesterCount": 8,
-    "university": "KU/PU",
-    "tags": [
-      "KU",
-      "PU",
-      "Computer",
-      "Networks"
-    ]
+    "university": "TU",
+    "tags": ["TU", "Social Work", "Community", "Welfare"]
   },
   {
     "id": "c-mba",
@@ -100,11 +166,6 @@
     "icon": "🎯",
     "semesterCount": 4,
     "university": "TU/KU/PU",
-    "tags": [
-      "TU",
-      "KU",
-      "PU",
-      "MBA"
-    ]
+    "tags": ["TU", "KU", "PU", "MBA"]
   }
 ]

@@ -4,8 +4,7 @@ import Link from "next/link";
 import { useFaculties } from "@/services/queries";
 import { SectionHeader } from "@/components/shared/section-header";
 import { Stagger, StaggerItem } from "@/components/shared/motion";
-import { cn } from "@/lib/utils";
-import { gradientFor } from "@/lib/gradients";
+
 
 export function Faculties() {
   const { data: faculties, isLoading } = useFaculties();
@@ -38,14 +37,11 @@ export function Faculties() {
         <Stagger className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {faculties.map((faculty) => (
             <StaggerItem key={faculty.id}>
-              <Link
-                href="/classes"
-                className="group flex h-full flex-col rounded-2xl border bg-background p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-card-hover"
-              >
-                <span className={cn("flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br text-white", gradientFor(faculty.name))}>
-                  {faculty.short.slice(0, 1)}
-                </span>
-                <h3 className="mt-4 font-semibold group-hover:text-primary">{faculty.name}</h3>
+               <Link
+                 href="/classes"
+                 className="group flex h-full flex-col rounded-2xl border bg-background p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-card-hover"
+               >
+                 <h3 className="font-display text-base font-bold tracking-tight group-hover:text-primary">{faculty.name}</h3>
                 <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{faculty.description}</p>
                 <p className="mt-3 text-xs font-medium text-primary">
                   {faculty.programs.length} programs →

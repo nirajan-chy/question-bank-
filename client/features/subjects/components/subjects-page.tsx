@@ -1,87 +1,104 @@
 "use client";
 
 import { useState } from "react";
-import { BookOpen } from "lucide-react";
-import { useSubjects } from "@/services/queries";
+import Link from "next/link";
+import { BookOpen, ArrowUpRight, Search } from "lucide-react";
+import { db } from "@/services/db";
 import { PageHeader } from "@/components/shared/page-header";
-import { GridSkeleton } from "@/components/shared/skeletons";
-import { EmptyState } from "@/components/shared/empty-state";
-import { SubjectCard } from "@/features/education/components/cards";
 import { Input } from "@/components/ui/input";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
-const levels = [
-  "All",
-  "NEB · Class 12",
-  "CTEVT",
-  "Bachelor · TU",
-  "Bachelor · KU/PU",
-  "Bachelor · TU/PU",
-  "Master",
-];
+const categoryColors: Record<string, string> = {
+  "Computing & IT": "from-blue-500 to-indigo-600",
+  Management: "from-emerald-500 to-teal-600",
+  Engineering: "from-orange-500 to-red-600",
+  Hospitality: "from-pink-500 to-rose-600",
+  Humanities: "from-violet-500 to-purple-600",
+  "Social Sciences": "from-amber-500 to-yellow-600",
+};
 
 export function SubjectsPage() {
-  const { data: subjects, isLoading } = useSubjects();
+  const courses = db.courses;
+  const subjects = db.subjects;
   const [query, setQuery] = useState("");
-  const [level, setLevel] = useState("All");
 
-  const filtered = (subjects ?? []).filter((s) => {
-    const matchesQuery =
-      s.name.toLowerCase().includes(query.toLowerCase()) ||
-      s.category.toLowerCase().includes(query.toLowerCase());
-    const matchesLevel = level === "All" || s.level.includes(level);
-    return matchesQuery && matchesLevel;
+  const filteredCourses = courses.filter((c) => {
+    if (!query) return true;
+    const q = query.toLowerCase();
+    return (
+      c.name.toLowerCase().includes(q) ||
+      c.description.toLowerCase().includes(q) ||
+      c.category.toLowerCase().includes(q)
+    );
   });
+
+  const getSubjectsCount = (courseSlug: string) =>
+    subjects.filter((s) => s.courseSlug === courseSlug).length;
 
   return (
     <>
       <PageHeader
         icon={BookOpen}
-        title="All Subjects"
-        description="Every subject from NEB to Master — with notes, question banks, past papers, mock tests and videos in one place."
+        title="Subjects"
+        description="Pick a course to see all its subjects — with notes, question banks, past papers and mock tests."
         crumbs={[{ label: "Subjects" }]}
       />
       <section className="py-12 md:py-16">
         <div className="container">
-          <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex flex-wrap gap-2">
-              {levels.map((l) => (
-                <button
-                  key={l}
-                  onClick={() => setLevel(l)}
-                  className={cn(
-                    "rounded-full border px-4 py-1.5 text-sm font-medium transition-colors",
-                    level === l
-                      ? "border-primary bg-primary text-primary-foreground"
-                      : "hover:border-primary/40 hover:text-primary"
-                  )}
-                >
-                  {l}
-                </button>
-              ))}
-            </div>
+          <div className="mb-8 flex items-center justify-between gap-4">
+            <p className="text-sm text-muted-foreground">
+              {filteredCourses.length} courses · {subjects.length} subjects total
+            </p>
             <Input
-              placeholder="Search subjects..."
+              placeholder="Search courses..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="w-full lg:w-72"
+              className="w-full sm:w-72"
             />
           </div>
 
-          {isLoading || !subjects ? (
-            <GridSkeleton count={8} />
-          ) : filtered.length === 0 ? (
-            <EmptyState
-              title="No subjects found"
-              description={`Nothing matched "${query}". Try a different subject or level.`}
-              actionLabel="View all subjects"
-              actionHref="/subjects"
-            />
+          {filteredCourses.length === 0 ? (
+            <div className="rounded-xl border bg-card p-12 text-center">
+              <BookOpen className="mx-auto h-10 w-10 text-muted-foreground" />
+              <p className="mt-4 font-medium">No courses found</p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Try a different search term.
+              </p>
+            </div>
           ) : (
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {filtered.map((subject) => (
-                <SubjectCard key={subject.id} subject={subject} />
-              ))}
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {filteredCourses.map((course) => {
+                const count = getSubjectsCount(course.slug);
+                return (
+                  <Link key={course.id} href={`/courses/${course.slug}`}>
+                    <Card className="group relative h-full overflow-hidden p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-card-hover">
+                      <div
+                        className={cn(
+                          "absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r",
+                          categoryColors[course.category] || "from-slate-500 to-slate-700"
+                        )}
+                      />
+                      <div className="flex items-start justify-between">
+                        <span className="text-3xl">{course.icon}</span>
+                        <ArrowUpRight className="h-5 w-5 shrink-0 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
+                      </div>
+                      <h3 className="mt-4 font-display text-lg font-bold group-hover:text-primary">
+                        {course.name}
+                      </h3>
+                      <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
+                        {course.description}
+                      </p>
+                      <div className="mt-4 flex flex-wrap gap-1.5">
+                        <Badge variant="secondary">{course.university}</Badge>
+                        <Badge variant="info">{count} subjects</Badge>
+                        <Badge variant="default">{course.semesterCount} semesters</Badge>
+                      </div>
+                    </Card>
+                  </Link>
+                );
+              })}
             </div>
           )}
         </div>
