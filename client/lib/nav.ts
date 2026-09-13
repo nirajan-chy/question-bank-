@@ -14,6 +14,7 @@ import {
   Users,
   Search,
   GraduationCap,
+  Globe,
 } from "lucide-react";
 
 export type NavLink = {
@@ -25,21 +26,10 @@ export type NavLink = {
 
 export const mainNav: NavLink[] = [
   { label: "Home", href: "/" },
-  { label: "Classes", href: "/classes" },
+  { label: "Courses", href: "/courses" },
   { label: "Universities", href: "/universities" },
-  { label: "Subjects", href: "/subjects" },
-  { label: "Notes", href: "/notes" },
-  { label: "Books", href: "/books" },
-  { label: "Question Banks", href: "/question-banks" },
-  { label: "Past Papers", href: "/past-papers" },
-  { label: "Mock Tests", href: "/mock-tests" },
-  { label: "Scholarships", href: "/scholarships" },
-  { label: "Results", href: "/results" },
-  { label: "Notices", href: "/notices" },
   { label: "Community", href: "/community" },
-  { label: "Blog", href: "/blog" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "Resources", href: "/resources" },
 ];
 
 export const resourcesNav: NavLink[] = [
@@ -61,8 +51,8 @@ export const dashboardNav: NavLink[] = [
 ];
 
 export const quickLinks: NavLink[] = [
-  { label: "Classes", href: "/classes", icon: BookOpen },
-  { label: "Universities", href: "/universities", icon: Award },
+  { label: "Courses", href: "/courses", icon: Globe },
+  { label: "Community", href: "/community", icon: Users },
   { label: "Scholarships", href: "/scholarships", icon: Award },
   { label: "Results", href: "/results", icon: FileText },
   { label: "Notices", href: "/notices", icon: Newspaper },

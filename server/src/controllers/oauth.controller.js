@@ -65,10 +65,7 @@ const getProvider = (provider) => {
   const clientId = config.clientId();
   const clientSecret = config.clientSecret();
   if (!clientId || !clientSecret) {
-    throw new ApiError(
-      500,
-      `Server misconfigured: ${provider.toUpperCase()}_CLIENT_ID / ${provider.toUpperCase()}_CLIENT_SECRET are not set`
-    );
+    return null;
   }
   return { ...config, clientId, clientSecret };
 };
@@ -76,6 +73,9 @@ const getProvider = (provider) => {
 const oauthStart = (req, res, next) => {
   try {
     const config = getProvider(req.params.provider);
+    if (!config) {
+      return res.redirect(`${CLIENT_URL}/auth/login?error=oauth_not_configured`);
+    }
     const nonce = crypto.randomBytes(24).toString("hex");
 
     const stateToken = jwt.sign(
@@ -115,6 +115,9 @@ const oauthCallback = async (req, res, next) => {
     }
 
     const config = getProvider(provider);
+    if (!config) {
+      return res.redirect(`${CLIENT_URL}/auth/login?error=oauth_not_configured`);
+    }
 
     const redirectUri = `${req.protocol}://${req.get("host")}/api/auth/${provider}/callback`;
     const tokenParams = new URLSearchParams({

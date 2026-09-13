@@ -71,14 +71,15 @@ export function Newsletter() {
                       <Button
                         type="submit"
                         disabled={isSubmitting}
-                        className="h-12 shrink-0 bg-white text-secondary hover:bg-white/90"
+                        variant="secondary"
+                        className="h-12 shrink-0"
                       >
                         <Mail className="h-4 w-4" />
                         {isSubmitting ? "Subscribing..." : "Subscribe"}
                       </Button>
                     </div>
                     {errors.email && (
-                      <p className="text-sm text-amber-200">{errors.email.message}</p>
+                      <p className="text-sm text-red-200">{errors.email.message}</p>
                     )}
                     <p className="text-xs text-white/60">
                       No spam. Unsubscribe anytime.

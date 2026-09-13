@@ -26,10 +26,10 @@ export function Logo({
       <img
         src={logoSrc}
         alt="PrashnaHub logo"
-        className={cn("shrink-0 object-contain", "h-10  sm:h-12 sm:w-[70px]")}
+        className={cn("shrink-0 object-contain h-10 w-auto sm:h-12 sm:w-auto")}
       />
       {withText && (
-        <span className="font-display text-base font-bold tracking-tight sm:text-lg mr-[120px]">
+        <span className="font-display text-base font-bold tracking-tight sm:text-lg">
           Prashna<span className="text-primary">Hub</span>
         </span>
       )}

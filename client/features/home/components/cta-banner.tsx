@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { ArrowRight, Users } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/shared/motion";
 import { StationeryBg } from "@/components/shared/stationery-bg";
 
 export function CtaBanner() {
   return (
-    <section className="pb-16 md:pb-24">
+    <section className="py-16 md:py-24">
       <div className="container">
         <FadeIn>
           <div className="relative overflow-hidden rounded-3xl border bg-background p-8 text-center md:p-14">
@@ -22,18 +23,14 @@ export function CtaBanner() {
                 score your best, in one place.
               </p>
               <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-                <Link
-                  href="/classes"
-                  className="inline-flex h-11 items-center gap-2 rounded-lg bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-glow-sm transition-transform hover:scale-[1.03] active:scale-95"
-                >
-                  Start learning free
-                </Link>
-                <Link
-                  href="/community"
-                  className="inline-flex h-11 items-center gap-2 rounded-lg border bg-background px-6 text-sm font-semibold transition-colors hover:bg-accent"
-                >
-                  Join the community <ArrowRight className="h-4 w-4" />
-                </Link>
+                <Button variant="gradient" size="lg" asChild>
+                  <Link href="/classes">Start learning free</Link>
+                </Button>
+                <Button variant="outline" size="lg" asChild>
+                  <Link href="/community">
+                    Join the community <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>

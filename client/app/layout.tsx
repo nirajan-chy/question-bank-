@@ -7,6 +7,7 @@ import { AnnouncementBar } from "@/components/layout/announcement-bar";
 import { CommandPalette } from "@/components/layout/command-palette";
 import { FloatingWidget } from "@/components/layout/floating-widget";
 import { ErrorBoundary } from "@/components/shared/error-boundary";
+import { PremiumBackground } from "@/components/shared/premium-background";
 import { seo } from "@/lib/seo";
 import "@/styles/globals.css";
 
@@ -48,7 +49,8 @@ export default function RootLayout({
         className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans antialiased`}
       >
         <AppProviders>
-          <div className="flex min-h-screen flex-col">
+          <div className="relative flex min-h-screen flex-col bg-[#FAFAFA]">
+            <PremiumBackground />
             <AnnouncementBar />
             <Navbar />
             <main className="flex-1"><ErrorBoundary>{children}</ErrorBoundary></main>

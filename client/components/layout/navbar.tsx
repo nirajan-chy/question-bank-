@@ -14,6 +14,7 @@ import {
   ShieldCheck,
   LogOut,
   GraduationCap,
+  Users,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { mainNav, resourcesNav } from "@/lib/nav";
@@ -63,40 +64,43 @@ export function Navbar() {
         <div className="flex items-center gap-6">
           <Logo />
           <div className="hidden items-center gap-1 lg:flex">
-            {mainNav.slice(0, 5).map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
-                  isActive(link.href) ? "text-foreground" : "text-muted-foreground"
-                )}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <button className="inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground">
-                  Resources
-                  <ChevronDown className="h-3.5 w-3.5" />
-                </button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" className="w-72">
-                <DropdownMenuLabel>Study Resources</DropdownMenuLabel>
-                {resourcesNav.map((item) => (
-                  <DropdownMenuItem key={item.href} asChild>
-                    <Link href={item.href} className="flex items-start gap-3 p-2">
-                      {item.icon && <item.icon className="mt-0.5 h-4 w-4 text-primary" />}
-                      <span>
-                        <span className="block text-sm font-medium">{item.label}</span>
-                        <span className="block text-xs text-muted-foreground">{item.description}</span>
-                      </span>
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+            {mainNav.map((link) =>
+              link.label === "Resources" ? (
+                <DropdownMenu key={link.href}>
+                  <DropdownMenuTrigger asChild>
+                    <button className="inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground">
+                      {link.label}
+                      <ChevronDown className="h-3.5 w-3.5" />
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start" className="w-72">
+                    <DropdownMenuLabel>Study Resources</DropdownMenuLabel>
+                    {resourcesNav.map((item) => (
+                      <DropdownMenuItem key={item.href} asChild>
+                        <Link href={item.href} className="flex items-start gap-3 p-2">
+                          {item.icon && <item.icon className="mt-0.5 h-4 w-4 text-primary" />}
+                          <span>
+                            <span className="block text-sm font-medium">{item.label}</span>
+                            <span className="block text-xs text-muted-foreground">{item.description}</span>
+                          </span>
+                        </Link>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    "rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
+                    isActive(link.href) ? "text-foreground" : "text-muted-foreground"
+                  )}
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
           </div>
         </div>
 
@@ -146,6 +150,11 @@ export function Navbar() {
                 <DropdownMenuItem asChild>
                   <Link href="/bookmarks" className="gap-2">
                     <Bookmark className="h-4 w-4" /> Bookmarks
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/community" className="gap-2">
+                    <Users className="h-4 w-4" /> Community
                   </Link>
                 </DropdownMenuItem>
                 {isAdmin && (
