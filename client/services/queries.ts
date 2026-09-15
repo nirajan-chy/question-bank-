@@ -63,6 +63,18 @@ export const useTrendingSubjects = (limit = 8) =>
   useQuery({ queryKey: queryKeys.trendingSubjects, queryFn: () => api.trendingSubjects(limit) });
 export const useNotes = (opts?: { limit?: number; subjectSlug?: string }) =>
   useQuery({ queryKey: queryKeys.notes(opts), queryFn: () => api.notes(opts) });
+export const useNote = (slug: string) =>
+  useQuery({
+    queryKey: ["notes", slug] as const,
+    queryFn: () => api.note(slug),
+    enabled: Boolean(slug),
+  });
+export const useRelatedNotes = (slug: string) =>
+  useQuery({
+    queryKey: ["notes", slug, "related"] as const,
+    queryFn: () => api.relatedNotes(slug),
+    enabled: Boolean(slug),
+  });
 export const useBooks = (opts?: { limit?: number }) =>
   useQuery({ queryKey: queryKeys.books(opts), queryFn: () => api.books(opts) });
 export const useQuestionBanks = (opts?: { limit?: number; subjectSlug?: string }) =>

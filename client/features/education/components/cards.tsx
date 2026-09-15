@@ -108,10 +108,7 @@ export function SubjectCard({ subject }: { subject: Subject }) {
   );
 }
 
-export function NoteCard({ note }: { note: Note }) {
-  const [reading, setReading] = useState(false);
-  const hasContent = Boolean(note.content?.trim());
-
+export function NoteCard({ note, onSelect }: { note: Note; onSelect?: (note: Note) => void }) {
   const inner = (
     <>
       <div className="flex items-start justify-between gap-2">
@@ -122,7 +119,7 @@ export function NoteCard({ note }: { note: Note }) {
             type: "note",
             title: note.title,
             subtitle: `${note.subjectName} · ${note.author}`,
-            href: `/subjects/${note.subjectSlug}?tab=notes`,
+            href: `/notes/${note.slug}`,
             savedAt: new Date().toISOString(),
             icon: "note",
           }}
@@ -130,17 +127,10 @@ export function NoteCard({ note }: { note: Note }) {
       </div>
       <h3 className="mt-3 line-clamp-2 font-semibold leading-snug group-hover:text-primary">{note.title}</h3>
       <p className="mt-2 line-clamp-2 flex-1 text-xs text-muted-foreground">{note.description}</p>
-      {(hasContent || note.pdfUrl) && (
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            if (hasContent) setReading(true);
-            else window.open(resolveFileUrl(note.pdfUrl), "_blank");
-          }}
-          className="mt-3 inline-flex w-fit items-center gap-1.5 rounded-md bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary transition-colors hover:bg-primary/20"
-        >
-          <FileText className="h-3.5 w-3.5" /> {hasContent ? "Read online" : "Open PDF"}
-        </button>
+      {note.pdfUrl && (
+        <span className="mt-3 inline-flex w-fit items-center gap-1.5 rounded-md bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary transition-colors hover:bg-primary/20">
+          <FileText className="h-3.5 w-3.5" /> Read PDF
+        </span>
       )}
       <div className="mt-4 flex items-center justify-between border-t pt-3 text-[11px] text-muted-foreground">
         <span className="flex items-center gap-1"><Star className="h-3 w-3 fill-amber-400 text-amber-400" /> {note.rating}</span>
@@ -152,35 +142,17 @@ export function NoteCard({ note }: { note: Note }) {
 
   const cardClass = "group flex h-full flex-col p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-card-hover";
 
-  return hasContent ? (
-    <>
-      <Card
-        className={cn(cardClass, "cursor-pointer")}
-        onClick={() => setReading(true)}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") setReading(true);
-        }}
-      >
+  if (onSelect) {
+    return (
+      <Card className={cn(cardClass, "cursor-pointer")} onClick={() => onSelect(note)}>
         {inner}
       </Card>
-      <MarkdownReaderDialog
-        open={reading}
-        onOpenChange={setReading}
-        title={note.title}
-        subtitle={`${note.subjectName} · ${note.author}`}
-        content={note.content}
-        pdfUrl={note.pdfUrl ? resolveFileUrl(note.pdfUrl) : null}
-      />
-    </>
-  ) : note.pdfUrl ? (
-    <Card className={cn(cardClass, "cursor-pointer")} onClick={() => window.open(resolveFileUrl(note.pdfUrl), "_blank")}>
-      {inner}
-    </Card>
-  ) : (
-    <Link href={`/subjects/${note.subjectSlug}?tab=notes`}>
-      <Card className={cardClass}>{inner}</Card>
+    );
+  }
+
+  return (
+    <Link href={`/notes/${note.slug}`}>
+      <Card className={cn(cardClass, "cursor-pointer")}>{inner}</Card>
     </Link>
   );
 }
@@ -307,7 +279,7 @@ export function QuestionBankCard({ qb }: { qb: QuestionBank }) {
   );
 }
 
-export function PastPaperCard({ paper }: { paper: PastPaper }) {
+export function PastPaperCard({ paper, onSelect }: { paper: PastPaper; onSelect?: (paper: PastPaper) => void }) {
   const inner = (
     <>
       <div className="flex items-start justify-between">
@@ -336,6 +308,14 @@ export function PastPaperCard({ paper }: { paper: PastPaper }) {
   );
 
   const cardClass = "group flex h-full flex-col p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-card-hover";
+
+  if (onSelect) {
+    return (
+      <Card className={cn(cardClass, "cursor-pointer")} onClick={() => onSelect(paper)}>
+        {inner}
+      </Card>
+    );
+  }
 
   return (
     <Link href={paper.pdfUrl ? `/past-papers/${paper.slug}` : "/past-papers"} aria-disabled={!paper.pdfUrl}>

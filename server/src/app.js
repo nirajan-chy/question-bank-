@@ -1,3 +1,6 @@
+
+
+
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
@@ -10,25 +13,15 @@ const { CLIENT_ORIGINS } = require("./config/dotenv");
 
 const app = express();
 
-// Trust a single reverse proxy hop (Vercel/Render) so req.protocol respects
-// the x-forwarded-proto header. Limiting to one hop prevents arbitrary clients
-// from spoofing X-Forwarded-* headers (and bypassing IP-based rate limiting).
 app.set("trust proxy", 1);
 
-app.use(
-  cors({
-    // Deny-by-default allowlist. Requests with no Origin header (curl,
-    // server-to-server) are allowed; browser cross-origin requests must
-    // match an explicit origin in CLIENT_ORIGINS.
-    origin: (origin, cb) => {
-      // Requests without an Origin header (curl, server-to-server) pass through.
-      // Disallowed browser origins get no CORS headers, so the browser blocks
-      // reading the response — they are not server-side errors.
-      cb(null, !origin || CLIENT_ORIGINS.includes(origin));
-    },
-    credentials: true,
-  }),
-);
+const corsOptions = {
+  origin:
+    CLIENT_ORIGINS.length > 0 ? CLIENT_ORIGINS : ["http://localhost:3000"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json({ limit: "2mb" }));
 app.use(express.urlencoded({ extended: true }));
@@ -36,7 +29,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(UPLOAD_DIR));
 
 app.get("/", (req, res) => {
-  res.json({ success: true, message: "PrashnaHub API is running" });
+  res.json({
+    success: true,
+    message: "PrashnaHub API is running",
+  });
 });
 
 app.get("/api/health", async (req, res) => {
