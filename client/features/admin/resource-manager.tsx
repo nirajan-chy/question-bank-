@@ -60,14 +60,6 @@ const UPLOAD_FIELD_KEYS = new Set(["pdfUrl", "cover", "avatar"]);
 // Resources that use markdown content instead of PDF uploads — hide their pdfUrl field.
 const MD_RESOURCES = new Set(["notes", "question-banks"]);
 
-type SubjectPicked = {
-  subjectSlug: string;
-  subjectName: string;
-  level: string;
-  courseSlug: string | null;
-  semester: number | null;
-};
-
 const EMPTY_PICK: { courseSlug: string; semester: string; subjectSlug: string } = {
   courseSlug: "",
   semester: "",
@@ -260,7 +252,7 @@ export function ResourceManager({ resource, label }: { resource: string; label: 
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm font-semibold">{primary(row)}</p>
                     <p className="truncate text-xs text-muted-foreground">
-                      <code className="text-[10px]">id:</code> {String(row.id)}
+                      <code className="text-2xs">id:</code> {String(row.id)}
                     </p>
                   </div>
                   <Button
@@ -339,7 +331,7 @@ function ResourceForm({
 
   const { data: courses = [] } = useQuery({
     queryKey: queryKeys.courses,
-    queryFn: api.courses,
+    queryFn: () => api.courses(),
     enabled: subjectLinked,
   });
   const { data: semesters = [] } = useQuery({
@@ -449,7 +441,7 @@ function ResourceForm({
             <div className="space-y-3 rounded-xl border border-primary/30 bg-primary/[0.04] p-4 sm:col-span-2">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <Label className="text-sm font-semibold">Classification</Label>
-                <span className="text-[11px] text-muted-foreground">
+                <span className="text-xs text-muted-foreground">
                   Decide where this file lives — course → semester → subject
                 </span>
               </div>
@@ -638,7 +630,7 @@ function Field({
       <Label htmlFor={`f-${field.key}`}>
         {humanize(field.key)}
         {required && <span className="ml-0.5 text-destructive">*</span>}
-        {badge && <Badge variant="outline" className="ml-2 text-[9px]">{badge}</Badge>}
+        {badge && <Badge variant="outline" className="ml-2 text-2xs">{badge}</Badge>}
       </Label>
       {isTextarea ? (
         <Textarea

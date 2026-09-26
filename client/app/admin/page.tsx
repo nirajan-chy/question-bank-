@@ -266,7 +266,7 @@ export default function AdminDashboardPage() {
                           style={{ height: `${Math.max(height, 4)}%` }}
                         />
                       </div>
-                      <span className="text-[10px] text-muted-foreground">{month.month}</span>
+                      <span className="text-2xs text-muted-foreground">{month.month}</span>
                     </div>
                   );
                 })}
@@ -294,7 +294,7 @@ export default function AdminDashboardPage() {
                           style={{ height: `${Math.max(height, 4)}%` }}
                         />
                       </div>
-                      <span className="text-[10px] text-muted-foreground">{day.day}</span>
+                      <span className="text-2xs text-muted-foreground">{day.day}</span>
                     </div>
                   );
                 })}
@@ -320,7 +320,7 @@ export default function AdminDashboardPage() {
                   <li key={c.id} className="rounded-lg border p-3">
                     <div className="flex items-center justify-between gap-2">
                       <p className="text-sm font-semibold">{c.name}</p>
-                      <Badge variant="outline" className="text-[10px]">{c.email}</Badge>
+                      <Badge variant="outline" className="text-2xs">{c.email}</Badge>
                     </div>
                     <p className="mt-0.5 text-xs font-medium text-primary">{c.subject}</p>
                     <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{c.message}</p>

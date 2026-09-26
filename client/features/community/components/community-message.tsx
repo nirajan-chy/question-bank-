@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Download, FileText, MoreHorizontal, Reply, SmilePlus, ThumbsUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { formatTime } from "@/lib/utils";
+import { formatDateTime } from "@/lib/utils";
 import type { CommunityMessage as ChatMessage } from "@/types";
 
 interface CommunityMessageProps {
@@ -35,7 +35,7 @@ export function CommunityMessage({ message, onReact }: CommunityMessageProps) {
               Moderator
             </span>
           )}
-          <span className="text-xs text-muted-foreground">{formatTime(message.createdAt)}</span>
+          <span className="text-xs text-muted-foreground">{formatDateTime(message.createdAt, "")}</span>
         </div>
 
         <p className="text-sm mt-1 whitespace-pre-wrap">{message.content}</p>

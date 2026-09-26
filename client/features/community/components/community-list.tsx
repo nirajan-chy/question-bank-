@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { CheckCircle2, ChevronDown, Eye, HelpCircle, MessageSquare, MessageSquarePlus, Search, ThumbsUp } from "lucide-react";
-import { useCommunity } from "@/services/queries";
+import { useCommunityQuestions } from "@/services/queries";
 import { cn, timeAgo, initials } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -15,7 +15,7 @@ import { PageHeader } from "@/components/shared/page-header";
 const sortOptions = ["Newest", "Most voted", "Active"] as const;
 
 export function CommunityList() {
-  const { data: questions = [], isPending } = useCommunity();
+  const { data: questions = [], isPending } = useCommunityQuestions();
   const [q, setQ] = useState("");
   const [tag, setTag] = useState("all");
   const [sort, setSort] = useState<(typeof sortOptions)[number]>("Newest");
@@ -140,7 +140,7 @@ export function CommunityList() {
                         <MessageSquare className="mb-0.5 h-3.5 w-3.5" />
                         {item.answerCount}
                       </span>
-                      <span className="flex items-center gap-1 text-[10px] text-muted-foreground">
+                      <span className="flex items-center gap-1 text-2xs text-muted-foreground">
                         <Eye className="h-3 w-3" /> {item.viewsFormatted}
                       </span>
                     </div>
@@ -167,13 +167,13 @@ export function CommunityList() {
                           <button
                             key={t}
                             onClick={() => setTag(tag === t ? "all" : t)}
-                            className="rounded-full bg-muted px-2 py-0.5 text-[10px] font-medium text-muted-foreground capitalize transition-colors hover:bg-primary/10 hover:text-primary"
+                            className="rounded-full bg-muted px-2 py-0.5 text-2xs font-medium text-muted-foreground capitalize transition-colors hover:bg-primary/10 hover:text-primary"
                           >
                             {t}
                           </button>
                         ))}
                         <span className="ml-auto flex items-center gap-2 text-xs text-muted-foreground">
-                          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-gradient text-[9px] font-bold text-white">
+                          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-gradient text-2xs font-bold text-white">
                             {initials(item.author)}
                           </span>
                           {item.author} · {timeAgo(item.createdAt)}
@@ -191,12 +191,12 @@ export function CommunityList() {
                         {item.answers.map((a) => (
                           <div key={a.id} className={cn("rounded-xl border bg-background p-4", a.accepted && "border-success/40 bg-success/[0.03]")}>
                             <div className="flex items-center gap-2">
-                              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-gradient text-[9px] font-bold text-white">
+                              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-gradient text-2xs font-bold text-white">
                                 {initials(a.author)}
                               </span>
                               <div>
                                 <p className="text-xs font-semibold">{a.author} {a.accepted && <Badge variant="success" className="ml-1">Accepted</Badge>}</p>
-                                <p className="text-[10px] text-muted-foreground">{a.authorRole} · {timeAgo(a.createdAt)}</p>
+                                <p className="text-2xs text-muted-foreground">{a.authorRole} · {timeAgo(a.createdAt)}</p>
                               </div>
                               <span className="ml-auto flex items-center gap-1 text-xs font-medium text-primary">
                                 <ThumbsUp className="h-3.5 w-3.5" /> {a.votes}

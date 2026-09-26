@@ -8,7 +8,7 @@ import type {
   McqResult,
 } from "@/types";
 
-import { http, httpForm, getAuthToken, BASE_URL } from "../http";
+import { http, httpForm, getAuthToken, apiUrl } from "../http";
 
 export const learn = {
   documents: () => http<RagDocument[]>("/rag/documents"),
@@ -51,7 +51,7 @@ export async function streamChat(
   const token = getAuthToken();
   if (token) headers.set("Authorization", `Bearer ${token}`);
 
-  const res = await fetch(`${BASE_URL}/rag/chat/stream`, {
+  const res = await fetch(apiUrl("/rag/chat/stream"), {
     method: "POST",
     headers,
     body: JSON.stringify({ question, document_ids: documentIds, history: null }),

@@ -90,12 +90,12 @@ export function UniversitiesPage() {
                   </p>
                   <div className="mt-4 flex flex-wrap items-center gap-1.5">
                     {uni.programs.slice(0, 3).map((p) => (
-                      <span key={p} className="rounded-full bg-muted px-2.5 py-1 text-[11px] font-medium">
+                      <span key={p} className="rounded-full bg-muted px-2.5 py-1 text-xs font-medium">
                         {p}
                       </span>
                     ))}
                     {uni.programs.length > 3 && (
-                      <span className="text-[11px] text-muted-foreground">+{uni.programs.length - 3}</span>
+                      <span className="text-xs text-muted-foreground">+{uni.programs.length - 3}</span>
                     )}
                   </div>
                   <div className="mt-5 flex items-center justify-between border-t pt-4 text-xs text-muted-foreground">
@@ -105,7 +105,7 @@ export function UniversitiesPage() {
                     <span className="flex items-center gap-1">
                       <Users className="h-3.5 w-3.5" /> {formatNumber(uni.students)}
                     </span>
-                    <Badge variant="secondary" className="text-[10px]">{uni.type}</Badge>
+                    <Badge variant="secondary" className="text-2xs">{uni.type}</Badge>
                   </div>
                 </Link>
               ))}

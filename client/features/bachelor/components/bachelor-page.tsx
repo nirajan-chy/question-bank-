@@ -45,7 +45,7 @@ export function BachelorPage() {
                 {f.short.slice(0, 1)}
               </span>
               <p className="mt-2 text-xs font-semibold">{f.name}</p>
-              <p className="text-[10px] text-muted-foreground">{f.programs.length} programs</p>
+              <p className="text-2xs text-muted-foreground">{f.programs.length} programs</p>
             </div>
           ))}
         </div>

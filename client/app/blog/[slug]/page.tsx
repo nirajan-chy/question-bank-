@@ -1,27 +1,25 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { db } from "@/services/db";
+
 import { seo } from "@/lib/seo";
-import { BlogPostPage } from "@/features/blog/components/blog-post-page";
+import { serverApi } from "@/lib/server-api";
+import { BlogPostRoute } from "@/features/blog/components/blog-post-route";
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+type Props = { params: Promise<{ slug: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = db.posts.find((p) => p.slug === slug);
-  if (!post) return {};
-  return seo({
-    title: post.title,
-    description: post.excerpt,
-    path: `/blog/${slug}`,
-  });
+  const post = await serverApi.post(slug);
+  if (!post) return { title: "Article" };
+  return seo({ title: post.title, description: post.excerpt, path: `/blog/${slug}` });
 }
 
-export async function generateStaticParams() {
-  return db.posts.map((p) => ({ slug: p.slug }));
-}
-
-export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+export default async function Page({ params }: Props) {
   const { slug } = await params;
-  const post = db.posts.find((p) => p.slug === slug);
-  if (!post) notFound();
-  return <BlogPostPage post={post} />;
+
+  // Raised from the server component so Next can serve a real 404 page. The
+  // article body itself is fetched in the browser by <BlogPostRoute />.
+  if (!(await serverApi.post(slug))) notFound();
+
+  return <BlogPostRoute slug={slug} />;
 }

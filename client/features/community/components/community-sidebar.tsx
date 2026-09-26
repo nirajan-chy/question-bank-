@@ -1,25 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { 
-  ChevronDown, 
-  ChevronRight, 
-  Hash, 
-  Plus, 
-  Search,
-  Users,
-  School,
-  BookOpen,
-  Trophy,
-  Sparkles,
-  GraduationCap,
-  Wrench,
-  Landmark,
-  Award
-} from "lucide-react";
+import { Award, BookOpen, GraduationCap, Hash, Landmark, School, Search, Sparkles, Trophy, Wrench } from "lucide-react";
+
 import { cn } from "@/lib/utils";
 import { gradientFor } from "@/lib/gradients";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import type { Community } from "@/types";
 
@@ -34,13 +19,13 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Award,
 };
 
-interface CommunitySidebarProps {
+type CommunitySidebarProps = {
   communities: Community[];
   selectedCommunity: string;
   selectedChannel: string;
   onSelectCommunity: (id: string) => void;
   onSelectChannel: (id: string) => void;
-}
+};
 
 export function CommunitySidebar({
   communities,
@@ -50,110 +35,98 @@ export function CommunitySidebar({
   onSelectChannel,
 }: CommunitySidebarProps) {
   const [search, setSearch] = useState("");
-  const [expandedCommunities, setExpandedCommunities] = useState<string[]>([selectedCommunity]);
 
-  const filteredCommunities = communities.filter((community) =>
-    community.name.toLowerCase().includes(search.toLowerCase())
+  const filtered = communities.filter((community) =>
+    community.name.toLowerCase().includes(search.trim().toLowerCase())
   );
 
-  const toggleExpand = (id: string) => {
-    setExpandedCommunities((prev) =>
-      prev.includes(id) ? prev.filter((c) => c !== id) : [...prev, id]
-    );
-  };
-
   return (
-    <div className="w-80 border-r bg-card flex flex-col">
-      <div className="p-4 border-b">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold">Communities</h2>
-          <Button size="icon" variant="ghost" className="h-8 w-8">
-            <Plus className="h-4 w-4" />
-          </Button>
-        </div>
+    <aside
+      aria-label="Chat rooms"
+      className="max-h-64 w-full shrink-0 overflow-y-auto border-b bg-card lg:max-h-none lg:h-full lg:w-72 lg:border-b-0 lg:border-r"
+    >
+      <div className="border-b p-3">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search communities..."
-            className="pl-9 h-9"
+            placeholder="Search rooms…"
+            aria-label="Search rooms"
+            className="h-9 pl-9"
           />
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-2">
-        {filteredCommunities.map((community) => {
-          const Icon = iconMap[community.icon] || Hash;
-          const isExpanded = expandedCommunities.includes(community.id);
-          const isSelected = selectedCommunity === community.id;
+      <nav className="p-2">
+        {filtered.length === 0 ? (
+          <p className="px-2 py-6 text-center text-sm text-muted-foreground">
+            No rooms match “{search}”.
+          </p>
+        ) : (
+          filtered.map((community) => {
+            const Icon = iconMap[community.icon] ?? Hash;
+            const isSelected = community.id === selectedCommunity;
 
-          return (
-            <div key={community.id} className="mb-1">
-              <button
-                onClick={() => {
-                  onSelectCommunity(community.id);
-                  toggleExpand(community.id);
-                }}
-                className={cn(
-                  "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left transition-colors",
-                  isSelected
-                    ? "bg-primary/10 text-primary"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                )}
-              >
-                <div
+            return (
+              <div key={community.id} className="mb-1">
+                <button
+                  type="button"
+                  onClick={() => onSelectCommunity(community.id)}
+                  aria-current={isSelected ? "true" : undefined}
                   className={cn(
-                    "flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br text-white",
-                    gradientFor(community.name)
+                    "flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left transition-colors",
+                    isSelected
+                      ? "bg-primary/10 text-primary"
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   )}
                 >
-                  <Icon className="h-5 w-5" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="font-medium truncate">{community.name}</p>
-                  <p className="text-xs text-muted-foreground">
-                    {community.memberCount.toLocaleString()} members
-                  </p>
-                </div>
-                {isExpanded ? (
-                  <ChevronDown className="h-4 w-4 shrink-0" />
-                ) : (
-                  <ChevronRight className="h-4 w-4 shrink-0" />
+                  <span
+                    className={cn(
+                      "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br text-white",
+                      gradientFor(community.name)
+                    )}
+                  >
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate text-sm font-medium">{community.name}</span>
+                    <span className="block text-xs text-muted-foreground">
+                      {community.memberCount.toLocaleString("en-NP")} members
+                    </span>
+                  </span>
+                </button>
+
+                {isSelected && community.channels.length > 0 && (
+                  <ul className="ml-4 mt-1 space-y-0.5 border-l pl-3">
+                    {community.channels.map((channel) => {
+                      const isActive = channel.id === selectedChannel;
+                      return (
+                        <li key={channel.id}>
+                          <button
+                            type="button"
+                            onClick={() => onSelectChannel(channel.id)}
+                            aria-current={isActive ? "page" : undefined}
+                            className={cn(
+                              "flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left text-sm transition-colors",
+                              isActive
+                                ? "bg-primary/10 font-medium text-primary"
+                                : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                            )}
+                          >
+                            <Hash className="h-3.5 w-3.5 shrink-0" />
+                            <span className="truncate">{channel.name}</span>
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
                 )}
-              </button>
-
-              {isExpanded && isSelected && (
-                <div className="ml-4 mt-1 space-y-0.5 border-l pl-3">
-                  {community.channels.map((channel) => (
-                    <button
-                      key={channel.id}
-                      onClick={() => onSelectChannel(channel.id)}
-                      className={cn(
-                        "flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left text-sm transition-colors",
-                        selectedChannel === channel.id
-                          ? "bg-primary/10 text-primary font-medium"
-                          : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                      )}
-                    >
-                      <Hash className="h-4 w-4 shrink-0" />
-                      <span className="truncate">{channel.name}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Invite Members Button */}
-      <div className="p-4 border-t">
-        <Button variant="outline" className="w-full justify-start gap-2">
-          <Users className="h-4 w-4" />
-          Invite Members
-        </Button>
-      </div>
-    </div>
+              </div>
+            );
+          })
+        )}
+      </nav>
+    </aside>
   );
 }

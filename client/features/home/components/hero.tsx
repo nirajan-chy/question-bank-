@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { ArrowRight, Search, Sparkles, TrendingUp, BookOpen, Timer, Users } from "lucide-react";
+import { ArrowRight, Search, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CountUp } from "@/components/shared/count-up";
@@ -120,7 +120,7 @@ export function Hero({ onSearch }: { onSearch?: (q: string) => void }) {
                 <p className="mt-2 font-display text-xl font-bold md:text-2xl">
                   <CountUp value={s.value} suffix={s.suffix} />
                 </p>
-                <p className="text-[11px] text-muted-foreground md:text-xs">{s.label}</p>
+                <p className="text-xs text-muted-foreground md:text-xs">{s.label}</p>
               </div>
             ))}
           </motion.div>

@@ -82,9 +82,9 @@ export function MarkdownEditor({
       <div className="flex flex-wrap items-center justify-between gap-2">
         <Label htmlFor={id}>
           {label}
-          <Badge variant="outline" className="ml-2 text-[9px]">markdown</Badge>
+          <Badge variant="outline" className="ml-2 text-2xs">markdown</Badge>
         </Label>
-        <span className="text-[11px] text-muted-foreground">
+        <span className="text-xs text-muted-foreground">
           {value.length.toLocaleString()} chars · {words.toLocaleString()} words
         </span>
       </div>

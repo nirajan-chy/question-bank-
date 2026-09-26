@@ -80,7 +80,7 @@ export function BookmarksPage() {
               >
                 <Card className="group flex items-center gap-4 p-4 transition-all hover:border-primary/40 hover:shadow-card-hover">
                   {meta && (
-                    <span className={cn("flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-[10px] font-bold", meta.className)}>
+                    <span className={cn("flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-2xs font-bold", meta.className)}>
                       {meta.label}
                     </span>
                   )}
@@ -89,7 +89,7 @@ export function BookmarksPage() {
                       {b.title}
                     </Link>
                     <p className="mt-0.5 truncate text-xs text-muted-foreground">{b.subtitle}</p>
-                    <p className="mt-0.5 text-[10px] text-muted-foreground">Saved {new Date(b.savedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</p>
+                    <p className="mt-0.5 text-2xs text-muted-foreground">Saved {new Date(b.savedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</p>
                   </div>
                   <div className="flex shrink-0 items-center gap-1">
                     <Button size="icon-sm" variant="ghost" asChild>

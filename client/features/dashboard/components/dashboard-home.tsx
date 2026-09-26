@@ -157,11 +157,11 @@ export function DashboardHome() {
                     )}
                     style={{ height: `${Math.max(4, (d.minutes / week.max) * 100)}%` }}
                   />
-                  <span className="absolute -top-6 hidden rounded bg-background px-1.5 py-0.5 text-[10px] font-medium shadow group-hover:block">
+                  <span className="absolute -top-6 hidden rounded bg-background px-1.5 py-0.5 text-2xs font-medium shadow group-hover:block">
                     {d.minutes}m
                   </span>
                 </div>
-                <span className={cn("text-[10px] text-muted-foreground", i === 6 && "font-bold text-primary")}>{d.label}</span>
+                <span className={cn("text-2xs text-muted-foreground", i === 6 && "font-bold text-primary")}>{d.label}</span>
               </div>
             ))}
           </div>
@@ -252,7 +252,7 @@ export function DashboardHome() {
               />
             ))}
           </div>
-          <div className="mt-4 flex items-center gap-1.5 text-[10px] text-muted-foreground">
+          <div className="mt-4 flex items-center gap-1.5 text-2xs text-muted-foreground">
             <span>Less</span>
             <span className="h-2.5 w-2.5 rounded-[3px] bg-muted" />
             <span className="h-2.5 w-2.5 rounded-[3px] bg-orange-300" />
@@ -275,7 +275,7 @@ export function DashboardHome() {
                     style={{ height: `${Math.min(100, (d.minutes / 60) * 100)}%` }}
                   />
                 </div>
-                <span className="text-[9px] text-muted-foreground">{d.label[0]}</span>
+                <span className="text-2xs text-muted-foreground">{d.label[0]}</span>
               </div>
             ))}
           </div>
@@ -295,14 +295,14 @@ export function DashboardHome() {
                 <span className={cn("w-6 text-center font-display text-sm font-bold", e.rank <= 3 ? "text-primary" : "text-muted-foreground")}>
                   {e.rank}
                 </span>
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-gradient text-[10px] font-bold text-white">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-gradient text-2xs font-bold text-white">
                   {e.avatar}
                 </span>
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-xs font-medium">{e.name}</p>
-                  <p className="text-[10px] text-muted-foreground">{e.level} · {formatNumber(e.xp)} XP</p>
+                  <p className="text-2xs text-muted-foreground">{e.level} · {formatNumber(e.xp)} XP</p>
                 </div>
-                <span className="flex items-center gap-0.5 text-[10px] text-orange-500">
+                <span className="flex items-center gap-0.5 text-2xs text-orange-500">
                   <Flame className="h-3 w-3" /> {e.streak}
                 </span>
               </div>
@@ -328,7 +328,7 @@ export function DashboardHome() {
                   <p className="truncate text-sm font-medium">{s.name}</p>
                   <div className="mt-1.5 flex items-center gap-2">
                     <Progress value={[65, 40, 82][i]} className="h-1.5" />
-                    <span className="text-[10px] text-muted-foreground">{[65, 40, 82][i]}%</span>
+                    <span className="text-2xs text-muted-foreground">{[65, 40, 82][i]}%</span>
                   </div>
                 </div>
               </Link>
@@ -347,7 +347,7 @@ export function DashboardHome() {
                 <span className="text-xl">{s.subjectEmoji}</span>
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-medium">{s.subject}</p>
-                  <p className="text-[11px] text-muted-foreground">{s.mode} · {s.date}</p>
+                  <p className="text-xs text-muted-foreground">{s.mode} · {s.date}</p>
                 </div>
                 <Badge variant="outline">{s.minutes} min</Badge>
               </div>

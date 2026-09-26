@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+
 import { seo } from "@/lib/seo";
+import { CommunityNav } from "@/features/community/components/community-nav";
+import { CommunityRooms } from "@/features/community/components/community-rooms";
 
 export const metadata: Metadata = seo({
   title: "Community",
@@ -8,5 +11,10 @@ export const metadata: Metadata = seo({
 });
 
 export default function Page() {
-  return null;
+  return (
+    <>
+      <CommunityNav />
+      <CommunityRooms />
+    </>
+  );
 }

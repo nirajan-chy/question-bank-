@@ -136,7 +136,7 @@ export function ProfilePage() {
                   <span className={cn("mx-auto flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br text-white", def.color)}>
                     <def.icon className="h-4 w-4" />
                   </span>
-                  <p className="mt-2 text-[11px] font-semibold leading-tight">{b.name}</p>
+                  <p className="mt-2 text-xs font-semibold leading-tight">{b.name}</p>
                 </div>
               );
             })}
@@ -156,16 +156,16 @@ export function ProfilePage() {
                   <span className={cn("w-6 text-center font-display text-sm font-bold", e.rank <= 3 ? "text-primary" : "text-muted-foreground")}>
                     {e.rank}
                   </span>
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-gradient text-[10px] font-bold text-white">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-gradient text-2xs font-bold text-white">
                     {e.avatar}
                   </span>
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-xs font-medium">
                       {e.name} {isMe && <span className="text-primary">(you)</span>}
                     </p>
-                    <p className="text-[10px] text-muted-foreground">{e.level}</p>
+                    <p className="text-2xs text-muted-foreground">{e.level}</p>
                   </div>
-                  <span className="flex items-center gap-0.5 text-[10px] text-orange-500">
+                  <span className="flex items-center gap-0.5 text-2xs text-orange-500">
                     <Flame className="h-3 w-3" /> {e.streak}
                   </span>
                 </div>

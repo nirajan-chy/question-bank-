@@ -23,10 +23,10 @@ export function BlogCard({ post, compact = false }: { post: Post; compact?: bool
     >
       <div className={cn("relative flex h-44 items-center justify-center bg-gradient-to-br", cover.gradient)}>
         <span className="text-6xl drop-shadow-lg transition-transform duration-300 group-hover:scale-110">{cover.emoji}</span>
-        <span className="absolute left-4 top-4 rounded-full bg-black/30 px-3 py-1 text-[11px] font-medium text-white backdrop-blur-sm">
+        <span className="absolute left-4 top-4 rounded-full bg-black/30 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
           {post.category}
         </span>
-        <span className="absolute bottom-3 right-3 flex items-center gap-1 rounded-full bg-black/30 px-2 py-0.5 text-[10px] text-white backdrop-blur-sm">
+        <span className="absolute bottom-3 right-3 flex items-center gap-1 rounded-full bg-black/30 px-2 py-0.5 text-2xs text-white backdrop-blur-sm">
           <Eye className="h-3 w-3" /> {formatNumber(post.views)}
         </span>
       </div>
@@ -51,7 +51,7 @@ export function BlogCard({ post, compact = false }: { post: Post; compact?: bool
             </span>
             <div>
               <p className="text-xs font-semibold">{post.author}</p>
-              <p className="text-[10px] text-muted-foreground">{post.authorRole}</p>
+              <p className="text-2xs text-muted-foreground">{post.authorRole}</p>
             </div>
           </div>
           <span className="flex items-center gap-1 text-xs font-medium text-primary">
