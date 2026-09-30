@@ -148,7 +148,7 @@ export function UsersManager() {
                       <p className="flex items-center gap-1.5 truncate text-sm font-semibold">
                         {u.name}
                         {u.id === currentUserId && (
-                          <Badge variant="outline" className="text-[9px]">
+                          <Badge variant="outline" className="text-2xs">
                             you
                           </Badge>
                         )}

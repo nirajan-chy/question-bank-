@@ -72,7 +72,7 @@ export function BlogPostPage({ post }: { post: Post }) {
           </div>
           <div className="mt-6 flex flex-wrap gap-1.5">
             {post.tags.map((tag) => (
-              <span key={tag} className="rounded-full bg-muted px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
+              <span key={tag} className="rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground">
                 #{tag.replace(/\s+/g, "")}
               </span>
             ))}

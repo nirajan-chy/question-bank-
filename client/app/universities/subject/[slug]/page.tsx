@@ -1,4 +1,34 @@
 import { notFound } from "next/navigation";
+<<<<<<< HEAD
+import { use } from "react";
+import { subjectCategories } from "@/lib/university-subjects";
+import { UniversitiesBySubject } from "@/features/universities/components/universities-by-subject";
+import { PageHeader } from "@/components/shared/page-header";
+
+export default function SubjectPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params);
+  const category = subjectCategories.find((c) => c.slug === slug);
+
+  if (!category) notFound();
+
+  const Icon = category.icon;
+
+  return (
+    <>
+      <PageHeader
+        icon={Icon}
+        title={category.name}
+        description={category.description}
+        crumbs={[{ label: "Universities", href: "/universities" }, { label: category.name }]}
+      />
+      <section className="py-12 md:py-16">
+        <div className="container">
+          <UniversitiesBySubject subjectSlug={category.name} />
+        </div>
+      </section>
+    </>
+  );
+=======
 import type { Metadata } from "next";
 import { seo } from "@/lib/seo";
 import { subjectCategories } from "@/lib/university-subjects";
@@ -27,4 +57,5 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   const { slug } = await params;
   if (!subjectCategories.some((c) => c.slug === slug)) notFound();
   return <UniversitiesBySubject slug={slug} />;
+>>>>>>> origin/main
 }

@@ -2,19 +2,19 @@ import type { Metadata } from "next";
 
 import { seo } from "@/lib/seo";
 import { CommunityNav } from "@/features/community/components/community-nav";
-import { CommunityRooms } from "@/features/community/components/community-rooms";
+import { CommunityList } from "@/features/community/components/community-list";
 
 export const metadata: Metadata = seo({
-  title: "Community",
-  description: "Join study communities, discuss topics, and help fellow students — all in one place.",
-  path: "/community",
+  title: "Questions",
+  description: "Ask a question, get unblocked by toppers and teachers, and help other students out.",
+  path: "/community/questions",
 });
 
 export default function Page() {
   return (
     <>
       <CommunityNav />
-      <CommunityRooms />
+      <CommunityList />
     </>
   );
 }

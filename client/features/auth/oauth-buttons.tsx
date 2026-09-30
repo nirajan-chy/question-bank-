@@ -3,8 +3,6 @@
 import { Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const API_ORIGIN = (process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:5000/api").replace(/\/api\/?$/, "");
-
 function GoogleIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
@@ -30,7 +28,9 @@ function GoogleIcon({ className }: { className?: string }) {
 
 export function OAuthButtons() {
   const start = (provider: "google" | "github") => {
-    window.location.href = `${API_ORIGIN}/api/auth/${provider}/start`;
+    // Same-origin: Next forwards this to the API server, so the OAuth
+    // redirect back to the app keeps the browser on one origin throughout.
+    window.location.href = `/api/auth/${provider}/start`;
   };
 
   return (

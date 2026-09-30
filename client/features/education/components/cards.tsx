@@ -48,7 +48,7 @@ export function LevelCard({
             {badge && (
               <span
                 className={cn(
-                  "mt-1.5 inline-flex items-center rounded-full bg-gradient-to-r px-2.5 py-0.5 text-[10px] font-semibold text-white",
+                  "mt-1.5 inline-flex items-center rounded-full bg-gradient-to-r px-2.5 py-0.5 text-2xs font-semibold text-white",
                   gradient
                 )}
               >
@@ -61,12 +61,12 @@ export function LevelCard({
         <p className="mt-3 line-clamp-2 text-sm text-muted-foreground">{description}</p>
         <div className="mt-4 flex flex-wrap gap-1.5">
           {subjects.slice(0, 3).map((s) => (
-            <span key={s} className="rounded-full bg-muted px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
+            <span key={s} className="rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground">
               {s}
             </span>
           ))}
           {subjects.length > 3 && (
-            <span className="rounded-full bg-muted px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
+            <span className="rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground">
               +{subjects.length - 3}
             </span>
           )}
@@ -90,14 +90,14 @@ export function SubjectCard({ subject }: { subject: Subject }) {
             {subject.emoji}
           </span>
           {subject.trending && (
-            <span className="inline-flex items-center gap-1 rounded-full bg-orange-500/10 px-2 py-0.5 text-[10px] font-semibold text-orange-600 dark:text-orange-400">
+            <span className="inline-flex items-center gap-1 rounded-full bg-orange-500/10 px-2 py-0.5 text-2xs font-semibold text-orange-600 dark:text-orange-400">
               <Flame className="h-3 w-3" /> Trending
             </span>
           )}
         </div>
         <h3 className="mt-4 font-semibold">{subject.name}</h3>
         <p className="mt-0.5 text-xs text-muted-foreground">{subject.level}</p>
-        <div className="mt-4 grid grid-cols-2 gap-x-3 gap-y-1.5 text-[11px] text-muted-foreground">
+        <div className="mt-4 grid grid-cols-2 gap-x-3 gap-y-1.5 text-xs text-muted-foreground">
           <span className="flex items-center gap-1"><FileQuestion className="h-3 w-3" /> {subject.questionBanks} Q banks</span>
           <span className="flex items-center gap-1"><FileText className="h-3 w-3" /> {subject.pastPapers} papers</span>
           <span className="flex items-center gap-1"><BookOpen className="h-3 w-3" /> {subject.notes} notes</span>
@@ -132,7 +132,7 @@ export function NoteCard({ note, onSelect }: { note: Note; onSelect?: (note: Not
           <FileText className="h-3.5 w-3.5" /> Read PDF
         </span>
       )}
-      <div className="mt-4 flex items-center justify-between border-t pt-3 text-[11px] text-muted-foreground">
+      <div className="mt-4 flex items-center justify-between border-t pt-3 text-xs text-muted-foreground">
         <span className="flex items-center gap-1"><Star className="h-3 w-3 fill-amber-400 text-amber-400" /> {note.rating}</span>
         <span>{formatNumber(note.downloads)} downloads</span>
         <span className="truncate">{note.author}</span>
@@ -186,7 +186,7 @@ export function BookCard({ book }: { book: Book }) {
             </div>
             <h3 className="mt-2 line-clamp-1 font-semibold group-hover:text-primary">{book.title}</h3>
             <p className="mt-0.5 line-clamp-1 text-xs text-muted-foreground">{book.author}</p>
-            <div className="mt-2 flex items-center gap-2 text-[11px] text-muted-foreground">
+            <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
               <span className="flex items-center gap-1"><Star className="h-3 w-3 fill-amber-400 text-amber-400" /> {book.rating}</span>
               <span>{book.pages} pages</span>
             </div>
@@ -237,7 +237,7 @@ export function QuestionBankCard({ qb }: { qb: QuestionBank }) {
           <FileText className="h-3.5 w-3.5" /> {hasContent ? "Read online" : "Open PDF"}
         </button>
       )}
-      <div className="mt-4 flex items-center justify-between border-t pt-3 text-[11px] text-muted-foreground">
+      <div className="mt-4 flex items-center justify-between border-t pt-3 text-xs text-muted-foreground">
         <span className="flex items-center gap-1"><Timer className="h-3 w-3" /> {formatNumber(qb.attempts)} attempts</span>
         <span className="flex items-center gap-1"><Star className="h-3 w-3 fill-amber-400 text-amber-400" /> {qb.rating}</span>
       </div>
@@ -284,13 +284,13 @@ export function PastPaperCard({ paper, onSelect }: { paper: PastPaper; onSelect?
     <>
       <div className="flex items-start justify-between">
         <Badge variant="secondary">{paper.year} BS</Badge>
-        <span className="flex items-center gap-1 rounded-md bg-destructive/10 px-2 py-0.5 text-[10px] font-semibold text-destructive">
+        <span className="flex items-center gap-1 rounded-md bg-destructive/10 px-2 py-0.5 text-2xs font-semibold text-destructive">
           <FileText className="h-3 w-3" /> PDF
         </span>
       </div>
       <h3 className="mt-3 line-clamp-2 font-semibold leading-snug group-hover:text-primary">{paper.title}</h3>
       <p className="mt-1 text-xs text-muted-foreground">{paper.exam}</p>
-      <div className="mt-3 grid grid-cols-3 gap-2 text-center text-[11px]">
+      <div className="mt-3 grid grid-cols-3 gap-2 text-center text-xs">
         <div className="rounded-md bg-muted/50 p-1.5">
           <p className="font-semibold">{paper.duration}</p>
           <p className="text-muted-foreground">Duration</p>
@@ -334,7 +334,7 @@ export function MockTestCard({ mock }: { mock: MockTest }) {
         </div>
         <h3 className="mt-3 line-clamp-2 font-semibold leading-snug group-hover:text-primary">{mock.title}</h3>
         <p className="mt-1 text-xs text-muted-foreground">{mock.subjectName}</p>
-        <div className="mt-3 grid grid-cols-3 gap-2 text-center text-[11px]">
+        <div className="mt-3 grid grid-cols-3 gap-2 text-center text-xs">
           <div className="rounded-md bg-muted/50 p-1.5">
             <p className="font-semibold">{mock.questions}</p>
             <p className="text-muted-foreground">Questions</p>
@@ -377,7 +377,7 @@ export function ScholarshipCard({ scholarship }: { scholarship: Scholarship }) {
             {daysLeft > 0 ? `${daysLeft} days left` : "Closing soon"}
           </Badge>
         </div>
-        <div className="mt-4 border-t pt-3 text-[11px] text-muted-foreground">
+        <div className="mt-4 border-t pt-3 text-xs text-muted-foreground">
           Deadline: <span className="font-medium text-foreground">{formatDate(scholarship.deadline)}</span> · {scholarship.seats} seats
         </div>
       </Card>
@@ -391,13 +391,13 @@ export function NoticeCard({ notice }: { notice: Notice }) {
       <Card className="group flex h-full flex-col p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-card-hover">
         <div className="flex items-center justify-between gap-2">
           <Badge variant={notice.pinned ? "gradient" : "secondary"}>{notice.pinned ? "📌 Pinned" : notice.category}</Badge>
-          <span className="text-[11px] text-muted-foreground">{formatDate(notice.date)}</span>
+          <span className="text-xs text-muted-foreground">{formatDate(notice.date)}</span>
         </div>
         <h3 className="mt-3 line-clamp-2 font-semibold leading-snug group-hover:text-primary">{notice.title}</h3>
         <p className="mt-2 line-clamp-2 flex-1 text-xs text-muted-foreground">{notice.body}</p>
         <div className="mt-3 flex flex-wrap gap-1.5">
           {notice.tags.map((t) => (
-            <span key={t} className="rounded-full bg-muted px-2 py-0.5 text-[10px] text-muted-foreground">{t}</span>
+            <span key={t} className="rounded-full bg-muted px-2 py-0.5 text-2xs text-muted-foreground">{t}</span>
           ))}
         </div>
       </Card>
@@ -419,15 +419,15 @@ export function ResultCard({ result }: { result: ResultEntry }) {
       <div className="mt-4 grid grid-cols-3 gap-2 text-center">
         <div className="rounded-md bg-muted/50 p-2">
           <p className="font-display text-lg font-bold">{result.totalCandidates.toLocaleString()}</p>
-          <p className="text-[10px] text-muted-foreground">Candidates</p>
+          <p className="text-2xs text-muted-foreground">Candidates</p>
         </div>
         <div className="rounded-md bg-muted/50 p-2">
           <p className="font-display text-lg font-bold text-success">{result.passed.toLocaleString()}</p>
-          <p className="text-[10px] text-muted-foreground">Passed</p>
+          <p className="text-2xs text-muted-foreground">Passed</p>
         </div>
         <div className="rounded-md bg-muted/50 p-2">
           <p className={cn("font-display text-lg font-bold", passColor)}>{result.passRate}%</p>
-          <p className="text-[10px] text-muted-foreground">Pass rate</p>
+          <p className="text-2xs text-muted-foreground">Pass rate</p>
         </div>
       </div>
     </Card>

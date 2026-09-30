@@ -1,6 +1,53 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { api, admin, learn } from "./api";
-import type { McqGenerateRequest, RagDocument } from "@/types";
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
+
+import { api, admin, adminContacts, learn, publicForms } from "./api";
+import type { ContactPayload } from "./api/public-forms";
+import type {
+  Level,
+  University,
+  Faculty,
+  Course,
+  Semester,
+  Subject,
+  Note,
+  Book,
+  QuestionBank,
+  PastPaper,
+  MockTest,
+  Scholarship,
+  Notice,
+  ResultEntry,
+  Faq,
+  Post,
+  LeaderboardEntry,
+  CommunityQuestion,
+  Community,
+  CommunityMessage,
+  McqGenerateRequest,
+  RagDocument,
+  User,
+} from "@/types";
+
+/** Catalogue content is stable — a long stale window keeps navigation instant. */
+const CONTENT_STALE_MS = 5 * 60 * 1000;
+
+/**
+ * Shared options for read-only catalogue queries.
+ *
+ * Deliberately *not* annotated as `Partial<UseQueryOptions>`: that generic
+ * defaults `TQueryFnData` to `unknown`, and spreading it into `useQuery` makes
+ * TypeScript fall back to `unknown` for `data` instead of inferring it from
+ * `queryFn`. Keeping it a plain object lets inference work.
+ */
+const contentDefaults = {
+  staleTime: CONTENT_STALE_MS,
+  gcTime: 30 * 60 * 1000,
+  refetchOnWindowFocus: false,
+};
 
 export const queryKeys = {
   levels: ["levels"] as const,
@@ -17,49 +64,162 @@ export const queryKeys = {
   subjectsByCourse: (course: string) => ["subjects", "course", course] as const,
   subjectsByCourseSemester: (course: string, semester: number) =>
     ["subjects", "course", course, "semester", semester] as const,
-  trendingSubjects: ["subjects", "trending"] as const,
-  notes: (opts?: { limit?: number; subjectSlug?: string }) => ["notes", opts] as const,
-  books: (opts?: { limit?: number }) => ["books", opts] as const,
-  questionBanks: (opts?: { limit?: number; subjectSlug?: string }) =>
-    ["question-banks", opts] as const,
-  pastPapers: (opts?: { limit?: number; subjectSlug?: string }) => ["past-papers", opts] as const,
-  pastPaper: (slug: string) => ["past-papers", "detail", slug] as const,
-  mockTests: (opts?: { limit?: number; subjectSlug?: string }) => ["mock-tests", opts] as const,
+  trendingSubjects: (limit: number) => ["subjects", "trending", limit] as const,
+
+  notes: (opts?: object) => ["notes", opts ?? {}] as const,
+  books: (opts?: object) => ["books", opts ?? {}] as const,
+  questionBanks: (opts?: object) => ["question-banks", opts ?? {}] as const,
+  pastPapers: (opts?: object) => ["past-papers", opts ?? {}] as const,
+  pastPaper: (slug: string) => ["past-papers", slug] as const,
+  mockTests: (opts?: object) => ["mock-tests", opts ?? {}] as const,
   mockTest: (slug: string) => ["mock-tests", slug] as const,
-  scholarships: (opts?: { limit?: number; featured?: boolean }) => ["scholarships", opts] as const,
-  notices: (opts?: { limit?: number }) => ["notices", opts] as const,
+  scholarships: (opts?: object) => ["scholarships", opts ?? {}] as const,
+  notices: (opts?: object) => ["notices", opts ?? {}] as const,
   results: ["results"] as const,
   faqs: ["faqs"] as const,
-  posts: (opts?: { limit?: number }) => ["posts", opts] as const,
+  posts: (opts?: object) => ["posts", opts ?? {}] as const,
   post: (slug: string) => ["posts", slug] as const,
-  community: ["community"] as const,
-  communities: ["communities"] as const,
-  communityMessages: (communityId: string, channelId: string) =>
-    ["communities", communityId, "messages", channelId] as const,
   leaderboard: ["leaderboard"] as const,
   search: (q: string) => ["search", q] as const,
+
+  questions: ["community", "questions"] as const,
+  channels: ["community", "channels"] as const,
+  channelMessages: (communityId: string, channelId: string) =>
+    ["community", "channels", communityId, "messages", channelId] as const,
+
+  admin: {
+    stats: ["admin", "stats"] as const,
+    userStats: ["admin", "user-stats"] as const,
+    users: (search = "") => ["admin", "users", search] as const,
+    resource: (resource: string, search = "") => ["admin", resource, search] as const,
+    meta: (resource: string) => ["admin", resource, "meta"] as const,
+  },
+
+  learn: {
+    documents: ["learn", "documents"] as const,
+    chatHistory: ["learn", "chat-history"] as const,
+    quiz: (id: string) => ["learn", "quiz", id] as const,
+  },
 };
 
-export const useLevels = () => useQuery({ queryKey: queryKeys.levels, queryFn: api.levels });
-export const useUniversities = () => useQuery({ queryKey: queryKeys.universities, queryFn: api.universities });
-export const useFaculties = () => useQuery({ queryKey: queryKeys.faculties, queryFn: api.faculties });
-export const useCourses = () => useQuery({ queryKey: queryKeys.courses, queryFn: api.courses });
+/* ─── Explorer ────────────────────────────────────────────────────────────── */
+
+export const useLevels = () =>
+  useQuery({ queryKey: queryKeys.levels, queryFn: () => api.levels(), ...contentDefaults });
+
+export const useLevel = (slug: string) =>
+  useQuery({
+    queryKey: ["levels", slug],
+    queryFn: () => api.level(slug),
+    enabled: Boolean(slug),
+    ...contentDefaults,
+  });
+
+export const useUniversities = (opts?: { limit?: number; search?: string }) =>
+  useQuery({ queryKey: queryKeys.universities, queryFn: () => api.universities(opts), ...contentDefaults });
+
+export const useUniversity = (slug: string) =>
+  useQuery({
+    queryKey: ["universities", slug],
+    queryFn: () => api.university(slug),
+    enabled: Boolean(slug),
+    ...contentDefaults,
+  });
+
+export const useFaculties = () =>
+  useQuery({ queryKey: queryKeys.faculties, queryFn: () => api.faculties(), ...contentDefaults });
+
+export const useCourses = (opts?: { search?: string }) =>
+  useQuery({ queryKey: queryKeys.courses, queryFn: () => api.courses(opts), ...contentDefaults });
+
 export const useCourse = (slug: string) =>
-  useQuery({ queryKey: queryKeys.course(slug), queryFn: () => api.course(slug) });
+  useQuery({
+    queryKey: queryKeys.course(slug),
+    queryFn: () => api.course(slug),
+    enabled: Boolean(slug),
+    ...contentDefaults,
+  });
+
 export const useCoursesByLevel = (level: string) =>
-  useQuery({ queryKey: queryKeys.coursesByLevel(level), queryFn: () => api.coursesByLevel(level) });
+  useQuery({
+    queryKey: queryKeys.coursesByLevel(level),
+    queryFn: () => api.coursesByLevel(level),
+    enabled: Boolean(level),
+    ...contentDefaults,
+  });
+
 export const useSemestersByCourse = (courseSlug: string) =>
-  useQuery({ queryKey: queryKeys.semestersByCourse(courseSlug), queryFn: () => api.semestersByCourse(courseSlug) });
-export const useSubjects = () => useQuery({ queryKey: queryKeys.subjects, queryFn: api.subjects });
+  useQuery({
+    queryKey: queryKeys.semestersByCourse(courseSlug),
+    queryFn: () => api.semestersByCourse(courseSlug),
+    enabled: Boolean(courseSlug),
+    ...contentDefaults,
+  });
+
+/* ─── Subjects ────────────────────────────────────────────────────────────── */
+
+export const useSubjects = (opts?: { limit?: number; search?: string }) =>
+  useQuery({ queryKey: queryKeys.subjects, queryFn: () => api.subjects(opts), ...contentDefaults });
+
 export const useSubject = (slug: string) =>
-  useQuery({ queryKey: queryKeys.subject(slug), queryFn: () => api.subject(slug) });
+  useQuery({
+    queryKey: queryKeys.subject(slug),
+    queryFn: () => api.subject(slug),
+    enabled: Boolean(slug),
+    ...contentDefaults,
+  });
+
 export const useSubjectsByLevel = (level: string) =>
-  useQuery({ queryKey: queryKeys.subjectsByLevel(level), queryFn: () => api.subjectsByLevel(level) });
+  useQuery({
+    queryKey: queryKeys.subjectsByLevel(level),
+    queryFn: () => api.subjectsByLevel(level),
+    enabled: Boolean(level),
+    ...contentDefaults,
+  });
+
 export const useSubjectsByCourse = (course: string) =>
-  useQuery({ queryKey: queryKeys.subjectsByCourse(course), queryFn: () => api.subjectsByCourse(course) });
+  useQuery({
+    queryKey: queryKeys.subjectsByCourse(course),
+    queryFn: () => api.subjectsByCourse(course),
+    enabled: Boolean(course),
+    ...contentDefaults,
+  });
+
 export const useSubjectsByCourseSemester = (course: string, semester: number) =>
-  useQuery({ queryKey: queryKeys.subjectsByCourseSemester(course, semester), queryFn: () => api.subjectsByCourseSemester(course, semester) });
+  useQuery({
+    queryKey: queryKeys.subjectsByCourseSemester(course, semester),
+    queryFn: () => api.subjectsByCourseSemester(course, semester),
+    enabled: Boolean(course) && Number.isFinite(semester),
+    ...contentDefaults,
+  });
+
 export const useTrendingSubjects = (limit = 8) =>
+<<<<<<< HEAD
+  useQuery({
+    queryKey: queryKeys.trendingSubjects(limit),
+    queryFn: () => api.trendingSubjects(limit),
+    ...contentDefaults,
+  });
+
+/* ─── Study resources ─────────────────────────────────────────────────────── */
+
+export const useNotes = (opts?: { limit?: number; subjectSlug?: string; search?: string }) =>
+  useQuery({ queryKey: queryKeys.notes(opts), queryFn: () => api.notes(opts), ...contentDefaults });
+
+export const useBooks = (opts?: { limit?: number; bestseller?: boolean; search?: string }) =>
+  useQuery({ queryKey: queryKeys.books(opts), queryFn: () => api.books(opts), ...contentDefaults });
+
+export const useQuestionBanks = (opts?: { limit?: number; subjectSlug?: string; search?: string }) =>
+  useQuery({
+    queryKey: queryKeys.questionBanks(opts),
+    queryFn: () => api.questionBanks(opts),
+    ...contentDefaults,
+  });
+
+export const usePastPapers = (opts?: { limit?: number; subjectSlug?: string; search?: string }) =>
+  useQuery({ queryKey: queryKeys.pastPapers(opts), queryFn: () => api.pastPapers(opts), ...contentDefaults });
+
+=======
   useQuery({ queryKey: queryKeys.trendingSubjects, queryFn: () => api.trendingSubjects(limit) });
 export const useNotes = (opts?: { limit?: number; subjectSlug?: string }) =>
   useQuery({ queryKey: queryKeys.notes(opts), queryFn: () => api.notes(opts) });
@@ -81,112 +241,206 @@ export const useQuestionBanks = (opts?: { limit?: number; subjectSlug?: string }
   useQuery({ queryKey: queryKeys.questionBanks(opts), queryFn: () => api.questionBanks(opts) });
 export const usePastPapers = (opts?: { limit?: number; subjectSlug?: string }) =>
   useQuery({ queryKey: queryKeys.pastPapers(opts), queryFn: () => api.pastPapers(opts) });
+>>>>>>> origin/main
 export const usePastPaper = (slug: string) =>
   useQuery({
     queryKey: queryKeys.pastPaper(slug),
     queryFn: () => api.pastPaper(slug),
     enabled: Boolean(slug),
+    ...contentDefaults,
   });
-export const useMockTests = (opts?: { limit?: number; subjectSlug?: string }) =>
-  useQuery({ queryKey: queryKeys.mockTests(opts), queryFn: () => api.mockTests(opts) });
+
+export const useMockTests = (opts?: { limit?: number; subjectSlug?: string; search?: string }) =>
+  useQuery({ queryKey: queryKeys.mockTests(opts), queryFn: () => api.mockTests(opts), ...contentDefaults });
+
 export const useMockTest = (slug: string) =>
   useQuery({
     queryKey: queryKeys.mockTest(slug),
     queryFn: () => api.mockTest(slug),
     enabled: Boolean(slug),
+    ...contentDefaults,
   });
-export const useScholarships = (opts?: { limit?: number; featured?: boolean }) =>
-  useQuery({ queryKey: queryKeys.scholarships(opts), queryFn: () => api.scholarships(opts) });
-export const useNotices = (opts?: { limit?: number }) =>
-  useQuery({ queryKey: queryKeys.notices(opts), queryFn: () => api.notices(opts) });
-export const useResults = () => useQuery({ queryKey: queryKeys.results, queryFn: api.results });
-export const useFaqs = () => useQuery({ queryKey: queryKeys.faqs, queryFn: api.faqs });
-export const usePosts = (opts?: { limit?: number }) =>
-  useQuery({ queryKey: queryKeys.posts(opts), queryFn: () => api.posts(opts) });
+
+/**
+ * Submitting a test bumps `attempts`/`avgScore` on the record server-side, so
+ * both the list and the detail cache have to be invalidated.
+ */
+export const useSubmitMockTest = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ slug, answers }: { slug: string; answers: Record<string, number> }) =>
+      api.submitMockTest(slug, answers),
+    onSuccess: (_data, variables) => {
+      void queryClient.invalidateQueries({ queryKey: queryKeys.mockTest(variables.slug) });
+      void queryClient.invalidateQueries({ queryKey: ["mock-tests"] });
+    },
+  });
+};
+
+/* ─── Opportunities & content ────────────────────────────────────────────── */
+
+export const useScholarships = (opts?: { limit?: number; featured?: boolean; search?: string }) =>
+  useQuery({ queryKey: queryKeys.scholarships(opts), queryFn: () => api.scholarships(opts), ...contentDefaults });
+
+export const useNotices = (opts?: { limit?: number; search?: string }) =>
+  useQuery({ queryKey: queryKeys.notices(opts), queryFn: () => api.notices(opts), ...contentDefaults });
+
+export const useResults = () =>
+  useQuery({ queryKey: queryKeys.results, queryFn: () => api.results(), ...contentDefaults });
+
+export const useFaqs = () =>
+  useQuery({ queryKey: queryKeys.faqs, queryFn: () => api.faqs(), ...contentDefaults });
+
+export const usePosts = (opts?: { limit?: number; search?: string }) =>
+  useQuery({ queryKey: queryKeys.posts(opts), queryFn: () => api.posts(opts), ...contentDefaults });
+
 export const usePost = (slug: string) =>
-  useQuery({ queryKey: queryKeys.post(slug), queryFn: () => api.post(slug) });
-export const useCommunity = () => useQuery({ queryKey: queryKeys.community, queryFn: api.community });
-export const useCommunities = () =>
-  useQuery({ queryKey: queryKeys.communities, queryFn: api.communities });
-export const useCommunityMessages = (communityId: string, channelId: string) =>
   useQuery({
-    queryKey: queryKeys.communityMessages(communityId, channelId),
-    queryFn: () => api.communityMessages(communityId, channelId),
+    queryKey: queryKeys.post(slug),
+    queryFn: () => api.post(slug),
+    enabled: Boolean(slug),
+    ...contentDefaults,
+  });
+
+export const useLeaderboard = () =>
+  useQuery({ queryKey: queryKeys.leaderboard, queryFn: () => api.leaderboard(), ...contentDefaults });
+
+export const useSearch = (query: string) => {
+  const term = query.trim();
+  return useQuery({
+    queryKey: queryKeys.search(term),
+    queryFn: () => api.search(term),
+    enabled: term.length > 0,
+    staleTime: 30 * 1000,
+  });
+};
+
+/* ─── Community ───────────────────────────────────────────────────────────── */
+
+export const useCommunityQuestions = () =>
+  useQuery({ queryKey: queryKeys.questions, queryFn: () => api.questions(), ...contentDefaults });
+
+export const useAskCommunityQuestion = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: api.askQuestion,
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: queryKeys.questions });
+    },
+  });
+};
+
+export const useAddAnswer = (questionId: string) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    // The endpoint responds with the whole updated question, answers included.
+    mutationFn: (payload: { body: string; author?: string }) =>
+      api.addAnswer(questionId, payload),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: queryKeys.questions });
+    },
+  });
+};
+
+export const useChannels = () =>
+  useQuery({ queryKey: queryKeys.channels, queryFn: () => api.channels(), ...contentDefaults });
+
+/** Legacy alias: the sidebar/page still refer to "communities". */
+export const useCommunity = useChannels;
+
+export const useChannelMessages = (communityId: string, channelId: string) =>
+  useQuery({
+    queryKey: queryKeys.channelMessages(communityId, channelId),
+    queryFn: () => api.channelMessages(communityId, channelId),
     enabled: Boolean(communityId && channelId),
   });
-export const useSendCommunityMessage = (communityId: string, channelId: string) => {
+
+export const useSendMessage = (communityId: string, channelId: string) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (payload: { author: string; role?: string; content: string }) =>
-      api.sendCommunityMessage(communityId, channelId, payload),
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: queryKeys.communityMessages(communityId, channelId) }),
+      api.sendMessage(communityId, channelId, payload),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({
+        queryKey: queryKeys.channelMessages(communityId, channelId),
+      });
+    },
   });
 };
+
 export const useReactToMessage = (communityId: string, channelId: string) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({ messageId, emoji }: { messageId: string; emoji: string }) =>
       api.reactToMessage(messageId, emoji),
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: queryKeys.communityMessages(communityId, channelId) }),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({
+        queryKey: queryKeys.channelMessages(communityId, channelId),
+      });
+    },
   });
 };
-export const useLeaderboard = () => useQuery({ queryKey: queryKeys.leaderboard, queryFn: api.leaderboard });
-export const useSearch = (query: string) =>
-  useQuery({ queryKey: queryKeys.search(query), queryFn: () => api.search(query), enabled: query.trim().length > 0 });
+
+/* ─── Public forms ────────────────────────────────────────────────────────── */
+
+export const useSubmitContact = () =>
+  useMutation({ mutationFn: (payload: ContactPayload) => publicForms.contact(payload) });
+
+/* ─── Admin ───────────────────────────────────────────────────────────────── */
 
 export const useAdminStats = () =>
   useQuery({
-    queryKey: ["admin", "stats"] as const,
-    queryFn: admin.stats,
+    queryKey: queryKeys.admin.stats,
+    queryFn: () => admin.stats(),
     retry: false,
   });
 
 export const useAdminUserStats = () =>
   useQuery({
-    queryKey: ["admin", "user-stats"] as const,
-    queryFn: admin.userStats,
+    queryKey: queryKeys.admin.userStats,
+    queryFn: () => admin.userStats(),
     retry: false,
   });
 
 export const useAdminResource = (resource: string, search = "") =>
   useQuery({
-    queryKey: ["admin", resource, search] as const,
+    queryKey: queryKeys.admin.resource(resource, search),
     queryFn: () => admin.list(resource, search),
+    enabled: Boolean(resource),
     retry: false,
+    placeholderData: (previous) => previous,
   });
 
 export const useAdminResourceMeta = (resource: string) =>
   useQuery({
-    queryKey: ["admin", resource, "meta"] as const,
+    queryKey: queryKeys.admin.meta(resource),
     queryFn: () => admin.meta(resource),
+    enabled: Boolean(resource),
     retry: false,
+    staleTime: 10 * 60 * 1000,
   });
 
-export const useAdminUsers = () =>
+export const useAdminUsers = (search = "") =>
   useQuery({
-    queryKey: ["admin", "users"] as const,
-    queryFn: admin.users,
+    queryKey: queryKeys.admin.users(search),
+    queryFn: () => admin.users(search),
     retry: false,
+    placeholderData: (previous) => previous,
   });
 
-// ─── Self Learning Center (RAG) ───────────────────────────────────────────────
+export const useAdminContacts = () =>
+  useQuery({ queryKey: ["admin", "contacts"], queryFn: adminContacts, retry: false });
 
-export const queryKeysLearn = {
-  documents: ["learn", "documents"] as const,
-  chatHistory: ["learn", "chat-history"] as const,
-  quiz: (id: string) => ["learn", "quiz", id] as const,
-};
+/* ─── Self Learning Center (RAG) ──────────────────────────────────────────── */
 
 export const useRagDocuments = () =>
   useQuery({
-    queryKey: queryKeysLearn.documents,
-    queryFn: learn.documents,
+    queryKey: queryKeys.learn.documents,
+    queryFn: () => learn.documents(),
+    // Poll only while the Python service is still embedding a file.
     refetchInterval: (query) => {
       const docs = query.state.data as RagDocument[] | undefined;
-      if (docs?.some((d) => d.status === "processing")) return 2000;
-      return false;
+      return docs?.some((doc) => doc.status === "processing") ? 2500 : false;
     },
   });
 
@@ -194,8 +448,9 @@ export const useUploadDocument = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (file: File) => learn.uploadDocument(file),
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: queryKeysLearn.documents }),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: queryKeys.learn.documents });
+    },
   });
 };
 
@@ -203,38 +458,67 @@ export const useDeleteDocument = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (id: string) => learn.deleteDocument(id),
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: queryKeysLearn.documents }),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: queryKeys.learn.documents });
+    },
   });
 };
 
 export const useRagChatHistory = () =>
-  useQuery({ queryKey: queryKeysLearn.chatHistory, queryFn: () => learn.chatHistory(50) });
+  useQuery({
+    queryKey: queryKeys.learn.chatHistory,
+    queryFn: () => learn.chatHistory(50),
+    retry: false,
+  });
 
-export const useAskQuestion = () => {
+export const useAskRagQuestion = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({ question, documentIds }: { question: string; documentIds?: string[] | null }) =>
       learn.ask(question, documentIds ?? null),
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: queryKeysLearn.chatHistory }),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: queryKeys.learn.chatHistory });
+    },
   });
 };
 
 export const useMcqGenerate = () =>
-  useMutation({
-    mutationFn: (payload: McqGenerateRequest) => learn.mcqGenerate(payload),
-  });
+  useMutation({ mutationFn: (payload: McqGenerateRequest) => learn.mcqGenerate(payload) });
 
 export const useMcq = (id: string | null) =>
   useQuery({
-    queryKey: queryKeysLearn.quiz(id ?? ""),
+    queryKey: queryKeys.learn.quiz(id ?? ""),
     queryFn: () => learn.mcq(id as string),
     enabled: Boolean(id),
+    retry: false,
   });
 
 export const useMcqSubmit = () =>
   useMutation({
-    mutationFn: ({ id, answers }: { id: string; answers: number[] }) =>
-      learn.mcqSubmit(id, answers),
+    mutationFn: ({ id, answers }: { id: string; answers: number[] }) => learn.mcqSubmit(id, answers),
   });
+
+/* ── Re-exported response shapes, so features never import from two places ── */
+export type {
+  Level,
+  University,
+  Faculty,
+  Course,
+  Semester,
+  Subject,
+  Note,
+  Book,
+  QuestionBank,
+  PastPaper,
+  MockTest,
+  Scholarship,
+  Notice,
+  ResultEntry,
+  Faq,
+  Post,
+  LeaderboardEntry,
+  CommunityQuestion,
+  Community,
+  CommunityMessage,
+  User,
+};

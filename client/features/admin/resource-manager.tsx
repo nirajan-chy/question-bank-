@@ -34,6 +34,18 @@ import {
 } from "@/components/ui/select";
 
 const NONE_VALUE = "__none__";
+<<<<<<< HEAD
+const UPLOAD_FIELD_KEYS = new Set(["pdfUrl", "cover", "avatar"]);
+// Resources that use markdown content instead of PDF uploads — hide their pdfUrl field.
+const MD_RESOURCES = new Set(["notes", "question-banks"]);
+
+const EMPTY_PICK: { courseSlug: string; semester: string; subjectSlug: string } = {
+  courseSlug: "",
+  semester: "",
+  subjectSlug: "",
+};
+=======
+>>>>>>> origin/main
 
 const humanize = (key: string) =>
   key
@@ -202,7 +214,7 @@ export function ResourceManager({ resource, label }: { resource: string; label: 
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm font-semibold">{primary(row)}</p>
                     <p className="truncate text-xs text-muted-foreground">
-                      <code className="text-[10px]">id:</code> {String(row.id)}
+                      <code className="text-2xs">id:</code> {String(row.id)}
                     </p>
                   </div>
                   <Button
@@ -268,6 +280,33 @@ function ResourceForm({
   });
   const [submitting, setSubmitting] = useState(false);
 
+<<<<<<< HEAD
+  const { data: courses = [] } = useQuery({
+    queryKey: queryKeys.courses,
+    queryFn: () => api.courses(),
+    enabled: subjectLinked,
+  });
+  const { data: semesters = [] } = useQuery({
+    queryKey: queryKeys.semestersByCourse(picked.courseSlug),
+    queryFn: () => api.semestersByCourse(picked.courseSlug),
+    enabled: subjectLinked && Boolean(picked.courseSlug),
+  });
+  const { data: courseSubjects = [] } = useQuery({
+    queryKey: queryKeys.subjectsByCourse(picked.courseSlug),
+    queryFn: () => api.subjectsByCourse(picked.courseSlug),
+    enabled: subjectLinked && Boolean(picked.courseSlug),
+  });
+  const subjects = useMemo(
+    () =>
+      picked.semester
+        ? courseSubjects.filter((s) => String(s.semester ?? "") === picked.semester)
+        : courseSubjects,
+    [courseSubjects, picked.semester]
+  );
+  const resolvedSubject = subjects.find((s) => s.slug === picked.subjectSlug);
+
+=======
+>>>>>>> origin/main
   const set = (key: string, value: string) => setValues((v) => ({ ...v, [key]: value }));
 
   const buildPayload = (): Record<string, unknown> => {
@@ -314,6 +353,93 @@ function ResourceForm({
         </div>
 
         <form onSubmit={onSubmit} className="grid gap-4 sm:grid-cols-2">
+<<<<<<< HEAD
+          {subjectLinked && (
+            <div className="space-y-3 rounded-xl border border-primary/30 bg-primary/[0.04] p-4 sm:col-span-2">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <Label className="text-sm font-semibold">Classification</Label>
+                <span className="text-xs text-muted-foreground">
+                  Decide where this file lives — course → semester → subject
+                </span>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-3">
+                <div className="space-y-1.5">
+                  <Label htmlFor="pick-course">Bachelor / Course</Label>
+                  <Select
+                    value={picked.courseSlug || NONE_VALUE}
+                    onValueChange={(v) =>
+                      setPicked((p) => ({ ...p, courseSlug: v === NONE_VALUE ? "" : v, semester: "", subjectSlug: "" }))
+                    }
+                  >
+                    <SelectTrigger id="pick-course">
+                      <SelectValue placeholder="Select course…" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value={NONE_VALUE}>—</SelectItem>
+                      {courses.map((c) => (
+                        <SelectItem key={c.slug} value={c.slug}>
+                          {c.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="pick-semester">Semester</Label>
+                  <Select
+                    value={picked.semester || NONE_VALUE}
+                    onValueChange={(v) => setPicked((p) => ({ ...p, semester: v === NONE_VALUE ? "" : v }))}
+                    disabled={!picked.courseSlug}
+                  >
+                    <SelectTrigger id="pick-semester">
+                      <SelectValue placeholder="Select semester…" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value={NONE_VALUE}>Any semester</SelectItem>
+                      {[...semesters]
+                        .sort((a, b) => a.number - b.number)
+                        .map((s) => (
+                          <SelectItem key={s.slug} value={String(s.number)}>
+                            {s.name}
+                          </SelectItem>
+                        ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="pick-subject">
+                    Subject<span className="ml-0.5 text-destructive">*</span>
+                  </Label>
+                  <Select
+                    value={picked.subjectSlug || NONE_VALUE}
+                    onValueChange={(v) => setPicked((p) => ({ ...p, subjectSlug: v === NONE_VALUE ? "" : v }))}
+                    disabled={!picked.courseSlug}
+                  >
+                    <SelectTrigger id="pick-subject">
+                      <SelectValue placeholder={picked.courseSlug ? "Select subject…" : "Pick a course first"} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value={NONE_VALUE}>—</SelectItem>
+                      {subjects.map((s) => (
+                        <SelectItem key={s.slug} value={s.slug}>
+                          {s.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              {resolvedSubject && (
+                <p className="text-xs text-muted-foreground">
+                  Saved under <span className="font-medium text-foreground">{resolvedSubject.name}</span> ·{" "}
+                  {resolvedSubject.level}
+                  {picked.semester ? ` · Semester ${picked.semester}` : ""}
+                </p>
+              )}
+            </div>
+          )}
+=======
+>>>>>>> origin/main
           {fields.map((f) => {
             const isNumber = f.type === "number";
             const isBoolean = f.type === "boolean";
@@ -373,3 +499,99 @@ function ResourceForm({
     </Card>
   );
 }
+<<<<<<< HEAD
+
+function Field({
+  field,
+  required,
+  disabled,
+  value,
+  onChange,
+  placeholder,
+  className,
+}: {
+  field: ResourceField;
+  required?: boolean;
+  disabled?: boolean;
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string;
+  className?: string;
+}) {
+  const isTextarea = field.type === "TEXT" || field.type === "JSONB";
+  const badge = field.type === "JSONB"
+    ? jsonbIsLines(field.defaultValue)
+      ? "one per line"
+      : "JSON"
+    : undefined;
+  return (
+    <div className={cn("space-y-1.5", className)}>
+      <Label htmlFor={`f-${field.key}`}>
+        {humanize(field.key)}
+        {required && <span className="ml-0.5 text-destructive">*</span>}
+        {badge && <Badge variant="outline" className="ml-2 text-2xs">{badge}</Badge>}
+      </Label>
+      {isTextarea ? (
+        <Textarea
+          id={`f-${field.key}`}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          rows={field.type === "TEXT" ? 3 : 5}
+          placeholder={field.type === "JSONB" ? 'e.g. [{"key": "value"}]' : placeholder}
+          className={cn(field.type === "JSONB" && "font-mono text-xs")}
+          disabled={disabled}
+        />
+      ) : (
+        <Input
+          id={`f-${field.key}`}
+          type={isDateType(field.type) ? "date" : isNumberType(field.type) ? "number" : "text"}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
+          disabled={disabled}
+        />
+      )}
+    </div>
+  );
+}
+
+function FieldSelect({
+  field,
+  value,
+  required,
+  disabled,
+  onChange,
+}: {
+  field: ResourceField;
+  value: string;
+  required?: boolean;
+  disabled?: boolean;
+  onChange: (v: string) => void;
+}) {
+  const options = field.values ?? [];
+  const showNone = !required;
+  return (
+    <div className="space-y-1.5">
+      <Label htmlFor={`f-${field.key}`}>
+        {humanize(field.key)}
+        {required && <span className="ml-0.5 text-destructive">*</span>}
+      </Label>
+      <Select value={value} onValueChange={onChange} disabled={disabled}>
+        <SelectTrigger id={`f-${field.key}`}>
+          <SelectValue placeholder="Select…" />
+        </SelectTrigger>
+        <SelectContent>
+          {showNone && <SelectItem value={NONE_VALUE}>—</SelectItem>}
+          {options.map((opt) => (
+            <SelectItem key={opt} value={opt}>
+              {opt}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
+  );
+}
+
+=======
+>>>>>>> origin/main

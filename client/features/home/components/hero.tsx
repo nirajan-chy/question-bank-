@@ -93,6 +93,29 @@ export function Hero({ onSearch }: { onSearch?: (q: string) => void }) {
           </motion.div>
 
           <motion.div
+<<<<<<< HEAD
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5, ease }}
+            className="mt-14 grid w-full max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4"
+          >
+            {stats.map((s) => (
+              <div
+                key={s.label}
+                className="rounded-2xl border bg-background/70 p-4 text-left backdrop-blur-sm transition-colors hover:border-primary/40"
+              >
+                <s.icon className="h-4 w-4 text-primary" />
+                <p className="mt-2 font-display text-xl font-bold md:text-2xl">
+                  <CountUp value={s.value} suffix={s.suffix} />
+                </p>
+                <p className="text-xs text-muted-foreground md:text-xs">{s.label}</p>
+              </div>
+            ))}
+          </motion.div>
+
+          <motion.div
+=======
+>>>>>>> origin/main
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}

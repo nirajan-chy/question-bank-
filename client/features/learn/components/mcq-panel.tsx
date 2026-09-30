@@ -4,7 +4,6 @@ import { useState } from "react";
 import {
   ArrowLeft,
   CheckCircle2,
-  Circle,
   FileText,
   Loader2,
   PartyPopper,
@@ -13,7 +12,6 @@ import {
   XCircle,
   Zap,
   Target,
-  BookOpen,
   Sparkles,
 } from "lucide-react";
 import { toast } from "sonner";
@@ -157,7 +155,7 @@ export function McqPanel() {
                   >
                     <stat.icon className={cn("h-4 w-4", stat.color)} />
                     <div>
-                      <p className="text-[11px] text-muted-foreground">{stat.label}</p>
+                      <p className="text-xs text-muted-foreground">{stat.label}</p>
                       <p className="text-sm font-semibold">{stat.value}</p>
                     </div>
                   </div>

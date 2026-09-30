@@ -20,14 +20,15 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         gradient:
-          "bg-brand-gradient text-primary-foreground shadow-glow-sm hover:opacity-90 active:scale-[0.98] transition-transform",
-        saffron:
-          "bg-saffron-gradient text-white shadow-sm hover:opacity-90 active:scale-[0.98] transition-transform",
+          "bg-brand-gradient text-primary-foreground shadow-glow-sm hover:brightness-105 active:scale-[0.98] transition-transform",
+        cta:
+          "bg-cta-gradient text-cta-foreground shadow-sm hover:brightness-105 active:scale-[0.98] transition-transform",
       },
       size: {
         default: "h-9 px-4 py-2",
         sm: "h-8 rounded-md px-3 text-xs",
         lg: "h-11 rounded-lg px-8 text-base",
+        xl: "h-12 rounded-lg px-10 text-base",
         icon: "h-9 w-9",
         "icon-sm": "h-8 w-8",
       },

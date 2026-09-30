@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+"use client";
+
+import { ResourcesPage } from "@/features/resources/components/resources-page";
+
+=======
 import { seo } from "@/lib/seo";
 import { ResourcesPage } from "@/features/resources/components/resources-page";
 
@@ -8,6 +14,7 @@ export const metadata = seo({
   path: "/resources",
 });
 
+>>>>>>> origin/main
 export default function Page() {
   return <ResourcesPage />;
 }

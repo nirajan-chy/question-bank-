@@ -49,7 +49,7 @@ export function AdminNav() {
       </div>
 
       <div className="flex-1 space-y-0.5 overflow-y-auto px-4 pb-4">
-        <p className="px-3 pb-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+        <p className="px-3 pb-1 text-2xs font-semibold uppercase tracking-wider text-muted-foreground">
           Content
         </p>
         {allResources.map((r) => {

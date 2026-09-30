@@ -154,6 +154,28 @@ export function UniversitiesPage() {
                   <p className="mt-0.5 text-sm text-muted-foreground">
                     Choose a subject to see universities offering it.
                   </p>
+<<<<<<< HEAD
+                  <div className="mt-4 flex flex-wrap items-center gap-1.5">
+                    {uni.programs.slice(0, 3).map((p) => (
+                      <span key={p} className="rounded-full bg-muted px-2.5 py-1 text-xs font-medium">
+                        {p}
+                      </span>
+                    ))}
+                    {uni.programs.length > 3 && (
+                      <span className="text-xs text-muted-foreground">+{uni.programs.length - 3}</span>
+                    )}
+                  </div>
+                  <div className="mt-5 flex items-center justify-between border-t pt-4 text-xs text-muted-foreground">
+                    <span className="flex items-center gap-1">
+                      <MapPin className="h-3.5 w-3.5" /> {uni.location}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Users className="h-3.5 w-3.5" /> {formatNumber(uni.students)}
+                    </span>
+                    <Badge variant="secondary" className="text-2xs">{uni.type}</Badge>
+                  </div>
+                </Link>
+=======
                 </div>
               </div>
             </div>
@@ -196,6 +218,7 @@ export function UniversitiesPage() {
                 >
                   <SubjectCard category={cat} />
                 </motion.div>
+>>>>>>> origin/main
               ))}
             </div>
           )}

@@ -13,7 +13,6 @@ import {
   Shield,
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/store/use-auth-store";
 import { DocumentsPanel } from "./documents-panel";
@@ -64,7 +63,7 @@ export function LearnShell() {
         <div className="container flex min-h-[70vh] max-w-2xl flex-col items-center justify-center py-20 text-center">
           <span className="relative flex h-20 w-20 items-center justify-center rounded-2xl bg-brand-gradient text-white shadow-glow">
             <GraduationCap className="h-10 w-10" />
-            <span className="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-success text-[10px] font-bold text-white">
+            <span className="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-success text-2xs font-bold text-white">
               AI
             </span>
           </span>

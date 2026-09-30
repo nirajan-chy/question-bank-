@@ -117,7 +117,7 @@ export function SubjectDetail({ slug, initialTab = "overview" }: { slug: string;
               </p>
               <div className="mt-5 flex flex-wrap gap-1.5">
                 {subject.tags.map((tag) => (
-                  <span key={tag} className="rounded-full bg-muted px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
+                  <span key={tag} className="rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground">
                     {tag}
                   </span>
                 ))}
@@ -157,15 +157,15 @@ export function SubjectDetail({ slug, initialTab = "overview" }: { slug: string;
               <div className="grid grid-cols-3 gap-2">
                 <div className="rounded-xl border bg-card p-3 text-center">
                   <p className="font-display text-lg font-bold">{subject.notes}</p>
-                  <p className="text-[10px] text-muted-foreground">Notes</p>
+                  <p className="text-2xs text-muted-foreground">Notes</p>
                 </div>
                 <div className="rounded-xl border bg-card p-3 text-center">
                   <p className="font-display text-lg font-bold">{subject.questionBanks}</p>
-                  <p className="text-[10px] text-muted-foreground">Q Banks</p>
+                  <p className="text-2xs text-muted-foreground">Q Banks</p>
                 </div>
                 <div className="rounded-xl border bg-card p-3 text-center">
                   <p className="font-display text-lg font-bold">{subject.mcqs}</p>
-                  <p className="text-[10px] text-muted-foreground">MCQs</p>
+                  <p className="text-2xs text-muted-foreground">MCQs</p>
                 </div>
               </div>
             </div>
@@ -316,7 +316,7 @@ function OverviewTab({ subject }: { subject: NonNullable<ReturnType<typeof useSu
             {statItems.map((item) => (
               <div key={item.label} className="rounded-lg bg-muted/50 p-3 text-center">
                 <p className="font-display text-lg font-bold">{item.value}</p>
-                <p className="text-[10px] text-muted-foreground">{item.label}</p>
+                <p className="text-2xs text-muted-foreground">{item.label}</p>
               </div>
             ))}
           </div>
@@ -464,7 +464,7 @@ function VideosTab({ subject, videos }: { subject: NonNullable<ReturnType<typeof
             <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/25 backdrop-blur-sm transition-transform group-hover:scale-110">
               <PlayCircle className="h-7 w-7 text-white" />
             </span>
-            <span className="absolute bottom-2 right-2 rounded bg-black/60 px-1.5 py-0.5 text-[10px] font-medium text-white">
+            <span className="absolute bottom-2 right-2 rounded bg-black/60 px-1.5 py-0.5 text-2xs font-medium text-white">
               {video.duration}
             </span>
           </div>
@@ -552,7 +552,7 @@ function DownloadsTab({ subject, downloads }: { subject: NonNullable<ReturnType<
       </Card>
       {downloads.map((item, i) => (
         <Card key={item.name} className="flex items-center gap-4 p-4">
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-destructive/10 text-[10px] font-bold text-destructive">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-destructive/10 text-2xs font-bold text-destructive">
             {item.type}
           </span>
           <div className="min-w-0 flex-1">

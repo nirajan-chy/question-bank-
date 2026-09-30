@@ -161,7 +161,7 @@ export function ChatPanel() {
             </span>
             <div>
               <p className="text-sm font-semibold">AI Study Assistant</p>
-              <p className="text-[11px] text-muted-foreground">
+              <p className="text-xs text-muted-foreground">
                 Answers grounded in your documents
               </p>
             </div>
@@ -237,7 +237,7 @@ export function ChatPanel() {
 
                 {/* Bubble */}
                 <div className="min-w-0 max-w-[85%]">
-                  <p className="mb-1.5 text-[11px] font-semibold text-muted-foreground">
+                  <p className="mb-1.5 text-xs font-semibold text-muted-foreground">
                     {m.role === "user" ? "You" : "AI Assistant"}
                   </p>
                   <div
@@ -263,7 +263,7 @@ export function ChatPanel() {
                   {/* Sources */}
                   {m.sources && m.sources.length > 0 && (
                     <div className="mt-2.5 space-y-1.5">
-                      <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                      <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                         <FileText className="h-3 w-3" />
                         Sources
                       </p>
@@ -337,7 +337,7 @@ export function ChatPanel() {
               </Button>
             )}
           </div>
-          <p className="mt-2 text-center text-[11px] text-muted-foreground">
+          <p className="mt-2 text-center text-xs text-muted-foreground">
             Answers are grounded strictly in your uploaded documents
           </p>
         </div>
@@ -363,7 +363,7 @@ export function ChatPanel() {
               },
             ].map((item) => (
               <li key={item.step} className="flex items-start gap-2.5">
-                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-gradient text-[10px] font-bold text-white">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-gradient text-2xs font-bold text-white">
                   {item.step}
                 </span>
                 <span className="text-xs text-muted-foreground leading-relaxed">

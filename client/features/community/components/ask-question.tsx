@@ -8,7 +8,7 @@ import { z } from "zod";
 import { ArrowLeft, Eye, MessageSquarePlus, Send } from "lucide-react";
 import { toast } from "sonner";
 import { api } from "@/services/api";
-import { useCommunity } from "@/services/queries";
+import { useCommunityQuestions } from "@/services/queries";
 import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -26,7 +26,7 @@ const schema = z.object({
 type Form = z.infer<typeof schema>;
 
 export function AskQuestion() {
-  const { data: questions = [] } = useCommunity();
+  const { data: questions = [] } = useCommunityQuestions();
   const suggestedTags = useMemo(
     () => Array.from(new Set(questions.flatMap((q) => q.tags))),
     [questions]
@@ -76,9 +76,20 @@ export function AskQuestion() {
         <p className="mt-2 text-sm text-muted-foreground">
           You’ll be notified when someone answers. Meanwhile, keep helping others — it earns XP.
         </p>
-        <div className="mt-6 flex gap-3">
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
           <Button variant="gradient" asChild>
-            <Link href="/community">Back to community</Link>
+            <Link href="/community/questions">See all questions</Link>
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => {
+              setPosted(false);
+              setTags([]);
+              setTagInput("");
+              setPreview(false);
+            }}
+          >
+            Ask another
           </Button>
         </div>
       </Card>
@@ -177,7 +188,7 @@ export function AskQuestion() {
               </p>
               <div className="mt-3 flex flex-wrap gap-1.5">
                 {tags.map((t) => (
-                  <span key={t} className="rounded-full bg-muted px-2 py-0.5 text-[10px] font-medium capitalize text-muted-foreground">
+                  <span key={t} className="rounded-full bg-muted px-2 py-0.5 text-2xs font-medium capitalize text-muted-foreground">
                     {t}
                   </span>
                 ))}

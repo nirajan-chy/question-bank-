@@ -118,7 +118,7 @@ function Meta({
     <div className="flex items-center gap-2.5 rounded-xl border bg-muted/30 px-3 py-2.5">
       <Icon className="h-4 w-4 shrink-0 text-primary" />
       <div className="min-w-0">
-        <p className="text-[11px] text-muted-foreground">{label}</p>
+        <p className="text-xs text-muted-foreground">{label}</p>
         <p className="truncate text-sm font-semibold">{value || "—"}</p>
       </div>
     </div>

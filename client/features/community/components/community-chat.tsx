@@ -5,7 +5,7 @@ import { Hash, Users, Search, Settings, Smile, Paperclip, Send, X, Loader2 } fro
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CommunityMessage } from "./community-message";
-import { useCommunityMessages, useReactToMessage, useSendCommunityMessage } from "@/services/queries";
+import { useChannelMessages, useSendMessage, useReactToMessage } from "@/services/queries";
 import { useAuthStore } from "@/store/use-auth-store";
 import type { Community, CommunityChannel } from "@/types";
 
@@ -15,8 +15,8 @@ interface CommunityChatProps {
 }
 
 export function CommunityChat({ community, channel }: CommunityChatProps) {
-  const { data: messages = [], isPending } = useCommunityMessages(community.id, channel.id);
-  const sendMessage = useSendCommunityMessage(community.id, channel.id);
+  const { data: messages = [], isPending } = useChannelMessages(community.id, channel.id);
+  const sendMessage = useSendMessage(community.id, channel.id);
   const reactToMessage = useReactToMessage(community.id, channel.id);
   const user = useAuthStore((s) => s.user);
 

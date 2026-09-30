@@ -4,65 +4,85 @@
 
 @layer base {
   :root {
+    --radius: 0.625rem;
+
     --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    --foreground: 224 20% 12%;
+
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card-foreground: 224 20% 12%;
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 152 67% 47%;
+    --popover-foreground: 224 20% 12%;
+
+    /* Brand — deep emerald. Growth + trust. */
+    --primary: 160 72% 32%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 210 12% 19%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 220 9% 96%;
-    --muted-foreground: 220 9% 46%;
-    --accent: 220 9% 96%;
-    --accent-foreground: 220 9% 10%;
-    --destructive: 2 73% 56%;
-    --destructive-foreground: 0 0% 98%;
-    --success: 130 60% 30%;
+    --brand-from: 160 68% 34%;
+    --brand-to: 162 62% 25%;
+
+    /* High-emphasis CTA — warm saffron, nodding at the Nepali flag. */
+    --cta: 28 88% 50%;
+    --cta-foreground: 30 60% 12%;
+
+    --secondary: 220 16% 96%;
+    --secondary-foreground: 224 20% 16%;
+    --muted: 220 16% 96%;
+    --muted-foreground: 220 9% 44%;
+    --accent: 220 16% 94%;
+    --accent-foreground: 224 20% 16%;
+
+    --destructive: 0 72% 48%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 152 60% 30%;
     --success-foreground: 0 0% 100%;
-    --warning: 46 96% 49%;
+    --warning: 32 88% 40%;
     --warning-foreground: 0 0% 100%;
-    --info: 207 90% 54%;
+    --info: 212 72% 44%;
     --info-foreground: 0 0% 100%;
-    --border: 220 9% 90%;
-    --input: 220 9% 90%;
-    --ring: 152 67% 47%;
-    --radius: 0.75rem;
-    --chart-1: 152 67% 47%;
-    --chart-2: 207 90% 54%;
-    --chart-3: 130 60% 30%;
-    --chart-4: 46 96% 49%;
-    --chart-5: 2 73% 56%;
+
+    --border: 220 14% 90%;
+    --input: 220 14% 88%;
+    --ring: 160 72% 32%;
+    --shadow-color: 224 30% 18%;
   }
 
   .dark {
-    --background: 210 12% 8%;
-    --foreground: 0 0% 98%;
-    --card: 210 12% 11%;
-    --card-foreground: 0 0% 98%;
-    --popover: 210 12% 8%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 152 55% 55%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 210 10% 25%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 210 10% 25%;
-    --muted-foreground: 210 5% 65%;
-    --accent: 210 10% 25%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 2 65% 52%;
-    --destructive-foreground: 0 0% 98%;
-    --success: 130 50% 38%;
-    --success-foreground: 0 0% 100%;
-    --warning: 46 85% 55%;
-    --warning-foreground: 0 0% 100%;
-    --info: 207 80% 58%;
-    --info-foreground: 0 0% 100%;
-    --border: 210 10% 25%;
-    --input: 210 10% 25%;
-    --ring: 152 55% 55%;
+    --background: 224 24% 8%;
+    --foreground: 210 20% 96%;
+
+    --card: 224 22% 11%;
+    --card-foreground: 210 20% 96%;
+    --popover: 224 22% 11%;
+    --popover-foreground: 210 20% 96%;
+
+    --primary: 158 62% 52%;
+    --primary-foreground: 224 30% 8%;
+    --brand-from: 158 58% 46%;
+    --brand-to: 162 52% 32%;
+
+    --cta: 30 92% 58%;
+    --cta-foreground: 30 60% 10%;
+
+    --secondary: 224 16% 18%;
+    --secondary-foreground: 210 20% 96%;
+    --muted: 224 16% 18%;
+    --muted-foreground: 218 12% 68%;
+    --accent: 224 16% 22%;
+    --accent-foreground: 210 20% 96%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 152 52% 42%;
+    --success-foreground: 224 30% 8%;
+    --warning: 34 88% 56%;
+    --warning-foreground: 224 30% 8%;
+    --info: 210 78% 60%;
+    --info-foreground: 224 30% 8%;
+
+    --border: 224 14% 22%;
+    --input: 224 14% 26%;
+    --ring: 158 62% 52%;
+    --shadow-color: 224 60% 2%;
   }
 }
 
@@ -74,17 +94,36 @@
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background font-sans text-foreground;
+    font-feature-settings: "cv11", "ss01";
   }
 
   ::selection {
     @apply bg-primary/20 text-primary;
   }
 
-  /* Scrollbar */
+  /* Only show focus rings for keyboard users. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
   ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -102,39 +141,83 @@
   }
 }
 
+@layer components {
+  /**
+   * Long-form content (blog bodies, community answers, note markdown).
+   * Scoped so it never leaks into the app chrome.
+   */
+  .prose-content {
+    @apply text-[0.9375rem] leading-7 text-foreground/90;
+  }
+  .prose-content > * + * {
+    @apply mt-4;
+  }
+  .prose-content h2 {
+    @apply mt-8 font-display text-xl font-bold tracking-tight;
+  }
+  .prose-content h3 {
+    @apply mt-6 font-display text-lg font-semibold tracking-tight;
+  }
+  .prose-content p {
+    @apply text-muted-foreground;
+  }
+  .prose-content a {
+    @apply font-medium text-primary underline underline-offset-4 hover:text-primary/80;
+  }
+  .prose-content strong {
+    @apply font-semibold text-foreground;
+  }
+  .prose-content ul {
+    @apply list-disc space-y-1.5 pl-5 text-muted-foreground marker:text-muted-foreground/50;
+  }
+  .prose-content ol {
+    @apply list-decimal space-y-1.5 pl-5 text-muted-foreground marker:text-muted-foreground/50;
+  }
+  .prose-content blockquote {
+    @apply border-l-2 border-primary/40 pl-4 italic text-muted-foreground;
+  }
+  .prose-content code {
+    @apply rounded bg-muted px-1.5 py-0.5 font-mono text-[0.8125rem];
+  }
+  .prose-content pre {
+    @apply overflow-x-auto rounded-lg bg-muted p-4;
+  }
+  .prose-content pre code {
+    @apply bg-transparent p-0;
+  }
+  .prose-content img {
+    @apply rounded-xl border;
+  }
+  .prose-content hr {
+    @apply border-t;
+  }
+  .prose-content table {
+    @apply w-full border-collapse text-sm;
+  }
+  .prose-content th,
+  .prose-content td {
+    @apply border px-3 py-2 text-left;
+  }
+  .prose-content th {
+    @apply bg-muted font-semibold;
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 
-  .text-gradient {
-    @apply text-primary;
+  .text-pretty {
+    text-wrap: pretty;
   }
 
-  .glass {
-    @apply bg-white/70 backdrop-blur-xl border border-black/5 dark:bg-zinc-950/70 dark:border-white/10;
-  }
-
-  .glass-card {
-    @apply bg-white/60 backdrop-blur-xl border border-black/5 shadow-card dark:bg-zinc-900/50 dark:border-white/10;
-  }
-
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-
-  .bg-grid {
-    background-image: linear-gradient(
-        to right,
-        hsl(var(--border) / 0.5) 1px,
-        transparent 1px
-      ),
-      linear-gradient(to bottom, hsl(var(--border) / 0.5) 1px, transparent 1px);
-    background-size: 40px 40px;
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 
   .mask-fade-b {
@@ -143,29 +226,7 @@
   }
 
   .mask-radial-faded {
-    -webkit-mask-image: radial-gradient(
-      ellipse 60% 60% at 50% 0%,
-      black 40%,
-      transparent 100%
-    );
-    mask-image: radial-gradient(
-      ellipse 60% 60% at 50% 0%,
-      black 40%,
-      transparent 100%
-    );
+    -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 0%, black 40%, transparent 100%);
+    mask-image: radial-gradient(ellipse 60% 60% at 50% 0%, black 40%, transparent 100%);
   }
-}
-
-/* Markdown-ish prose for community/blog */
-.prose-sandarbh p {
-  @apply text-sm leading-7 text-muted-foreground;
-}
-.prose-sandarbh strong {
-  @apply font-semibold text-foreground;
-}
-.prose-sandarbh ul {
-  @apply list-disc pl-5 space-y-1.5 text-sm text-muted-foreground;
-}
-.prose-sandarbh ol {
-  @apply list-decimal pl-5 space-y-1.5 text-sm text-muted-foreground;
 }

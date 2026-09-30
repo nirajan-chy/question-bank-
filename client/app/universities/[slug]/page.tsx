@@ -1,30 +1,23 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { db } from "@/services/db";
+
 import { seo } from "@/lib/seo";
+import { serverApi } from "@/lib/server-api";
 import { UniversityDetail } from "@/features/universities/components/university-detail";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
+type Props = { params: Promise<{ slug: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const uni = db.universities.find((u) => u.slug === slug);
-  if (!uni) return {};
+  const university = await serverApi.university(slug);
+  if (!university) return { title: "University" };
   return seo({
-    title: uni.name,
-    description: uni.description,
+    title: university.name,
+    description: university.description,
     path: `/universities/${slug}`,
   });
 }
 
-export async function generateStaticParams() {
-  return db.universities.map((u) => ({ slug: u.slug }));
-}
-
-export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+export default async function Page({ params }: Props) {
   const { slug } = await params;
-  if (!db.universities.some((u) => u.slug === slug)) notFound();
   return <UniversityDetail slug={slug} />;
 }
