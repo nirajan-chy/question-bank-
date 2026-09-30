@@ -52,9 +52,20 @@ export function Logo({
       aria-label="PrashnaHub — home"
       className={cn("group inline-flex items-center gap-2.5", className)}
     >
+<<<<<<< HEAD
       <LogoMark className="transition-transform duration-300 group-hover:scale-105" />
       {withText && (
         <span className="font-display text-lg font-bold leading-none tracking-tight">
+=======
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={logoSrc}
+        alt="PrashnaHub logo"
+        className={cn("shrink-0 object-contain h-10 w-auto sm:h-12 sm:w-auto")}
+      />
+      {withText && (
+        <span className="font-display text-base font-bold tracking-tight sm:text-lg">
+>>>>>>> origin/main
           Prashna<span className="text-primary">Hub</span>
         </span>
       )}

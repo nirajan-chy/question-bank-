@@ -8,6 +8,7 @@ import {
   FileQuestion,
   FileText,
   GraduationCap,
+<<<<<<< HEAD
   Home,
   Info,
   Layers,
@@ -23,6 +24,9 @@ import {
   ShieldCheck,
   Timer,
   User,
+=======
+  Globe,
+>>>>>>> origin/main
 } from "lucide-react";
 
 export type NavItem = {
@@ -33,6 +37,7 @@ export type NavItem = {
   description?: string;
 };
 
+<<<<<<< HEAD
 export type NavGroup = {
   id: string;
   label: string;
@@ -173,6 +178,14 @@ export const navGroups: NavGroup[] = [
       },
     ],
   },
+=======
+export const mainNav: NavLink[] = [
+  { label: "Home", href: "/" },
+  { label: "Courses", href: "/courses" },
+  { label: "Universities", href: "/universities" },
+  { label: "Community", href: "/community" },
+  { label: "Resources", href: "/resources" },
+>>>>>>> origin/main
 ];
 
 /** Every public destination, flattened — used by search and the command palette. */
@@ -199,6 +212,7 @@ export const dashboardNav: NavItem[] = accountNav.filter(
   (item) => !["/search", "/admin"].includes(item.href)
 );
 
+<<<<<<< HEAD
 /** Groups rendered as footer columns. */
 export const footerGroups = navGroups.filter(
   (group) => group.id !== "explore" || group.items.length > 1
@@ -208,3 +222,12 @@ export function isNavItemActive(pathname: string, href: string): boolean {
   if (href === "/") return pathname === "/";
   return pathname === href || pathname.startsWith(`${href}/`);
 }
+=======
+export const quickLinks: NavLink[] = [
+  { label: "Courses", href: "/courses", icon: Globe },
+  { label: "Community", href: "/community", icon: Users },
+  { label: "Scholarships", href: "/scholarships", icon: Award },
+  { label: "Results", href: "/results", icon: FileText },
+  { label: "Notices", href: "/notices", icon: Newspaper },
+];
+>>>>>>> origin/main

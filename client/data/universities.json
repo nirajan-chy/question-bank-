@@ -6,8 +6,9 @@
     "short": "TU",
     "established": 1959,
     "location": "Kirtipur, Kathmandu",
-    "type": "Constituent",
-    "description": "Nepal's largest and oldest university, enrolling over 400,000 students across 60+ constituent and 1,000+ affiliated colleges nationwide. Known for BSc CSIT, BBA, MBBS, engineering and humanities programs.",
+    "city": "Kathmandu",
+    "type": "Public",
+    "description": "Nepal's largest and oldest university, enrolling over 400,000 students across 60+ constituent and 1,000+ affiliated colleges nationwide.",
     "programs": [
       "BSc CSIT",
       "BBA",
@@ -16,11 +17,1234 @@
       "MBBS",
       "B.Ed",
       "BHM",
+      "BIT",
+      "BCA",
+      "BICTE",
       "M.Sc"
     ],
     "ranking": "#1 National",
     "students": 415000,
-    "website": "https://tu.edu.np"
+    "website": "https://tu.edu.np",
+    "ecoFriendly": true,
+    "greenCampus": true,
+    "affiliatedColleges": [
+      {
+        "program": "B.Sc. CSIT",
+        "constituent": [
+          {
+            "name": "Patan Multiple Campus",
+            "location": "Patan Dhoka, Lalitpur",
+            "type": "constituent"
+          },
+          {
+            "name": "Amrit Campus",
+            "location": "Lainchaur, Kathmandu",
+            "type": "constituent"
+          },
+          {
+            "name": "Bhairahawa Multiple Campus",
+            "location": "Bhairahawa",
+            "type": "constituent"
+          },
+          {
+            "name": "Bhaktapur Multiple Campus",
+            "location": "Bhaktapur",
+            "type": "constituent"
+          },
+          {
+            "name": "Padma Kanya Multiple Campus",
+            "location": "Bagbazar, Kathmandu",
+            "type": "constituent"
+          },
+          {
+            "name": "Siddhanath Science Campus",
+            "location": "Mahendranagar",
+            "type": "constituent"
+          },
+          {
+            "name": "Ramsworup Ramsagar Multiple Campus",
+            "location": "Janakpur",
+            "type": "constituent"
+          },
+          {
+            "name": "Mechi Multiple Campus",
+            "location": "Bhadrapur, Jhapa",
+            "type": "constituent"
+          },
+          {
+            "name": "Mahendra Morang Adarsh Multiple Campus",
+            "location": "Biratnagar",
+            "type": "constituent"
+          },
+          {
+            "name": "Birendra Multiple Campus",
+            "location": "Bharatpur, Chitwan",
+            "type": "constituent"
+          },
+          {
+            "name": "Prithvi Narayan Campus",
+            "location": "Pokhara",
+            "type": "constituent"
+          },
+          {
+            "name": "Butwal Multiple Campus",
+            "location": "Butwal",
+            "type": "constituent"
+          },
+          {
+            "name": "Mahendra Multiple Campus",
+            "location": "Nepalgunj",
+            "type": "constituent"
+          },
+          {
+            "name": "Mahendra Multiple Campus",
+            "location": "Dang",
+            "type": "constituent"
+          },
+          {
+            "name": "Central Campus of Technology",
+            "location": "Dharan",
+            "type": "constituent"
+          }
+        ],
+        "affiliated": [
+          {
+            "name": "St. Xavier's College",
+            "location": "Maitighar, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Kathford International College of Engineering & Management",
+            "location": "Balkumari, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "New Summit College",
+            "location": "Old Baneshwor, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Prime College",
+            "location": "Nayabazar, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "St. Lawrence College",
+            "location": "Chabahil, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "College of Applied Business",
+            "location": "Chabahil, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Kathmandu Bernhardt College",
+            "location": "Bafal, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Deerwalk Institute of Technology",
+            "location": "Sifal, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Vedas College",
+            "location": "Jawalakhel, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Texas International College",
+            "location": "Chabahil, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "National College of Computer Studies (NCCS)",
+            "location": "Paknajol, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Orchid International College",
+            "location": "Gaushala, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Ambition College",
+            "location": "Baneshwor, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Sagarmatha College of Science & Technology",
+            "location": "Sanepa, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Nagarjuna College of Information Technology",
+            "location": "Shankhamul, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Academia International College",
+            "location": "Gwarko, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Himalaya College of Engineering",
+            "location": "Chyasal, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Asian School of Management",
+            "location": "Samakhusi, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Madan Bhandari Memorial College",
+            "location": "Binayaknagar, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Nepalaya College",
+            "location": "Kalanki, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Asian College of Higher Studies",
+            "location": "Jawalakhel, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Trinity International College",
+            "location": "Dillibazar, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Samriddhi College",
+            "location": "Lokanthali, Bhaktapur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Swastik College",
+            "location": "Thimi, Bhaktapur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Kathmandu College of Technology",
+            "location": "Lokanthali, Bhaktapur",
+            "type": "affiliated"
+          },
+          {
+            "name": "NIST College",
+            "location": "Banepa, Kavre",
+            "type": "affiliated"
+          },
+          {
+            "name": "Shreeyantra College",
+            "location": "Damak, Jhapa",
+            "type": "affiliated"
+          },
+          {
+            "name": "Birendra Memorial College",
+            "location": "Dharan",
+            "type": "affiliated"
+          },
+          {
+            "name": "Godawari College",
+            "location": "Itahari",
+            "type": "affiliated"
+          },
+          {
+            "name": "Birat Kshitiz College",
+            "location": "Biratnagar",
+            "type": "affiliated"
+          },
+          {
+            "name": "Nihareeka College",
+            "location": "Biratnagar",
+            "type": "affiliated"
+          },
+          {
+            "name": "Birat Multiple College",
+            "location": "Biratnagar",
+            "type": "affiliated"
+          },
+          {
+            "name": "AIMS College",
+            "location": "Biratnagar",
+            "type": "affiliated"
+          },
+          {
+            "name": "Himalaya Darshan College",
+            "location": "Biratnagar",
+            "type": "affiliated"
+          },
+          {
+            "name": "National Infotech College",
+            "location": "Birgunj",
+            "type": "affiliated"
+          },
+          {
+            "name": "Hetauda City College",
+            "location": "Hetauda",
+            "type": "affiliated"
+          },
+          {
+            "name": "Chitwan College of Technology",
+            "location": "Chitwan",
+            "type": "affiliated"
+          },
+          {
+            "name": "Lumbini ICT Campus",
+            "location": "Gaindakot",
+            "type": "affiliated"
+          },
+          {
+            "name": "Mt. Annapurna Campus",
+            "location": "Pokhara",
+            "type": "affiliated"
+          },
+          {
+            "name": "Soch College",
+            "location": "Pokhara",
+            "type": "affiliated"
+          },
+          {
+            "name": "Lumbini City College",
+            "location": "Butwal",
+            "type": "affiliated"
+          },
+          {
+            "name": "Nepathya College",
+            "location": "Butwal",
+            "type": "affiliated"
+          },
+          {
+            "name": "Banke Bageshwori Campus",
+            "location": "Nepalgunj",
+            "type": "affiliated"
+          },
+          {
+            "name": "Nepalgunj Campus",
+            "location": "Nepalgunj",
+            "type": "affiliated"
+          },
+          {
+            "name": "Ambikeshwori Campus",
+            "location": "Dang",
+            "type": "affiliated"
+          }
+        ]
+      },
+      {
+        "program": "BIT",
+        "constituent": [
+          {
+            "name": "Central Campus of Technology",
+            "location": "Dharan, Sunsari",
+            "type": "constituent"
+          },
+          {
+            "name": "Mahendra Morang Adarsha Multiple Campus",
+            "location": "Biratnagar, Morang",
+            "type": "constituent"
+          },
+          {
+            "name": "Degree Campus",
+            "location": "Biratnagar, Morang",
+            "type": "constituent"
+          },
+          {
+            "name": "Mahendra Bindeshwori Multiple Campus",
+            "location": "Rajbiraj, Saptari",
+            "type": "constituent"
+          },
+          {
+            "name": "Surya Narayan Satya Narayan Morwaita Yadav Campus",
+            "location": "Siraha",
+            "type": "constituent"
+          },
+          {
+            "name": "Ramsorup Ramsagar Multiple Campus",
+            "location": "Janakpur, Dhanusha",
+            "type": "constituent"
+          },
+          {
+            "name": "Thakur Ram Multiple Campus",
+            "location": "Birgunj, Parsa",
+            "type": "constituent"
+          },
+          {
+            "name": "Birendra Multiple Campus",
+            "location": "Bharatpur, Chitwan",
+            "type": "constituent"
+          },
+          {
+            "name": "Siddhanath Campus",
+            "location": "Mahendranagar, Kanchanpur",
+            "type": "constituent"
+          },
+          {
+            "name": "Mahendra Multiple Campus",
+            "location": "Nepalgunj, Banke",
+            "type": "constituent"
+          },
+          {
+            "name": "Amrit Campus",
+            "location": "Lainchaur, Kathmandu",
+            "type": "constituent"
+          },
+          {
+            "name": "Patan Multiple Campus",
+            "location": "Patan, Lalitpur",
+            "type": "constituent"
+          },
+          {
+            "name": "Bhaktapur Multiple Campus",
+            "location": "Bhaktapur",
+            "type": "constituent"
+          },
+          {
+            "name": "Padma Kanya Multiple Campus",
+            "location": "Bagbazar, Kathmandu",
+            "type": "constituent"
+          },
+          {
+            "name": "Bhairahawa Multiple Campus",
+            "location": "Bhairahawa, Rupandehi",
+            "type": "constituent"
+          }
+        ],
+        "affiliated": []
+      },
+      {
+        "program": "BCA",
+        "constituent": [
+          {
+            "name": "Mechi Multiple Campus",
+            "location": "Bhadrapur, Jhapa",
+            "type": "constituent"
+          },
+          {
+            "name": "Mahendra Morang Adarsha Multiple Campus",
+            "location": "Biratnagar, Morang",
+            "type": "constituent"
+          },
+          {
+            "name": "Dhankuta Multiple Campus",
+            "location": "Dhankuta",
+            "type": "constituent"
+          },
+          {
+            "name": "Birendra Multiple Campus",
+            "location": "Bharatpur, Chitwan",
+            "type": "constituent"
+          },
+          {
+            "name": "Saraswati Multiple Campus",
+            "location": "Kathmandu",
+            "type": "constituent"
+          },
+          {
+            "name": "Padma Kanya Multiple Campus",
+            "location": "Kathmandu",
+            "type": "constituent"
+          },
+          {
+            "name": "Ratna Rajyalaxmi Campus",
+            "location": "Kathmandu",
+            "type": "constituent"
+          },
+          {
+            "name": "Patan Multiple Campus",
+            "location": "Lalitpur",
+            "type": "constituent"
+          },
+          {
+            "name": "Bhaktapur Multiple Campus",
+            "location": "Bhaktapur",
+            "type": "constituent"
+          },
+          {
+            "name": "Prithvi Narayan Multiple Campus",
+            "location": "Pokhara, Kaski",
+            "type": "constituent"
+          },
+          {
+            "name": "Bhairahawa Multiple Campus",
+            "location": "Bhairahawa, Rupandehi",
+            "type": "constituent"
+          },
+          {
+            "name": "Tribhuvan Multiple Campus",
+            "location": "Tansen, Palpa",
+            "type": "constituent"
+          },
+          {
+            "name": "Mahendra Multiple Campus",
+            "location": "Nepalgunj, Banke",
+            "type": "constituent"
+          },
+          {
+            "name": "Mahendra Multiple Campus",
+            "location": "Ghorahi, Dang",
+            "type": "constituent"
+          },
+          {
+            "name": "Doti Multiple Campus",
+            "location": "Doti",
+            "type": "constituent"
+          }
+        ],
+        "affiliated": [
+          {
+            "name": "Damak Multiple Campus",
+            "location": "Damak, Jhapa",
+            "type": "affiliated"
+          },
+          {
+            "name": "Model Campus",
+            "location": "Damak, Jhapa",
+            "type": "affiliated"
+          },
+          {
+            "name": "Koshi Saint James College",
+            "location": "Itahari, Sunsari",
+            "type": "affiliated"
+          },
+          {
+            "name": "Vishwa Aadarsha College",
+            "location": "Itahari, Sunsari",
+            "type": "affiliated"
+          },
+          {
+            "name": "Itahari Namuna College",
+            "location": "Itahari, Sunsari",
+            "type": "affiliated"
+          },
+          {
+            "name": "Nihareeka College",
+            "location": "Biratnagar, Morang",
+            "type": "affiliated"
+          },
+          {
+            "name": "Himalaya Darshan College",
+            "location": "Biratnagar, Morang",
+            "type": "affiliated"
+          },
+          {
+            "name": "Birat Kshitiz College",
+            "location": "Biratnagar, Morang",
+            "type": "affiliated"
+          },
+          {
+            "name": "Model Multiple Campus",
+            "location": "Janakpurdham, Dhanusha",
+            "type": "affiliated"
+          },
+          {
+            "name": "Nava Kshitiz Campus",
+            "location": "Bardibas, Mahottari",
+            "type": "affiliated"
+          },
+          {
+            "name": "National Infotech College",
+            "location": "Birgunj, Parsa",
+            "type": "affiliated"
+          },
+          {
+            "name": "Hetauda City College",
+            "location": "Hetauda, Makwanpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Hetauda School of Management and Social Sciences",
+            "location": "Hetauda, Makwanpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Sungava College",
+            "location": "Chitwan",
+            "type": "affiliated"
+          },
+          {
+            "name": "Indreni College",
+            "location": "Bharatpur, Chitwan",
+            "type": "affiliated"
+          },
+          {
+            "name": "Saptagandaki Multiple Campus",
+            "location": "Bharatpur, Chitwan",
+            "type": "affiliated"
+          },
+          {
+            "name": "Saheed Smarak College",
+            "location": "Bharatpur, Chitwan",
+            "type": "affiliated"
+          },
+          {
+            "name": "Lumbini ICT College",
+            "location": "Gaidakot, Nawalparasi",
+            "type": "affiliated"
+          },
+          {
+            "name": "Butwal Kalika Campus",
+            "location": "Butwal, Rupandehi",
+            "type": "affiliated"
+          },
+          {
+            "name": "Lumbini City College",
+            "location": "Tilottama, Rupandehi",
+            "type": "affiliated"
+          },
+          {
+            "name": "Nepathya College",
+            "location": "Tilottama, Rupandehi",
+            "type": "affiliated"
+          },
+          {
+            "name": "Gyan Deep College",
+            "location": "Tulsipur, Dang",
+            "type": "affiliated"
+          },
+          {
+            "name": "Ambikeshwari Campus",
+            "location": "Ghorahi, Dang",
+            "type": "affiliated"
+          },
+          {
+            "name": "Banke Bageshwori Campus",
+            "location": "Nepalgunj, Banke",
+            "type": "affiliated"
+          },
+          {
+            "name": "Nepalgunj Campus",
+            "location": "Nepalgunj, Banke",
+            "type": "affiliated"
+          },
+          {
+            "name": "Sahara Campus",
+            "location": "Surkhet",
+            "type": "affiliated"
+          },
+          {
+            "name": "Janajyoti Multiple Campus",
+            "location": "Mahendranagar, Kanchanpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Aadim National College",
+            "location": "Chabahil, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Advanced College of Engineering & Management",
+            "location": "Kalanki, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Aims International College",
+            "location": "Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Ambition College",
+            "location": "New Baneshwor, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Araniko Multiple Campus",
+            "location": "Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Arunima College",
+            "location": "Bouddha, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Asian College of Higher Studies",
+            "location": "Jawalakhel, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Asian School of Management & Technology",
+            "location": "Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Bajra International College",
+            "location": "Jorpati, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Caribbean College of Management",
+            "location": "Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "D.A.V. College",
+            "location": "Jawalakhel, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Danfe College",
+            "location": "Sinamangal, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Deerwalk Institute of Technology",
+            "location": "Sifal, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Dibya Gyan College",
+            "location": "Kamaladi, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "ED-Mark College",
+            "location": "Kalanki, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Everest Innovative College",
+            "location": "Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Ganeshman Singh Multiple Campus",
+            "location": "Kalanki, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "G.P. Koirala Memorial College",
+            "location": "Siphal, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "GoldenGate International College",
+            "location": "Baneshwor, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Greenfield National College",
+            "location": "Bafal, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Himalaya College of Engineering",
+            "location": "Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Himalayan College for Learning Excellence",
+            "location": "Sifal, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Jana Bhawana Campus",
+            "location": "Godawari, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Janamaitri Multiple Campus",
+            "location": "Kuleshwor, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Jaya Multiple College",
+            "location": "Makalbari, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Kantipur College of Management and Information Technology",
+            "location": "Baneshwor, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Kasthamandap College",
+            "location": "Kalanki, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Kathford International College of Engineering and Management",
+            "location": "Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Kathmandu BernHardt College",
+            "location": "Bafal, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Kathmandu Business Campus",
+            "location": "Balaju, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Kathmandu College of Central State",
+            "location": "Kalimati, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Kathmandu College of Technology",
+            "location": "Lokanthali, Bhaktapur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Kathmandu Model College",
+            "location": "Bagbazar, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Kathmandu National College",
+            "location": "Koteshwor, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Kathmandu Shiksha Campus",
+            "location": "Satungal, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "K & K International College",
+            "location": "Baneshwor, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Kavre Multiple Campus",
+            "location": "Banepa, Kavre",
+            "type": "affiliated"
+          },
+          {
+            "name": "Lalitpur Engineering College",
+            "location": "Chakupat, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Lumbini Academy",
+            "location": "Chabahil, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Madan Bhandari Memorial College",
+            "location": "New Baneshwor, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Mega National College",
+            "location": "Kumaripati, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Milton International College",
+            "location": "New Baneshwor, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Morgan International College",
+            "location": "Basundhara, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Nagarjuna College of Information Technology",
+            "location": "Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "National College (NIST)",
+            "location": "Lainchaur, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "National College of Computer Studies",
+            "location": "Paknajol, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "National Integrated College",
+            "location": "Dillibazar, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Nepal Kasthamandap College",
+            "location": "Kalanki, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Nepal Mega College",
+            "location": "Babarmahal, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Nepalaya College",
+            "location": "Kalanki, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Nesfield International College",
+            "location": "Lagankhel, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "New Summit College",
+            "location": "Baneshwor, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "NIMS College",
+            "location": "Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "NIST College",
+            "location": "Banepa, Kavre",
+            "type": "affiliated"
+          },
+          {
+            "name": "Ojashwi College",
+            "location": "Gwarko, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Orchid International College",
+            "location": "Gaushala/Sinamangal, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Padmashree International College",
+            "location": "Tinkune, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Pascal National College",
+            "location": "Satdobato, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Pashupati Multiple Campus",
+            "location": "Chabahil, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Patan Nistha College",
+            "location": "Balkumari, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Prime College",
+            "location": "Nayabazar, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Rainbow International College",
+            "location": "Swoyambhu, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Relliance College",
+            "location": "Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Sagarmatha College for Higher Studies",
+            "location": "Dillibazar, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Sagarmatha College of Science & Technology",
+            "location": "Sanepa, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Sahid Smarak College",
+            "location": "Kirtipur, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Samarpan Academy",
+            "location": "Dhumbarahi, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Samriddhi College",
+            "location": "Lokanthali, Bhaktapur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Shwoyambhu International College",
+            "location": "Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "South Western State College",
+            "location": "Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "St. Lawrence College",
+            "location": "Chabahil, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Swastik College",
+            "location": "Madhyapur Thimi, Bhaktapur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Texas College of Management & IT",
+            "location": "Siphal, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "The Times International College",
+            "location": "Dillibazar, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Thames International College",
+            "location": "Baneshwor, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Trinity International College",
+            "location": "Dillibazar, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Triton International College",
+            "location": "Tinkune, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "United College",
+            "location": "Kumaripati, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Vedas College",
+            "location": "Jawalakhel, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "V.S. International College",
+            "location": "Tinkune, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Whitefield International College",
+            "location": "Nayabazar, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Xavier International College",
+            "location": "Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Yeti International College",
+            "location": "Lalitpur",
+            "type": "affiliated"
+          }
+        ]
+      },
+      {
+        "program": "BE / Engineering",
+        "constituent": [
+          {
+            "name": "Pulchowk Campus",
+            "location": "Pulchowk, Lalitpur",
+            "type": "constituent"
+          },
+          {
+            "name": "Thapathali Campus",
+            "location": "Thapathali, Kathmandu",
+            "type": "constituent"
+          },
+          {
+            "name": "Purwanchal Campus",
+            "location": "Dharan, Sunsari",
+            "type": "constituent"
+          },
+          {
+            "name": "Paschimanchal Campus",
+            "location": "Lamachaur, Pokhara, Kaski",
+            "type": "constituent"
+          },
+          {
+            "name": "Chitwan Engineering Campus",
+            "location": "Rampur, Chitwan",
+            "type": "constituent"
+          }
+        ],
+        "affiliated": [
+          {
+            "name": "Advanced College of Engineering and Management",
+            "location": "Kupondol, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Kantipur Engineering College",
+            "location": "Dhapakhel, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "National College of Engineering",
+            "location": "Talsikhel, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Himalaya College of Engineering",
+            "location": "Chyasal, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Sagarmatha Engineering College",
+            "location": "Sanepa, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Lalitpur Engineering College",
+            "location": "Chakupat, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Kathford International College of Engineering and Management",
+            "location": "Gwarko, Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Kathmandu Engineering College",
+            "location": "Kalimati, Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Khwopa College of Engineering",
+            "location": "Libali, Bhaktapur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Janakpur Engineering College",
+            "location": "Tathali, Bhaktapur",
+            "type": "affiliated"
+          }
+        ]
+      },
+      {
+        "program": "MBBS",
+        "constituent": [
+          {
+            "name": "Maharajgunj Medical Campus (MMC)",
+            "location": "Maharajgunj, Kathmandu",
+            "type": "constituent"
+          }
+        ],
+        "affiliated": [
+          {
+            "name": "Nepalese Army Institute of Health Sciences (NAIHS)",
+            "location": "Kathmandu",
+            "type": "affiliated"
+          },
+          {
+            "name": "Chitwan Medical College (CMC)",
+            "location": "Chitwan",
+            "type": "affiliated"
+          },
+          {
+            "name": "Universal College of Medical Sciences & Teaching Hospital (UCMS)",
+            "location": "Bhairahawa",
+            "type": "affiliated"
+          },
+          {
+            "name": "National Medical College (NMC)",
+            "location": "Birgunj",
+            "type": "affiliated"
+          },
+          {
+            "name": "KIST Medical College & Teaching Hospital",
+            "location": "Lalitpur",
+            "type": "affiliated"
+          },
+          {
+            "name": "Gandaki Medical College Teaching Hospital & Research Centre",
+            "location": "Pokhara",
+            "type": "affiliated"
+          },
+          {
+            "name": "Janaki Medical College & Teaching Hospital",
+            "location": "Janakpur",
+            "type": "affiliated"
+          }
+        ]
+      },
+      {
+        "program": "BICTE",
+        "constituent": [
+          {
+            "name": "Birendra Multiple Campus",
+            "location": "Bharatpur, Chitwan",
+            "type": "constituent"
+          },
+          {
+            "name": "Butwal Multiple Campus",
+            "location": "Butwal, Rupandehi",
+            "type": "constituent"
+          },
+          {
+            "name": "Dadeldhura Multiple Campus",
+            "location": "Dadeldhura",
+            "type": "constituent"
+          },
+          {
+            "name": "Mahendra Morang Adarsha Multiple Campus",
+            "location": "Biratnagar, Morang",
+            "type": "constituent"
+          },
+          {
+            "name": "Mahendra Ratna Campus",
+            "location": "Tahachal, Kathmandu",
+            "type": "constituent"
+          },
+          {
+            "name": "Ramsworup Ramsagar Multiple Campus",
+            "location": "Janakpur, Dhanusha",
+            "type": "constituent"
+          },
+          {
+            "name": "Surya Narayan Satya Narayan Morwaita Yadav Multiple Campus",
+            "location": "Siraha",
+            "type": "constituent"
+          },
+          {
+            "name": "Sanothimi Campus",
+            "location": "Bhaktapur",
+            "type": "constituent"
+          },
+          {
+            "name": "Surkhet Multiple Campus",
+            "location": "Surkhet",
+            "type": "constituent"
+          },
+          {
+            "name": "Aadikavi Bhanubhakta Campus",
+            "location": "Damauli, Tanahun",
+            "type": "constituent"
+          },
+          {
+            "name": "Dhawalagiri Multiple Campus",
+            "location": "Baglung, Baglung",
+            "type": "constituent"
+          }
+        ],
+        "affiliated": [
+          {
+            "name": "Jwala Prasad Syo Wai Devi Murarka Campus",
+            "location": "Siraha",
+            "type": "affiliated"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "u2",
@@ -29,8 +1253,9 @@
     "short": "KU",
     "established": 1991,
     "location": "Dhulikhel, Kavre",
-    "type": "Autonomous",
-    "description": "Nepal's first autonomous, private, non-profit university. Renowned for engineering (BE), medicine (MBBS), management (BBA) and science research with semester-based modern curricula.",
+    "city": "Kathmandu",
+    "type": "Private",
+    "description": "Nepal's first private, non-profit university. Renowned for engineering, medicine, management and science research.",
     "programs": [
       "BE",
       "MBBS",
@@ -42,7 +1267,9 @@
     ],
     "ranking": "#1 Private",
     "students": 14500,
-    "website": "https://ku.edu.np"
+    "website": "https://ku.edu.np",
+    "ecoFriendly": true,
+    "greenCampus": true
   },
   {
     "id": "u3",
@@ -51,8 +1278,9 @@
     "short": "PU",
     "established": 1997,
     "location": "Pokhara, Kaski",
-    "type": "Autonomous",
-    "description": "A semester-based autonomous university known for quality management, health sciences and engineering programs with a strong focus on practical education in the beautiful Lakeside city.",
+    "city": "Pokhara",
+    "type": "Private",
+    "description": "A semester-based university known for quality management, health sciences and engineering programs.",
     "programs": [
       "BE",
       "BBA",
@@ -64,7 +1292,9 @@
     ],
     "ranking": "#3 Overall",
     "students": 62000,
-    "website": "https://pu.edu.np"
+    "website": "https://pu.edu.np",
+    "ecoFriendly": true,
+    "greenCampus": false
   },
   {
     "id": "u4",
@@ -73,8 +1303,9 @@
     "short": "PURU",
     "established": 1993,
     "location": "Biratnagar, Koshi",
-    "type": "Constituent",
-    "description": "Eastern Nepal's premier university covering engineering, management, education, health and humanities across Morang, Sunsari and beyond.",
+    "city": "Biratnagar",
+    "type": "Public",
+    "description": "Eastern Nepal's premier university covering engineering, management, education, health and humanities.",
     "programs": [
       "BE",
       "BBA",
@@ -85,7 +1316,9 @@
     ],
     "ranking": "#1 East Nepal",
     "students": 86000,
-    "website": "https://purbuniv.edu.np"
+    "website": "https://purbuniv.edu.np",
+    "ecoFriendly": false,
+    "greenCampus": true
   },
   {
     "id": "u5",
@@ -94,8 +1327,9 @@
     "short": "GU",
     "established": 2019,
     "location": "Lamachaur, Pokhara",
-    "type": "Autonomous",
-    "description": "A young, technology-focused university with modern programs in engineering, science, management and health built around applied research.",
+    "city": "Pokhara",
+    "type": "Public",
+    "description": "A young, technology-focused university with modern programs in engineering, science, management and health.",
     "programs": [
       "BE",
       "B.Sc",
@@ -105,7 +1339,9 @@
     ],
     "ranking": "Emerging",
     "students": 2200,
-    "website": "https://www.gandakiuniversity.edu.np"
+    "website": "https://www.gandakiuniversity.edu.np",
+    "ecoFriendly": true,
+    "greenCampus": true
   },
   {
     "id": "u6",
@@ -114,8 +1350,9 @@
     "short": "MU",
     "established": 2010,
     "location": "Birendranagar, Surkhet",
-    "type": "Constituent",
-    "description": "The hub of higher education in Karnali province, offering programs across education, management, science, engineering and health.",
+    "city": "Surkhet",
+    "type": "Public",
+    "description": "The hub of higher education in Karnali province, offering programs across education, management, science and engineering.",
     "programs": [
       "BBA",
       "B.Ed",
@@ -125,7 +1362,9 @@
     ],
     "ranking": "#1 Karnali",
     "students": 34000,
-    "website": "https://mu.edu.np"
+    "website": "https://mu.edu.np",
+    "ecoFriendly": false,
+    "greenCampus": false
   },
   {
     "id": "u7",
@@ -134,7 +1373,8 @@
     "short": "FWU",
     "established": 2010,
     "location": "Mahendranagar, Sudurpashchim",
-    "type": "Constituent",
+    "city": "Mahendranagar",
+    "type": "Public",
     "description": "Serving the Sudurpashchim region with programs in education, management, science, engineering and medical sciences.",
     "programs": [
       "BBA",
@@ -145,7 +1385,9 @@
     ],
     "ranking": "#1 Far West",
     "students": 29000,
-    "website": "https://fwu.edu.np"
+    "website": "https://fwu.edu.np",
+    "ecoFriendly": false,
+    "greenCampus": true
   },
   {
     "id": "u8",
@@ -154,7 +1396,8 @@
     "short": "NSU",
     "established": 1986,
     "location": "Beljhundi, Dang",
-    "type": "Constituent",
+    "city": "Dang",
+    "type": "Public",
     "description": "The national centre for Sanskrit, Vedic and traditional knowledge, also offering modern humanities and education programs.",
     "programs": [
       "MA",
@@ -164,7 +1407,9 @@
     ],
     "ranking": "Specialist",
     "students": 8000,
-    "website": "https://nsu.edu.np"
+    "website": "https://nsu.edu.np",
+    "ecoFriendly": false,
+    "greenCampus": false
   },
   {
     "id": "u9",
@@ -173,7 +1418,8 @@
     "short": "LBU",
     "established": 2004,
     "location": "Lumbini, Rupandehi",
-    "type": "Autonomous",
+    "city": "Lumbini",
+    "type": "Public",
     "description": "The first Buddhist university in Nepal, blending Buddhist studies, culture, tourism and modern liberal arts education.",
     "programs": [
       "BA",
@@ -183,7 +1429,9 @@
     ],
     "ranking": "Specialist",
     "students": 5000,
-    "website": "https://lbu.edu.np"
+    "website": "https://lbu.edu.np",
+    "ecoFriendly": true,
+    "greenCampus": true
   },
   {
     "id": "u10",
@@ -192,8 +1440,9 @@
     "short": "AFU",
     "established": 2010,
     "location": "Rampur, Chitwan",
-    "type": "Constituent",
-    "description": "Nepal's dedicated university for agriculture, forestry, animal science and veterinary medicine located in the heart of the Terai.",
+    "city": "Chitwan",
+    "type": "Public",
+    "description": "Nepal's dedicated university for agriculture, forestry, animal science and veterinary medicine.",
     "programs": [
       "B.Sc Agriculture",
       "B.V.Sc",
@@ -202,7 +1451,9 @@
     ],
     "ranking": "#1 Agriculture",
     "students": 11000,
-    "website": "https://afu.edu.np"
+    "website": "https://afu.edu.np",
+    "ecoFriendly": true,
+    "greenCampus": true
   },
   {
     "id": "u11",
@@ -211,7 +1462,8 @@
     "short": "NOU",
     "established": 2016,
     "location": "Lalitpur",
-    "type": "Autonomous",
+    "city": "Kathmandu",
+    "type": "Open",
     "description": "Nepal's first open and distance learning university offering flexible online programs for working professionals.",
     "programs": [
       "BBA",
@@ -222,7 +1474,9 @@
     ],
     "ranking": "#1 Distance",
     "students": 9000,
-    "website": "https://nou.edu.np"
+    "website": "https://nou.edu.np",
+    "ecoFriendly": true,
+    "greenCampus": false
   },
   {
     "id": "u12",
@@ -231,7 +1485,8 @@
     "short": "KAHS",
     "established": 2011,
     "location": "Jumla, Karnali",
-    "type": "Autonomous",
+    "city": "Jumla",
+    "type": "Public",
     "description": "A health-sciences academy focused on medical and nursing education tailored to the remote Karnali region.",
     "programs": [
       "MBBS",
@@ -240,6 +1495,8 @@
     ],
     "ranking": "Health Specialist",
     "students": 2500,
-    "website": "https://kahs.edu.np"
+    "website": "https://kahs.edu.np",
+    "ecoFriendly": false,
+    "greenCampus": false
   }
 ]

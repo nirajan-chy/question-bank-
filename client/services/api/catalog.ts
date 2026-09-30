@@ -76,8 +76,20 @@ export const catalog = {
     http<Subject[]>(`/subjects/course/${courseSlug}/semester/${semester}`),
   trendingSubjects: (limit = 8) => http<Subject[]>(`/subjects/trending?limit=${limit}`),
 
+<<<<<<< HEAD
   notes: (opts?: SubjectScopedOptions) => http<Note[]>(withQuery("/notes", opts)),
   books: (opts?: ListOptions & { bestseller?: boolean }) =>
+=======
+  notes: (opts?: { limit?: number; subjectSlug?: string }) =>
+    http<Note[]>(withQuery("/notes", opts)),
+  note: (slug: string) => http<Note>(`/notes/${slug}`),
+  relatedNotes: (slug: string) => http<Note[]>(`/notes/${slug}/related`),
+  trackNoteView: (slug: string) =>
+    http<{ views: number }>(`/notes/${slug}/view`, { method: "POST" }),
+  trackNoteDownload: (slug: string) =>
+    http<{ downloads: number }>(`/notes/${slug}/download`, { method: "POST" }),
+  books: (opts?: { limit?: number; bestseller?: boolean }) =>
+>>>>>>> origin/main
     http<Book[]>(withQuery("/books", opts)),
   questionBanks: (opts?: SubjectScopedOptions) =>
     http<QuestionBank[]>(withQuery("/question-banks", opts)),

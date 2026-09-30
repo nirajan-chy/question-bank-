@@ -8,12 +8,16 @@ import {
   ChevronDown,
   Command,
   GraduationCap,
+<<<<<<< HEAD
   LayoutDashboard,
   LogOut,
   Search,
   Settings,
   ShieldCheck,
   type LucideIcon,
+=======
+  Users,
+>>>>>>> origin/main
 } from "lucide-react";
 
 import { cn, initials } from "@/lib/utils";
@@ -162,10 +166,51 @@ export function Navbar() {
       <nav className="container flex h-16 items-center gap-3" aria-label="Main">
         <div className="flex min-w-0 items-center gap-1">
           <Logo />
+<<<<<<< HEAD
           <div className="ml-4 hidden items-center gap-0.5 lg:flex">
             {navGroups.map((group) => (
               <NavDropdown key={group.id} group={group} pathname={pathname} />
             ))}
+=======
+          <div className="hidden items-center gap-1 lg:flex">
+            {mainNav.map((link) =>
+              link.label === "Resources" ? (
+                <DropdownMenu key={link.href}>
+                  <DropdownMenuTrigger asChild>
+                    <button className="inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground">
+                      {link.label}
+                      <ChevronDown className="h-3.5 w-3.5" />
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start" className="w-72">
+                    <DropdownMenuLabel>Study Resources</DropdownMenuLabel>
+                    {resourcesNav.map((item) => (
+                      <DropdownMenuItem key={item.href} asChild>
+                        <Link href={item.href} className="flex items-start gap-3 p-2">
+                          {item.icon && <item.icon className="mt-0.5 h-4 w-4 text-primary" />}
+                          <span>
+                            <span className="block text-sm font-medium">{item.label}</span>
+                            <span className="block text-xs text-muted-foreground">{item.description}</span>
+                          </span>
+                        </Link>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    "rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
+                    isActive(link.href) ? "text-foreground" : "text-muted-foreground"
+                  )}
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
+>>>>>>> origin/main
           </div>
         </div>
 
@@ -188,9 +233,80 @@ export function Navbar() {
           <ModeToggle />
 
           {!hasHydrated ? (
+<<<<<<< HEAD
             <span className="h-8 w-8" aria-hidden />
           ) : user ? (
             <AccountMenu />
+=======
+            <div className="h-8 w-8" aria-hidden />
+          ) : authUser ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="relative" aria-label="Account">
+                  <Avatar className="h-8 w-8">
+                    <AvatarFallback className="bg-brand-gradient text-white">
+                      {authUser.name.charAt(0).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuLabel>
+                  <p className="text-sm font-medium">{authUser.name}</p>
+                  <p className="text-xs font-normal text-muted-foreground">{authUser.email}</p>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href="/dashboard" className="gap-2">
+                    <LayoutDashboard className="h-4 w-4" /> Dashboard
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/profile" className="gap-2">
+                    <User className="h-4 w-4" /> Profile
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/bookmarks" className="gap-2">
+                    <Bookmark className="h-4 w-4" /> Bookmarks
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/community" className="gap-2">
+                    <Users className="h-4 w-4" /> Community
+                  </Link>
+                </DropdownMenuItem>
+                {isAdmin && (
+                  <DropdownMenuItem asChild>
+                    <Link href="/admin" className="gap-2">
+                      <ShieldCheck className="h-4 w-4" /> Admin panel
+                    </Link>
+                  </DropdownMenuItem>
+                )}
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href="/learn" className="gap-2">
+                    <GraduationCap className="h-4 w-4" /> Self Learning Center
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/settings" className="gap-2">
+                    <Settings className="h-4 w-4" /> Settings
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onSelect={() => {
+                    logout();
+                    router.push("/");
+                    router.refresh();
+                  }}
+                  className="gap-2 text-destructive focus:text-destructive"
+                >
+                  <LogOut className="h-4 w-4" /> Sign out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+>>>>>>> origin/main
           ) : (
             <div className="hidden items-center gap-2 sm:flex">
               <Button variant="ghost" size="sm" asChild>

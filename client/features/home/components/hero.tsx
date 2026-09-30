@@ -6,17 +6,6 @@ import { motion } from "framer-motion";
 import { ArrowRight, Search, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { CountUp } from "@/components/shared/count-up";
-import { StationeryBg } from "@/components/shared/stationery-bg";
-
-type HeroStat = { label: string; value: number; suffix: string; icon: React.ComponentType<{ className?: string }> };
-
-const stats: HeroStat[] = [
-  // { label: "Students learning", value: 128000, suffix: "+", icon: Users },
-  // { label: "Study resources", value: 2400, suffix: "+", icon: BookOpen },
-  // { label: "Questions solved", value: 2400000, suffix: "+", icon: TrendingUp },
-  // { label: "Mock tests taken", value: 360000, suffix: "+", icon: Timer },
-];
 
 const ease = [0.21, 0.47, 0.32, 0.98] as const;
 
@@ -32,9 +21,7 @@ export function Hero({ onSearch }: { onSearch?: (q: string) => void }) {
   };
 
   return (
-    <section className="relative overflow-hidden bg-background">
-      <StationeryBg />
-
+    <section className="relative overflow-hidden">
       <div className="container relative px-4 pb-20 pt-16 md:pb-28 md:pt-24">
         <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
           <motion.span
@@ -106,6 +93,7 @@ export function Hero({ onSearch }: { onSearch?: (q: string) => void }) {
           </motion.div>
 
           <motion.div
+<<<<<<< HEAD
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5, ease }}
@@ -126,9 +114,11 @@ export function Hero({ onSearch }: { onSearch?: (q: string) => void }) {
           </motion.div>
 
           <motion.div
+=======
+>>>>>>> origin/main
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
+            transition={{ delay: 0.5 }}
             className="mt-8 flex items-center gap-3"
           >
             <Link

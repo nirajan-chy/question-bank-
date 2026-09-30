@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * API location for browser code.
  *
@@ -28,3 +29,7 @@ export const API_ORIGIN = "";
 export const SERVER_API_BASE = `${
   (process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:5000").replace(/\/api\/?$/, "").replace(/\/+$/, "") || "/api"
 }/api`;
+=======
+const url = process.env.NEXT_PUBLIC_BASE_URL;
+export const BASEURL = url || "/api";
+>>>>>>> origin/main
