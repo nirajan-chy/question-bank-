@@ -35,7 +35,7 @@ export function Newsletter() {
     <section className="py-16 md:py-24">
       <div className="container">
         <FadeIn>
-          <div className="relative overflow-hidden rounded-3xl bg-secondary p-8 text-white md:p-14">
+          <div className="relative overflow-hidden rounded-3xl bg-band-gradient p-8 text-white md:p-14">
             <div className="relative grid items-center gap-8 md:grid-cols-2">
               <div>
                 <h2 className="font-display text-2xl font-bold text-balance md:text-4xl">
@@ -65,13 +65,13 @@ export function Newsletter() {
                         id="newsletter-email"
                         type="email"
                         placeholder="you@example.com"
-                        className="h-12 border-white/20 bg-white/10 text-white placeholder:text-white/50 focus-visible:ring-white"
+                        className="h-12 border-white/20 bg-white/10 text-white placeholder:text-white/70 focus-visible:ring-white"
                         {...register("email")}
                       />
                       <Button
                         type="submit"
                         disabled={isSubmitting}
-                        className="h-12 shrink-0 bg-white text-secondary hover:bg-white/90"
+                        className="h-12 shrink-0 bg-white text-band-deep hover:bg-white/90"
                       >
                         <Mail className="h-4 w-4" />
                         {isSubmitting ? "Subscribing..." : "Subscribe"}
@@ -80,7 +80,7 @@ export function Newsletter() {
                     {errors.email && (
                       <p className="text-sm text-amber-200">{errors.email.message}</p>
                     )}
-                    <p className="text-xs text-white/60">
+                    <p className="text-xs text-white/70">
                       No spam. Unsubscribe anytime.
                     </p>
                   </form>

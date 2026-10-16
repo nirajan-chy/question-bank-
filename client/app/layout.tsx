@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/footer";
 import { AnnouncementBar } from "@/components/layout/announcement-bar";
 import { CommandPalette } from "@/components/layout/command-palette";
 import { FloatingWidget } from "@/components/layout/floating-widget";
+import { PageLoader } from "@/components/layout/page-loader";
 import { ErrorBoundary } from "@/components/shared/error-boundary";
 import { seo } from "@/lib/seo";
 import "@/styles/globals.css";
@@ -56,6 +57,7 @@ export default function RootLayout({
           </div>
           <CommandPalette />
           <FloatingWidget />
+          <PageLoader />
         </AppProviders>
       </body>
     </html>

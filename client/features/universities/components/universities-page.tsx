@@ -1,30 +1,47 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { Landmark, MapPin, Users } from "lucide-react";
-import { useUniversities } from "@/services/queries";
+import { useMemo, useState } from "react";
+import { ArrowUpRight, Landmark, Search } from "lucide-react";
+
 import { PageHeader } from "@/components/shared/page-header";
 import { Input } from "@/components/ui/input";
+import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { ErrorState } from "@/components/shared/error-state";
+import { GridSkeleton } from "@/components/shared/skeletons";
+import { EmptyState } from "@/components/shared/empty-state";
+import { Button } from "@/components/ui/button";
 import { cn, formatNumber } from "@/lib/utils";
 import { gradientFor } from "@/lib/gradients";
-import { GridSkeleton } from "@/components/shared/skeletons";
+import { useUniversities } from "@/services/queries";
 
-const types = ["All", "Constituent", "Autonomous", "Affiliated"] as const;
+const ALL = "All";
 
 export function UniversitiesPage() {
-  const { data: universities, isLoading } = useUniversities();
+  const { data: universities, isPending, isError, error, refetch } = useUniversities();
   const [query, setQuery] = useState("");
-  const [type, setType] = useState<(typeof types)[number]>("All");
+  const [type, setType] = useState(ALL);
 
-  const filtered = (universities ?? []).filter(
-    (u) =>
-      (type === "All" || u.type === type) &&
-      (u.name.toLowerCase().includes(query.toLowerCase()) ||
-        u.location.toLowerCase().includes(query.toLowerCase()) ||
-        u.short.toLowerCase().includes(query.toLowerCase()))
+  // Types come from the API so a new university type shows up on its own.
+  const types = useMemo(
+    () => [ALL, ...Array.from(new Set((universities ?? []).map((u) => u.type).filter(Boolean)))],
+    [universities]
   );
+
+  const filtered = useMemo(() => {
+    const term = query.trim().toLowerCase();
+    return (universities ?? []).filter((u) => {
+      const matchesQuery =
+        !term ||
+        u.name.toLowerCase().includes(term) ||
+        u.location.toLowerCase().includes(term) ||
+        u.short.toLowerCase().includes(term) ||
+        u.description.toLowerCase().includes(term);
+      const matchesType = type === ALL || u.type === type;
+      return matchesQuery && matchesType;
+    });
+  }, [universities, query, type]);
 
   return (
     <>
@@ -36,77 +53,105 @@ export function UniversitiesPage() {
       />
       <section className="py-12 md:py-16">
         <div className="container">
-          <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <Input
-              placeholder="Search universities..."
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              className="w-full md:w-72"
-            />
-            <div className="flex flex-wrap gap-2">
-              {types.map((t) => (
-                <button
-                  key={t}
-                  onClick={() => setType(t)}
-                  className={cn(
-                    "rounded-full border px-4 py-1.5 text-sm font-medium transition-colors",
-                    type === t
-                      ? "border-primary bg-primary text-primary-foreground"
-                      : "hover:border-primary/40 hover:text-primary"
-                  )}
-                >
-                  {t}
-                </button>
-              ))}
+          <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            {types.length > 1 && (
+              <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by university type">
+                {types.map((t) => (
+                  <button
+                    key={t}
+                    type="button"
+                    onClick={() => setType(t)}
+                    aria-pressed={type === t}
+                    className={cn(
+                      "rounded-full border px-4 py-1.5 text-sm font-medium transition-colors",
+                      type === t
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "hover:border-primary/40 hover:text-primary"
+                    )}
+                  >
+                    {t}
+                  </button>
+                ))}
+              </div>
+            )}
+            <div className="relative w-full lg:w-72">
+              <Search
+                className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+                aria-hidden="true"
+              />
+              <Input
+                placeholder="Search universities…"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                className="w-full pl-9"
+                aria-label="Search universities"
+              />
             </div>
           </div>
 
-          {isLoading || !universities ? (
-            <GridSkeleton count={6} className="grid gap-4 md:grid-cols-2 lg:grid-cols-3" />
+          {isPending ? (
+            <GridSkeleton count={8} />
+          ) : isError ? (
+            <ErrorState title="Could not load universities" error={error} onRetry={() => void refetch()} />
+          ) : filtered.length === 0 ? (
+            <EmptyState
+              icon={<Landmark className="h-5 w-5" />}
+              title="No universities found"
+              description={
+                query || type !== ALL
+                  ? "Try a different search term or clear the type filter."
+                  : "Nothing has been published here yet."
+              }
+              action={
+                (query || type !== ALL) && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      setQuery("");
+                      setType(ALL);
+                    }}
+                  >
+                    Clear filters
+                  </Button>
+                )
+              }
+            />
           ) : (
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {filtered.map((uni) => (
                 <Link
                   key={uni.id}
                   href={`/universities/${uni.slug}`}
-                  className="group flex h-full flex-col rounded-2xl border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-card-hover"
+                  className="group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                 >
-                  <div className="flex items-center gap-4">
-                    <span
-                      className={cn(
-                        "flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br font-display text-lg font-bold text-white",
-                        gradientFor(uni.name)
-                      )}
-                    >
-                      {uni.short}
-                    </span>
-                    <div className="min-w-0">
-                      <h3 className="truncate font-semibold group-hover:text-primary">{uni.name}</h3>
-                      <p className="text-xs text-muted-foreground">Est. {uni.established} · {uni.ranking}</p>
-                    </div>
-                  </div>
-                  <p className="mt-4 line-clamp-3 flex-1 text-sm text-muted-foreground">
-                    {uni.description}
-                  </p>
-                  <div className="mt-4 flex flex-wrap items-center gap-1.5">
-                    {uni.programs.slice(0, 3).map((p) => (
-                      <span key={p} className="rounded-full bg-muted px-2.5 py-1 text-xs font-medium">
-                        {p}
+                  <Card className="h-full p-6 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-primary/40 group-hover:shadow-card-hover group-focus-visible:ring-2 group-focus-visible:ring-primary">
+                    <div className="flex items-start justify-between gap-3">
+                      <span
+                        className={cn(
+                          "flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br font-display text-base font-bold text-white",
+                          gradientFor(uni.name)
+                        )}
+                      >
+                        {uni.short}
                       </span>
-                    ))}
-                    {uni.programs.length > 3 && (
-                      <span className="text-xs text-muted-foreground">+{uni.programs.length - 3}</span>
-                    )}
-                  </div>
-                  <div className="mt-5 flex items-center justify-between border-t pt-4 text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1">
-                      <MapPin className="h-3.5 w-3.5" /> {uni.location}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Users className="h-3.5 w-3.5" /> {formatNumber(uni.students)}
-                    </span>
-                    <Badge variant="secondary" className="text-2xs">{uni.type}</Badge>
-                  </div>
+                      <ArrowUpRight className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
+                    </div>
+
+                    <h3 className="mt-4 font-display text-lg font-extrabold tracking-tight group-hover:text-primary">
+                      {uni.name}
+                    </h3>
+                    <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
+                      {uni.description}
+                    </p>
+
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                      <Badge variant="secondary">{uni.type}</Badge>
+                      <Badge variant="info">{uni.ranking}</Badge>
+                      <Badge variant="secondary">{formatNumber(uni.students)} students</Badge>
+                      <Badge variant="secondary">{uni.location}</Badge>
+                    </div>
+                  </Card>
                 </Link>
               ))}
             </div>

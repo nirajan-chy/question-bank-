@@ -6,7 +6,6 @@ import { SubjectDetail } from "@/features/subjects/components/subject-detail";
 
 type Props = {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ tab?: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -14,14 +13,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const subject = await serverApi.subject(slug);
   if (!subject) return { title: "Subject" };
   return seo({
-    title: `${subject.name} — Notes, Question Banks & Syllabus`,
+    title: `${subject.name} — Past Questions`,
     description: subject.description,
     path: `/subjects/${slug}`,
   });
 }
 
-export default async function Page({ params, searchParams }: Props) {
+export default async function Page({ params }: Props) {
   const { slug } = await params;
-  const { tab } = await searchParams;
-  return <SubjectDetail slug={slug} initialTab={tab} />;
+  return <SubjectDetail slug={slug} />;
 }

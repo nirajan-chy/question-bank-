@@ -9,6 +9,7 @@ import { z } from "zod";
 import { ArrowRight, LogIn } from "lucide-react";
 import { toast } from "sonner";
 import { auth } from "@/services/api";
+import { readNextPath, withNext } from "@/lib/safe-redirect";
 import { useAuthStore } from "@/store/use-auth-store";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -37,7 +38,7 @@ export function LoginForm() {
   useEffect(() => {
     if (!hasHydrated) return;
     if (token && user) {
-      router.replace(isAdmin ? "/admin" : "/");
+      router.replace(readNextPath() ?? (isAdmin ? "/admin" : "/"));
     }
   }, [hasHydrated, token, user, isAdmin, router]);
 
@@ -49,7 +50,7 @@ export function LoginForm() {
       const { token, user } = await auth.login(email, password);
       setAuth(token, user);
       toast.success(`Welcome back, ${user.name.split(" ")[0]}!`);
-      router.push(user.role === "admin" ? "/admin" : "/");
+      router.push(readNextPath() ?? (user.role === "admin" ? "/admin" : "/"));
       router.refresh();
     } catch (error) {
       toast.error("Login failed", {
@@ -132,7 +133,7 @@ export function LoginForm() {
 
           <p className="mt-6 text-center text-sm text-muted-foreground">
             Don&apos;t have an account?{" "}
-            <Link href="/register" className="inline-flex items-center gap-1 font-medium text-primary hover:underline">
+            <Link href={withNext("/register")} className="inline-flex items-center gap-1 font-medium text-primary hover:underline">
               Create one <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </p>

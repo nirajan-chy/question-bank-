@@ -6,6 +6,7 @@ import { useMockTests } from "@/services/queries";
 import { PageHeader } from "@/components/shared/page-header";
 import { GridSkeleton } from "@/components/shared/skeletons";
 import { EmptyState } from "@/components/shared/empty-state";
+import { AuthGate } from "@/components/shared/auth-gate";
 import { MockTestCard } from "@/features/education/components/cards";
 import { ResourceFilters } from "./resource-filters";
 
@@ -30,7 +31,11 @@ export function MockTestsPage() {
     });
 
   return (
-    <>
+    <AuthGate
+      title="Sign in to take mock tests"
+      description="Your attempts, scores and GPA projections are saved to your account, so you can pick up exactly where you left off."
+      icon={Timer}
+    >
       <PageHeader
         icon={Timer}
         title="Mock Tests"
@@ -70,6 +75,6 @@ export function MockTestsPage() {
           )}
         </div>
       </section>
-    </>
+    </AuthGate>
   );
 }

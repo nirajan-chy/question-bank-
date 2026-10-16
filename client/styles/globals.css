@@ -24,6 +24,12 @@
     --cta: 28 88% 50%;
     --cta-foreground: 30 60% 12%;
 
+    /* Deep emerald band for emphasis cards (newsletter, promo strips).
+       Deliberately NOT overridden in .dark: the copy sitting on it is white,
+       so the band has to stay dark in both themes to clear WCAG AA. */
+    --band: 160 72% 20%;
+    --band-deep: 164 70% 11%;
+
     --secondary: 220 16% 96%;
     --secondary-foreground: 224 20% 16%;
     --muted: 220 16% 96%;
@@ -228,5 +234,21 @@
   .mask-radial-faded {
     -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 0%, black 40%, transparent 100%);
     mask-image: radial-gradient(ellipse 60% 60% at 50% 0%, black 40%, transparent 100%);
+  }
+}
+
+
+/* -----------------------------------------------------------------------------
+   Loading indicator + reduced motion
+   -----------------------------------------------------------------------------
+   The global rule above collapses every animation to one 0.01ms iteration,
+   which would strand the indeterminate bar on its end keyframe (off-screen).
+   Give it a legible static rest state instead.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .loader-indicator {
+    animation: none !important;
+    transform: none !important;
+    width: 100% !important;
   }
 }

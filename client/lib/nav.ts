@@ -31,6 +31,12 @@ export type NavItem = {
   icon: LucideIcon;
   /** Shown as secondary text inside dropdowns and the command palette. */
   description?: string;
+  /**
+   * The destination is gated behind a signed-in account. The link still
+   * navigates normally — the page itself renders an `AuthGate` — so one click
+   * always takes you somewhere useful instead of failing silently.
+   */
+  requiresAuth?: boolean;
 };
 
 export type NavGroup = {
@@ -38,6 +44,44 @@ export type NavGroup = {
   label: string;
   items: NavItem[];
 };
+
+/**
+ * The top bar. Deliberately flat: five single-click links, no dropdowns, so the
+ * primary journey (find a subject, find a university, sit a test, study) never
+ * costs more than one click.
+ *
+ * `navGroups` below stays the complete site map and keeps feeding the footer
+ * and the mobile "More" list, so nothing becomes unreachable.
+ */
+export const mainNav: NavItem[] = [
+  { label: "Home", href: "/", icon: Home, description: "Back to the homepage" },
+  {
+    label: "Subjects",
+    href: "/subjects",
+    icon: Layers,
+    description: "Syllabus, notes and practice by subject",
+  },
+  {
+    label: "Universities",
+    href: "/universities",
+    icon: Building2,
+    description: "TU, KU, PU, Pokhara and more",
+  },
+  {
+    label: "Mock Tests",
+    href: "/mock-tests",
+    icon: Timer,
+    requiresAuth: true,
+    description: "Timed tests with instant scoring",
+  },
+  {
+    label: "Self Learning Center",
+    href: "/learn",
+    icon: GraduationCap,
+    requiresAuth: true,
+    description: "Upload documents, chat with AI, take AI quizzes",
+  },
+];
 
 /**
  * The single source of truth for site navigation.
@@ -177,6 +221,19 @@ export const navGroups: NavGroup[] = [
 
 /** Every public destination, flattened — used by search and the command palette. */
 export const allNavItems: NavItem[] = navGroups.flatMap((group) => group.items);
+
+/**
+ * The full site map minus whatever already sits in the top bar.
+ *
+ * Keeps the mobile menu and the footer from repeating "Subjects" twice while
+ * still exposing Notes, Books, Past Papers, Scholarships and the rest.
+ */
+export const secondaryNavGroups: NavGroup[] = (() => {
+  const primary = new Set(mainNav.map((item) => item.href));
+  return navGroups
+    .map((group) => ({ ...group, items: group.items.filter((item) => !primary.has(item.href)) }))
+    .filter((group) => group.items.length > 0);
+})();
 
 /** Signed-in user navigation inside the dashboard shell. */
 export const accountNav: NavItem[] = [

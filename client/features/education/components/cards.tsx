@@ -78,9 +78,12 @@ export function LevelCard({
 
 export function SubjectCard({ subject }: { subject: Subject }) {
   return (
-    <Link href={`/subjects/${subject.slug}`}>
-      <Card className="group relative h-full overflow-hidden p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-card-hover">
-        <div className="flex items-start justify-between">
+    <Link
+      href={`/subjects/${subject.slug}`}
+      className="group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+    >
+      <Card className="h-full p-5 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-primary/40 group-hover:shadow-card-hover group-focus-visible:ring-2 group-focus-visible:ring-primary">
+        <div className="flex items-start justify-between gap-3">
           <span
             className={cn(
               "flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br text-xl text-white shadow-sm",
@@ -89,14 +92,23 @@ export function SubjectCard({ subject }: { subject: Subject }) {
           >
             {subject.emoji}
           </span>
+          <ArrowUpRight className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
+        </div>
+
+        <h3 className="mt-4 font-display text-lg font-extrabold tracking-tight group-hover:text-primary">
+          {subject.name}
+        </h3>
+        <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{subject.description}</p>
+
+        <div className="mt-3 flex flex-wrap gap-1.5">
+          <Badge variant="secondary">{subject.level}</Badge>
           {subject.trending && (
-            <span className="inline-flex items-center gap-1 rounded-full bg-orange-500/10 px-2 py-0.5 text-2xs font-semibold text-orange-600 dark:text-orange-400">
+            <Badge variant="warning" className="gap-1">
               <Flame className="h-3 w-3" /> Trending
-            </span>
+            </Badge>
           )}
         </div>
-        <h3 className="mt-4 font-semibold">{subject.name}</h3>
-        <p className="mt-0.5 text-xs text-muted-foreground">{subject.level}</p>
+
         <div className="mt-4 grid grid-cols-2 gap-x-3 gap-y-1.5 text-xs text-muted-foreground">
           <span className="flex items-center gap-1"><FileQuestion className="h-3 w-3" /> {subject.questionBanks} Q banks</span>
           <span className="flex items-center gap-1"><FileText className="h-3 w-3" /> {subject.pastPapers} papers</span>
@@ -122,7 +134,7 @@ export function NoteCard({ note }: { note: Note }) {
             type: "note",
             title: note.title,
             subtitle: `${note.subjectName} · ${note.author}`,
-            href: `/subjects/${note.subjectSlug}?tab=notes`,
+            href: `/subjects/${note.subjectSlug}`,
             savedAt: new Date().toISOString(),
             icon: "note",
           }}
@@ -179,7 +191,7 @@ export function NoteCard({ note }: { note: Note }) {
       {inner}
     </Card>
   ) : (
-    <Link href={`/subjects/${note.subjectSlug}?tab=notes`}>
+    <Link href={`/subjects/${note.subjectSlug}`}>
       <Card className={cardClass}>{inner}</Card>
     </Link>
   );

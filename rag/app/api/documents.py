@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, UploadFile
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, UploadFile
 from fastapi.concurrency import run_in_threadpool
 
 from ..database import SessionLocal, get_db
@@ -36,8 +36,8 @@ def list_documents(
 @router.post("", response_model=DocumentOut, status_code=202)
 async def upload_document(
     file: UploadFile,
-    user_id: str = Depends(require_service),
     background_tasks: BackgroundTasks,
+    user_id: str = Depends(require_service),
 ):
     data = await _read_limited(file)
     try:

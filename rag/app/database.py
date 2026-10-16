@@ -5,7 +5,17 @@ from .config import get_settings
 
 settings = get_settings()
 
-engine = create_engine(settings.rag_db_url, pool_pre_ping=True, pool_size=5, max_overflow=10)
+# pool_pre_ping is what keeps this alive on a lossy link (it discards sockets
+# that died silently), but 5 + 10 overflow could ask Aiven for far more
+# connections than the API needs to share with us. Two warm + a small overflow
+# is plenty for a RAG service.
+engine = create_engine(
+    settings.rag_db_url,
+    pool_pre_ping=True,
+    pool_size=2,
+    max_overflow=3,
+    pool_recycle=1800,
+)
 SessionLocal = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False)
 
 

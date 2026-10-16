@@ -1,13 +1,13 @@
 "use client";
 
 import { notFound } from "next/navigation";
-import { MapPin, Calendar, Users, Globe, CheckCircle2 } from "lucide-react";
+import { MapPin, Calendar, Users, Globe } from "lucide-react";
 import { useUniversities } from "@/services/queries";
 import { PageHeader } from "@/components/shared/page-header";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { AffiliatedColleges } from "@/features/universities/components/affiliated-colleges";
 import { formatNumber } from "@/lib/utils";
-import { cn } from "@/lib/utils";
 import { gradientFor } from "@/lib/gradients";
 
 export function UniversityDetail({ slug }: { slug: string }) {
@@ -60,34 +60,8 @@ export function UniversityDetail({ slug }: { slug: string }) {
       </PageHeader>
 
       <section className="py-12 md:py-16">
-        <div className="container grid gap-6 lg:grid-cols-3">
-          <Card className="lg:col-span-2">
-            <CardHeader>
-              <CardTitle>Programs offered</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {university.programs.map((program) => (
-                  <div
-                    key={program}
-                    className="flex items-center gap-2.5 rounded-lg border bg-muted/30 px-4 py-3 text-sm font-medium"
-                  >
-                    <CheckCircle2 className="h-4 w-4 shrink-0 text-success" />
-                    {program}
-                  </div>
-                ))}
-              </div>
-              <div className="mt-6 flex flex-wrap gap-2">
-                {university.programs.map((p) => (
-                  <span key={p} className={cn("rounded-full bg-gradient-to-r px-3 py-1 text-xs font-semibold text-white", gradientFor(university.name))}>
-                    {p}
-                  </span>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          <div className="space-y-6">
+        <div className="container space-y-6">
+          <div className="grid gap-6 lg:grid-cols-2">
             <Card>
               <CardHeader>
                 <CardTitle className="text-base">University type</CardTitle>
@@ -103,6 +77,7 @@ export function UniversityDetail({ slug }: { slug: string }) {
                 </p>
               </CardContent>
             </Card>
+
             <Card>
               <CardHeader>
                 <CardTitle className="text-base">Quick facts</CardTitle>
@@ -127,6 +102,8 @@ export function UniversityDetail({ slug }: { slug: string }) {
               </CardContent>
             </Card>
           </div>
+
+          <AffiliatedColleges slug={university.slug} />
         </div>
       </section>
     </>

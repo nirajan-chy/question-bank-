@@ -9,6 +9,7 @@ import { z } from "zod";
 import { ArrowLeft, UserPlus } from "lucide-react";
 import { toast } from "sonner";
 import { auth } from "@/services/api";
+import { readNextPath, withNext } from "@/lib/safe-redirect";
 import { useAuthStore } from "@/store/use-auth-store";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -38,7 +39,7 @@ export function RegisterForm() {
   useEffect(() => {
     if (!hasHydrated) return;
     if (token && user) {
-      router.replace(isAdmin ? "/admin" : "/");
+      router.replace(readNextPath() ?? (isAdmin ? "/admin" : "/"));
     }
   }, [hasHydrated, token, user, isAdmin, router]);
 
@@ -50,7 +51,7 @@ export function RegisterForm() {
       const { token, user } = await auth.register(name, email, password);
       setAuth(token, user);
       toast.success("Account created!", { description: `Welcome to PrashnaHub, ${user.name.split(" ")[0]}!` });
-      router.push("/");
+      router.push(readNextPath() ?? "/");
       router.refresh();
     } catch (error) {
       toast.error("Registration failed", {
@@ -118,7 +119,7 @@ export function RegisterForm() {
 
           <p className="mt-6 text-center text-sm text-muted-foreground">
             Already have an account?{" "}
-            <Link href="/login" className="inline-flex items-center gap-1 font-medium text-primary hover:underline">
+            <Link href={withNext("/login")} className="inline-flex items-center gap-1 font-medium text-primary hover:underline">
               <ArrowLeft className="h-3.5 w-3.5" /> Sign in
             </Link>
           </p>

@@ -39,6 +39,10 @@ const config: Config = {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
         },
+        band: {
+          DEFAULT: "hsl(var(--band))",
+          deep: "hsl(var(--band-deep))",
+        },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
@@ -113,6 +117,16 @@ const config: Config = {
         shimmer: {
           "100%": { transform: "translateX(100%)" },
         },
+        /* Indeterminate loader: 1/3-width bar sweeping its full track. */
+        "loader-slide": {
+          "0%": { transform: "translateX(-110%)" },
+          "100%": { transform: "translateX(320%)" },
+        },
+        /* Soft heartbeat behind the splash mark. */
+        "loader-breathe": {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.07)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -120,10 +134,14 @@ const config: Config = {
         "fade-up": "fade-up 0.4s ease-out both",
         float: "float 6s ease-in-out infinite",
         shimmer: "shimmer 2s infinite",
+        "loader-slide": "loader-slide 1.15s cubic-bezier(0.4, 0, 0.2, 1) infinite",
+        "loader-breathe": "loader-breathe 2.8s ease-in-out infinite",
       },
       backgroundImage: {
         "brand-gradient":
           "linear-gradient(135deg, hsl(var(--brand-from)), hsl(var(--brand-to)))",
+        "band-gradient":
+          "linear-gradient(135deg, hsl(var(--band)), hsl(var(--band-deep)))",
         "brand-soft":
           "linear-gradient(135deg, hsl(var(--primary) / 0.12), hsl(var(--primary) / 0.04))",
         "cta-gradient":

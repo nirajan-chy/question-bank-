@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { LogOut, Menu, ShieldCheck } from "lucide-react";
 
 import { cn, initials } from "@/lib/utils";
-import { isNavItemActive, navGroups } from "@/lib/nav";
+import { isNavItemActive, mainNav, secondaryNavGroups } from "@/lib/nav";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -41,7 +41,36 @@ export function MobileNav() {
         </SheetHeader>
 
         <div className="flex-1 overflow-y-auto px-4 py-4">
-          {navGroups.map((group, index) => (
+          <nav className="flex flex-col gap-0.5" aria-label="Primary">
+            {mainNav.map((item) => {
+              const active = isNavItemActive(pathname, item.href);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={close}
+                  aria-current={active ? "page" : undefined}
+                  className={cn(
+                    "flex items-center gap-3 rounded-lg px-2 py-2.5 text-sm font-medium transition-colors",
+                    active
+                      ? "bg-primary/10 text-primary"
+                      : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                  )}
+                >
+                  <item.icon className="h-4 w-4 shrink-0 opacity-80" />
+                  {item.label}
+                </Link>
+              );
+            })}
+          </nav>
+
+          <Separator className="my-4" />
+
+          <p className="px-2 pb-1.5 text-2xs font-semibold uppercase tracking-wider text-muted-foreground">
+            More
+          </p>
+
+          {secondaryNavGroups.map((group, index) => (
             <div key={group.id}>
               {index > 0 && <Separator className="my-4" />}
               <p className="px-2 pb-1.5 text-2xs font-semibold uppercase tracking-wider text-muted-foreground">

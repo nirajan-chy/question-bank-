@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
   Bookmark,
-  ChevronDown,
   Command,
   GraduationCap,
   LayoutDashboard,
@@ -17,7 +16,7 @@ import {
 } from "lucide-react";
 
 import { cn, initials } from "@/lib/utils";
-import { isNavItemActive, navGroups, type NavItem } from "@/lib/nav";
+import { isNavItemActive, mainNav } from "@/lib/nav";
 import { Logo } from "@/components/shared/logo";
 import { ModeToggle } from "@/components/shared/mode-toggle";
 import { Button } from "@/components/ui/button";
@@ -34,48 +33,28 @@ import { useUiStore } from "@/store/use-ui-store";
 import { useAuthStore } from "@/store/use-auth-store";
 import { MobileNav } from "./mobile-nav";
 
-function NavDropdown({
-  group,
-  pathname,
-}: {
-  group: { id: string; label: string; items: NavItem[] };
-  pathname: string;
-}) {
-  const active = group.items.some((item) => isNavItemActive(pathname, item.href));
+/**
+ * A single top-bar link.
+ *
+ * Flat and instant — no dropdown to open, hover to manage or submenu to miss.
+ * Items flagged `requiresAuth` still navigate normally; the destination page
+ * renders an `AuthGate` with a sign-in button that returns you here.
+ */
+function NavLink({ item, pathname }: { item: (typeof mainNav)[number]; pathname: string }) {
+  const active = isNavItemActive(pathname, item.href);
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <button
-          className={cn(
-            "inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors",
-            "hover:bg-accent hover:text-accent-foreground",
-            active ? "text-foreground" : "text-muted-foreground"
-          )}
-        >
-          {group.label}
-          <ChevronDown className="h-3.5 w-3.5 opacity-60" />
-        </button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="start" className="w-80">
-        <DropdownMenuLabel>{group.label}</DropdownMenuLabel>
-        {group.items.map((item) => (
-          <DropdownMenuItem key={item.href} asChild>
-            <Link href={item.href} className="flex items-start gap-3 p-2">
-              <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
-                <item.icon className="h-3.5 w-3.5" />
-              </span>
-              <span className="min-w-0">
-                <span className="block text-sm font-medium">{item.label}</span>
-                {item.description && (
-                  <span className="block text-xs text-muted-foreground">{item.description}</span>
-                )}
-              </span>
-            </Link>
-          </DropdownMenuItem>
-        ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <Link
+      href={item.href}
+      aria-current={active ? "page" : undefined}
+      className={cn(
+        "whitespace-nowrap rounded-md px-2.5 py-2 text-sm font-medium transition-colors",
+        "hover:bg-accent hover:text-accent-foreground",
+        active ? "text-foreground" : "text-muted-foreground"
+      )}
+    >
+      {item.label}
+    </Link>
   );
 }
 
@@ -163,8 +142,8 @@ export function Navbar() {
         <div className="flex min-w-0 items-center gap-1">
           <Logo />
           <div className="ml-4 hidden items-center gap-0.5 lg:flex">
-            {navGroups.map((group) => (
-              <NavDropdown key={group.id} group={group} pathname={pathname} />
+            {mainNav.map((item) => (
+              <NavLink key={item.href} item={item} pathname={pathname} />
             ))}
           </div>
         </div>
@@ -179,8 +158,8 @@ export function Navbar() {
             )}
           >
             <Search className="h-4 w-4" />
-            <span className="hidden lg:inline">Search</span>
-            <kbd className="hidden items-center gap-0.5 rounded border bg-background px-1.5 py-0.5 font-mono text-2xs lg:inline-flex">
+            <span className="hidden xl:inline">Search</span>
+            <kbd className="hidden items-center gap-0.5 rounded border bg-background px-1.5 py-0.5 font-mono text-2xs xl:inline-flex">
               <Command className="h-2.5 w-2.5" />K
             </kbd>
           </button>
